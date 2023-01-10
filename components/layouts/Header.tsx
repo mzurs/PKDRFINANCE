@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { useAtom,useAtomValue } from 'jotai'
-import { count } from '../../jotai'
+import { count } from '../../state/jotai'
 
 function Header() {
     const countval=useAtomValue(count)

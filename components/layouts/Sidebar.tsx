@@ -11,7 +11,7 @@ if(!useAtomValue(web3authAtom)){
     <div  title="Open SideBar">
       
       <button
-        className="text-gray-900 hover:bg-grey-900 " 
+        className="text-gray-900 hover:bg-grey-900 border-4" 
         onClick={() => setOpen(!isOpen)}
       ><span className="sr-only">Toggle sidebar</span>
       <svg
@@ -27,7 +27,7 @@ if(!useAtomValue(web3authAtom)){
     </div>
   ) : (
     <div className="flex flex-row h-auto">
-      <nav className="bg-gray-900 w-20  justify-between flex flex-col border-2 border-black">
+      <nav className=" justify-between flex flex-col border-2">
         <div className="mt-10 mb-10">
           <div className="mt-10">
             <a href="#">

@@ -1,11 +1,11 @@
 import Header from "./Header"
 import Footer from "./Footer"
-import Sidebar from "./Sidebar"
+// import SideBar from "./Sidebar"
 export default function Layout({ children }:any) {
   return (
     <>
       <Header />
-      <Sidebar/>
+      {/* <SideBar/> */}
       <main>{children}</main>
       <Footer />
     </>

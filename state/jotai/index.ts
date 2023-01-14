@@ -10,5 +10,6 @@ const providerAtom=atom<SafeEventEmitterProvider|null|unknown>(null)
 const privKeyAtom = atomWithStorage("privKey", null, storage);
 const userInfoAtom = atomWithStorage("userInfo", null, storage);
 const auth = atom<Web3AuthCore | null>(null);
+const loading=atom(true)
 
-export { web3authAtom, auth, privKeyAtom, userInfoAtom, web3authStateAtom,providerAtom };
+export { web3authAtom, auth, privKeyAtom, userInfoAtom, web3authStateAtom,providerAtom,loading };

@@ -1,19 +1,17 @@
 import type { NextPage } from "next";
-import { privKeyAtom } from "../state/jotai";
 import { useEffect } from "react";
 import { useAtom, useAtomValue } from "jotai";
-// const Loading = dynamic(() => import('../components/loading/Loading'), {
-// ssr: false,
-// })
-
+import { loading, web3authAtom } from "../state/jotai";
+import Loading from "../components/loading/Loading";
+import Image from "next/image";
+import Front from "../components/Front";
 const Home: NextPage = () => {
-  const [privKey, setPrivKey] = useAtom(privKeyAtom);
-const privKeyValue=useAtomValue(privKeyAtom)
-  useEffect(()=>{
-    if(privKeyValue){
-      setPrivKey(privKeyValue)
-    }
-  })
-  return <div>{privKey? JSON.stringify(privKey):""}</div>;
+  const [isLoading, setLoading] = useAtom(loading);
+  const [auth, setAuth] = useAtom(web3authAtom);
+  if (!auth) {
+    return <Front />;
+  } else {
+    return <div></div>;
+  }
 };
 export default Home;

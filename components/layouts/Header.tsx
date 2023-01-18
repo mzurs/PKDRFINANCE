@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import Link from "next/link";
+import { getPublicCompressed } from "@toruslabs/eccrypto";
+import Cookies from "js-cookie";
 import {
   web3authAtom,
   web3authStateAtom,
@@ -15,7 +17,7 @@ import { SafeEventEmitterProvider, WALLET_ADAPTERS } from "@web3auth/base";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { polygonMumbaiPRC } from "./config/RPC/polygon-mumbai";
 import { CLIENT_ID } from "./config/constants";
-
+import { useRouter } from "next/router";
 const clientId: string = CLIENT_ID;
 import RPC from "./config/ethersRPC";
 function Header() {
@@ -29,6 +31,8 @@ function Header() {
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
   );
+
+  const router = useRouter();
 
   useEffect(() => {
     const init = async () => {
@@ -92,13 +96,30 @@ function Header() {
         try {
           const rpc = new RPC(provider);
           const privateKey = await rpc.getPrivateKey();
-          const authentication = await web3auth?.authenticateUser();
-          const userData = await web3auth?.getUserInfo();
+          const authentication: any = await web3auth?.authenticateUser();
+          const userData: any = await web3auth?.getUserInfo();
+
+          //getting public key of a logged in  user and set in  a cookie
+          const app_scoped_privkey = await web3auth?.provider?.request({
+            method: "eth_private_key", // use "private_key" for other non-evm chains
+          });
+          const app_pub_key = getPublicCompressed(
+            Buffer.from(
+              (app_scoped_privkey as unknown as any).padStart(64, "0"),
+              "hex"
+            )
+          ).toString("hex");
 
           //@ user info related to Web3Auth is being pass to defined atom states
           setAuth(authentication);
           setPrivKey(privateKey);
           setUserInfo(userData);
+
+          //cookies are set into browser for use in middlewares
+          Cookies.set("web3auth", JSON.stringify(userData));
+          Cookies.set("pub_key", JSON.stringify(app_pub_key));
+          Cookies.set("idToken", JSON.stringify(authentication));
+          // Cookies.set("userRole",null)
         } catch (error: any) {
           console.log(
             `Error While set the user info from Web3Auth to Atom State \nERROR MESSAGE: ${error.message}`
@@ -110,6 +131,7 @@ function Header() {
       info();
     }
   });
+
   const login = async () => {
     if (!web3auth) {
       console.log("web3auth not initialized yet");
@@ -147,6 +169,9 @@ function Header() {
       setAuth(null);
       setPrivKey(null);
       setUserInfo(null);
+      Cookies.remove("web3auth");
+      Cookies.remove("pub_key");
+      Cookies.remove("idToken");
       window.location.href =
         "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=http://localhost:3000&redirect_uri=http://localhost:3000";
     } catch (error: any) {
@@ -155,7 +180,16 @@ function Header() {
       );
     }
   };
-
+  if (router.pathname === "/login") {
+    if (
+      !Cookies.get("idToken") ||
+      !Cookies.get("pub_key") ||
+      !Cookies.get("web3auth")
+    ) {
+      console.log(`Login page......Logging out, ${router.pathname}`);
+      logout();
+    }
+  }
   const unloggedInView = (
     <button
       onClick={login}
@@ -195,7 +229,8 @@ function Header() {
           </Link>
         </li>
         <li className="mr-2" role="presentation">
-          <Link href={"/profile"}
+          <Link
+            href={"/profile"}
             className="text-white inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300 dark:hover:text-blue-300"
             id="dashboard-tab"
             data-tabs-target="#dashboard"
@@ -247,12 +282,17 @@ function Header() {
             width={30}
             height={5}
           />
-        </div>   -||
+        </div>{" "}
+        -||
         <Link href="/" className="font-medium text-xl underline text-white ">
           PKDR Finance
         </Link>
         <nav className="ml-auto">{auth ? navMenu : ""}</nav>
-        <nav className="ml-auto">{auth ? loggedInView : unloggedInView}</nav>
+        <nav className="ml-auto">
+          {auth
+            ? loggedInView
+            : unloggedInView}
+        </nav>
       </div>
     </header>
   );

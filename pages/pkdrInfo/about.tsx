@@ -1,5 +1,5 @@
 import React, { useEffect,  } from "react";
-import { web3authAtom, userInfoAtom} from "../state/jotai";
+import { web3authAtom, userInfoAtom} from "../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
 
 function about() {

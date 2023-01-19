@@ -28,7 +28,8 @@ const auth = atom<Web3AuthCore | null>(null);
 const loading = atom(true);
 
 //authentication of JWT token for all Pages and component
-const customAuthentication = atom<boolean>(false);
+
+const customAuthentication = atom<boolean>(false)
 
 const userRole = atom<string | null>(null);
 

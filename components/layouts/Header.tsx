@@ -119,6 +119,7 @@ function Header() {
           Cookies.set("web3auth", JSON.stringify(userData));
           Cookies.set("pub_key", JSON.stringify(app_pub_key));
           Cookies.set("idToken", JSON.stringify(authentication));
+          Cookies.set("oAuthIdToken", JSON.stringify(userData.oAuthIdToken));
           // Cookies.set("userRole",null)
         } catch (error: any) {
           console.log(
@@ -172,6 +173,7 @@ function Header() {
       Cookies.remove("web3auth");
       Cookies.remove("pub_key");
       Cookies.remove("idToken");
+      Cookies.remove("oAuthIdToken");
       window.location.href =
         "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=http://localhost:3000&redirect_uri=http://localhost:3000";
     } catch (error: any) {
@@ -288,11 +290,7 @@ function Header() {
           PKDR Finance
         </Link>
         <nav className="ml-auto">{auth ? navMenu : ""}</nav>
-        <nav className="ml-auto">
-          {auth
-            ? loggedInView
-            : unloggedInView}
-        </nav>
+        <nav className="ml-auto">{auth ? loggedInView : unloggedInView}</nav>
       </div>
     </header>
   );

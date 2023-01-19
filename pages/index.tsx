@@ -13,13 +13,64 @@ import Front from "../components/Front";
 import * as cookie from "cookie";
 import { useRouter } from "next/router";
 import auth from "./api/auth";
-const Home: NextPage = () => {
+import { useHydrateAtoms } from "jotai/utils";
+const Home = ({ role, isAuth }: any) => {
+  const router = useRouter();
+
+  //@ts-ignore
+  useHydrateAtoms([[userRole, role]]);
+  //@ts-ignore
+  useHydrateAtoms([[customAuthentication, isAuth]]);
+
   const [isLoading, setLoading] = useAtom(loading);
   const [auth, setAuth] = useAtom(web3authAtom);
+  const [isAuthenticated, setIsAuthenticated] = useAtom(customAuthentication);
+  const [getUserRole, setRole] = useAtom(userRole);
+
+  useEffect(() => {
+    if (role == null || isAuth == false) {
+      setIsAuthenticated(false);
+      setRole(null);
+    } else {
+      setIsAuthenticated(isAuth);
+      setRole(role);
+    }
+  });
+
   if (!auth) {
     return <Front />;
   } else {
-    return <div></div>;
+    if (role == null || isAuth == false) {
+      return (
+        <div>
+          <Front />
+        </div>
+      );
+    } else {
+      if (isAuth && role) {
+        if (role == "users") {
+          // setIsAuthenticated(true);
+          // setRole(role);
+          router.push("/user/users/");
+        } else if (role == "admin") {
+          // setIsAuthenticated(true);
+          // setRole(role);
+          router.push("/user/admin/");
+        } else {
+          return (
+            <div>
+              <Front />
+            </div>
+          );
+        }
+      } else {
+        return (
+          <div>
+            <Front />
+          </div>
+        );
+      }
+    }
   }
 };
 export default Home;
@@ -32,12 +83,23 @@ export async function getServerSideProps(context: any) {
     // Access a specific cookie
     const web3AuthCookie = cookies.idToken;
     const pub_key_Cookie = cookies.pub_key;
-    if (!web3AuthCookie || !pub_key_Cookie) {
+    const oAuthIdTokenCookie = cookies.oAuthIdToken;
+    console.log("🚀 ~ file: index.tsx:87 ~ getServerSideProps ~ oAuthIdTokenCookie", oAuthIdTokenCookie)
+    if (!web3AuthCookie || !pub_key_Cookie || !oAuthIdTokenCookie) {
       return {
         props: {}, // will be passed to the page component as props
       };
     }
     const { idToken }: any = JSON.parse(web3AuthCookie);
+    console.log(
+      "🚀 ~ file: index.tsx:37 ~ getServerSideProps ~ idToken",
+      idToken
+    );
+    const oAuthIdToken : any = JSON.parse(oAuthIdTokenCookie);
+    console.log(
+      "🚀 ~ file: index.tsx:98 ~ getServerSideProps ~ oAuthIdToken",
+      oAuthIdToken
+    );
     console.log(
       "🚀 ~ file: index.tsx:37 ~ getServerSideProps ~ idToken",
       idToken
@@ -49,34 +111,46 @@ export async function getServerSideProps(context: any) {
       pub_key
     );
 
-    if (!idToken || !pub_key) {
+    if (!idToken || !pub_key || !oAuthIdToken) {
       return {
-        props: {}, // will be passed to the page component as props
+        props: {
+          role: null,
+          isAuth: false,
+        }, // will be passed to the page component as props
       };
     } else {
-      const res = await auth(idToken, pub_key);
+      const res = await auth(idToken, pub_key,oAuthIdToken);
       console.log(`res: ${JSON.stringify(res)}`);
       if (!res.result) {
         return {
-          props: {}, // will be passed to the page component as props
+          props: {
+            role: null,
+            isAuth: false,
+          }, // will be passed to the page component as props
         };
       }
       if (res.result) {
         return {
-          redirect: {
-            destination: `/user/${res.userRole}`,
-            permanent: false,
-          },
+          props: {
+            role: res.userRole,
+            isAuth: res.result,
+          }, // will be passed to the page component as props
         };
       }
     }
     return {
-      props: {}, // will be passed to the page component as props
+      props: {
+        role: null,
+        isAuth: false,
+      }, // will be passed to the page component as props
     };
   } catch (e) {
     console.log(e);
     return {
-      props: {}, // will be passed to the page component as props
+      props: {
+        role: null,
+        isAuth: false,
+      }, // will be passed to the page component as props
     };
   }
 }

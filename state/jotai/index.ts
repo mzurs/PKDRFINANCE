@@ -25,7 +25,7 @@ const userInfoAtom = atomWithStorage("userInfo", null, storage);
 const auth = atom<Web3AuthCore | null>(null);
 
 // loading state for loading component
-const loading = atom(true);
+const loading = atom(false);
 
 //authentication of JWT token for all Pages and component
 

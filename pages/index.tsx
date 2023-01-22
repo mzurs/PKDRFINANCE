@@ -35,7 +35,7 @@ const Home = ({ role, isAuth }: any) => {
       setIsAuthenticated(isAuth);
       setRole(role);
     }
-  });
+  }, [isAuth, role]);
 
   if (!auth) {
     return <Front />;
@@ -84,7 +84,10 @@ export async function getServerSideProps(context: any) {
     const web3AuthCookie = cookies.idToken;
     const pub_key_Cookie = cookies.pub_key;
     const oAuthIdTokenCookie = cookies.oAuthIdToken;
-    console.log("🚀 ~ file: index.tsx:87 ~ getServerSideProps ~ oAuthIdTokenCookie", oAuthIdTokenCookie)
+    console.log(
+      "🚀 ~ file: index.tsx:87 ~ getServerSideProps ~ oAuthIdTokenCookie",
+      oAuthIdTokenCookie
+    );
     if (!web3AuthCookie || !pub_key_Cookie || !oAuthIdTokenCookie) {
       return {
         props: {}, // will be passed to the page component as props
@@ -95,7 +98,7 @@ export async function getServerSideProps(context: any) {
       "🚀 ~ file: index.tsx:37 ~ getServerSideProps ~ idToken",
       idToken
     );
-    const oAuthIdToken : any = JSON.parse(oAuthIdTokenCookie);
+    const oAuthIdToken: any = JSON.parse(oAuthIdTokenCookie);
     console.log(
       "🚀 ~ file: index.tsx:98 ~ getServerSideProps ~ oAuthIdToken",
       oAuthIdToken
@@ -119,7 +122,7 @@ export async function getServerSideProps(context: any) {
         }, // will be passed to the page component as props
       };
     } else {
-      const res = await auth(idToken, pub_key,oAuthIdToken);
+      const res = await auth(idToken, pub_key, oAuthIdToken);
       console.log(`res: ${JSON.stringify(res)}`);
       if (!res.result) {
         return {

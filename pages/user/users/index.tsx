@@ -4,6 +4,7 @@ import {
   web3authAtom,
   loading,
   userRole,
+  isVerified,
 } from "../../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
 import * as cookie from "cookie";
@@ -11,21 +12,29 @@ import * as jose from "jose";
 import { useRouter } from "next/router";
 import Loading from "../../../components/loading/Loading";
 function index({ isAuthenticated }: any) {
+  const router = useRouter();
+
+  // const [isAuthenticated, setIsAuthenticated] = useAtom(customAuthentication);
+  const [verified, setVerified] = useAtom(isVerified);
   const [role, setRole] = useAtom(userRole);
   const [auth, setAuth] = useAtom(web3authAtom);
   const info = useAtomValue(userInfoAtom);
   // <Loading state={true} />;
-  const router = useRouter();
 
   useEffect(() => {
     if (isAuthenticated === false) {
-      router.replace("/");
+      router.push("/");
     }
   });
   if (auth) {
+    if(!verified){
+      console.log(`Register: ${verified}`)
+      router.push('/user/users/register')
+     }else{
     if (info) {
       return <div> User: {JSON.stringify(info)}</div>;
     }
+  }
   } else {
     return <div>Login</div>;
   }

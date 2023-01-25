@@ -6,6 +6,7 @@ import {
   userRole,
   web3authAtom,
   customAuthentication,
+  isVerified,
 } from "../state/jotai";
 import Loading from "../components/loading/Loading";
 import Image from "next/image";
@@ -14,7 +15,7 @@ import * as cookie from "cookie";
 import { useRouter } from "next/router";
 import auth from "./api/auth";
 import { useHydrateAtoms } from "jotai/utils";
-const Home = ({ role, isAuth }: any) => {
+const Home = ({ role, isAuth, userTag }: any) => {
   const router = useRouter();
 
   //@ts-ignore
@@ -26,52 +27,71 @@ const Home = ({ role, isAuth }: any) => {
   const [auth, setAuth] = useAtom(web3authAtom);
   const [isAuthenticated, setIsAuthenticated] = useAtom(customAuthentication);
   const [getUserRole, setRole] = useAtom(userRole);
-
+  const [verified, setVerified] = useAtom(isVerified);
   useEffect(() => {
     if (role == null || isAuth == false) {
       setIsAuthenticated(false);
       setRole(null);
+      setVerified(userTag);
     } else {
       setIsAuthenticated(isAuth);
       setRole(role);
+      setVerified(userTag);
+    }
+  }, [isAuth, role, userTag]);
+
+  useEffect(() => {
+    // window.location.href ="/"
+    console.log("|Second UseEffect from Index PAge is running", role);
+    if (isAuth && role) {
+      setIsAuthenticated(true);
+      setRole(role);
+      setVerified(userTag);
+      router.push(`/user/${role}/`);
     }
   }, [isAuth, role]);
 
-  if (!auth) {
-    return <Front />;
-  } else {
-    if (role == null || isAuth == false) {
-      return (
-        <div>
-          <Front />
-        </div>
-      );
-    } else {
-      if (isAuth && role) {
-        if (role == "users") {
-          // setIsAuthenticated(true);
-          // setRole(role);
-          router.push("/user/users/");
-        } else if (role == "admin") {
-          // setIsAuthenticated(true);
-          // setRole(role);
-          router.push("/user/admin/");
-        } else {
-          return (
-            <div>
-              <Front />
-            </div>
-          );
-        }
-      } else {
-        return (
-          <div>
-            <Front />
-          </div>
-        );
-      }
-    }
-  }
+  // if (!auth) {
+  //   return <Front />;
+  // } else {
+  //   if (role == null || isAuth == false) {
+  //     return (
+  //       <div>
+  //         <Front />
+  //       </div>
+  //     );
+  //   } else {
+  //     if (isAuth && role) {
+  //       if (role == "users") {
+  //         // setIsAuthenticated(true);
+  //         // setRole(role);
+  //         router.push("/user/users/");
+  //       } else if (role == "admin") {
+  //         // setIsAuthenticated(true);
+  //         // setRole(role);
+  //         router.push("/user/admin/");
+  //       } else {
+  //         return (
+  //           <div>
+  //             <Front />
+  //           </div>
+  //         );
+  //       }
+  //     } else {
+  //       return (
+  //         <div>
+  //           <Front />
+  //         </div>
+  //       );
+  //     }
+  //   }
+
+  // }
+  return (
+    <div>
+      <Front />
+    </div>
+  );
 };
 export default Home;
 
@@ -119,6 +139,7 @@ export async function getServerSideProps(context: any) {
         props: {
           role: null,
           isAuth: false,
+          userTag: false,
         }, // will be passed to the page component as props
       };
     } else {
@@ -129,6 +150,7 @@ export async function getServerSideProps(context: any) {
           props: {
             role: null,
             isAuth: false,
+            userTag: false,
           }, // will be passed to the page component as props
         };
       }
@@ -137,6 +159,7 @@ export async function getServerSideProps(context: any) {
           props: {
             role: res.userRole,
             isAuth: res.result,
+            userTag: res.userTag,
           }, // will be passed to the page component as props
         };
       }
@@ -145,6 +168,7 @@ export async function getServerSideProps(context: any) {
       props: {
         role: null,
         isAuth: false,
+        userTag: false,
       }, // will be passed to the page component as props
     };
   } catch (e) {
@@ -153,6 +177,7 @@ export async function getServerSideProps(context: any) {
       props: {
         role: null,
         isAuth: false,
+        userTag: false,
       }, // will be passed to the page component as props
     };
   }

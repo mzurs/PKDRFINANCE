@@ -2,11 +2,39 @@ import { API, Amplify } from "aws-amplify";
 import type { CreateUser, createUserResult } from "../../../src/API";
 import awsExports from "../../../src/aws-exports";
 import { createUser } from "../../../src/graphql/mutations";
-import { NextRequest, NextResponse } from "next/server";
 import { keccak256 } from "js-sha3";
 import * as jwt from "jsonwebtoken";
+import auth from "../auth";
+const AWS = require("aws-sdk");
 Amplify.configure(awsExports);
 
+async function addUserToVerifiedGroup(oAuthIdToken: string) {
+  const decoded: any = jwt.decode(oAuthIdToken);
+  const cognitoUserName = decoded["cognito:username"];
+
+  const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider(
+    {
+      region: "us-west-2",
+    }
+  );
+
+  const params = {
+    GroupName: "verified",
+    UserPoolId: "us-west-2_cPjOesJgg",
+    Username: cognitoUserName,
+  };
+
+  await cognitoIdentityServiceProvider.adminAddUserToGroup(
+    params,
+    function (err: any, data: any) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(data);
+      }
+    }
+  );
+}
 const getUserInfo = async (idToken: string) => {
   const decoded: any = await jwt.decode(idToken);
   const email = decoded.email;
@@ -16,8 +44,16 @@ const getUserInfo = async (idToken: string) => {
   return { email, eth_address };
 };
 
-async function createUserAPI(userData: any) {
-  const { email, eth_address } = await getUserInfo(userData.idToken);
+async function createUserAPI(
+  userData: any,
+  idToken: string,
+  oAuthIdToken: string
+) {
+  let returnResult: boolean = false;
+  // console.log("🚀 ~ file: createUser.ts:24 ~ oAuthIdToken", oAuthIdToken)
+  // console.log("🚀 ~ file: createUser.ts:24 ~ idToken", idToken)
+  // console.log("🚀 ~ file: createUser.ts:24 ~ userData", userData)
+  const { email, eth_address } = await getUserInfo(idToken);
 
   const formData = {
     ADDRESS: userData.data.ADDRESS,
@@ -37,23 +73,52 @@ async function createUserAPI(userData: any) {
     user: formData,
   };
   const authToken = "abc";
+  try {
+    const res: any = await API.graphql({
+      query: createUser,
+      variables,
+      authToken,
+    });
 
-  const res: any = await API.graphql({
-    query: createUser,
-    variables,
-    authToken,
-  });
-  // console.log(
-  //   "------------------------------------\n ",
-  //   res,
-  //   "\n--------------------------------"
-  // );
-  return res;
+    try {
+      console.log("User Added to DynamoDB");
+      await addUserToVerifiedGroup(oAuthIdToken);
+      returnResult = true;
+      return { res, returnResult };
+    } catch (error) {
+      const res = error as string;
+      return { res, returnResult };
+    }
+  } catch (err: any) {
+    const res = err as string;
+    return { res, returnResult };
+  }
 }
 
-export default async function handler(req: any, res: any) {
+export default async function handler(request: any, response: any) {
   // console.log(`Body: ${JSON.stringify(req.body)}`);
-  const response = await createUserAPI(req.body);
-  console.log("🚀 ~ file: createUser.ts:57 ~ handler ~ response", response)
-  res.status(200).json({ message: response });
+
+  const authTokens = JSON.parse(request.headers["x-custom-header"]);
+  console.log(
+    "🚀 ~ file: createUser.ts:58 ~ handler ~ oAuthIdToken",
+    authTokens
+  );
+
+  const { res, returnResult } = await createUserAPI(
+    request.body,
+    authTokens[0],
+    authTokens[1]
+  );
+  const contentType = request.headers["content-type"];
+  console.log(
+    "🚀 ~ file: createUser.ts:57 ~ handler ~ contentType",
+    contentType
+  );
+  console.log(
+    "🚀 ~ file: createUser.ts:106 ~ handler ~ returnResult",
+    returnResult
+  );
+
+  console.log("🚀 ~ file: createUser.ts:57 ~ handler ~ response", res);
+  response.status(200).json({ message: JSON.stringify([res,returnResult])});
 }

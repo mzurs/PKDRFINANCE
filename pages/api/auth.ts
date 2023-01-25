@@ -4,24 +4,40 @@ import * as jwt from "jsonwebtoken";
 type response = {
   userRole: string | null;
   result: boolean;
+  userTag: boolean;
 };
-
-async function role(oAuthIdToken: string): Promise<string | null> {
+type roleResponse = {
+  result: string;
+  userTag: boolean;
+};
+async function role(oAuthIdToken: string): Promise<roleResponse | null> {
   const decoded: any = jwt.decode(oAuthIdToken);
-  // console.log(`Decoded: ${JSON.stringify(decoded)}`);
+  console.log(`Decoded: ${JSON.stringify(decoded)}`);
   const groups = decoded["cognito:groups"];
+  console.log("🚀 ~ file: auth.ts:17 ~ role ~ groups", groups);
   // const userRole: string | null = groups.includes("Admin");
   if (groups.includes("Admin")) {
-    return "admin";
+    const result = "admin";
+    const userTag = true;
+    return { result, userTag };
+    // return "admin";
+  } else if (groups.includes("verified")) {
+    const result = "users";
+    const userTag = true;
+    return { result, userTag };
   } else if (groups.includes("us-west-2_cPjOesJgg_Google")) {
-    return "users";
+    const result = "users";
+    const userTag = false;
+    return { result, userTag };
   } else {
     return null;
   }
   // console.log("🚀 ~ file: auth.ts:14 ~ role ~ userRole", userRole);
   // console.log("🚀 ~ file: auth.ts:13 ~ role ~ groups", groups)
 
-  return "users";
+  const result = "users";
+  const userTag = false;
+  return { result, userTag };
 }
 export default async function auth(
   idToken: string,
@@ -34,6 +50,7 @@ export default async function auth(
   const res: response = {
     userRole: null,
     result: false,
+    userTag: false,
   };
 
   const jwks = await jose.createRemoteJWKSet(
@@ -53,10 +70,11 @@ export default async function auth(
     if (wallet === pub_key) {
       res.result = true;
 
-      const userRole = await role(oAuthIdToken);
+      const { result, userTag }: any = await role(oAuthIdToken);
 
-      if (userRole) {
-        res.userRole = userRole;
+      if (result) {
+        res.userRole = result;
+        res.userTag = userTag;
         console.log(res);
         return res;
       } else {

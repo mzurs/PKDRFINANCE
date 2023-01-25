@@ -29,7 +29,9 @@ const loading = atom(false);
 
 //authentication of JWT token for all Pages and component
 
-const customAuthentication = atom<boolean>(false)
+const customAuthentication = atom<boolean>(false);
+
+const isVerified = atom<boolean>(false);
 
 const userRole = atom<string | null>(null);
 
@@ -43,4 +45,5 @@ export {
   loading,
   customAuthentication,
   userRole,
+  isVerified,
 };

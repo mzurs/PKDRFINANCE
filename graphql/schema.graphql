@@ -1,0 +1,103 @@
+type Mutation {
+  createUser(user: CreateUser!): createUserResult @aws_lambda
+
+  updateUser(user: UpdateUser!): updateUserResult @aws_lambda
+
+  deleteUser(id: ID!): deleteUserResult @aws_lambda
+  zkProfile(zkuser: ZKUserInfo): String @aws_lambda
+  setUserName(setname: SetUserName): String @aws_lambda
+  addContacts(user: UpdateContactList!): updateUserResult @aws_lambda
+
+}
+
+type Query {
+  getUserByEmail(id: ID!): getUserResult @aws_lambda
+  getAllUserInfo: [User] @aws_lambda
+  getAddressByUserName(userName: String): getAddressByUserNameResult @aws_lambda
+}
+
+union createUserResult = UserInfo | UserExists | Error
+union getUserResult = UserInfo | UserNotExists | Error
+union updateUserResult = UpdatedResult | UserNotExists | Error
+union deleteUserResult = DeletedResult | UserNotExists | Error
+union getAddressByUserNameResult = AddressInfo | UserNotExists | Error
+
+input CreateUser {
+  id: ID!
+  cnic: String!
+  PHONE_NUMBER: String!
+  ETH_ADDRESS: String!
+  FULL_NAME: String
+  DOB: String
+  FATHER_OR_HUSBAND_NAME: String
+  CITY: String
+  COUNTRY: String
+  POSTAL_CODE: String
+  ADDRESS: String
+}
+input UpdateContactList {
+  id: ID!
+  attributeValue: String
+}
+input UpdateUser {
+  id: ID!
+  attributeName: String
+  attributeValue: String
+}
+input ZKUserInfo {
+  cnic: String
+  privateKey: String
+  publicAddress: String
+  publicAddressAdmin: String
+  optionalParams: String
+  bit: Boolean
+}
+
+
+type AddressInfo {
+  address: String
+}
+
+input SetUserName {
+  id: ID!
+  userName: String!
+}
+type DeletedResult @aws_lambda {
+  id: ID!
+  message: String
+}
+
+type UpdatedResult @aws_lambda {
+  id: ID!
+  message: String
+}
+
+type UserExists @aws_lambda {
+  message: String
+}
+
+type UserNotExists @aws_lambda {
+  message: String
+}
+
+type UserInfo @aws_lambda {
+  userInfo: String
+}
+
+type Error @aws_lambda {
+  message: String
+}
+
+type User @aws_lambda {
+  id: ID!
+  cnic: String
+  PHONE_NUMBER: String
+  ETH_ADDRESS: String
+  FULL_NAME: String
+  DOB: String
+  FATHER_OR_HUSBAND_NAME: String
+  CITY: String
+  COUNTRY: String
+  POSTAL_CODE: String
+  ADDRESS: String
+}

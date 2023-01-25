@@ -1,0 +1,13 @@
+{
+    "info": {
+      "fieldName": "updateUser"
+    },
+    "arguments": {
+      "user": {
+        "id":"d",
+        "attributeName": "PHONE_NUMBER",
+        "attributeValue": "a"
+      }
+    }
+  }
+  

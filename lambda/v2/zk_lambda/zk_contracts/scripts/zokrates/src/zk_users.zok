@@ -1,0 +1,72 @@
+// import "hashes/sha256/512bitPacked" as sha256packed;
+
+// def verifyUser(field[2] hash, field hashFirst,field hashSecond,field publicAddress,field publicAddressAdmin)->field[2]{
+
+
+// assert(hash[0]==hashFirst);
+
+// assert(hash[1]==hashSecond);
+
+// return [hash[0],hash[1]];
+
+// }
+
+
+
+
+
+
+
+// def main( private field   cnic,private field  privKeyFirst,private field  privKeySecond, field publicAddress,private field  publicAddressAdmin,private field  optionalParams, field hashFirst,field hashSecond, bool bit)-> field[2]{
+
+
+//  field[2] hash =sha256packed([cnic,privKeyFirst,privKeySecond,optionalParams]);
+
+
+//  return if bit == false{
+
+
+//      [publicAddress,publicAddressAdmin]
+
+
+//  } else{
+
+
+//      verifyUser(hash,hashFirst,hashSecond,publicAddress,publicAddressAdmin)
+
+
+//  };
+ 
+
+// }
+
+
+
+
+import "hashes/sha256/512bitPacked" as sha256packed;
+
+
+
+
+
+
+
+
+def main( private field   cnic,private field  privKeyFirst,private field  privKeySecond, field publicAddress,private field  publicAddressAdmin,private field  optionalParams, field hashFirst,field hashSecond)-> field[2]{
+
+
+field[2] hash =sha256packed([cnic,privKeyFirst,privKeySecond,optionalParams]);
+
+
+assert(hash[0]==hashFirst);
+
+
+assert(hash[1]==hashSecond);
+
+
+return [hash[0],hash[1]];
+}
+
+
+
+

@@ -1,0 +1,15 @@
+*.js
+!jest.config.js
+*.d.ts
+node_modules
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+out
+
+zk_setup.json
+zk_abi.json
+
+deploy.zip
+lambda/v2/zkp_lambda/deploy.zip

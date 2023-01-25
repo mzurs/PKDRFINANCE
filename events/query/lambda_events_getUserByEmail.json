@@ -1,0 +1,9 @@
+{
+  "info": {
+    "fieldName": "getUserByEmail"
+  },
+  "arguments": {
+      "id": "111111"
+    
+  }
+}

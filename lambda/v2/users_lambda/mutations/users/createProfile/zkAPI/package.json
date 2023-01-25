@@ -1,0 +1,22 @@
+{
+  "name": "zkapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "elliptic": "^6.5.4",
+    "ethereumjs-util": "^7.1.5",
+    "ethers": "^5.7.2",
+    "hexadecimal-to-decimal": "^1.0.2",
+    "js-sha3": "^0.8.0",
+    "secp256k1": "^4.0.3",
+    "to-hex": "^0.0.18",
+    "zokrates-js": "^1.1.4"
+  }
+}

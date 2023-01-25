@@ -1,0 +1,13 @@
+{
+    "info": {
+      "fieldName": "createUser"
+    },
+    "arguments": {
+      "user": {
+        "id": "111111",
+        "cnic":"111111",
+        "PHONE_NUMBER":"ccc" 
+      }
+    }
+  }
+  

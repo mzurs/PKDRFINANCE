@@ -1,0 +1,41 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ninterface AggregatorV3Interface {\n  function decimals() external view returns (uint8);\n\n  function description() external view returns (string memory);\n\n  function version() external view returns (uint256);\n\n  function getRoundData(uint80 _roundId)\n    external\n    view\n    returns (\n      uint80 roundId,\n      int256 answer,\n      uint256 startedAt,\n      uint256 updatedAt,\n      uint80 answeredInRound\n    );\n\n  function latestRoundData()\n    external\n    view\n    returns (\n      uint80 roundId,\n      int256 answer,\n      uint256 startedAt,\n      uint256 updatedAt,\n      uint80 answeredInRound\n    );\n}\n"
+    },
+    "contracts/PriceConverter.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.7;\n\nimport \"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol\";\n\nlibrary PriceConverter {\n  function getPrice(AggregatorV3Interface priceFeed)\n    internal\n    view\n    returns (uint256)\n  {\n    (, int256 answer, , , ) = priceFeed.latestRoundData();\n    // ETH/USD rate in 18 digit\n    return uint256(answer * 10000000000);\n  }\n\n  // 1000000000\n  // call it get fiatConversionRate, since it assumes something about decimals\n  // It wouldn't work for every aggregator\n  function getConversionRate(uint256 ethAmount, AggregatorV3Interface priceFeed)\n    internal\n    view\n    returns (uint256)\n  {\n    uint256 ethPrice = getPrice(priceFeed);\n    uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;\n    // the actual ETH/USD conversation rate, after adjusting the extra 0s.\n    return ethAmountInUsd;\n  }\n}"
+    },
+    "contracts/topUp.sol": {
+      "content": "// SPDX-License-Identifier: SEE LICENSE IN LICENSE\npragma solidity ^0.8.7;\nimport \"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol\";\nimport \"./PriceConverter.sol\";\n\ncontract topUp {\n\n    using PriceConverter for uint256;\n\n    // uint256 public TOPUP_AMOUNT = 1 * 10**18;\n    address private immutable i_pkdrOrgAddress;\n    AggregatorV3Interface private s_priceFeed;\n\n    //errors\n    error ONLY_OWNER_CAN_CALL();\n    error TOPUP_FAILED();\n\n    //events\n    event topUpCompleted(address to, uint256 amount);\n    event amountDeposited(address from, uint256 amount);\n\n    modifier onlyPkdrOrg() {\n        if (msg.sender != i_pkdrOrgAddress) revert ONLY_OWNER_CAN_CALL();\n        _;\n    }\n\n    // Functions Order:\n    //// constructor\n    //// receive\n    //// fallback\n    //// external\n    //// public\n    //// internal\n    //// private\n    //// view / pure\n\n    //1.constructor\n    constructor(address priceFeed) {\n        s_priceFeed = AggregatorV3Interface(0x0715A7794a1dc8e42615F059dD6e406A6594651A);\n\n        i_pkdrOrgAddress = msg.sender;\n    }\n\n    //2.receive\n    // This function is called for plain Ether transfers, i.e.\n    // for every call with empty calldata.\n    receive() external payable {\n        emit amountDeposited(msg.sender, msg.value); //event to receive matic\n    }\n\n    //3. fallback\n    // Any call with non-empty calldata to this contract will execute\n    // the fallback function (even if Ether is sent along with the call).\n    fallback() external payable {\n        emit amountDeposited(msg.sender, msg.value);\n    }\n\n    //4.external\n    //5.public\n    function getRate()public view returns (uint256){\n        // return PriceConverter.getConversionRate(2,s_priceFeed);\n            (\n            /*uint80 roundID*/,\n            int price,\n            /*uint startedAt*/,\n            /*uint timeStamp*/,\n            /*uint80 answeredInRound*/\n        ) = s_priceFeed.latestRoundData();\n        return uint256(price);\n    \n    }\n\n    \n    // function topUpAddress(address to, uint256 conversionRateUsdToPkr) public onlyPkdrOrg returns(uint256){\n\n    //     uint256 TOPUP_AMOUNT=conversionRateUsdToPkr;//conversionRateUsdToPkr.getConversionRate(s_priceFeed);\n    //     // uint256 TOPUP_AMOUNT=conversionRateUsdToPkr;\n    //     // (bool success, ) = to.call{value: TOPUP_AMOUNT}(\"\");\n\n    //     // if (!success) revert TOPUP_FAILED();\n\n    //     // emit topUpCompleted(to, TOPUP_AMOUNT);\n    //     return TOPUP_AMOUNT;\n    // }\n\n    function topUpContract() public payable onlyPkdrOrg {\n        emit amountDeposited(msg.sender, msg.value);\n    }\n\n    //6. internal\n\n    //7.private\n\n    // 8. View and pure functions\n\n    function getPkdrAddress() public view onlyPkdrOrg returns (address) {\n        return i_pkdrOrgAddress;\n    }\n\n    function getContractBalance() public view onlyPkdrOrg returns (uint256) {\n        return address(this).balance;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

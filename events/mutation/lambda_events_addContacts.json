@@ -1,0 +1,12 @@
+{
+    "info": {
+      "fieldName": "addContacts"
+    },
+    "arguments": {
+      "user": {
+        "id":"c",
+        "attributeValue": "1111cc11"
+      }
+    }
+  }
+  

@@ -1,0 +1,10 @@
+update lambda functions
+aws lambda update-function-code --function-name test --zip-file fileb://deploy.zip
+
+zip folder to current directory
+zip -r deploy.zip ./
+
+
+sam invoke function 
+sam local invoke -t ./cdk.out/UsersStack.template.json -e ./events/mutation/lambda_events_addContacts.json usersLambda
+

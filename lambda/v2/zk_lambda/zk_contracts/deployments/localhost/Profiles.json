@@ -1,0 +1,243 @@
+{
+  "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "ALREADY_VERIFIED",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "IS_NOT_IN_LIST",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ONLY_OWNER",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "USER_EXISTS",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "USER_NOT_EXISTS",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "name": "ProfileCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ProfileRetained",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ProfileRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "zkResult",
+          "type": "bool"
+        }
+      ],
+      "name": "createProfile",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getVerifiedUser",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "retainVerification",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "revokeVerifiedUser",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "verifiedUser",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x0eb26aa4a2ea1416a28af765ec575a64b6fa314b198c821635e79e363739b76f",
+  "receipt": {
+    "to": null,
+    "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "contractAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "transactionIndex": 0,
+    "gasUsed": "522016",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xfcc7f3ccc6da72cbd7f3c30b5e84e98a2f896d60e7a050d28a1cf2afd566477e",
+    "transactionHash": "0x0eb26aa4a2ea1416a28af765ec575a64b6fa314b198c821635e79e363739b76f",
+    "logs": [],
+    "blockNumber": 2,
+    "cumulativeGasUsed": "522016",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "0f62f2d3f5edcb39c969b2b3be9159ed",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"ALREADY_VERIFIED\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"IS_NOT_IN_LIST\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ONLY_OWNER\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"USER_EXISTS\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"USER_NOT_EXISTS\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"name\":\"ProfileCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ProfileRetained\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ProfileRevoked\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"zkResult\",\"type\":\"bool\"}],\"name\":\"createProfile\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"}],\"name\":\"getVerifiedUser\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"}],\"name\":\"retainVerification\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"}],\"name\":\"revokeVerifiedUser\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"verifiedUser\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Profiles.sol\":\"Profiles\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Profiles.sol\":{\"content\":\"//SPDX-License-Identifier:MIT\\npragma solidity ^0.8.7;\\n\\ncontract Profiles {\\n    error USER_EXISTS();\\n    error USER_NOT_EXISTS();\\n    error ONLY_OWNER();\\n    error ALREADY_VERIFIED();\\n    error IS_NOT_IN_LIST();\\n\\n    address private immutable PKDRorg;\\n\\n    mapping(address => bool) public verifiedUser;\\n\\n    event ProfileCreated(address, bool);\\n    event ProfileRevoked(address);\\n    event ProfileRetained(address);\\n\\n    modifier onlyPKDRorg() {\\n        if (msg.sender != PKDRorg) revert ONLY_OWNER();\\n        _;\\n    }\\n    modifier ifUserExists(address userAddress) {\\n        if (verifiedUser[userAddress]) revert USER_EXISTS();\\n        _;\\n    }\\n    modifier ifUserNotExists(address userAddress) {\\n        if (!verifiedUser[userAddress]) revert USER_NOT_EXISTS();\\n        _;\\n    }\\n    modifier alreadyVerified(address userAddress) {\\n        if (verifiedUser[userAddress] == true) revert ALREADY_VERIFIED();\\n        _;\\n    }\\n    modifier ifInList(address userAddress) {\\n        if (\\n            verifiedUser[userAddress] != true ||\\n            verifiedUser[userAddress] != false\\n        ) revert IS_NOT_IN_LIST();\\n        _;\\n    }\\n\\n    constructor() {\\n        PKDRorg = msg.sender;\\n    }\\n\\n    function createProfile(address userAddress, bool zkResult)\\n        external\\n        onlyPKDRorg\\n        ifUserExists(userAddress)\\n        returns (bool)\\n    {\\n        if (zkResult == true) {\\n            verifiedUser[userAddress] = zkResult;\\n            emit ProfileCreated(userAddress, zkResult);\\n            return true;\\n        } else {\\n            return false;\\n        }\\n    }\\n\\n    function getVerifiedUser(address userAddress) external view returns (bool) {\\n        return verifiedUser[userAddress];\\n    }\\n\\n    function revokeVerifiedUser(address userAddress)\\n        external\\n        onlyPKDRorg\\n        ifUserNotExists(userAddress)\\n        returns (bool)\\n    {\\n        verifiedUser[userAddress] = false;\\n        emit ProfileRevoked(userAddress);\\n        return true;\\n    }\\n\\n    function retainVerification(address userAddress)\\n        external\\n        onlyPKDRorg\\n        alreadyVerified(userAddress)\\n        returns (bool)\\n    {\\n        verifiedUser[userAddress] = true;\\n        emit ProfileRetained(userAddress);\\n        return true;\\n    }\\n}\\n\",\"keccak256\":\"0x20aad182e61a521b6b635abe11b1151d1684874759c2fb6d7814fc8349c5b9f1\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60a060405234801561001057600080fd5b503373ffffffffffffffffffffffffffffffffffffffff1660808173ffffffffffffffffffffffffffffffffffffffff168152505060805161088461006e60003960008181610150015281816102fa01526104d601526108846000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c8063391a5bf01461005c5780636492eb7e1461008c5780637cde8699146100bc57806387d55ff3146100ec578063d117fc991461011c575b600080fd5b6100766004803603810190610071919061072c565b61014c565b6040516100839190610774565b60405180910390f35b6100a660048036038101906100a191906107bb565b6102f6565b6040516100b39190610774565b60405180910390f35b6100d660048036038101906100d1919061072c565b6104b2565b6040516100e39190610774565b60405180910390f35b6101066004803603810190610101919061072c565b6104d2565b6040516101139190610774565b60405180910390f35b6101366004803603810190610131919061072c565b610674565b6040516101439190610774565b60405180910390f35b60007f000000000000000000000000000000000000000000000000000000000000000073ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146101d3576040517fd238ed5900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b81600115156000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff161515141561025e576040517f59e6438c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60016000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055507f0438960ee55847040b96d330fa6d6b37e9d44b67bd7e9a05facb4aa10815031b836040516102e4919061080a565b60405180910390a16001915050919050565b60007f000000000000000000000000000000000000000000000000000000000000000073ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161461037d576040517fd238ed5900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b826000808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615610401576040517f74c16f6400000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6001151583151514156104a657826000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055507f9a776145ac8fd361e8e81bf290c2868d6479e71ab0336317a4ea58f86993dd3c8484604051610495929190610825565b60405180910390a1600191506104ab565b600091505b5092915050565b60006020528060005260406000206000915054906101000a900460ff1681565b60007f000000000000000000000000000000000000000000000000000000000000000073ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614610559576040517fd238ed5900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b816000808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff166105dc576040517f551b5fec00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055507f1235dd3cd914789338e6e4d5b85769aa71a56084cc071471e2aaa54f5ec37d0c83604051610662919061080a565b60405180910390a16001915050919050565b60008060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff169050919050565b600080fd5b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006106f9826106ce565b9050919050565b610709816106ee565b811461071457600080fd5b50565b60008135905061072681610700565b92915050565b600060208284031215610742576107416106c9565b5b600061075084828501610717565b91505092915050565b60008115159050919050565b61076e81610759565b82525050565b60006020820190506107896000830184610765565b92915050565b61079881610759565b81146107a357600080fd5b50565b6000813590506107b58161078f565b92915050565b600080604083850312156107d2576107d16106c9565b5b60006107e085828601610717565b92505060206107f1858286016107a6565b9150509250929050565b610804816106ee565b82525050565b600060208201905061081f60008301846107fb565b92915050565b600060408201905061083a60008301856107fb565b6108476020830184610765565b939250505056fea264697066735822122061fd9d6206984094b08feea37cb031ad88ba071601c4b8799cf46546782b8ebf64736f6c63430008090033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100575760003560e01c8063391a5bf01461005c5780636492eb7e1461008c5780637cde8699146100bc57806387d55ff3146100ec578063d117fc991461011c575b600080fd5b6100766004803603810190610071919061072c565b61014c565b6040516100839190610774565b60405180910390f35b6100a660048036038101906100a191906107bb565b6102f6565b6040516100b39190610774565b60405180910390f35b6100d660048036038101906100d1919061072c565b6104b2565b6040516100e39190610774565b60405180910390f35b6101066004803603810190610101919061072c565b6104d2565b6040516101139190610774565b60405180910390f35b6101366004803603810190610131919061072c565b610674565b6040516101439190610774565b60405180910390f35b60007f000000000000000000000000000000000000000000000000000000000000000073ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146101d3576040517fd238ed5900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b81600115156000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff161515141561025e576040517f59e6438c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60016000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055507f0438960ee55847040b96d330fa6d6b37e9d44b67bd7e9a05facb4aa10815031b836040516102e4919061080a565b60405180910390a16001915050919050565b60007f000000000000000000000000000000000000000000000000000000000000000073ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161461037d576040517fd238ed5900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b826000808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1615610401576040517f74c16f6400000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6001151583151514156104a657826000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055507f9a776145ac8fd361e8e81bf290c2868d6479e71ab0336317a4ea58f86993dd3c8484604051610495929190610825565b60405180910390a1600191506104ab565b600091505b5092915050565b60006020528060005260406000206000915054906101000a900460ff1681565b60007f000000000000000000000000000000000000000000000000000000000000000073ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614610559576040517fd238ed5900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b816000808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff166105dc576040517f551b5fec00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055507f1235dd3cd914789338e6e4d5b85769aa71a56084cc071471e2aaa54f5ec37d0c83604051610662919061080a565b60405180910390a16001915050919050565b60008060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff169050919050565b600080fd5b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006106f9826106ce565b9050919050565b610709816106ee565b811461071457600080fd5b50565b60008135905061072681610700565b92915050565b600060208284031215610742576107416106c9565b5b600061075084828501610717565b91505092915050565b60008115159050919050565b61076e81610759565b82525050565b60006020820190506107896000830184610765565b92915050565b61079881610759565b81146107a357600080fd5b50565b6000813590506107b58161078f565b92915050565b600080604083850312156107d2576107d16106c9565b5b60006107e085828601610717565b92505060206107f1858286016107a6565b9150509250929050565b610804816106ee565b82525050565b600060208201905061081f60008301846107fb565b92915050565b600060408201905061083a60008301856107fb565b6108476020830184610765565b939250505056fea264697066735822122061fd9d6206984094b08feea37cb031ad88ba071601c4b8799cf46546782b8ebf64736f6c63430008090033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 17,
+        "contract": "contracts/Profiles.sol:Profiles",
+        "label": "verifiedUser",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_address,t_bool)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      }
+    }
+  }
+}

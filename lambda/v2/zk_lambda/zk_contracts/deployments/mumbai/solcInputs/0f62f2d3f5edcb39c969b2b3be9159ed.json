@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Profiles.sol": {
+      "content": "//SPDX-License-Identifier:MIT\npragma solidity ^0.8.7;\n\ncontract Profiles {\n    error USER_EXISTS();\n    error USER_NOT_EXISTS();\n    error ONLY_OWNER();\n    error ALREADY_VERIFIED();\n    error IS_NOT_IN_LIST();\n\n    address private immutable PKDRorg;\n\n    mapping(address => bool) public verifiedUser;\n\n    event ProfileCreated(address, bool);\n    event ProfileRevoked(address);\n    event ProfileRetained(address);\n\n    modifier onlyPKDRorg() {\n        if (msg.sender != PKDRorg) revert ONLY_OWNER();\n        _;\n    }\n    modifier ifUserExists(address userAddress) {\n        if (verifiedUser[userAddress]) revert USER_EXISTS();\n        _;\n    }\n    modifier ifUserNotExists(address userAddress) {\n        if (!verifiedUser[userAddress]) revert USER_NOT_EXISTS();\n        _;\n    }\n    modifier alreadyVerified(address userAddress) {\n        if (verifiedUser[userAddress] == true) revert ALREADY_VERIFIED();\n        _;\n    }\n    modifier ifInList(address userAddress) {\n        if (\n            verifiedUser[userAddress] != true ||\n            verifiedUser[userAddress] != false\n        ) revert IS_NOT_IN_LIST();\n        _;\n    }\n\n    constructor() {\n        PKDRorg = msg.sender;\n    }\n\n    function createProfile(address userAddress, bool zkResult)\n        external\n        onlyPKDRorg\n        ifUserExists(userAddress)\n        returns (bool)\n    {\n        if (zkResult == true) {\n            verifiedUser[userAddress] = zkResult;\n            emit ProfileCreated(userAddress, zkResult);\n            return true;\n        } else {\n            return false;\n        }\n    }\n\n    function getVerifiedUser(address userAddress) external view returns (bool) {\n        return verifiedUser[userAddress];\n    }\n\n    function revokeVerifiedUser(address userAddress)\n        external\n        onlyPKDRorg\n        ifUserNotExists(userAddress)\n        returns (bool)\n    {\n        verifiedUser[userAddress] = false;\n        emit ProfileRevoked(userAddress);\n        return true;\n    }\n\n    function retainVerification(address userAddress)\n        external\n        onlyPKDRorg\n        alreadyVerified(userAddress)\n        returns (bool)\n    {\n        verifiedUser[userAddress] = true;\n        emit ProfileRetained(userAddress);\n        return true;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

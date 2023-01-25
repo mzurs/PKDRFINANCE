@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { web3authAtom, loading } from "../../../state/jotai";
+import {
+  web3authAtom,
+  loading,
+  customAuthentication,
+  isVerified,
+  userRole,
+  privKeyAtom,
+  userInfoAtom,
+  web3authStateAtom,
+  providerAtom,
+} from "../../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
 import Loading from "../../loading/Loading";
 import PushNotification from "../../PushNotification";
-import { Router, useRouter } from "next/router";
+import router, { Router, useRouter } from "next/router";
+import Cookies from "js-cookie";
 const Register = () => {
   const [data, setData] = useState<{
     ADDRESS: string;
@@ -31,31 +42,65 @@ const Register = () => {
     POSTAL_CODE: "",
     PHONE_NUMBER: "",
   });
+  const [privKey, setPrivKey] = useAtom(privKeyAtom);
+  const [userInfo, setUserInfo] = useAtom(userInfoAtom);
+  const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
+  const [providerAtomState, setProviderAtomState] = useAtom(providerAtom);
+  const [auth, setAuth] = useAtom(web3authAtom);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(true);
   const [web3auth] = useAtom(web3authAtom);
+  const [verified, setVerified] = useAtom(isVerified);
+
   const [loadingState, setlLoadingState] = useAtom(loading);
-  const router=useRouter()
   const handleSubmit = async () => {
-    const idToken = (web3auth as any).idToken;
+    // const idToken = (web3auth as any).idToken;
     const formData = {
       data,
-      idToken,
+      // idToken,
     };
 
     handleCloseModal();
-    setlLoadingState(true)
-
+    setlLoadingState(true);
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([
+        (web3auth as unknown as any).idToken,
+        (userInfo as unknown as any).oAuthIdToken,
+      ])
+    );
     await fetch("/api/mutation/createUser", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: headers,
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(async (data) => {
         console.log(`RESPONSE: ${JSON.stringify(data)}`);
-        setlLoadingState(false)
-        router.push('/user/users/')
+        setlLoadingState(false);
+        // router.push("/user/users/");
+        if (data) {
+          console.log(`data: ${data}`);
+          // try {
+          //   await web3authState?.logout();
+          //   // setProvider(null);
+          //   setAuth(null);
+          //   setPrivKey(null);
+          //   setUserInfo(null);
+          //   Cookies.remove("web3auth");
+          //   Cookies.remove("pub_key");
+          //   Cookies.remove("idToken");
+          //   Cookies.remove("oAuthIdToken");
+          //   window.location.href =
+          //     "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=http://localhost:3000&redirect_uri=http://localhost:3000";
+          // } catch (error: any) {
+          //   console.log(
+          //     `Error while signing out from Header Component: \n ERROR MESSAGE: ${error.message}`
+          //   );
+          // }
+        }
       });
   };
   const handleNextClick = () => {
@@ -69,7 +114,7 @@ const Register = () => {
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-  if (loadingState==true) {
+  if (loadingState == true) {
     // return <PushNotification/>
     return <Loading state={true} />;
   } else {

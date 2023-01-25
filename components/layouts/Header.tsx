@@ -132,7 +132,9 @@ function Header() {
       info();
     }
   });
-
+  const homePage = async () => {
+    window.location.href = "/";
+  };
   const login = async () => {
     if (!web3auth) {
       console.log("web3auth not initialized yet");
@@ -227,7 +229,7 @@ function Header() {
             aria-controls="dashboard"
             aria-selected="false"
           >
-            Home
+            <button onClick={homePage}>Home</button>
           </Link>
         </li>
         <li className="mr-2" role="presentation">
@@ -289,8 +291,10 @@ function Header() {
         <Link href="/" className="font-medium text-xl underline text-white ">
           PKDR Finance
         </Link>
-        <nav className="ml-auto">{auth ? navMenu : ""}</nav>
-        <nav className="ml-auto">{auth ? loggedInView : unloggedInView}</nav>
+        <nav className="ml-auto">{auth && web3auth ? navMenu : ""}</nav>
+        <nav className="ml-auto">
+          {auth && web3auth ? loggedInView : unloggedInView}
+        </nav>
       </div>
     </header>
   );

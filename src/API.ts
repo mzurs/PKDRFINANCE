@@ -82,14 +82,6 @@ export type UpdateContactList = {
   attributeValue?: string | null,
 };
 
-export type zkParams = {
-  cnic?: string | null,
-  privateKey?: string | null,
-  publicAddress?: string | null,
-  publicAddressAdmin?: string | null,
-  optionalParams?: string | null,
-};
-
 export type getUserResult = UserInfo | UserNotExists | Error
 
 
@@ -205,14 +197,6 @@ export type AddContactsMutation = {
       message?: string | null,
     }
   ) | null,
-};
-
-export type ZeroKnowledgeProfileMutationVariables = {
-  zkp?: zkParams | null,
-};
-
-export type ZeroKnowledgeProfileMutation = {
-  zeroKnowledgeProfile?: string | null,
 };
 
 export type GetUserByEmailQueryVariables = {

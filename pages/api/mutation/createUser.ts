@@ -35,7 +35,7 @@ async function addUserToVerifiedGroup(oAuthIdToken: string) {
     }
   );
 }
-const getUserInfo = async (idToken: string) => {
+export const getUserInfo = async (idToken: string) => {
   const decoded: any = await jwt.decode(idToken);
   const email = decoded.email;
   const hash = keccak256(Buffer.from(decoded.wallets[0].public_key, "hex"));
@@ -50,12 +50,10 @@ async function createUserAPI(
   oAuthIdToken: string
 ) {
   let returnResult: boolean = false;
-  // console.log("🚀 ~ file: createUser.ts:24 ~ oAuthIdToken", oAuthIdToken)
-  // console.log("🚀 ~ file: createUser.ts:24 ~ idToken", idToken)
-  // console.log("🚀 ~ file: createUser.ts:24 ~ userData", userData)
+  
   const { email, eth_address } = await getUserInfo(idToken);
 
-  const formData = {
+  const formData:CreateUser = {
     ADDRESS: userData.data.ADDRESS,
     CITY: userData.data.CITY,
     COUNTRY: userData.data.COUNTRY,

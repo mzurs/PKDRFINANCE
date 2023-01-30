@@ -75,8 +75,3 @@ export const addContacts = /* GraphQL */ `
     }
   }
 `;
-export const zeroKnowledgeProfile = /* GraphQL */ `
-  mutation ZeroKnowledgeProfile($zkp: zkParams) {
-    zeroKnowledgeProfile(zkp: $zkp)
-  }
-`;

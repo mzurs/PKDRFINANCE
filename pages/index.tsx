@@ -89,6 +89,7 @@ const Home = ({ role, isAuth, userTag }: any) => {
   // }
   return (
     <div>
+      <title>PKDR Finance</title>
       <Front />
     </div>
   );

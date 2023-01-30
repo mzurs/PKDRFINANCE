@@ -9,7 +9,18 @@ function profile() {
 
   if (auth) {
     if (info) {
-      return <div> {JSON.stringify(info)}</div>;
+      return (
+        <div className="flex-wrap overflow-hidden">
+          {" "}
+          Email = {info.email}
+          <div>
+            Name = {info.name} 
+          </div>
+          <div>
+          {JSON.stringify(Object.keys(info))}
+          </div>
+        </div>
+      );
     }
   } else {
     return <div>Login</div>;

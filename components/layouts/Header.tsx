@@ -197,7 +197,7 @@ function Header() {
   const unloggedInView = (
     <button
       onClick={login}
-      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      className="text-green-600 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
     >
       Sign up
     </button>
@@ -205,15 +205,15 @@ function Header() {
   const loggedInView = (
     <button
       onClick={logout}
-      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      className="right-0 text-green-600  font-sm font-normal text-sm border-transparent px-[3px] py-1 border-1 rounded-md hover:border-green-600 border-2"
     >
       Sign out
     </button>
   );
   const navMenu = (
-    <div className=" border-gray-200 dark:border-gray-700">
+    <div className=" border-gray-200 dark:border-gray-700  text-green-600 ">
       <ul
-        className="flex flex-wrap -mb-px text-sm font-medium text-center"
+        className="flex items-center text-sm font-medium text-center"
         id="myTab"
         data-tabs-toggle="#myTabContent"
         role="tablist"
@@ -221,7 +221,7 @@ function Header() {
         <li className="mr-2" role="presentation">
           <Link
             href={"/"}
-            className="text-white inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300 dark:hover:text-blue-300"
+            className="mx-1 px-2 py-1.5 border-transparent rounded-sm hover:border-b-2 hover:border-green-700 hover:text-green-700"
             id="dashboard-tab"
             data-tabs-target="#dashboard"
             type="button"
@@ -232,10 +232,13 @@ function Header() {
             <button onClick={homePage}>Home</button>
           </Link>
         </li>
-        <li className="mr-2" role="presentation">
+        <li
+          className="mr-2 flex justify-between align-center"
+          role="presentation"
+        >
           <Link
             href={"/profile"}
-            className="text-white inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300 dark:hover:text-blue-300"
+            className="mx-1 px-2 py-1.5 border-transparent rounded-sm hover:border-b-2 hover:border-green-700 hover:text-green-700"
             id="dashboard-tab"
             data-tabs-target="#dashboard"
             type="button"
@@ -248,7 +251,7 @@ function Header() {
         </li>
         <li className="mr-2" role="presentation">
           <button
-            className="text-white inline-block p-4 border-b-2 border-transparent rounded-t-lg  hover:text-blue-600 hover:border-blue-300 dark:hover:text-blue-300"
+            className="mx-1 px-2 py-1.5 border-transparent rounded-sm hover:border-b-2 hover:border-green-700 hover:text-green-700"
             id="settings-tab"
             data-tabs-target="#settings"
             type="button"
@@ -261,7 +264,7 @@ function Header() {
         </li>
         <li role="presentation">
           <button
-            className="text-white inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300 dark:hover:text-blue-300"
+            className="mx-1 px-2 py-1.5 border-transparent rounded-sm hover:border-b-2 hover:border-green-700 hover:text-green-700"
             id="contacts-tab"
             data-tabs-target="#contacts"
             type="button"
@@ -276,26 +279,19 @@ function Header() {
     </div>
   );
   return (
-    <header className="bg-black flex top-0 left-0 z-50 w-full h-16 text-white p-4 border-0">
-      <div className="container mx-auto flex items-center">
+    <header className="border-slate-1000 shadow-md right-0 left-0 bg-slate-900 flex top-0 z-1 w-full h-[8.2vh] p-3 border-0 items-center">
+      <div className="container flex items-center">
         <div>
-          {" "}
-          <Image
-            src="https://flowbite.com/docs/images/logo.svg"
-            alt="Vercel Logo"
-            width={30}
-            height={5}
-          />
-        </div>{" "}
-        -||
-        <Link href="/" className="font-medium text-xl underline text-white ">
+          <Image src="/logo.png" alt="logo" width="50" height="50" />
+        </div>
+        <Link href="/" className="font-light text-m  text-green-600 ">
           PKDR Finance
         </Link>
-        <nav className="ml-auto">{auth && web3auth ? navMenu : ""}</nav>
-        <nav className="ml-auto">
-          {auth && web3auth ? loggedInView : unloggedInView}
-        </nav>
+        <nav className="m-auto">{auth && web3auth ? navMenu : ""}</nav>
       </div>
+      <nav className="ml-auto">
+        {auth && web3auth ? loggedInView : unloggedInView}
+      </nav>
     </header>
   );
 }

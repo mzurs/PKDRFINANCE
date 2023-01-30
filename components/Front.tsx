@@ -5,7 +5,10 @@ import Image from 'next/image';
 function Front() {
     const auth=useAtomValue(web3authAtom);
     return (
-     <div> PKDR FINANCE</div> 
+      <>
+      <div> PKDR FINANCE</div>
+      </>
+      
        );
 }
 

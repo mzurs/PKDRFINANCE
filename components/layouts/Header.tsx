@@ -177,7 +177,7 @@ function Header() {
       Cookies.remove("idToken");
       Cookies.remove("oAuthIdToken");
       window.location.href =
-        "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=http://localhost:3000&redirect_uri=http://localhost:3000";
+        "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=http://localhost:3000&redirect_uri=http://localhost:3000 hover:font-xl";
     } catch (error: any) {
       console.log(
         `Error while signing out from Header Component: \n ERROR MESSAGE: ${error.message}`
@@ -197,7 +197,7 @@ function Header() {
   const unloggedInView = (
     <button
       onClick={login}
-      className="text-green-600 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+      className="text-lg right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1  hover:text-yellow-600"
     >
       Sign up
     </button>
@@ -205,23 +205,23 @@ function Header() {
   const loggedInView = (
     <button
       onClick={logout}
-      className="right-0 text-green-600  font-sm font-normal text-sm border-transparent px-[3px] py-1 border-1 rounded-md hover:border-green-600 border-2"
+      className="text-lg right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1  hover:text-yellow-600"
     >
       Sign out
     </button>
   );
   const navMenu = (
-    <div className=" border-gray-200 dark:border-gray-700  text-green-600 ">
+    <div className=" text-gray-200 ">
       <ul
-        className="flex items-center text-sm font-medium text-center"
+        className="flex items-center font-medium text-center text-xl"
         id="myTab"
         data-tabs-toggle="#myTabContent"
         role="tablist"
       >
-        <li className="mr-2" role="presentation">
+        <li className="mr-2 " role="presentation">
           <Link
             href={"/"}
-            className="mx-1 px-2 py-1.5 border-transparent rounded-sm hover:border-b-2 hover:border-green-700 hover:text-green-700"
+            className="mx-3 px-3 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 " 
             id="dashboard-tab"
             data-tabs-target="#dashboard"
             type="button"
@@ -238,7 +238,7 @@ function Header() {
         >
           <Link
             href={"/profile"}
-            className="mx-1 px-2 py-1.5 border-transparent rounded-sm hover:border-b-2 hover:border-green-700 hover:text-green-700"
+            className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
             id="dashboard-tab"
             data-tabs-target="#dashboard"
             type="button"
@@ -251,7 +251,7 @@ function Header() {
         </li>
         <li className="mr-2" role="presentation">
           <button
-            className="mx-1 px-2 py-1.5 border-transparent rounded-sm hover:border-b-2 hover:border-green-700 hover:text-green-700"
+            className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
             id="settings-tab"
             data-tabs-target="#settings"
             type="button"
@@ -264,7 +264,7 @@ function Header() {
         </li>
         <li role="presentation">
           <button
-            className="mx-1 px-2 py-1.5 border-transparent rounded-sm hover:border-b-2 hover:border-green-700 hover:text-green-700"
+            className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
             id="contacts-tab"
             data-tabs-target="#contacts"
             type="button"
@@ -279,12 +279,12 @@ function Header() {
     </div>
   );
   return (
-    <header className="border-slate-1000 shadow-md right-0 left-0 bg-slate-900 flex top-0 z-1 w-full h-[8.2vh] p-3 border-0 items-center">
+    <header className="border-yellow-600 border-b-[3.5px] shadow-md right-0 left-0 bg-[#18270D] flex top-0 z-1 w-full h-[8.2vh] p-3 items-center">
       <div className="container flex items-center">
         <div>
           <Image src="/logo.png" alt="logo" width="50" height="50" />
         </div>
-        <Link href="/" className="font-light text-m  text-green-600 ">
+        <Link href="/" className="font-light text-[22px]  text-green-600 hover:text-green-500">
           PKDR Finance
         </Link>
         <nav className="m-auto">{auth && web3auth ? navMenu : ""}</nav>

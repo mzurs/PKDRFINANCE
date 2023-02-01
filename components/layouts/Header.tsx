@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { TbGridDots } from 'react-icons/tb';
 import Image from "next/image";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { getPublicCompressed } from "@toruslabs/eccrypto";
 import Cookies from "js-cookie";
+import { HiBars3 } from 'react-icons/hi2';
+
 import {
   web3authAtom,
   web3authStateAtom,
@@ -20,6 +23,7 @@ import { CLIENT_ID } from "./config/constants";
 import { useRouter } from "next/router";
 const clientId: string = CLIENT_ID;
 import RPC from "./config/ethersRPC";
+
 function Header() {
   const [auth, setAuth] = useAtom(web3authAtom);
   const [privKey, setPrivKey] = useAtom(privKeyAtom);
@@ -197,19 +201,71 @@ function Header() {
   const unloggedInView = (
     <button
       onClick={login}
-      className="text-lg right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1  hover:text-yellow-600"
+      className="text-xl right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1  hover:text-yellow-600"
     >
       Sign up
     </button>
   );
-  const loggedInView = (
-    <button
-      onClick={logout}
-      className="text-lg right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1  hover:text-yellow-600"
-    >
-      Sign out
-    </button>
+
+  const togglemenu = ()=>{
+    const menu = document.getElementById("menu");
+    const grid = document.getElementById("grid");
+    if(!menu?.classList.contains("hidden")){
+      menu?.classList.add("hidden")
+      grid?.classList.remove("rotate-45")
+    }
+    else{
+      menu?.classList.remove("hidden")
+      grid?.classList.add("rotate-45")
+    }
+  }
+
+  const usermenu = (
+    <div className="top-[2.5rem] right-4 absolute bg-[#131f0bd1] border-2 rounded-lg border-yellow-600 text-gray-200 w-[9.5vw] h-auto">
+      <h4 className="m-[1px] py-3 px-5 rounded-md text-center  border-b-2 border-yellow-600 text-yellow-600">Menu</h4>
+      <ul className="">
+        <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
+          <Link href={"/profile"}>Your Profile</Link>
+        </li>
+        <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
+          <Link href={"/"}>Settings</Link>
+        </li>
+        <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
+          <Link href={"/"}>Account</Link>
+        </li>
+        <li className="py-2 px-4 rounded-md border-b-[1px] border-yellow-600 hover:text-yellow-600 text-md">
+          <a className="cursor-pointer" onClick={logout}>Signout</a>
+        </li>
+        <li className="px-4 rounded-md text-yellow-600 text-xl flex justify-center bg-[#131e0c]">
+          <HiBars3/>
+        </li>
+        
+      </ul>
+    </div>
   );
+
+  const loggedInView = (
+    <div className="flex text-lg items-center right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1 ">
+        {/* <button
+      onClick={logout}
+      className=" hover:text-yellow-600 hover:underline"
+    >
+      Sign out 
+    </button> */}
+    <div>
+      {}
+    </div>
+      
+    <div onMouseOver={()=>{setTimeout(togglemenu, 200);}} id="grid" className="p-3 ml-3 hover:rotate-45 hover:duration-200 hover:text-yellow-600 text-2xl" onClick={togglemenu}>
+    <TbGridDots />
+    </div >
+    <div id="menu" className="hidden" onMouseLeave={togglemenu}>
+    {usermenu}
+    </div>
+      
+    </div>
+  );
+
   const navMenu = (
     <div className=" text-gray-200 ">
       <ul
@@ -233,24 +289,25 @@ function Header() {
           </Link>
         </li>
         <li
-          className="mr-2 flex justify-between align-center"
+          className="mr-2"
           role="presentation"
         >
           <Link
             href={"/profile"}
             className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
-            id="dashboard-tab"
-            data-tabs-target="#dashboard"
+            id="profile-tab"
+            data-tabs-target="#profile"
             type="button"
             role="tab"
-            aria-controls="dashboard"
+            aria-controls="profile"
             aria-selected="false"
           >
             Profile
           </Link>
         </li>
         <li className="mr-2" role="presentation">
-          <button
+          <Link
+            href={"/settings"}
             className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
             id="settings-tab"
             data-tabs-target="#settings"
@@ -260,10 +317,11 @@ function Header() {
             aria-selected="false"
           >
             Settings
-          </button>
+          </Link>
         </li>
         <li role="presentation">
-          <button
+          <Link
+          href={"/pkdrInfo/contact"}
             className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
             id="contacts-tab"
             data-tabs-target="#contacts"
@@ -273,8 +331,9 @@ function Header() {
             aria-selected="false"
           >
             Contacts
-          </button>
+          </Link>
         </li>
+        
       </ul>
     </div>
   );

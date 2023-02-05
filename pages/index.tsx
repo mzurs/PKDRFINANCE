@@ -104,10 +104,10 @@ export async function getServerSideProps(context: any) {
     const web3AuthCookie = cookies.idToken;
     const pub_key_Cookie = cookies.pub_key;
     const oAuthIdTokenCookie = cookies.oAuthIdToken;
-    console.log(
-      "🚀 ~ file: index.tsx:87 ~ getServerSideProps ~ oAuthIdTokenCookie",
-      oAuthIdTokenCookie
-    );
+    // console.log(
+    //   "🚀 ~ file: index.tsx:87 ~ getServerSideProps ~ oAuthIdTokenCookie",
+    //   oAuthIdTokenCookie
+    // );
     if (!web3AuthCookie || !pub_key_Cookie || !oAuthIdTokenCookie) {
       return {
         props: {}, // will be passed to the page component as props

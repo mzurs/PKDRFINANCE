@@ -15,12 +15,13 @@ function profile() {
           <section className="text-gray-600 body-font py-2 w-full">
             <div className="px-12 py-16 mx-auto flex flex-col">
               <div className="lg:w-full mx-auto">
-                <div className="rounded-2xl h-36 overflow-hidden mb-6">
+                <div className="rounded-2xl h-28 overflow-hidden mb-6">
                   {/* <img
                     alt="content"
                     className="object-cover object-center h-full w-full "
                     src="https://th.bing.com/th/id/R.477a439e64ecec7f2ac1758f3c62df71?rik=WGxoAUjMGwB7rA&pid=ImgRaw&r=0"
                   /> */}
+                  
                 </div>
                 <div className="flex flex-col sm:flex-row md:items-center sm:mt-1">
                   <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">

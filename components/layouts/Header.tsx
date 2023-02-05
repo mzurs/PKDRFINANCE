@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { TbGridDots } from "react-icons/tb";
 import Image from "next/image";
 import { useAtom } from "jotai";
+import LoadingBar from 'react-top-loading-bar'
 import Link from "next/link";
 import { getPublicCompressed } from "@toruslabs/eccrypto";
 import Cookies from "js-cookie";
@@ -34,9 +35,13 @@ function Header() {
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
   );
+  const [progress, setProgress] = useState(0)
   const router = useRouter();
+  const ref = useRef(null)
 
   useEffect(() => {
+    router.events.on('routeChangeComplete', ()=>{setProgress(100);});
+    router.events.on('routeChangeStart', ()=>{setProgress(30);});
     const init = async () => {
       try {
         const web3auth = new Web3AuthCore({
@@ -346,6 +351,13 @@ function Header() {
     </div>
   );
   return (
+    <>
+    <LoadingBar
+        color='#8b8343'
+        progress={progress}
+        waitingTime={400}
+        onLoaderFinished={() => setProgress(0)}
+      />
     <div className="fixed flex flex-wrap items-center w-full">
       <header className="border-yellow-600 border-b-[3.5px] shadow-md right-0 left-0 w-[100vw] bg-[#18270D] flex top-0 z-1 h-[8.2vh] p-3 items-center">
         <div>
@@ -364,6 +376,7 @@ function Header() {
         </nav>
       </header>
     </div>
+    </>
   );
 }
 

@@ -1,20 +1,9 @@
-import React, { useEffect,  } from "react";
-import { web3authAtom, userInfoAtom} from "../../state/jotai";
-import { useAtom, useAtomValue } from "jotai";
+import React from 'react'
 
-function about() {
-  const [provider, serProvider] = useAtom<any>(web3authAtom);
-  const [userInfo, setUserInfo] = useAtom(userInfoAtom);
-  console.log(`provider from about : ${useAtomValue(web3authAtom)}`);
-  useEffect(()=>{
-    setUserInfo(provider)
-  })
+const about = () => {
   return (
-    <div>
-    
-      
-    </div>
-  );
+    <div className='h-[100vh] flex items-center justify-center text-4xl'>About</div> 
+    );
 }
 
-export default about;
+export default about

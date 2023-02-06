@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { TbGridDots } from "react-icons/tb";
 import Image from "next/image";
 import { useAtom } from "jotai";
-import LoadingBar from "react-top-loading-bar";
+import LoadingBar from 'react-top-loading-bar'
 import Link from "next/link";
 import { getPublicCompressed } from "@toruslabs/eccrypto";
 import Cookies from "js-cookie";
-import { BsFileEarmarkPerson } from "react-icons/bs";
-import { BiLogOut } from "react-icons/bi";
-import { IoMdSettings } from "react-icons/io";
-import { FaTelegramPlane } from "react-icons/fa";
-import { IoIosPeople } from "react-icons/io";
-
+import { HiBars3 } from "react-icons/hi2";
 import {
   web3authAtom,
   web3authStateAtom,
@@ -28,7 +23,7 @@ import { CLIENT_ID } from "./config/constants";
 import { useRouter } from "next/router";
 const clientId: string = CLIENT_ID;
 import RPC from "./config/ethersRPC";
-import Front from "../Front";
+import Sidebar from "./Sidebar";
 
 function Header() {
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -41,16 +36,13 @@ function Header() {
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
   );
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0)
   const router = useRouter();
+  const ref = useRef(null)
 
   useEffect(() => {
-    router.events.on("routeChangeComplete", () => {
-      setProgress(100);
-    });
-    router.events.on("routeChangeStart", () => {
-      setProgress(30);
-    });
+    router.events.on('routeChangeComplete', ()=>{setProgress(100);});
+    router.events.on('routeChangeStart', ()=>{setProgress(30);});
     const init = async () => {
       try {
         const web3auth = new Web3AuthCore({
@@ -188,7 +180,7 @@ function Header() {
       setAuth(null);
       setPrivKey(null);
       setUserInfo(null);
-
+      
       Cookies.remove("web3auth");
       Cookies.remove("pub_key");
       Cookies.remove("idToken");
@@ -237,82 +229,44 @@ function Header() {
 
   const usermenu = (
     <div
-      id="menu"
-      className="right-0 hidden top-[5rem] absolute bg-[#0c1407dc]  text-gray-200 h-auto border-l-[3px] border-yellow-600"
-      onMouseLeave={togglemenu}
-    >
-      <div className="relative hidden h-screen my-4 ml-4 shadow-lg lg:block w-72">
-        <div className="h-full">
-          <div className="flex items-center justify-center pt-6">
-            <Image src="/logo.png" alt="logo" width="85" height="85" />
-          </div>
-          <nav className="mt-6">
-            <div>
-              <Link
-                className="flex items-center justify-start w-full p-4 my-2 font-thin text-yellow-600 uppercase transition-colors duration-200 border-r-4 border-yellow-600 bg-gradient-to-r from-white to-blue-100 dark:from-gray-800 dark:to-gray-900"
-                href="/profile"
-              >
-                <span className="text-left">
-                  <div>
-                    <BsFileEarmarkPerson />
-                  </div>
-                </span>
-                <span className="mx-4 text-sm font-normal">Your Profile</span>
-              </Link>
-              <Link
-                className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600"
-                href="/settings"
-              >
-                <span className="text-left">
-                  <div>
-                    <IoMdSettings />
-                  </div>
-                </span>
-                <span className="mx-4 text-sm font-normal">Settings</span>
-              </Link>
-              <Link
-                className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600"
-                href="/pkdrInfo/contact"
-              >
-                <span className="text-left">
-                  <div>
-                    <FaTelegramPlane />
-                  </div>
-                </span>
-                <span className="mx-4 text-sm font-normal">Contact Us</span>
-              </Link>
-              <Link
-                className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600"
-                href="/pkdrInfo/about"
-              >
-                <span className="text-left">
-                  <div>
-                    <IoIosPeople />
-                  </div>
-                </span>
-                <span className="mx-4 text-sm font-normal">About Us</span>
-              </Link>
-              <div
-                className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600"
-                onClick={logout}
-              >
-                <span className="text-left">
-                  <div>
-                    <BiLogOut />
-                  </div>
-                </span>
-                <span className="mx-4 text-sm font-normal">Signout</span>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </div>
+      className="top-[3.4rem] right-3 absolute bg-[#131f0bd1] border-2 rounded-lg border-yellow-600 text-gray-200 w-[9.5vw] h-auto">
+      <h4 className="m-[1px] py-3 px-5 rounded-md text-center  border-b-2 border-yellow-600 text-yellow-600">
+        Menu
+      </h4>
+      <ul className="">
+        <Link href={"/profile"}>
+          <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
+            Your Profile
+          </li>
+        </Link>
+        <Link href={"/"}>
+          <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
+            Settings
+          </li>
+        </Link>
+        <Link href={"/"}>
+          <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
+            Account
+          </li>
+        </Link>
+        <li
+          onClick={logout}
+          className="py-2 px-4 cursor-pointer rounded-md border-b-[1px] border-yellow-600 hover:text-yellow-600 text-md"
+        >
+          <a className="cursor-pointer">Signout</a>
+        </li>
+        <li className="px-5 rounded-md text-yellow-600 text-xl flex justify-center bg-[#131e0c]">
+          <HiBars3 />
+        </li>
+      </ul>
     </div>
   );
 
   const loggedInView = (
     <div className="w-[20rem] flex flex-row text-xl items-center justify-end">
-      <div className="text-yellow-600">{userInfo?.name}</div>
+      <div className="text-yellow-600">
+      {userInfo?.name}
+      </div>
 
       <div>
         <TbGridDots
@@ -323,7 +277,9 @@ function Header() {
         />
       </div>
 
-      {usermenu}
+      <div className="hidden" id="menu" onMouseLeave={togglemenu}>
+        <Sidebar/>
+      </div>
     </div>
   );
 
@@ -396,33 +352,30 @@ function Header() {
   );
   return (
     <>
-      <LoadingBar
-        color="#8b8343"
+    <LoadingBar
+        color='#8b8343'
         progress={progress}
         waitingTime={400}
         onLoaderFinished={() => setProgress(0)}
       />
-      <div className="fixed flex flex-wrap items-center w-full">
-        <header className="border-yellow-600 border-b-[3.5px] shadow-md right-0 left-0 w-[100vw] bg-[#18270D] flex top-0 z-1 h-[8.2vh] p-3 items-center">
-          <div>
-            <Image src="/logo.png" alt="logo" width="50" height="50" />
-          </div>
-          <Link
-            href="/"
-            className="font-light text-[22px]  text-green-600 hover:text-green-500"
-          >
-            PKDR Finance
-          </Link>
-          <nav className="ml-[480px]">{auth && web3auth ? navMenu : ""}</nav>
+    <div className="fixed flex flex-wrap items-center w-full">
+      <header className="border-yellow-600 border-b-[3.5px] shadow-md right-0 left-0 w-[100vw] bg-[#18270D] flex top-0 z-1 h-[8.2vh] p-3 items-center">
+        <div>
+          <Image src="/logo.png" alt="logo" width="50" height="50" />
+        </div>
+        <Link
+          href="/"
+          className="font-light text-[22px]  text-green-600 hover:text-green-500"
+        >
+          PKDR Finance
+        </Link>
+        <nav className="ml-[480px]">{auth && web3auth ? navMenu : ""}</nav>
 
-          <nav className="ml-auto">
-            {auth && web3auth ? loggedInView : unloggedInView}
-          </nav>
-        </header>
-        <body>
-          <Front />
-        </body>
-      </div>
+        <nav className="ml-auto">
+          {auth && web3auth ? loggedInView : unloggedInView}
+        </nav>
+      </header>
+    </div>
     </>
   );
 }

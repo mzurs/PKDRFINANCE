@@ -13,9 +13,9 @@ function profile() {
         // relative container
         <div className="flex justify-center w-full h-full items-center">
           <section className="text-gray-600 body-font py-2 w-full">
-            <div className="px-12 py-16 mx-auto flex flex-col">
+            <div className="px-12 md:py-16 mx-auto flex flex-col">
               <div className="lg:w-full mx-auto">
-                <div className="rounded-2xl h-28 overflow-hidden mb-6">
+                <div className="rounded-2xl md:h-28 h-14 overflow-hidden mb-6">
                   {/* <img
                     alt="content"
                     className="object-cover object-center h-full w-full "
@@ -95,7 +95,7 @@ function profile() {
                               $120,000
                             </dd>
                           </div>
-                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
                             <dt className="text-sm font-medium text-gray-500">
                               About
                             </dt>

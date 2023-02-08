@@ -2,11 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { TbGridDots } from "react-icons/tb";
 import Image from "next/image";
 import { useAtom } from "jotai";
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from "react-top-loading-bar";
 import Link from "next/link";
 import { getPublicCompressed } from "@toruslabs/eccrypto";
 import Cookies from "js-cookie";
-import { HiBars3 } from "react-icons/hi2";
 import {
   web3authAtom,
   web3authStateAtom,
@@ -16,7 +15,6 @@ import {
 } from "../../state/jotai";
 import { Web3AuthCore } from "@web3auth/core";
 import { SafeEventEmitterProvider, WALLET_ADAPTERS } from "@web3auth/base";
-
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { polygonMumbaiPRC } from "./config/RPC/polygon-mumbai";
 import { CLIENT_ID } from "./config/constants";
@@ -36,13 +34,75 @@ function Header() {
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
   );
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState(0);
   const router = useRouter();
-  const ref = useRef(null)
+  const [prevlocation, setprevlocation] = useState<string>("home");
+
+  const change_color = (current_page: string) => {
+    if (current_page !== "home") {
+      let prev = document.getElementById(`${prevlocation}-tab`);
+      let curr = document.getElementById(`${current_page}-tab`);
+
+      curr?.classList.remove("hover:border-yellow-600");
+      curr?.classList.remove("hover:border-l-[1px]");
+      curr?.classList.remove("hover:border-r-[1px]");
+      curr?.classList.remove("hover:text-yellow-600");
+      curr?.classList.remove("text-gray-200");
+      curr?.classList.add("bg-yellow-600");
+      curr?.classList.add("text-white");
+
+      prev?.classList.remove("bg-yellow-600");
+      prev?.classList.remove("text-white");
+      prev?.classList.add("hover:border-yellow-600");
+      prev?.classList.add("hover:border-l-[1px]");
+      prev?.classList.add("hover:border-r-[1px]");
+      prev?.classList.add("hover:text-yellow-600");
+      prev?.classList.add("text-gray-200");
+    }
+    else{
+      let home = document.getElementById(`${prevlocation}-tab`);
+      home?.classList.remove("bg-yellow-600");
+      home?.classList.remove("text-white");
+      home?.classList.add("hover:border-yellow-600");
+      home?.classList.add("hover:border-l-[1px]");
+      home?.classList.add("hover:border-r-[1px]");
+      home?.classList.add("hover:text-yellow-600");
+      home?.classList.add("text-gray-200");
+    }
+  };
+
+  const get_page = () => {
+    let url = window.location.href;
+    if (
+      !(url === "http://localhost:3000/" || url === "http://localhost:3000")
+    ) {
+      let url_fragment = url.split("/");
+      let len = url_fragment.length;
+      let page_name = url_fragment[len - 1];
+      change_color(page_name);
+      setprevlocation(page_name);
+      //console.log("Current URL = " + page_name);
+    } else {
+      change_color("home");
+      setprevlocation("home");
+    }
+  };
+
+  try {
+    useEffect(() => {
+      //console.log("Previous URL = " + prevlocation);
+      get_page();
+    }, [window.location.href]);
+  } catch {}
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', ()=>{setProgress(100);});
-    router.events.on('routeChangeStart', ()=>{setProgress(30);});
+    router.events.on("routeChangeStart", () => {
+      setProgress(30);
+    });
+    router.events.on("routeChangeComplete", () => {
+      setProgress(100);
+    });
+
     const init = async () => {
       try {
         const web3auth = new Web3AuthCore({
@@ -91,7 +151,6 @@ function Header() {
         console.error(error);
       }
     };
-
     init();
   }, []);
 
@@ -180,7 +239,7 @@ function Header() {
       setAuth(null);
       setPrivKey(null);
       setUserInfo(null);
-      
+
       Cookies.remove("web3auth");
       Cookies.remove("pub_key");
       Cookies.remove("idToken");
@@ -204,6 +263,7 @@ function Header() {
       logout();
     }
   }
+
   const unloggedInView = (
     <button
       onClick={login}
@@ -216,7 +276,6 @@ function Header() {
   const togglemenu = () => {
     const menu = document.getElementById("menu");
     const grid = document.getElementById("grid");
-    console.log("Triggered");
     if (!menu?.classList.contains("hidden")) {
       menu?.classList.add("hidden");
       grid?.classList.remove("rotate-45");
@@ -227,46 +286,9 @@ function Header() {
     }
   };
 
-  const usermenu = (
-    <div
-      className="top-[3.4rem] right-3 absolute bg-[#131f0bd1] border-2 rounded-lg border-yellow-600 text-gray-200 w-[9.5vw] h-auto">
-      <h4 className="m-[1px] py-3 px-5 rounded-md text-center  border-b-2 border-yellow-600 text-yellow-600">
-        Menu
-      </h4>
-      <ul className="">
-        <Link href={"/profile"}>
-          <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
-            Your Profile
-          </li>
-        </Link>
-        <Link href={"/"}>
-          <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
-            Settings
-          </li>
-        </Link>
-        <Link href={"/"}>
-          <li className="m-[1px] py-2 px-4 border-b-[1px] rounded-md border-yellow-600 hover:text-yellow-600">
-            Account
-          </li>
-        </Link>
-        <li
-          onClick={logout}
-          className="py-2 px-4 cursor-pointer rounded-md border-b-[1px] border-yellow-600 hover:text-yellow-600 text-md"
-        >
-          <a className="cursor-pointer">Signout</a>
-        </li>
-        <li className="px-5 rounded-md text-yellow-600 text-xl flex justify-center bg-[#131e0c]">
-          <HiBars3 />
-        </li>
-      </ul>
-    </div>
-  );
-
   const loggedInView = (
     <div className="w-[20rem] flex flex-row text-xl items-center justify-end">
-      <div className="text-yellow-600">
-      {userInfo?.name}
-      </div>
+      <div className="text-yellow-600">{userInfo?.name}</div>
 
       <div>
         <TbGridDots
@@ -278,37 +300,37 @@ function Header() {
       </div>
 
       <div className="hidden" id="menu" onMouseLeave={togglemenu}>
-        <Sidebar/>
+        <Sidebar />
       </div>
     </div>
   );
 
   const navMenu = (
-    <div className="text-gray-200">
+    <div>
       <ul
         className="flex items-center font-medium text-center text-xl"
         id="myTab"
         data-tabs-toggle="#myTabContent"
         role="tablist"
       >
-        <li className="mr-2 " role="presentation">
+        <li role="presentation">
           <Link
             href={"/"}
-            className="mx-3 px-3 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
-            id="dashboard-tab"
-            data-tabs-target="#dashboard"
+            className="px-10 py-6 text-white bg-yellow-600 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] "
+            id="home-tab"
+            data-tabs-target="#home"
             type="button"
             role="tab"
-            aria-controls="dashboard"
+            aria-controls="home"
             aria-selected="false"
           >
             <button onClick={homePage}>Home</button>
           </Link>
         </li>
-        <li className="mr-2" role="presentation">
+        <li role="presentation">
           <Link
             href={"/profile"}
-            className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
+            className="px-10 py-6 text-gray-200 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
             id="profile-tab"
             data-tabs-target="#profile"
             type="button"
@@ -319,32 +341,32 @@ function Header() {
             Profile
           </Link>
         </li>
-        <li className="mr-2" role="presentation">
+        <li role="presentation">
           <Link
-            href={"/settings"}
-            className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
-            id="settings-tab"
-            data-tabs-target="#settings"
+            href={"/pkdrInfo/contact"}
+            className="px-10 py-6 text-gray-200 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
+            id="contact-tab"
+            data-tabs-target="#contact"
             type="button"
             role="tab"
-            aria-controls="settings"
+            aria-controls="contact"
             aria-selected="false"
           >
-            Settings
+            Contact
           </Link>
         </li>
         <li role="presentation">
           <Link
-            href={"/pkdrInfo/contact"}
-            className="mx-3 px-3 py-0.5 my-1 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
-            id="contacts-tab"
-            data-tabs-target="#contacts"
+            href={"/pkdrInfo/about"}
+            className="px-10 py-6 text-gray-200 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
+            id="about-tab"
+            data-tabs-target="#about"
             type="button"
             role="tab"
-            aria-controls="contacts"
+            aria-controls="about"
             aria-selected="false"
           >
-            Contacts
+            About
           </Link>
         </li>
       </ul>
@@ -352,30 +374,32 @@ function Header() {
   );
   return (
     <>
-    <LoadingBar
-        color='#8b8343'
+      <LoadingBar
+        color="#8b8343"
         progress={progress}
         waitingTime={400}
-        onLoaderFinished={() => setProgress(0)}
+        onLoaderFinished={() => {
+          setProgress(0);
+        }}
       />
-    <div className="fixed flex flex-wrap items-center w-full">
-      <header className="border-yellow-600 border-b-[3.5px] shadow-md right-0 left-0 w-[100vw] bg-[#18270D] flex top-0 z-1 h-[8.2vh] p-3 items-center">
-        <div>
-          <Image src="/logo.png" alt="logo" width="50" height="50" />
-        </div>
-        <Link
-          href="/"
-          className="font-light text-[22px]  text-green-600 hover:text-green-500"
-        >
-          PKDR Finance
-        </Link>
-        <nav className="ml-[480px]">{auth && web3auth ? navMenu : ""}</nav>
+      <div className="fixed flex flex-wrap items-center w-full">
+        <header className="border-yellow-600 border-b-[3.5px] shadow-md right-0 left-0 w-[100vw] bg-[#18270D] flex top-0 z-1 h-[8.2vh] p-3 items-center">
+          <div>
+            <Image src="/logo.png" alt="logo" width="50" height="50" />
+          </div>
+          <Link
+            href="/"
+            className="font-light text-[22px]  text-green-600 hover:text-green-500"
+          >
+            PKDR Finance
+          </Link>
+          <nav className="ml-[480px]">{auth && web3auth ? navMenu : ""}</nav>
 
-        <nav className="ml-auto">
-          {auth && web3auth ? loggedInView : unloggedInView}
-        </nav>
-      </header>
-    </div>
+          <nav className="ml-auto">
+            {auth && web3auth ? loggedInView : unloggedInView}
+          </nav>
+        </header>
+      </div>
     </>
   );
 }

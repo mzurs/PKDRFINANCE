@@ -1,5 +1,5 @@
 import { Web3AuthCore } from "@web3auth/core";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,6 +23,48 @@ const Sidebar = () => {
   const [userInfo, setUserInfo] = useAtom(userInfoAtom);
   const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
   const [providerAtomState, setProviderAtomState] = useAtom(providerAtom);
+  const [prevlocation, setprevlocation] = useState<string>("home");
+
+  const change_color = (current_page:string)=>{
+    let prev = document.getElementById(prevlocation);
+    let curr = document.getElementById(current_page);
+
+    curr?.classList.add("border-r-4");
+    curr?.classList.add("border-yellow-600");
+    curr?.classList.add("bg-gradient-to-r");
+    curr?.classList.add("from-white");
+    curr?.classList.add("dark:from-gray-800");
+    curr?.classList.add("dark:to-gray-900");
+    curr?.classList.remove("text-gray-200");
+    curr?.classList.add("text-yellow-600");
+
+    prev?.classList.remove("border-r-4");
+    prev?.classList.remove("border-yellow-600");
+    prev?.classList.remove("bg-gradient-to-r");
+    prev?.classList.remove("from-white");
+    prev?.classList.remove("dark:from-gray-800");
+    prev?.classList.remove("dark:to-gray-900");
+    prev?.classList.remove("text-yellow-600");
+    prev?.classList.add("text-gray-200");
+
+  }
+
+  const get_page = () => {
+    let url = window.location.href; 
+    if (url !== "http://localhost:3000/") {
+      let url_fragment = url.split("/");
+      let len = url_fragment.length;
+      let page_name = url_fragment[len-1];      
+      //console.log("Current URL = " + page_name);
+      change_color(page_name);
+      setprevlocation(page_name);
+    }
+  };
+
+  useEffect(() => {
+    //console.log("Previous URL = " + prevlocation);
+    get_page();
+  }, [window.location.href]);
 
   const logout = async () => {
     if (!web3authState) {
@@ -61,7 +103,8 @@ const Sidebar = () => {
             <nav className="mt-6">
               <div>
                 <Link
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin text-yellow-600 uppercase transition-colors duration-200 border-r-4 border-yellow-600 bg-gradient-to-r from-white to-blue-100 dark:from-gray-800 dark:to-gray-900"
+                  id="profile"
+                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
                   href="/profile"
                 >
                   <span className="text-left">
@@ -72,18 +115,8 @@ const Sidebar = () => {
                   <span className="mx-4 text-sm font-normal">Your Profile</span>
                 </Link>
                 <Link
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600"
-                  href="/settings"
-                >
-                  <span className="text-left">
-                    <div>
-                      <IoMdSettings />
-                    </div>
-                  </span>
-                  <span className="mx-4 text-sm font-normal">Settings</span>
-                </Link>
-                <Link
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600"
+                  id="contact"
+                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
                   href="/pkdrInfo/contact"
                 >
                   <span className="text-left">
@@ -94,7 +127,8 @@ const Sidebar = () => {
                   <span className="mx-4 text-sm font-normal">Contact Us</span>
                 </Link>
                 <Link
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600"
+                  id="about"
+                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
                   href="/pkdrInfo/about"
                 >
                   <span className="text-left">
@@ -104,15 +138,30 @@ const Sidebar = () => {
                   </span>
                   <span className="mx-4 text-sm font-normal">About Us</span>
                 </Link>
-                <div
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600"
+                <Link
+                  id="settings"
+                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
+                  href="/settings"
                 >
+                  <span className="text-left">
+                    <div>
+                      <IoMdSettings />
+                    </div>
+                  </span>
+                  <span className="mx-4 text-sm font-normal">Settings</span>
+                </Link>
+                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600">
                   <span className="text-left">
                     <div>
                       <BiLogOut />
                     </div>
                   </span>
-                  <span className="cursor-pointer mx-4 text-sm font-normal" onClick={logout}>Signout</span>
+                  <span
+                    className="cursor-pointer mx-4 text-sm font-normal"
+                    onClick={logout}
+                  >
+                    Signout
+                  </span>
                 </div>
               </div>
             </nav>

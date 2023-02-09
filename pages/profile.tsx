@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { userInfoAtom, web3authAtom, loading } from "../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import Loading from "../components/loading/Loading";
+import { UserInfo } from '../Types/userTypes'
 function profile() {
   const [auth, setAuth] = useAtom(web3authAtom);
-  const info = useAtomValue(userInfoAtom);
+  const info:UserInfo = useAtomValue(userInfoAtom);
   <Loading state={true} />;
 
   if (auth) {
@@ -41,7 +42,7 @@ function profile() {
                     </div>
                     <div className="flex flex-col items-center text-center justify-center">
                       <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">
-                        {info.name}
+                        {info?.name}
                       </h2>
                       <div className="w-12 h-1 bg-yellow-600 rounded mt-2 mb-4"></div>
                       <p className="text-base">

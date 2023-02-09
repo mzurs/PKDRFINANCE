@@ -2,6 +2,7 @@ import { SafeEventEmitterProvider } from "@web3auth/base";
 import { Web3AuthCore } from "@web3auth/core";
 import { atom } from "jotai";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
+import { UserInfo } from "../../Types/userTypes";
 
 //storage object for local storage
 const storage = { ...createJSONStorage(() => localStorage), delayInit: true };
@@ -19,7 +20,7 @@ const providerAtom = atom<SafeEventEmitterProvider | null | unknown>(null);
 const privKeyAtom = atomWithStorage("privKey", null, storage);
 
 //user info
-const userInfoAtom = atomWithStorage("userInfo", null, storage);
+const userInfoAtom = atomWithStorage<UserInfo | any>("userInfo", null, storage);
 
 //simple auth for web3auth
 const auth = atom<Web3AuthCore | null>(null);

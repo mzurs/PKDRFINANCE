@@ -267,7 +267,7 @@ function Header() {
   const unloggedInView = (
     <button
       onClick={login}
-      className="text-xl right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1  hover:text-yellow-600"
+      className="text-xl p-4 right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1  hover:text-yellow-600"
     >
       Sign up
     </button>

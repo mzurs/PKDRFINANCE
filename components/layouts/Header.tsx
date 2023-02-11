@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { TbGridDots } from "react-icons/tb";
 import Image from "next/image";
+import Link from "next/link";
 import { useAtom } from "jotai";
 import LoadingBar from "react-top-loading-bar";
-import Link from "next/link";
 import { getPublicCompressed } from "@toruslabs/eccrypto";
 import Cookies from "js-cookie";
 import {
@@ -36,64 +36,37 @@ function Header() {
   );
   const [progress, setProgress] = useState(0);
   const router = useRouter();
-  const [prevlocation, setprevlocation] = useState<string>("home");
-
-  const change_color = (current_page: string) => {
-    if (current_page !== "home") {
-      let prev = document.getElementById(`${prevlocation}-tab`);
-      let curr = document.getElementById(`${current_page}-tab`);
-
-      curr?.classList.remove("hover:border-yellow-600");
-      curr?.classList.remove("hover:border-l-[1px]");
-      curr?.classList.remove("hover:border-r-[1px]");
-      curr?.classList.remove("hover:text-yellow-600");
-      curr?.classList.remove("text-gray-200");
-      curr?.classList.add("bg-yellow-600");
-      curr?.classList.add("text-white");
-
-      prev?.classList.remove("bg-yellow-600");
-      prev?.classList.remove("text-white");
-      prev?.classList.add("hover:border-yellow-600");
-      prev?.classList.add("hover:border-l-[1px]");
-      prev?.classList.add("hover:border-r-[1px]");
-      prev?.classList.add("hover:text-yellow-600");
-      prev?.classList.add("text-gray-200");
-    }
-    else{
-      let home = document.getElementById(`${prevlocation}-tab`);
-      home?.classList.remove("bg-yellow-600");
-      home?.classList.remove("text-white");
-      home?.classList.add("hover:border-yellow-600");
-      home?.classList.add("hover:border-l-[1px]");
-      home?.classList.add("hover:border-r-[1px]");
-      home?.classList.add("hover:text-yellow-600");
-      home?.classList.add("text-gray-200");
-    }
-  };
+  const [sidebar, setsidebar] = useState<boolean>(false);
+  const [page, setpage] = useState<string>("home");
+  const style = "sm:border-b-[4px] border-[#009ac9] text-[#11aede]";
 
   const get_page = () => {
     let url = window.location.href;
-    if (
-      !(url === "http://localhost:3000/" || url === "http://localhost:3000")
-    ) {
-      let url_fragment = url.split("/");
-      let len = url_fragment.length;
-      let page_name = url_fragment[len - 1];
-      change_color(page_name);
-      setprevlocation(page_name);
-      //console.log("Current URL = " + page_name);
-    } else {
-      change_color("home");
-      setprevlocation("home");
+    if (url !== undefined) {
+      if (
+        !(url === "http://localhost:3000/" || url === "http://localhost:3000")
+      ) {
+        let url_fragment = url.split("/");
+        let len = url_fragment.length;
+        setpage(url_fragment[len - 1]);
+      } else if (
+        url === "http://localhost:3000/" ||
+        url === "http://localhost:3000"
+      ) {
+        setpage("home");
+      } else {
+        setpage("");
+      }
     }
   };
 
-  try {
-    useEffect(() => {
-      //console.log("Previous URL = " + prevlocation);
-      get_page();
-    }, [window.location.href]);
-  } catch {}
+  const togglemenu = () => {
+    if (sidebar === false) {
+      setsidebar(true);
+    } else {
+      setsidebar(false);
+    }
+  };
 
   useEffect(() => {
     router.events.on("routeChangeStart", () => {
@@ -102,6 +75,12 @@ function Header() {
     router.events.on("routeChangeComplete", () => {
       setProgress(100);
     });
+
+    try {
+      useEffect(() => {
+        get_page();
+      }, [window.location.href]);
+    } catch {}
 
     const init = async () => {
       try {
@@ -264,142 +243,217 @@ function Header() {
     }
   }
 
-  const unloggedInView = (
-    <button
-      onClick={login}
-      className="text-xl p-4 right-0 text-gray-200  font-sm font-normal text-md border-transparent px-[3px] py-1  hover:text-yellow-600"
-    >
-      Sign up
-    </button>
-  );
+  const Navbar = (
+    <div>
+      <nav className="bg-gray-800 fixed w-full">
+        <div className="lg:pr-2">
+          <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
+            <div
+              className={`${
+                auth && web3auth ? "" : "hidden"
+              } absolute inset-y-0 left-0 flex items-center sm:hidden`}
+            >
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Open main menu</span>
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+                <svg
+                  className="hidden h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              className={`${
+                auth && web3auth
+                  ? " flex-1 justify-center sm:items-stretch sm:justify-center"
+                  : ""
+              } flex items-center `}
+            >
+              <div className="flex flex-shrink-0 items-center">
+                <Image
+                  className="block h-8 w-auto lg:hidden"
+                  src="/logo.png"
+                  alt="PKDR Finance"
+                  width={60}
+                  height={60}
+                />
+                <Link href={"/"} className="cursor-pointer">
+                  <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+                    <Image
+                      src="/logo.png"
+                      alt="PKDR Finance"
+                      width={65}
+                      height={65}
+                    />
+                    <h3>PKDR Finance</h3>
+                  </div>
+                </Link>
+              </div>
+              <div
+                className={`${
+                  auth && web3auth ? "sm:block" : "sm:hidden"
+                } hidden sm:mx-auto `}
+              >
+                <div className="flex space-x-4">
+                  <Link
+                    href={"/"}
+                    onClick={()=>setpage("home")}
+                    className={`cursor-pointer ${
+                      page === "home" ? style : ""
+                    } text-white px-5 md:text-md py-2 md:py-4 text-sm font-medium hover:text-[#009ac9] ${page==="home"?style:""}`}
+                    aria-current="page"
+                    id="home"
+                  >
+                    Home
+                  </Link>
 
-  const togglemenu = () => {
-    const menu = document.getElementById("menu");
-    const grid = document.getElementById("grid");
-    if (!menu?.classList.contains("hidden")) {
-      menu?.classList.add("hidden");
-      grid?.classList.remove("rotate-45");
-    } else {
-      menu?.classList.remove("hidden");
-      grid?.classList.add("rotate-45");
-      grid?.classList.add("rotate-45");
-    }
-  };
+                  <Link
+                    href={"/profile"}
+                    onClick={()=>setpage("profile")}
+                    className={`cursor-pointer ${
+                      page === "profile" ? style : ""
+                    } text-white px-5 md:text-md py-2 md:py-4 text-sm font-medium hover:text-[#009ac9] ${page==="profile"?"border-b-[4px] text-[#009ac9]":""}`}
+                    id="profile"
+                  >
+                    Profile
+                  </Link>
 
-  const loggedInView = (
-    <div className="w-[20rem] flex flex-row text-xl items-center justify-end">
-      <div className="text-yellow-600">{userInfo?.name}</div>
+                  <Link
+                    href={"/pkdrInfo/contact"}
+                    onClick={()=>setpage("contact")}
+                    className={`cursor-pointer ${
+                      page === "contact" ? style : ""
+                    } text-white px-5 md:text-md py-2 md:py-4 text-sm font-medium hover:text-[#009ac9] ${page==="contact"?style:""}`}
+                    id="contact"
+                  >
+                    Contact
+                  </Link>
 
-      <div>
-        <TbGridDots
-          onClick={togglemenu}
-          id="grid"
-          title="Menu"
-          className="mr-2 ml-5 duration-200 text-white hover:text-yellow-600 text-2xl"
-        />
-      </div>
+                  <Link
+                    href={"/pkdrInfo/about"}
+                    onClick={()=>setpage("about")}
+                    className={`cursor-pointer ${
+                      page === "about" ? style : ""
+                    } text-white px-5 md:text-md py-2 md:py-4 text-sm font-medium hover:text-[#009ac9] ${page==="about"?style:""}`}
+                    id="about"
+                  >
+                    About
+                  </Link>
+                </div>
+              </div>
+              <div
+                className={`${
+                  auth && web3auth ? "md:flex" : "hidden"
+                } items-center`}
+              >
+                <div className="text-md text-[#009ac9]">{userInfo?.name}</div>
+                <TbGridDots
+                  onClick={togglemenu}
+                  id="grid"
+                  title="Menu"
+                  className={`hidden duration-200 md:block  ml-3 text-lg hover:text-[#009ac9] ${
+                    sidebar ? "rotate-45 text-[#009ac9]" : "text-white"
+                  } cursor-pointer`}
+                />
+              </div>
+              <div
+                className={`${
+                  auth && web3auth ? "hidden" : ""
+                } text-white absolute right-2 text-md px-2 py-2 hover:text-[#009ac9]`}
+                onClick={login}
+              >
+                <button>Sign up</button>
+              </div>
+            </div>
+          </div>
+          <div
+            className={`${auth && web3auth ? "sm:hidden" : "hidden"} `}
+            id="mobile-menu"
+          >
+            <div className="space-y-1 px-2 pt-2 pb-3">
+              <Link
+                href={"/"}
+                className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                aria-current="page"
+              >
+                Home
+              </Link>
 
-      <div className="hidden" id="menu" onMouseLeave={togglemenu}>
+              <Link
+                href="/profile"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Profile
+              </Link>
+
+              <Link
+                href={"/pkdrInfo/contact"}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Contact
+              </Link>
+
+              <Link
+                href={"/pkdrInfo/about"}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                About
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div
+        className={`${sidebar ? "block" : "hidden"}`}
+        id="menu"
+        onMouseLeave={togglemenu}
+      >
         <Sidebar />
       </div>
     </div>
   );
 
-  const navMenu = (
-    <div>
-      <ul
-        className="flex items-center font-medium text-center text-xl"
-        id="myTab"
-        data-tabs-toggle="#myTabContent"
-        role="tablist"
-      >
-        <li role="presentation">
-          <Link
-            href={"/"}
-            className="px-10 py-6 text-white bg-yellow-600 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] "
-            id="home-tab"
-            data-tabs-target="#home"
-            type="button"
-            role="tab"
-            aria-controls="home"
-            aria-selected="false"
-          >
-            <button onClick={homePage}>Home</button>
-          </Link>
-        </li>
-        <li role="presentation">
-          <Link
-            href={"/profile"}
-            className="px-10 py-6 text-gray-200 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
-            id="profile-tab"
-            data-tabs-target="#profile"
-            type="button"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-          >
-            Profile
-          </Link>
-        </li>
-        <li role="presentation">
-          <Link
-            href={"/pkdrInfo/contact"}
-            className="px-10 py-6 text-gray-200 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
-            id="contact-tab"
-            data-tabs-target="#contact"
-            type="button"
-            role="tab"
-            aria-controls="contact"
-            aria-selected="false"
-          >
-            Contact
-          </Link>
-        </li>
-        <li role="presentation">
-          <Link
-            href={"/pkdrInfo/about"}
-            className="px-10 py-6 text-gray-200 hover:border-yellow-600 hover:border-l-[1px] hover:border-r-[1px] hover:text-yellow-600 "
-            id="about-tab"
-            data-tabs-target="#about"
-            type="button"
-            role="tab"
-            aria-controls="about"
-            aria-selected="false"
-          >
-            About
-          </Link>
-        </li>
-      </ul>
-    </div>
-  );
   return (
     <>
       <LoadingBar
-        color="#8b8343"
+        color="#009ac9"
         progress={progress}
         waitingTime={400}
         onLoaderFinished={() => {
           setProgress(0);
         }}
       />
-      <div className="fixed flex flex-wrap items-center w-full">
-        <header className="border-yellow-600 border-b-[3.5px] shadow-md right-0 left-0 w-[100vw] bg-[#18270D] flex top-0 z-1 h-[8.2vh] p-3 items-center">
-          <div>
-            <Image src="/logo.png" alt="logo" width="50" height="50" />
-          </div>
-          <Link
-            href="/"
-            className="font-light text-[22px]  text-green-600 hover:text-green-500"
-          >
-            PKDR Finance
-          </Link>
-          <nav className="ml-[480px]">{auth && web3auth ? navMenu : ""}</nav>
-
-          <nav className="ml-auto">
-            {auth && web3auth ? loggedInView : unloggedInView}
-          </nav>
-        </header>
-      </div>
+        {Navbar}
     </>
   );
 }

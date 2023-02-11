@@ -8,7 +8,7 @@ const AccountInfo = () => {
   return (
     <div>
       <div className="pl-4">
-        <h1 className="md:text-2xl text-xl font-medium md:pt-10 pt-8">
+        <h1 className="md:text-xl text-lg font-medium md:pt-10 pt-8">
           Account Information
         </h1>
         <p className="text-gray-500 text-justify pt-3 pl-3">
@@ -21,10 +21,10 @@ const AccountInfo = () => {
             <div className="border-t-2 border-gray-200">
               <dl>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                  <dt className="text-md font-sm md:text-lg text-gray-500">
+                  <dt className="text-md font-sm md:text-md text-gray-500">
                     Account Title
                   </dt>
-                  <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-md md:text-md text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.name}
                     <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
                       Update
@@ -32,10 +32,10 @@ const AccountInfo = () => {
                   </dd>
                 </div>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                  <dt className="text-md font-sm md:text-lg text-gray-500">
+                  <dt className="text-md font-sm md:text-md text-gray-500">
                     Account email
                   </dt>
-                  <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-md md:text-md text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.email}
                     <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
                       Update
@@ -43,10 +43,10 @@ const AccountInfo = () => {
                   </dd>
                 </div>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                  <dt className="text-md font-sm md:text-lg text-gray-500">
+                  <dt className="text-md font-sm md:text-md text-gray-500">
                     Account Number
                   </dt>
-                  <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-md md:text-md text-gray-900 sm:col-span-2 sm:mt-0">
                     14674503895621
                     <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
                       Update
@@ -54,10 +54,10 @@ const AccountInfo = () => {
                   </dd>
                 </div>
                 <div className="py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                  <dt className="text-md font-sm md:text-lg text-gray-500">
+                  <dt className="text-md font-sm md:text-md text-gray-500">
                     Profile Photo
                   </dt>
-                  <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-md md:text-md text-gray-900 sm:col-span-2 sm:mt-0">
                     Photo
                     <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
                       Update

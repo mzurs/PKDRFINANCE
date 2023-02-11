@@ -24,31 +24,32 @@ const Sidebar = () => {
   const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
   const [providerAtomState, setProviderAtomState] = useAtom(providerAtom);
   const [prevlocation, setprevlocation] = useState<string>("home");
+  const [page, setpage] = useState<string>("");
 
   const change_color = (current_page: string) => {
     let prev = document.getElementById(prevlocation);
     let curr = document.getElementById(current_page);
 
     prev?.classList.remove("border-r-4");
-    prev?.classList.remove("border-yellow-600");
+    prev?.classList.remove("border-[#009ac9]");
     prev?.classList.remove("bg-gradient-to-r");
     prev?.classList.remove("from-[#03213b]");
     prev?.classList.remove("to-[#021b30]");
     prev?.classList.remove("dark:from-gray-800");
     prev?.classList.remove("dark:to-gray-900");
-    prev?.classList.remove("text-yellow-600");
+    prev?.classList.remove("text-[#009ac9]");
     prev?.classList.remove("font-extrabold");
     prev?.classList.add("text-gray-200");
 
     curr?.classList.add("border-r-4");
-    curr?.classList.add("border-yellow-600");
+    curr?.classList.add("border-[#009ac9]");
     curr?.classList.add("bg-gradient-to-r");
     curr?.classList.add("from-[#03213b]");
     curr?.classList.add("to-[#021b30]");
     curr?.classList.add("dark:from-gray-800");
     curr?.classList.add("dark:to-gray-900");
     curr?.classList.remove("text-gray-200");
-    curr?.classList.add("text-yellow-600");
+    curr?.classList.add("text-[#009ac9]");
     curr?.classList.add("font-extrabold");
   };
 
@@ -57,17 +58,18 @@ const Sidebar = () => {
     if (url !== "http://localhost:3000/") {
       let url_fragment = url.split("/");
       let len = url_fragment.length;
-      let page_name = url_fragment[len - 1];
-      //console.log("Current URL = " + page_name);
-      change_color(page_name);
-      setprevlocation(page_name);
+      setpage(url_fragment[len - 1]);
     }
   };
 
-  useEffect(() => {
-    //console.log("Previous URL = " + prevlocation);
-    get_page();
-  }, [window.location.href]);
+  try {
+    useEffect(() => {
+      get_page();
+    }, [window.location.href]);
+  } catch (error) {
+    
+  }
+  
 
   const logout = async () => {
     if (!web3authState) {
@@ -95,10 +97,12 @@ const Sidebar = () => {
     }
   };
 
+  const style = "border-r-4 border-[#009ac9] bg-gradient-to-r from-[#021729] dark:from-gray-900 dark:to-gray-900 text-[#009ac9] font-extrabold";
+
   return (
     <>
-      <div className="right-0 top-[5rem] absolute bg-[#0c1407dc] text-gray-200 h-auto border-l-[3px] border-yellow-600">
-        <div className="relative hidden h-screen my-4 ml-4 shadow-lg lg:block w-72">
+      <div className="hidden md:block right-0 top-[3rem] fixed bg-gray-800 text-gray-200 h-auto">
+        <div className="relative hidden h-screen my-4 ml-4 shadow-lg lg:block w-60">
           <div className="h-full">
             <div className="flex items-center justify-center pt-6">
               <Image src="/logo.png" alt="logo" width="85" height="85" />
@@ -107,8 +111,9 @@ const Sidebar = () => {
               <div>
                 <Link
                   id="profile"
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
+                  className={`${page==="profile"?style:"text-gray-200"} flex items-center justify-start w-full py-3 px-2 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
                   href="/profile"
+                  onClick={()=>setpage("profile")}
                 >
                   <span className="text-left">
                     <div>
@@ -119,7 +124,8 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   id="user_contacts"
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
+                  onClick={()=>setpage("user_contacts")}
+                  className={`${page==="user_contacts"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
                   href="/user/users/user_contacts"
                 >
                   <span className="text-left">
@@ -133,7 +139,8 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   id="settings"
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
+                  onClick={()=>setpage("settings")}
+                  className={`${page==="settings"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
                   href="/settings"
                 >
                   <span className="text-left">
@@ -145,7 +152,8 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   id="about"
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
+                  onClick={()=>setpage("about")}
+                  className={`${page==="about"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/about"
                 >
                   <span className="text-left">
@@ -157,7 +165,8 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   id="contact"
-                  className="flex items-center justify-start w-full p-4 my-2 font-thin uppercase transition-colors duration-200 text-gray-200 hover:text-yellow-600"
+                  onClick={()=>setpage("contact")}
+                  className={`${page==="contact"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/contact"
                 >
                   <span className="text-left">
@@ -167,7 +176,7 @@ const Sidebar = () => {
                   </span>
                   <span className="mx-4 text-sm font-normal">Contact Us</span>
                 </Link>
-                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-white uppercase transition-colors duration-200 dark:text-gray-200 hover:text-yellow-600">
+                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-white transition-colors duration-200 dark:text-gray-200 hover:text-[#009ac9]">
                   <span className="text-left">
                     <div>
                       <BiLogOut />

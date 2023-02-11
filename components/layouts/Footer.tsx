@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="fixed bottom-0 left-0 z-20 w-full p-4 bg-[#343434] shadow md:flex md:items-center md:justify-between md:p-2.5">
+    <footer className="fixed bottom-0 left-0 z-20 w-full p-4 bg-gray-800 shadow md:flex md:items-center md:justify-between md:p-2.5">
       <span className="text-[15px] text-[#e8e8e8] sm:text-center">
         © 2023{" "}
-        <a href="/" className="hover:underline">
+        <a href="/" className="hover:text-[#009ac9]">
           PKDR Finance™
         </a>
         . All Rights Reserved.

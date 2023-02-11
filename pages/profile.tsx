@@ -16,7 +16,7 @@ function profile() {
           <section className="text-gray-600 body-font py-2 w-full">
             <div className="px-12 md:py-16 mx-auto flex flex-col">
               <div className="lg:w-full mx-auto">
-                <div className="rounded-2xl md:h-28 h-14 overflow-hidden mb-6">
+                <div className="rounded-2xl md:h-12 h-14 overflow-hidden mb-6">
                   {/* <img
                     alt="content"
                     className="object-cover object-center h-full w-full "
@@ -44,7 +44,7 @@ function profile() {
                       <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">
                         {info?.name}
                       </h2>
-                      <div className="w-12 h-1 bg-yellow-600 rounded mt-2 mb-4"></div>
+                      <div className="w-12 h-1 bg-[#009ac9] rounded mt-2 mb-4"></div>
                       <p className="text-base">
                         Raclette knausgaard hella meggs normcore williamsburg
                         enamel pin sartorial venmo tbh hot chicken gentrify

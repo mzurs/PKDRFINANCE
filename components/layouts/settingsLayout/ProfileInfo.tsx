@@ -17,7 +17,7 @@ const ProfileInfo = () => {
         </p>
       </div>
       <div>
-        <div className="md:px-4 ml-4 p-0 sm:py-8 mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+        <div className="md:px-4 ml-4 p-0 sm:py-8 mt-4 pt-4 sm:mt-0 sm:text-left">
           <div className="overflow-hidden">
             <div className="border-t-2 border-gray-200">
               <dl>
@@ -27,6 +27,9 @@ const ProfileInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.name}
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                      Update
+                    </button>
                   </dd>
                 </div>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -35,6 +38,9 @@ const ProfileInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.email}
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                      Update
+                    </button>
                   </dd>
                 </div>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -43,6 +49,9 @@ const ProfileInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     Photo
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                      Update
+                    </button>
                   </dd>
                 </div>
                 <div className="py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -51,6 +60,9 @@ const ProfileInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     14674503895621
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                      Update
+                    </button>
                   </dd>
                 </div>
               </dl>

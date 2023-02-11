@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { userInfoAtom, web3authAtom, loading } from "../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import Loading from "../components/loading/Loading";

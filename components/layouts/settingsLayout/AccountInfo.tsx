@@ -26,6 +26,9 @@ const AccountInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.name}
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                      Update
+                    </button>
                   </dd>
                 </div>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -34,6 +37,9 @@ const AccountInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.email}
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                      Update
+                    </button>
                   </dd>
                 </div>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -42,6 +48,9 @@ const AccountInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     14674503895621
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                      Update
+                    </button>
                   </dd>
                 </div>
                 <div className="py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -50,6 +59,9 @@ const AccountInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     Photo
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                      Update
+                    </button>
                   </dd>
                 </div>
               </dl>

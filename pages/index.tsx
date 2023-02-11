@@ -1,6 +1,5 @@
-import type { NextPage } from "next";
 import { useEffect } from "react";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import {
   loading,
   userRole,

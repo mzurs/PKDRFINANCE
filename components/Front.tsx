@@ -5,14 +5,14 @@ import { useAtomValue } from "jotai";
 function Front() {
   const auth = useAtomValue(web3authAtom);
   return (
-<div className="bg-white py-20 sm:py-24">
-  <div className="mx-auto px-6 lg:px-8">
+<div className="bg-white py-20 sm:py-32">
+  <div className="mx-auto px-6 lg:px-14">
     <div className="mx-auto lg:text-center">
-      <h2 className="text-lg font-semibold leading-8 tracking-tight text-[#009ac9]">Fast and Secure Money Transfer</h2>
-      <p className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everything you need about for secure transactions</p>
-      <p className="mt-6 text-lg leading-8 text-gray-600 text-center mx-48">Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
+      <h2 className="text-xl font-semibold leading-8 tracking-tight text-[#009ac9]">Fast and Secure Money Transfer</h2>
+      <p className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Everything you need about for secure transactions</p>
+      <p className="mt-6 text-lg leading-8 text-gray-600 text-center mx-56">Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
     </div>
-    <div className="mx-auto mt-16 sm:mt-10 lg:mt-4 lg:max-w-4xl">
+    <div className="mx-auto mt-16 sm:mt-10 lg:mt-4 lg:max-w-3xl">
       <dl className="grid max-w-xl grid-cols-1 gap-y-10 gap-x-8 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
         <div className="relative pl-16">
           <dt className="text-base font-semibold leading-7 text-gray-900">

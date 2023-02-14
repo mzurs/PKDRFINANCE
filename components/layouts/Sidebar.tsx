@@ -23,35 +23,7 @@ const Sidebar = () => {
   const [userInfo, setUserInfo] = useAtom(userInfoAtom);
   const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
   const [providerAtomState, setProviderAtomState] = useAtom(providerAtom);
-  const [prevlocation, setprevlocation] = useState<string>("home");
   const [page, setpage] = useState<string>("");
-
-  const change_color = (current_page: string) => {
-    let prev = document.getElementById(prevlocation);
-    let curr = document.getElementById(current_page);
-
-    prev?.classList.remove("border-r-4");
-    prev?.classList.remove("border-[#009ac9]");
-    prev?.classList.remove("bg-gradient-to-r");
-    prev?.classList.remove("from-[#03213b]");
-    prev?.classList.remove("to-[#021b30]");
-    prev?.classList.remove("dark:from-gray-800");
-    prev?.classList.remove("dark:to-gray-900");
-    prev?.classList.remove("text-[#009ac9]");
-    prev?.classList.remove("font-extrabold");
-    prev?.classList.add("text-gray-200");
-
-    curr?.classList.add("border-r-4");
-    curr?.classList.add("border-[#009ac9]");
-    curr?.classList.add("bg-gradient-to-r");
-    curr?.classList.add("from-[#03213b]");
-    curr?.classList.add("to-[#021b30]");
-    curr?.classList.add("dark:from-gray-800");
-    curr?.classList.add("dark:to-gray-900");
-    curr?.classList.remove("text-gray-200");
-    curr?.classList.add("text-[#009ac9]");
-    curr?.classList.add("font-extrabold");
-  };
 
   const get_page = () => {
     let url = window.location.href;
@@ -111,7 +83,7 @@ const Sidebar = () => {
               <div>
                 <Link
                   id="profile"
-                  className={`${page==="profile"?style:"text-gray-200"} flex items-center justify-start w-full py-3 px-2 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
+                  className={`${page==="profile"?style:"text-gray-200"} flex items-center justify-start w-full py-3 px-2 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/profile"
                   onClick={()=>setpage("profile")}
                 >
@@ -125,7 +97,7 @@ const Sidebar = () => {
                 <Link
                   id="user_contacts"
                   onClick={()=>setpage("user_contacts")}
-                  className={`${page==="user_contacts"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
+                  className={`${page==="user_contacts"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/user/users/user_contacts"
                 >
                   <span className="text-left">
@@ -140,7 +112,7 @@ const Sidebar = () => {
                 <Link
                   id="settings"
                   onClick={()=>setpage("settings")}
-                  className={`${page==="settings"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
+                  className={`${page==="settings"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/settings"
                 >
                   <span className="text-left">
@@ -153,7 +125,7 @@ const Sidebar = () => {
                 <Link
                   id="about"
                   onClick={()=>setpage("about")}
-                  className={`${page==="about"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
+                  className={`${page==="about"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/about"
                 >
                   <span className="text-left">
@@ -166,7 +138,7 @@ const Sidebar = () => {
                 <Link
                   id="contact"
                   onClick={()=>setpage("contact")}
-                  className={`${page==="contact"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 text-gray-200 hover:text-[#009ac9]`}
+                  className={`${page==="contact"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/contact"
                 >
                   <span className="text-left">

@@ -68,6 +68,12 @@ function Header() {
     }
   };
 
+  try {
+    useEffect(() => {
+      get_page();
+    }, [window.location.href]);
+  } catch {}
+
   useEffect(() => {
     router.events.on("routeChangeStart", () => {
       setProgress(30);
@@ -76,11 +82,7 @@ function Header() {
       setProgress(100);
     });
 
-    try {
-      useEffect(() => {
-        get_page();
-      }, [window.location.href]);
-    } catch {}
+    
 
     const init = async () => {
       try {

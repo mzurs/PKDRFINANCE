@@ -32,7 +32,7 @@ function contact() {
         <div className="p-2 w-full">
           <button className="flex border-2 mx-auto rounded-xl text-white bg-gray-800 py-2 px-8 hover:text-[#009ac9] text-md">Submit</button>
         </div>
-        <div className="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
+        <div className="p-2 w-full pt-4 mt-8 border-t border-gray-200 text-center">
           <a className="text-[#009ac9]">example@email.com</a>
           <p className="leading-normal my-5">49 Smith St.
             <br/>Saint Cloud, MN 56301

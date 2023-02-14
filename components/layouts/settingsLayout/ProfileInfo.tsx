@@ -27,7 +27,7 @@ const ProfileInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-md text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.name}
-                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                       Update
                     </button>
                   </dd>
@@ -38,7 +38,7 @@ const ProfileInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-md text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.email}
-                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                       Update
                     </button>
                   </dd>
@@ -49,7 +49,7 @@ const ProfileInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-md text-gray-900 sm:col-span-2 sm:mt-0">
                     Photo
-                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                       Update
                     </button>
                   </dd>
@@ -60,7 +60,7 @@ const ProfileInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-md text-gray-900 sm:col-span-2 sm:mt-0">
                     14674503895621
-                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-yellow-600 hover:underline">
+                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                       Update
                     </button>
                   </dd>

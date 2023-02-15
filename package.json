@@ -31,7 +31,9 @@
     "react-icons": "^4.7.1",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.8.1",
-    "react-top-loading-bar": "^2.3.1"
+    "react-top-loading-bar": "^2.3.1",
+    "@stripe/stripe-js": "^1.20.3",
+    "stripe": "^8.185.0"
   },
   "devDependencies": {
     "@types/node": "18.11.3",

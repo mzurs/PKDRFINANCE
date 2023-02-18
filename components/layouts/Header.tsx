@@ -391,7 +391,7 @@ function Header() {
               <div
                 className={`${
                   auth && web3auth ? "hidden" : ""
-                } text-white absolute right-2 text-md px-2 py-2 hover:text-[#009ac9]`}
+                } text-white absolute right-2 text-md px-2 py-2 hover:text-[#009ac9] cursor-pointer`}
                 onClick={login}
               >
                 <button>Sign up</button>

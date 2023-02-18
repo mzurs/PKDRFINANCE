@@ -13,7 +13,7 @@ const Settings = () => {
 
   return (
     <>
-      <div className="md:pt-16 pt-20 md:pb-8 p-6 overflow-x-hidden">
+      <div className="md:pt-16 pt-20 md:pb-8 p-6 w-[100vw] h-[100vh] overflow-x-hidden">
         <h1 className="md:pt-9 md:pb-6 pt-3 pb-3 md:text-3xl text-2xl font-bold pl-4">
           Settings
         </h1>

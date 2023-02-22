@@ -3,23 +3,49 @@ import { userInfoAtom, web3authAtom, loading } from "../../../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { UserInfo } from "../../../Types/userTypes";
 import { useRouter } from "next/router";
+import Loading from "../../../components/loading/Loading";
 
 const transfer = () => {
   const [auth, setAuth] = useAtom(web3authAtom);
   const info: UserInfo = useAtomValue(userInfoAtom);
   const [Amount, setAmount] = useState<number>(0);
+  const [Purpose, setPurpose] = useState<string>("none");
   const router = useRouter();
+  const data = router.query;
 
-  const handleChange = (event: any) => {
-    setAmount(event.target.value);
+  const handletransfer = (e: any) => {
+    e.preventDefault();
+    let transfer_obj = {
+      "Benificiary_Name": data.name,
+      "Benificiary_Email": data.email,
+      "Amount": Amount,
+      "Purpose": Purpose,
+    };
+
+    fetch("http://localhost:3000/api/transfer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(transfer_obj),
+    })
+      .then((response) => response.json())
+      .then((d) => {
+        console.log("Successfull Transfer : "+d);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   if (auth) {
-    if (info) {      
-      const data = router.query;
+    if (info) {
       return (
         <div className="body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden flex  justify-center md:pt-[4rem]">
-          <form className="w-full max-w-xl pt-20 pb-4" action="#" method="POST">
+          <form
+            className="w-full max-w-xl pt-20 pb-4"
+            onSubmit={handletransfer}
+          >
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label
@@ -65,6 +91,7 @@ const transfer = () => {
                   disabled
                   id="grid-first-name"
                   type="text"
+                  name="Benificiary Email"
                   value={data.email}
                 />
               </div>
@@ -80,6 +107,7 @@ const transfer = () => {
                   disabled
                   id="grid-last-name"
                   type="text"
+                  name="Benificiary Name"
                   value={data.name}
                 />
               </div>
@@ -97,8 +125,11 @@ const transfer = () => {
                   id="grid-password"
                   type="number"
                   value={Amount}
-                  onChange={handleChange}
+                  onChange={(e: any) => {
+                    setAmount(e.target.value);
+                  }}
                   required
+                  name="amount"
                 />
               </div>
             </div>
@@ -114,20 +145,33 @@ const transfer = () => {
                   <select
                     className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-state"
+                    name="purpose"
+                    value={Purpose}
+                    onChange={(e) => {
+                      setPurpose(e.target.value);
+                    }}
                   >
-                    <option>Select Purpose of Payment</option>
-                    <option>Courier Service</option>
-                    <option>Donations</option>
-                    <option>Educational Payment</option>
-                    <option>Family Support</option>
-                    <option>Insurance Payment</option>
-                    <option>Loan Payment</option>
-                    <option>Medical Allowance</option>
-                    <option>Miscellaneous Payments</option>
-                    <option>Mutual Funds</option>
-                    <option>Online Purchaces</option>
-                    <option>Family Support</option>
-                    <option>Others</option>
+                    <option value={"none"}>Select Purpose of Payment</option>
+                    <option value={"Courier Service"}>Courier Service</option>
+                    <option value={"Donations"}>Donations</option>
+                    <option value={"Educational Payment"}>
+                      Educational Payment
+                    </option>
+                    <option value={"Family Support"}>Family Support</option>
+                    <option value={"Insurance Payment"}>
+                      Insurance Payment
+                    </option>
+                    <option value={"Loan Payment"}>Loan Payment</option>
+                    <option value={"Medical Allowance"}>
+                      Medical Allowance
+                    </option>
+                    <option value={"Miscellaneous Payments"}>
+                      Miscellaneous Payments
+                    </option>
+                    <option value={"Mutual Funds"}>Mutual Funds</option>
+                    <option value={"Online Purchaces"}>Online Purchaces</option>
+                    <option value={"Family Support"}>Family Support</option>
+                    <option value={"Others"}>Others</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg
@@ -144,10 +188,11 @@ const transfer = () => {
             <div className="w-ful flex mt-6">
               <button
                 className={`${
-                  Amount <= 0
-                    ? "bg-[#81adba] disabled"
+                  Amount <= 0 || Purpose == "none" || data == null
+                    ? "bg-[#81adba] disabled cursor-default"
                     : "bg-[#028db7] hover:bg-[#017699] hover:underline"
                 } px-4 py-2  mx-auto rounded-full text-white  text-md`}
+                type="submit"
               >
                 Pay Now
               </button>

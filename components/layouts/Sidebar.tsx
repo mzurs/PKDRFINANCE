@@ -83,7 +83,7 @@ const Sidebar = () => {
               <div>
                 <Link
                   id="profile"
-                  className={`${page==="profile"?style:"text-gray-200"} flex items-center justify-start w-full py-3 px-2 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  className={`${page==="profile"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/profile"
                   onClick={()=>setpage("profile")}
                 >

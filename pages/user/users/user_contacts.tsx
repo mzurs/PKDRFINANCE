@@ -20,7 +20,7 @@ function contacts() {
 
   return (
     <>
-      <form action='/api/checkout/checkout_sessions' method='POST'>
+      <form action="/api/checkout/checkout_sessions" method="POST">
         <div className=" text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden">
           <div className="w-[50%] px-2 mx-auto pt-20 pb-4">
             <div className="mx-auto flex items-center justify-between lg:w-[82%] border-b pb-4 mb-10 border-gray-200">
@@ -49,7 +49,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>
@@ -68,7 +71,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>
@@ -87,7 +93,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>
@@ -106,7 +115,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>
@@ -125,7 +137,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>
@@ -144,7 +159,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>
@@ -163,7 +181,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>
@@ -182,7 +203,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>
@@ -201,7 +225,10 @@ function contacts() {
                 </div>
                 <Link
                   className="text-md p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                  href={"/user/users/transfer"}
+                  href={{
+                    pathname: "/user/users/transfer",
+                    query: {name:"Zohaib",email:"example@gmail.com"}
+                  }}
                 >
                   Pay Now
                 </Link>

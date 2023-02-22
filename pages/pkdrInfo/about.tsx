@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 const about = () => {
   return (
     <>
-      <section className="flex md:items-center justify-center text-gray-600 body-font w-[100vw] h-[100vh] overflow-x-hidden">
+      <section className="flex pt-[182px] justify-center text-gray-600 body-font w-[100vw] h-[100vh] overflow-x-hidden">
         <div className="container px-5 mx-auto">
-          <div className="text-center md:mb-20">
-            <h1 className="md:text-3xl text-2xl font-medium text-center title-font text-gray-900 md:mb-4 md:pt-0 pt-4">
+          <div className="text-center md:mb-10">
+            <h1 className="md:text-[35px] text-2xl font-medium text-center title-font text-gray-900 md:mb-6 md:pt-0 pt-4">
               About PKDR Finance
             </h1>
-            <p className="text-base leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">
+            <p className="text-lg leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">
               The Digital Rupee (Rs) or PKDR or E-Rupee is a tokenised digital
               version of the Pakistani Rupee, to be issued by the State Bank of
               Pakistan as a central bank digital currency (CBDC). The regulator
@@ -20,7 +20,7 @@ const about = () => {
               money.
             </p>
           </div>
-          <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+          <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2 text-lg">
             <div className="p-2 sm:w-1/2 w-full">
               <div className="bg-gray-100 rounded flex p-4 h-full items-center">
                 <svg
@@ -114,7 +114,7 @@ const about = () => {
                 </span>
               </div>
             </div>
-            <div className="p-2 sm:w-1/2 w-full  md:pb-0 pb-32">
+            <div className="md:p-2 sm:w-1/2 w-full pb-32">
               <div className="bg-gray-100 rounded flex p-4 h-full items-center">
                 <svg
                   fill="none"

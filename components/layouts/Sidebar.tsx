@@ -74,7 +74,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="hidden md:block right-0 top-[3rem] fixed bg-gray-800 text-gray-200 h-auto">
-        <div className="relative hidden h-screen my-4 ml-4 shadow-lg lg:block w-60">
+        <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full">
             <div className="flex items-center justify-center pt-6">
               <Image src="/logo.png" alt="logo" width="85" height="85" />
@@ -89,10 +89,10 @@ const Sidebar = () => {
                 >
                   <span className="text-left">
                     <div>
-                      <BsFileEarmarkPerson />
+                      <BsFileEarmarkPerson className="text-2xl mr-3 ml-5"/>
                     </div>
                   </span>
-                  <span className="mx-4 text-sm font-normal">Your Profile</span>
+                  <span className="mx-4 text-lg font-normal">Your Profile</span>
                 </Link>
                 <Link
                   id="user_contacts"
@@ -102,10 +102,10 @@ const Sidebar = () => {
                 >
                   <span className="text-left">
                     <div>
-                      <RiContactsBookLine />
+                      <RiContactsBookLine className="text-2xl mr-3 ml-5"/>
                     </div>
                   </span>
-                  <span className="mx-4 text-sm font-normal">
+                  <span className="mx-4 text-lg font-normal">
                     User Contacts
                   </span>
                 </Link>
@@ -117,10 +117,10 @@ const Sidebar = () => {
                 >
                   <span className="text-left">
                     <div>
-                      <FiSettings />
+                      <FiSettings className="text-2xl mr-3 ml-5"/>
                     </div>
                   </span>
-                  <span className="mx-4 text-sm font-normal">Settings</span>
+                  <span className="mx-4 text-lg font-normal">Settings</span>
                 </Link>
                 <Link
                   id="about"
@@ -130,10 +130,10 @@ const Sidebar = () => {
                 >
                   <span className="text-left">
                     <div>
-                      <IoIosPeople />
+                      <IoIosPeople className="text-2xl mr-3 ml-5"/>
                     </div>
                   </span>
-                  <span className="mx-4 text-sm font-normal">About Us</span>
+                  <span className="mx-4 text-lg font-normal">About Us</span>
                 </Link>
                 <Link
                   id="contact"
@@ -143,19 +143,19 @@ const Sidebar = () => {
                 >
                   <span className="text-left">
                     <div>
-                      <VscFeedback />
+                      <VscFeedback className="text-2xl mr-3 ml-5"/>
                     </div>
                   </span>
-                  <span className="mx-4 text-sm font-normal">Contact Us</span>
+                  <span className="mx-4 text-lg font-normal">Contact Us</span>
                 </Link>
                 <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-white transition-colors duration-200 dark:text-gray-200 hover:text-[#009ac9]">
                   <span className="text-left">
                     <div>
-                      <BiLogOut />
+                      <BiLogOut className="text-2xl mr-3 ml-5"/>
                     </div>
                   </span>
                   <span
-                    className="cursor-pointer mx-4 text-sm font-normal"
+                    className="cursor-pointer mx-4 text-lg font-normal"
                     onClick={logout}
                   >
                     Signout

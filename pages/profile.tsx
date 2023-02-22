@@ -13,7 +13,7 @@ function profile() {
       return (
         // relative container
         <div className="flex justify-center w-full h-full items-center">
-          <section className="text-gray-600 body-font py-2 w-full">
+          <section className="text-gray-600 body-font py-10 w-full">
             <div className="px-12 md:py-16 mx-auto flex flex-col">
               <div className="lg:w-full mx-auto">
                 <div className="rounded-2xl md:h-12 h-14 overflow-hidden mb-6">
@@ -41,11 +41,11 @@ function profile() {
                       </svg>
                     </div>
                     <div className="flex flex-col items-center text-center justify-center">
-                      <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">
+                      <h2 className="font-medium title-font mt-4 text-gray-900 text-xl">
                         {info?.name}
                       </h2>
                       <div className="w-12 h-1 bg-[#009ac9] rounded mt-2 mb-4"></div>
-                      <p className="text-base">
+                      <p className="text-lg">
                         Raclette knausgaard hella meggs normcore williamsburg
                         enamel pin sartorial venmo tbh hot chicken gentrify
                         portland.
@@ -55,52 +55,52 @@ function profile() {
                   <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left w-auto">
                   <div className="overflow-hidden bg-white shadow sm:rounded-lg">
                       <div className="px-4 py-5 sm:px-6">
-                        <h3 className="text-lg font-medium leading-6 text-gray-900">
+                        <h3 className="text-2xl font-medium leading-6 text-gray-900">
                           Personal Information
                         </h3>
-                        <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                        <p className="mt-1 max-w-2xl text-md text-gray-500">
                           Personal details and account information.
                         </p>
                       </div>
                       <div className="border-t border-gray-200">
                         <dl>
                           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
+                            <dt className="text-lg font-medium text-gray-500">
                               Full name
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="mt-1 text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                               {info.name}
                             </dd>
                           </div>
                           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
+                            <dt className="text-lg font-medium text-gray-500">
                               Account ID
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="mt-1 text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                               14674503895621
                             </dd>
                           </div>
                           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
+                            <dt className="text-lg font-medium text-gray-500">
                               Email address
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="mt-1 text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                               {info.email}
                             </dd>
                           </div>
                           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
+                            <dt className="text-lg font-medium text-gray-500">
                               Salary expectation
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="mt-1 text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                               $120,000
                             </dd>
                           </div>
                           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
-                            <dt className="text-sm font-medium text-gray-500">
+                            <dt className="text-lg font-medium text-gray-500">
                               About
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="mt-1 text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                               Fugiat ipsum ipsum deserunt culpa aute sint do
                               nostrud anim incididunt cillum culpa consequat.
                               Excepteur qui ipsum aliquip consequat sint. Sit id

@@ -3,13 +3,13 @@ import React from "react";
 function contact() {
   return (
     <>
-      <section className="text-gray-600 body-font md:pt-10 w-[100vw] h-[100vh] overflow-x-hidden">
-        <div className="container px-2 pt-11 pb-3 mx-auto">
+      <section className="text-gray-600 body-font md:pt-10 w-[100vw] h-[100vh] overflow-x-hidden flex justify-center items-center">
+        <div className="container px-2 pb-3 mx-auto">
           <div className="flex flex-col text-center mb-9">
-            <h1 className="md:text-2xl text-xl font-medium title-font mb-2 text-gray-900">
+            <h1 className="md:text-[35px] text-2xl font-medium title-font mb-2 text-gray-900">
               Contact Us
             </h1>
-            <p className="lg:w-2/3 text-lg mx-auto leading-relaxed">
+            <p className="lg:w-2/3 text-lg mx-auto leading-relaxed mt-4">
               Whatever glitch or error that you faced just tell us so that we
               can improve our services.
             </p>
@@ -20,7 +20,7 @@ function contact() {
                 <div className="relative">
                   <label
                     htmlFor="name"
-                    className="leading-7 text-sm text-gray-600"
+                    className="leading-7 text-lg text-gray-600"
                   >
                     Name
                   </label>
@@ -36,7 +36,7 @@ function contact() {
                 <div className="relative">
                   <label
                     htmlFor="email"
-                    className="leading-7 text-sm text-gray-600"
+                    className="leading-7 text-lg text-gray-600"
                   >
                     Email
                   </label>
@@ -53,7 +53,7 @@ function contact() {
                 <div className="relative">
                   <label
                     htmlFor="message"
-                    className="leading-7 text-sm text-gray-600"
+                    className="leading-7 text-lg text-gray-600"
                   >
                     Message
                   </label>
@@ -65,13 +65,13 @@ function contact() {
                 </div>
               </div>
               <div className="p-2 w-full md:mt-5">
-                <button className="flex border-2 bg-[#028db7] mx-auto rounded-full text-white py-2 px-8 hover:bg-[#017699] text-md hover:underline">
+                <button className="flex border-2 bg-[#028db7] mx-auto rounded-full text-white py-2 px-8 hover:bg-[#017699] text-xl hover:underline">
                   Submit
                 </button>
               </div>
-              <div className="p-2 w-full pt-4 mt-8 border-t border-gray-200 text-center">
-                <a className="text-[#009ac9]">example@email.com</a>
-                <p className="leading-normal my-5">
+              <div className="p-2 w-full pt-4 mt-8 border-t border-gray-200 text-center text-lg">
+                <a className="text-[#009ac9]">contact@pkdr.com</a>
+                <p className="leading-normal my-5  text-lg">
                   49 Smith St.
                   <br />
                   Saint Cloud, MN 56301

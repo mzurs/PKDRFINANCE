@@ -14,11 +14,11 @@ const Settings = () => {
   return (
     <>
       <div className="md:pt-16 pt-20 md:pb-8 p-6 w-[100vw] h-[100vh] overflow-x-hidden">
-        <h1 className="md:pt-9 md:pb-6 pt-3 pb-3 md:text-3xl text-2xl font-bold pl-4">
+        <h1 className="md:pt-9 md:pb-6 pt-3 pb-3 md:text-[35px] text-2xl font-bold pl-4">
           Settings
         </h1>
         <div>
-          <ul className="flex ml-2 mr-2 border-b-2 border-gray-300 sm:text-md md:text-md text-gray-500">
+          <ul className="flex ml-2 mr-2 border-b-2 border-gray-300 sm:text-lg md:text-xl text-gray-500">
             <li id="profile" onClick={()=>{set_profile_info(true); set_account_info(false);}} className={`p-3 md:mr-6 mr-2 cursor-pointer ${profile_info ? "text-[#009ac9] border-b-2 rounded-sm border-[#009ac9]" : ""} hover:text-[#009ac9]`}>
               Profile
             </li>

@@ -317,22 +317,22 @@ function Header() {
                       width={65}
                       height={65}
                     />
-                    <h3>PKDR Finance</h3>
+                    <h2 className="text-xl">PKDR Finance</h2>
                   </div>
                 </Link>
               </div>
               <div
                 className={`${
                   auth && web3auth ? "sm:block" : "sm:hidden"
-                } hidden sm:mx-auto `}
+                } hidden mx-auto`}
               >
-                <div className="flex space-x-4">
+                <div className="flex justify-between">
                   <Link
                     href={"/"}
                     onClick={()=>setpage("home")}
                     className={`cursor-pointer ${
                       page === "home" ? style : ""
-                    } text-white px-5 md:text-md py-2 md:py-4 text-sm font-medium hover:text-[#009ac9] ${page==="home"?style:""}`}
+                    } text-white px-4 mx-4 md:text-md py-5 text-xl font-medium hover:text-[#009ac9] ${page==="home"?style:""}`}
                     aria-current="page"
                     id="home"
                   >
@@ -344,7 +344,7 @@ function Header() {
                     onClick={()=>setpage("profile")}
                     className={`cursor-pointer ${
                       page === "profile" ? style : ""
-                    } text-white px-5 md:text-md py-2 md:py-4 text-sm font-medium hover:text-[#009ac9] ${page==="profile"?"border-b-[4px] text-[#009ac9]":""}`}
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${page==="profile"?"border-b-[4px] text-[#009ac9]":""}`}
                     id="profile"
                   >
                     Profile
@@ -355,7 +355,7 @@ function Header() {
                     onClick={()=>setpage("contact")}
                     className={`cursor-pointer ${
                       page === "contact" ? style : ""
-                    } text-white px-5 md:text-md py-2 md:py-4 text-sm font-medium hover:text-[#009ac9] ${page==="contact"?style:""}`}
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${page==="contact"?style:""}`}
                     id="contact"
                   >
                     Contact
@@ -366,7 +366,7 @@ function Header() {
                     onClick={()=>setpage("about")}
                     className={`cursor-pointer ${
                       page === "about" ? style : ""
-                    } text-white px-5 md:text-md py-2 md:py-4 text-sm font-medium hover:text-[#009ac9] ${page==="about"?style:""}`}
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${page==="about"?style:""}`}
                     id="about"
                   >
                     About
@@ -378,12 +378,12 @@ function Header() {
                   auth && web3auth ? "md:flex" : "hidden"
                 } items-center`}
               >
-                <div className="text-md text-[#009ac9]">{userInfo?.name}</div>
+                <div className="text-xl text-[#009ac9]">{userInfo?.name}</div>
                 <TbGridDots
                   onClick={togglemenu}
                   id="grid"
                   title="Menu"
-                  className={`hidden duration-200 md:block  ml-3 text-lg hover:text-[#009ac9] ${
+                  className={`hidden duration-200 md:block  ml-4 mr-2 text-[22px] hover:text-[#009ac9] ${
                     sidebar ? "rotate-45 text-[#009ac9]" : "text-white"
                   } cursor-pointer`}
                 />
@@ -391,7 +391,7 @@ function Header() {
               <div
                 className={`${
                   auth && web3auth ? "hidden" : ""
-                } text-white absolute right-2 text-md px-2 py-2 hover:text-[#009ac9] cursor-pointer`}
+                } text-white absolute right-2 text-xl px-2 py-2 hover:text-[#009ac9] cursor-pointer`}
                 onClick={login}
               >
                 <button>Sign up</button>

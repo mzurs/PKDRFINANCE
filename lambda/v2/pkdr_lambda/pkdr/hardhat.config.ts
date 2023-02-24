@@ -1,6 +1,7 @@
-// import { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 require("dotenv").config();
+import "@openzeppelin/hardhat-upgrades";
 import "@typechain/hardhat";
 // import "@nomiclabs/hardhat-waffle"
 import "@nomiclabs/hardhat-etherscan";
@@ -13,7 +14,7 @@ import "solidity-coverage";
 const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL;
 const MUMBAI_PRIVATE_KEY = <string>process.env.MUMBAI_PRIVATE_KEY;
 
-const config = {
+const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {
     localhost: {
@@ -37,6 +38,12 @@ const config = {
     deployer: {
       default: 0, // here this will by default take the first account as deployer
       1: 0, // similarly on mainnet it will take the first account as deployer. Note though that depending on how hardhat network are configured, the account 0 on one network can be different than on another
+    },
+    deployer_userA: {
+      default: 1,
+    },
+    deployer_userB: {
+      default: 2,
     },
   },
 };

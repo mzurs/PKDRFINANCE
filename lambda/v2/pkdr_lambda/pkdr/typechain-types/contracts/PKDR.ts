@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -27,18 +28,6 @@ import type {
   PromiseOrValue,
 } from "../common";
 
-export declare namespace ERC20VotesUpgradeable {
-  export type CheckpointStruct = {
-    fromBlock: PromiseOrValue<BigNumberish>;
-    votes: PromiseOrValue<BigNumberish>;
-  };
-
-  export type CheckpointStructOutput = [number, BigNumber] & {
-    fromBlock: number;
-    votes: BigNumber;
-  };
-}
-
 export interface PKDRInterface extends utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
@@ -48,30 +37,22 @@ export interface PKDRInterface extends utils.Interface {
     "balanceOfAt(address,uint256)": FunctionFragment;
     "burn(uint256)": FunctionFragment;
     "burnFrom(address,uint256)": FunctionFragment;
-    "checkpoints(address,uint32)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
-    "delegate(address)": FunctionFragment;
-    "delegateBySig(address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
-    "delegates(address)": FunctionFragment;
-    "flashFee(address,uint256)": FunctionFragment;
-    "flashLoan(address,address,uint256,bytes)": FunctionFragment;
-    "getPastTotalSupply(uint256)": FunctionFragment;
-    "getPastVotes(address,uint256)": FunctionFragment;
-    "getVotes(address)": FunctionFragment;
+    "getContractBalance()": FunctionFragment;
+    "getProfileAddress()": FunctionFragment;
     "increaseAllowance(address,uint256)": FunctionFragment;
     "initialize()": FunctionFragment;
-    "maxFlashLoan(address)": FunctionFragment;
     "mint(address,uint256)": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
-    "numCheckpoints(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "pause()": FunctionFragment;
     "paused()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "proxiableUUID()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "snapshot()": FunctionFragment;
+    "setProfileAddress(address)": FunctionFragment;
     "symbol()": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "totalSupplyAt(uint256)": FunctionFragment;
@@ -79,6 +60,8 @@ export interface PKDRInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "unpause()": FunctionFragment;
+    "upgradeTo(address)": FunctionFragment;
+    "upgradeToAndCall(address,bytes)": FunctionFragment;
   };
 
   getFunction(
@@ -90,30 +73,22 @@ export interface PKDRInterface extends utils.Interface {
       | "balanceOfAt"
       | "burn"
       | "burnFrom"
-      | "checkpoints"
       | "decimals"
       | "decreaseAllowance"
-      | "delegate"
-      | "delegateBySig"
-      | "delegates"
-      | "flashFee"
-      | "flashLoan"
-      | "getPastTotalSupply"
-      | "getPastVotes"
-      | "getVotes"
+      | "getContractBalance"
+      | "getProfileAddress"
       | "increaseAllowance"
       | "initialize"
-      | "maxFlashLoan"
       | "mint"
       | "name"
       | "nonces"
-      | "numCheckpoints"
       | "owner"
       | "pause"
       | "paused"
       | "permit"
+      | "proxiableUUID"
       | "renounceOwnership"
-      | "snapshot"
+      | "setProfileAddress"
       | "symbol"
       | "totalSupply"
       | "totalSupplyAt"
@@ -121,6 +96,8 @@ export interface PKDRInterface extends utils.Interface {
       | "transferFrom"
       | "transferOwnership"
       | "unpause"
+      | "upgradeTo"
+      | "upgradeToAndCall"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -151,58 +128,18 @@ export interface PKDRInterface extends utils.Interface {
     functionFragment: "burnFrom",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "checkpoints",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decreaseAllowance",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "delegate",
-    values: [PromiseOrValue<string>]
+    functionFragment: "getContractBalance",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "delegateBySig",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "delegates",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "flashFee",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "flashLoan",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPastTotalSupply",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPastVotes",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getVotes",
-    values: [PromiseOrValue<string>]
+    functionFragment: "getProfileAddress",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "increaseAllowance",
@@ -213,20 +150,12 @@ export interface PKDRInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "maxFlashLoan",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "mint",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "nonces",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "numCheckpoints",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -245,10 +174,17 @@ export interface PKDRInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "proxiableUUID",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "snapshot", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "setProfileAddress",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
@@ -275,6 +211,14 @@ export interface PKDRInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "upgradeTo",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "upgradeToAndCall",
+    values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
@@ -289,57 +233,43 @@ export interface PKDRInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burnFrom", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "checkpoints",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "decreaseAllowance",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "delegate", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "delegateBySig",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "delegates", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "flashFee", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "flashLoan", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getPastTotalSupply",
+    functionFragment: "getContractBalance",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getPastVotes",
+    functionFragment: "getProfileAddress",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "getVotes", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "increaseAllowance",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "maxFlashLoan",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "numCheckpoints",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "proxiableUUID",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "snapshot", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setProfileAddress",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
@@ -359,29 +289,85 @@ export interface PKDRInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "upgradeTo", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "upgradeToAndCall",
+    data: BytesLike
+  ): Result;
 
   events: {
+    "AMOUNT_RECEIVED_THROUGH_FALLBACK(uint256)": EventFragment;
+    "AMOUNT_RECEIVED_THROUGH_RECEIVE(uint256)": EventFragment;
+    "AdminChanged(address,address)": EventFragment;
     "Approval(address,address,uint256)": EventFragment;
-    "DelegateChanged(address,address,address)": EventFragment;
-    "DelegateVotesChanged(address,uint256,uint256)": EventFragment;
+    "BeaconUpgraded(address)": EventFragment;
     "Initialized(uint8)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Paused(address)": EventFragment;
     "Snapshot(uint256)": EventFragment;
+    "TRANSFER_REQUIRED_MULTI_SIGNATURE(address)": EventFragment;
+    "TRANSFER_REQUIRED_VERIFICATION_I(address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
     "Unpaused(address)": EventFragment;
+    "Upgraded(address)": EventFragment;
   };
 
+  getEvent(
+    nameOrSignatureOrTopic: "AMOUNT_RECEIVED_THROUGH_FALLBACK"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "AMOUNT_RECEIVED_THROUGH_RECEIVE"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "DelegateChanged"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "DelegateVotesChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BeaconUpgraded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Snapshot"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "TRANSFER_REQUIRED_MULTI_SIGNATURE"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "TRANSFER_REQUIRED_VERIFICATION_I"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Upgraded"): EventFragment;
 }
+
+export interface AMOUNT_RECEIVED_THROUGH_FALLBACKEventObject {
+  fallbackAmount: BigNumber;
+}
+export type AMOUNT_RECEIVED_THROUGH_FALLBACKEvent = TypedEvent<
+  [BigNumber],
+  AMOUNT_RECEIVED_THROUGH_FALLBACKEventObject
+>;
+
+export type AMOUNT_RECEIVED_THROUGH_FALLBACKEventFilter =
+  TypedEventFilter<AMOUNT_RECEIVED_THROUGH_FALLBACKEvent>;
+
+export interface AMOUNT_RECEIVED_THROUGH_RECEIVEEventObject {
+  receiveAmount: BigNumber;
+}
+export type AMOUNT_RECEIVED_THROUGH_RECEIVEEvent = TypedEvent<
+  [BigNumber],
+  AMOUNT_RECEIVED_THROUGH_RECEIVEEventObject
+>;
+
+export type AMOUNT_RECEIVED_THROUGH_RECEIVEEventFilter =
+  TypedEventFilter<AMOUNT_RECEIVED_THROUGH_RECEIVEEvent>;
+
+export interface AdminChangedEventObject {
+  previousAdmin: string;
+  newAdmin: string;
+}
+export type AdminChangedEvent = TypedEvent<
+  [string, string],
+  AdminChangedEventObject
+>;
+
+export type AdminChangedEventFilter = TypedEventFilter<AdminChangedEvent>;
 
 export interface ApprovalEventObject {
   owner: string;
@@ -395,30 +381,15 @@ export type ApprovalEvent = TypedEvent<
 
 export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 
-export interface DelegateChangedEventObject {
-  delegator: string;
-  fromDelegate: string;
-  toDelegate: string;
+export interface BeaconUpgradedEventObject {
+  beacon: string;
 }
-export type DelegateChangedEvent = TypedEvent<
-  [string, string, string],
-  DelegateChangedEventObject
+export type BeaconUpgradedEvent = TypedEvent<
+  [string],
+  BeaconUpgradedEventObject
 >;
 
-export type DelegateChangedEventFilter = TypedEventFilter<DelegateChangedEvent>;
-
-export interface DelegateVotesChangedEventObject {
-  delegate: string;
-  previousBalance: BigNumber;
-  newBalance: BigNumber;
-}
-export type DelegateVotesChangedEvent = TypedEvent<
-  [string, BigNumber, BigNumber],
-  DelegateVotesChangedEventObject
->;
-
-export type DelegateVotesChangedEventFilter =
-  TypedEventFilter<DelegateVotesChangedEvent>;
+export type BeaconUpgradedEventFilter = TypedEventFilter<BeaconUpgradedEvent>;
 
 export interface InitializedEventObject {
   version: number;
@@ -453,6 +424,28 @@ export type SnapshotEvent = TypedEvent<[BigNumber], SnapshotEventObject>;
 
 export type SnapshotEventFilter = TypedEventFilter<SnapshotEvent>;
 
+export interface TRANSFER_REQUIRED_MULTI_SIGNATUREEventObject {
+  arg0: string;
+}
+export type TRANSFER_REQUIRED_MULTI_SIGNATUREEvent = TypedEvent<
+  [string],
+  TRANSFER_REQUIRED_MULTI_SIGNATUREEventObject
+>;
+
+export type TRANSFER_REQUIRED_MULTI_SIGNATUREEventFilter =
+  TypedEventFilter<TRANSFER_REQUIRED_MULTI_SIGNATUREEvent>;
+
+export interface TRANSFER_REQUIRED_VERIFICATION_IEventObject {
+  arg0: string;
+}
+export type TRANSFER_REQUIRED_VERIFICATION_IEvent = TypedEvent<
+  [string],
+  TRANSFER_REQUIRED_VERIFICATION_IEventObject
+>;
+
+export type TRANSFER_REQUIRED_VERIFICATION_IEventFilter =
+  TypedEventFilter<TRANSFER_REQUIRED_VERIFICATION_IEvent>;
+
 export interface TransferEventObject {
   from: string;
   to: string;
@@ -471,6 +464,13 @@ export interface UnpausedEventObject {
 export type UnpausedEvent = TypedEvent<[string], UnpausedEventObject>;
 
 export type UnpausedEventFilter = TypedEventFilter<UnpausedEvent>;
+
+export interface UpgradedEventObject {
+  implementation: string;
+}
+export type UpgradedEvent = TypedEvent<[string], UpgradedEventObject>;
+
+export type UpgradedEventFilter = TypedEventFilter<UpgradedEvent>;
 
 export interface PKDR extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -502,8 +502,8 @@ export interface PKDR extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
+      _owner: PromiseOrValue<string>,
+      _spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -535,12 +535,6 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    checkpoints(
-      account: PromiseOrValue<string>,
-      pos: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[ERC20VotesUpgradeable.CheckpointStructOutput]>;
-
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     decreaseAllowance(
@@ -549,55 +543,9 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    delegate(
-      delegatee: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    getContractBalance(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    delegateBySig(
-      delegatee: PromiseOrValue<string>,
-      nonce: PromiseOrValue<BigNumberish>,
-      expiry: PromiseOrValue<BigNumberish>,
-      v: PromiseOrValue<BigNumberish>,
-      r: PromiseOrValue<BytesLike>,
-      s: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    delegates(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    flashFee(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    flashLoan(
-      receiver: PromiseOrValue<string>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    getPastTotalSupply(
-      blockNumber: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    getPastVotes(
-      account: PromiseOrValue<string>,
-      blockNumber: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    getVotes(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    getProfileAddress(overrides?: CallOverrides): Promise<[string]>;
 
     increaseAllowance(
       spender: PromiseOrValue<string>,
@@ -608,11 +556,6 @@ export interface PKDR extends BaseContract {
     initialize(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    maxFlashLoan(
-      token: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     mint(
       to: PromiseOrValue<string>,
@@ -626,11 +569,6 @@ export interface PKDR extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    numCheckpoints(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[number]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -651,11 +589,14 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    proxiableUUID(overrides?: CallOverrides): Promise<[string]>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    snapshot(
+    setProfileAddress(
+      _profiles: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -689,13 +630,24 @@ export interface PKDR extends BaseContract {
     unpause(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    upgradeTo(
+      newImplementation: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    upgradeToAndCall(
+      newImplementation: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
   allowance(
-    owner: PromiseOrValue<string>,
-    spender: PromiseOrValue<string>,
+    _owner: PromiseOrValue<string>,
+    _spender: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -727,12 +679,6 @@ export interface PKDR extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  checkpoints(
-    account: PromiseOrValue<string>,
-    pos: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<ERC20VotesUpgradeable.CheckpointStructOutput>;
-
   decimals(overrides?: CallOverrides): Promise<number>;
 
   decreaseAllowance(
@@ -741,55 +687,9 @@ export interface PKDR extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  delegate(
-    delegatee: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  getContractBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
-  delegateBySig(
-    delegatee: PromiseOrValue<string>,
-    nonce: PromiseOrValue<BigNumberish>,
-    expiry: PromiseOrValue<BigNumberish>,
-    v: PromiseOrValue<BigNumberish>,
-    r: PromiseOrValue<BytesLike>,
-    s: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  delegates(
-    account: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  flashFee(
-    token: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  flashLoan(
-    receiver: PromiseOrValue<string>,
-    token: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  getPastTotalSupply(
-    blockNumber: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  getPastVotes(
-    account: PromiseOrValue<string>,
-    blockNumber: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  getVotes(
-    account: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  getProfileAddress(overrides?: CallOverrides): Promise<string>;
 
   increaseAllowance(
     spender: PromiseOrValue<string>,
@@ -800,11 +700,6 @@ export interface PKDR extends BaseContract {
   initialize(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  maxFlashLoan(
-    token: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
 
   mint(
     to: PromiseOrValue<string>,
@@ -818,11 +713,6 @@ export interface PKDR extends BaseContract {
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  numCheckpoints(
-    account: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<number>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -843,11 +733,14 @@ export interface PKDR extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  proxiableUUID(overrides?: CallOverrides): Promise<string>;
+
   renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  snapshot(
+  setProfileAddress(
+    _profiles: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -882,12 +775,23 @@ export interface PKDR extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  upgradeTo(
+    newImplementation: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  upgradeToAndCall(
+    newImplementation: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
+      _owner: PromiseOrValue<string>,
+      _spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -919,12 +823,6 @@ export interface PKDR extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    checkpoints(
-      account: PromiseOrValue<string>,
-      pos: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<ERC20VotesUpgradeable.CheckpointStructOutput>;
-
     decimals(overrides?: CallOverrides): Promise<number>;
 
     decreaseAllowance(
@@ -933,55 +831,9 @@ export interface PKDR extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    delegate(
-      delegatee: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    getContractBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
-    delegateBySig(
-      delegatee: PromiseOrValue<string>,
-      nonce: PromiseOrValue<BigNumberish>,
-      expiry: PromiseOrValue<BigNumberish>,
-      v: PromiseOrValue<BigNumberish>,
-      r: PromiseOrValue<BytesLike>,
-      s: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    delegates(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    flashFee(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    flashLoan(
-      receiver: PromiseOrValue<string>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    getPastTotalSupply(
-      blockNumber: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getPastVotes(
-      account: PromiseOrValue<string>,
-      blockNumber: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getVotes(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    getProfileAddress(overrides?: CallOverrides): Promise<string>;
 
     increaseAllowance(
       spender: PromiseOrValue<string>,
@@ -990,11 +842,6 @@ export interface PKDR extends BaseContract {
     ): Promise<boolean>;
 
     initialize(overrides?: CallOverrides): Promise<void>;
-
-    maxFlashLoan(
-      token: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     mint(
       to: PromiseOrValue<string>,
@@ -1008,11 +855,6 @@ export interface PKDR extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    numCheckpoints(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<number>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -1031,9 +873,14 @@ export interface PKDR extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    proxiableUUID(overrides?: CallOverrides): Promise<string>;
+
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    snapshot(overrides?: CallOverrides): Promise<void>;
+    setProfileAddress(
+      _profiles: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     symbol(overrides?: CallOverrides): Promise<string>;
 
@@ -1063,9 +910,43 @@ export interface PKDR extends BaseContract {
     ): Promise<void>;
 
     unpause(overrides?: CallOverrides): Promise<void>;
+
+    upgradeTo(
+      newImplementation: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    upgradeToAndCall(
+      newImplementation: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
+    "AMOUNT_RECEIVED_THROUGH_FALLBACK(uint256)"(
+      fallbackAmount?: null
+    ): AMOUNT_RECEIVED_THROUGH_FALLBACKEventFilter;
+    AMOUNT_RECEIVED_THROUGH_FALLBACK(
+      fallbackAmount?: null
+    ): AMOUNT_RECEIVED_THROUGH_FALLBACKEventFilter;
+
+    "AMOUNT_RECEIVED_THROUGH_RECEIVE(uint256)"(
+      receiveAmount?: null
+    ): AMOUNT_RECEIVED_THROUGH_RECEIVEEventFilter;
+    AMOUNT_RECEIVED_THROUGH_RECEIVE(
+      receiveAmount?: null
+    ): AMOUNT_RECEIVED_THROUGH_RECEIVEEventFilter;
+
+    "AdminChanged(address,address)"(
+      previousAdmin?: null,
+      newAdmin?: null
+    ): AdminChangedEventFilter;
+    AdminChanged(
+      previousAdmin?: null,
+      newAdmin?: null
+    ): AdminChangedEventFilter;
+
     "Approval(address,address,uint256)"(
       owner?: PromiseOrValue<string> | null,
       spender?: PromiseOrValue<string> | null,
@@ -1077,27 +958,12 @@ export interface PKDR extends BaseContract {
       value?: null
     ): ApprovalEventFilter;
 
-    "DelegateChanged(address,address,address)"(
-      delegator?: PromiseOrValue<string> | null,
-      fromDelegate?: PromiseOrValue<string> | null,
-      toDelegate?: PromiseOrValue<string> | null
-    ): DelegateChangedEventFilter;
-    DelegateChanged(
-      delegator?: PromiseOrValue<string> | null,
-      fromDelegate?: PromiseOrValue<string> | null,
-      toDelegate?: PromiseOrValue<string> | null
-    ): DelegateChangedEventFilter;
-
-    "DelegateVotesChanged(address,uint256,uint256)"(
-      delegate?: PromiseOrValue<string> | null,
-      previousBalance?: null,
-      newBalance?: null
-    ): DelegateVotesChangedEventFilter;
-    DelegateVotesChanged(
-      delegate?: PromiseOrValue<string> | null,
-      previousBalance?: null,
-      newBalance?: null
-    ): DelegateVotesChangedEventFilter;
+    "BeaconUpgraded(address)"(
+      beacon?: PromiseOrValue<string> | null
+    ): BeaconUpgradedEventFilter;
+    BeaconUpgraded(
+      beacon?: PromiseOrValue<string> | null
+    ): BeaconUpgradedEventFilter;
 
     "Initialized(uint8)"(version?: null): InitializedEventFilter;
     Initialized(version?: null): InitializedEventFilter;
@@ -1117,6 +983,20 @@ export interface PKDR extends BaseContract {
     "Snapshot(uint256)"(id?: null): SnapshotEventFilter;
     Snapshot(id?: null): SnapshotEventFilter;
 
+    "TRANSFER_REQUIRED_MULTI_SIGNATURE(address)"(
+      arg0?: null
+    ): TRANSFER_REQUIRED_MULTI_SIGNATUREEventFilter;
+    TRANSFER_REQUIRED_MULTI_SIGNATURE(
+      arg0?: null
+    ): TRANSFER_REQUIRED_MULTI_SIGNATUREEventFilter;
+
+    "TRANSFER_REQUIRED_VERIFICATION_I(address)"(
+      arg0?: null
+    ): TRANSFER_REQUIRED_VERIFICATION_IEventFilter;
+    TRANSFER_REQUIRED_VERIFICATION_I(
+      arg0?: null
+    ): TRANSFER_REQUIRED_VERIFICATION_IEventFilter;
+
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
@@ -1130,14 +1010,21 @@ export interface PKDR extends BaseContract {
 
     "Unpaused(address)"(account?: null): UnpausedEventFilter;
     Unpaused(account?: null): UnpausedEventFilter;
+
+    "Upgraded(address)"(
+      implementation?: PromiseOrValue<string> | null
+    ): UpgradedEventFilter;
+    Upgraded(
+      implementation?: PromiseOrValue<string> | null
+    ): UpgradedEventFilter;
   };
 
   estimateGas: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
+      _owner: PromiseOrValue<string>,
+      _spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1169,12 +1056,6 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    checkpoints(
-      account: PromiseOrValue<string>,
-      pos: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     decreaseAllowance(
@@ -1183,55 +1064,9 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    delegate(
-      delegatee: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    getContractBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
-    delegateBySig(
-      delegatee: PromiseOrValue<string>,
-      nonce: PromiseOrValue<BigNumberish>,
-      expiry: PromiseOrValue<BigNumberish>,
-      v: PromiseOrValue<BigNumberish>,
-      r: PromiseOrValue<BytesLike>,
-      s: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    delegates(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    flashFee(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    flashLoan(
-      receiver: PromiseOrValue<string>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    getPastTotalSupply(
-      blockNumber: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getPastVotes(
-      account: PromiseOrValue<string>,
-      blockNumber: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getVotes(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    getProfileAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseAllowance(
       spender: PromiseOrValue<string>,
@@ -1241,11 +1076,6 @@ export interface PKDR extends BaseContract {
 
     initialize(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    maxFlashLoan(
-      token: PromiseOrValue<string>,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     mint(
@@ -1258,11 +1088,6 @@ export interface PKDR extends BaseContract {
 
     nonces(
       owner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    numCheckpoints(
-      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1285,11 +1110,14 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    proxiableUUID(overrides?: CallOverrides): Promise<BigNumber>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    snapshot(
+    setProfileAddress(
+      _profiles: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1323,14 +1151,25 @@ export interface PKDR extends BaseContract {
     unpause(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    upgradeTo(
+      newImplementation: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    upgradeToAndCall(
+      newImplementation: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
+      _owner: PromiseOrValue<string>,
+      _spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1362,12 +1201,6 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    checkpoints(
-      account: PromiseOrValue<string>,
-      pos: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decreaseAllowance(
@@ -1376,55 +1209,11 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    delegate(
-      delegatee: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    delegateBySig(
-      delegatee: PromiseOrValue<string>,
-      nonce: PromiseOrValue<BigNumberish>,
-      expiry: PromiseOrValue<BigNumberish>,
-      v: PromiseOrValue<BigNumberish>,
-      r: PromiseOrValue<BytesLike>,
-      s: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    delegates(
-      account: PromiseOrValue<string>,
+    getContractBalance(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    flashFee(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    flashLoan(
-      receiver: PromiseOrValue<string>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    getPastTotalSupply(
-      blockNumber: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getPastVotes(
-      account: PromiseOrValue<string>,
-      blockNumber: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getVotes(
-      account: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    getProfileAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     increaseAllowance(
       spender: PromiseOrValue<string>,
@@ -1434,11 +1223,6 @@ export interface PKDR extends BaseContract {
 
     initialize(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    maxFlashLoan(
-      token: PromiseOrValue<string>,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     mint(
@@ -1451,11 +1235,6 @@ export interface PKDR extends BaseContract {
 
     nonces(
       owner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    numCheckpoints(
-      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1478,11 +1257,14 @@ export interface PKDR extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    proxiableUUID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    snapshot(
+    setProfileAddress(
+      _profiles: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1515,6 +1297,17 @@ export interface PKDR extends BaseContract {
 
     unpause(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    upgradeTo(
+      newImplementation: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    upgradeToAndCall(
+      newImplementation: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

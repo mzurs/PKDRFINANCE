@@ -2,10 +2,11 @@ import { assert, expect, use } from "chai";
 import { Contract } from "ethers";
 const { network, getNamedAccounts, deployments, ethers } = require("hardhat");
 
-describe("                                                                             Contract Unit Test", function () {
+describe("Contract Unit Test\n\n\n\n", function () {
   let user_Admin: any,
     user_A: any,
     user_B: any,
+    INITIAL_SUPPLY = 0,
     pkdrContract: Contract,
     profileContract: Contract;
 
@@ -26,7 +27,7 @@ describe("                                                                      
     // console.log(`PKDR contract address: ${pkdrContract.address}`);
   });
 
-  describe("---------Address Configuration---------------------", () => {
+  describe("\n\n\nAddress Configuration\\n\n\n", () => {
     it("Profile was deployed", async () => {
       assert(profileContract.address);
     });
@@ -40,13 +41,29 @@ describe("                                                                      
       expect(await pkdrContract.getProfileAddress()).to.equal(
         profileContract.address
       );
+
     });
   });
 
-  describe("---------------Mint PKDR--------------------------", () => {
+  describe("\n\n\nOwnable contract\n\n\n", () => {
+
+
+    it(`Owner should be Admin `, async () => {
+      const userAdmin = pkdrContract.connect(user_Admin);
+      // console.log("🚀 ~ file: pkdr.test.ts:50 ~ it ~ address:", )
+
+
+      await assert.equal(await userAdmin.owner(), user_Admin.address);
+    });
+  });
+  describe("\n\n\nMint PKDR\n\n\n\n", () => {
+
+
     it("Only Owner can Mint the PKDR", async () => {
       assert(await pkdrContract.mint(user_Admin.address, 100));
     });
+
+
     it("Minting from other user should've Fail the Transaction", async () => {
       const userA = pkdrContract.connect(user_A);
       await expect(userA.mint(user_A.address, 100)).to.be.revertedWith(
@@ -54,5 +71,13 @@ describe("                                                                      
       );
     });
   });
+
+
+  // describe('\n\n\nTransfers\n\n\n', () => {
+
+  //   it("")
+
+
+  //  })
 
 });

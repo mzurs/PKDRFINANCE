@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts-upgradeable": "^4.8.1",
+    "@openzeppelin/hardhat-upgrades": "^1.22.1",
     "request": "^2.88.2"
   }
 }

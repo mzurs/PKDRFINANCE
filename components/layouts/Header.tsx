@@ -39,20 +39,24 @@ function Header() {
   const router = useRouter();
   const [sidebar, setsidebar] = useState<boolean>(false);
   const [page, setpage] = useState<string>("home");
-  const [Money, setMoney] = useState<float>(0.00);
   const style = "sm:border-b-[4px] border-[#009ac9] text-[#11aede]";
 
   const get_page = () => {
     let url = window.location.href;
     if (url !== undefined) {
       if (
-        !(url === "http://localhost:3000/" || url === "http://localhost:3000")
+        !(
+          url === "http://localhost:3000/" ||
+          url === "http://localhost:3000/user/users" ||
+          url === "http://localhost:3000"
+        )
       ) {
         let url_fragment = url.split("/");
         let len = url_fragment.length;
         setpage(url_fragment[len - 1]);
       } else if (
         url === "http://localhost:3000/" ||
+        url === "http://localhost:3000/user/users" ||
         url === "http://localhost:3000"
       ) {
         setpage("home");
@@ -83,8 +87,6 @@ function Header() {
     router.events.on("routeChangeComplete", () => {
       setProgress(100);
     });
-
-    
 
     const init = async () => {
       try {
@@ -274,8 +276,8 @@ function Header() {
                   aria-hidden="true"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                   />
                 </svg>
@@ -289,8 +291,8 @@ function Header() {
                   aria-hidden="true"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
@@ -326,15 +328,17 @@ function Header() {
               <div
                 className={`${
                   auth && web3auth ? "sm:block" : "sm:hidden"
-                } mx-auto`}
+                } hidden mx-auto`}
               >
                 <div className="flex justify-between">
                   <Link
                     href={"/"}
-                    onClick={()=>setpage("home")}
+                    onClick={() => setpage("home")}
                     className={`cursor-pointer ${
                       page === "home" ? style : ""
-                    } text-white px-4 mx-4 md:text-md py-5 text-xl font-medium hover:text-[#009ac9] ${page==="home"?style:""}`}
+                    } text-white px-4 mx-4 md:text-md py-5 text-xl font-medium hover:text-[#009ac9] ${
+                      page === "home" ? style : ""
+                    }`}
                     aria-current="page"
                     id="home"
                   >
@@ -343,10 +347,12 @@ function Header() {
 
                   <Link
                     href={"/profile"}
-                    onClick={()=>setpage("profile")}
+                    onClick={() => setpage("profile")}
                     className={`cursor-pointer ${
                       page === "profile" ? style : ""
-                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${page==="profile"?"border-b-[4px] text-[#009ac9]":""}`}
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${
+                      page === "profile" ? "border-b-[4px] text-[#009ac9]" : ""
+                    }`}
                     id="profile"
                   >
                     Profile
@@ -354,10 +360,12 @@ function Header() {
 
                   <Link
                     href={"/pkdrInfo/contact"}
-                    onClick={()=>setpage("contact")}
+                    onClick={() => setpage("contact")}
                     className={`cursor-pointer ${
                       page === "contact" ? style : ""
-                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${page==="contact"?style:""}`}
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${
+                      page === "contact" ? style : ""
+                    }`}
                     id="contact"
                   >
                     Contact
@@ -365,10 +373,12 @@ function Header() {
 
                   <Link
                     href={"/pkdrInfo/about"}
-                    onClick={()=>setpage("about")}
+                    onClick={() => setpage("about")}
                     className={`cursor-pointer ${
                       page === "about" ? style : ""
-                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${page==="about"?style:""}`}
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${
+                      page === "about" ? style : ""
+                    }`}
                     id="about"
                   >
                     About
@@ -380,7 +390,15 @@ function Header() {
                   auth && web3auth ? "md:flex" : "hidden"
                 } items-center`}
               >
-                <div className="text-[22px] text-[#009ac9]">{Money.toPrecision(3)}</div>
+                <div className=" w-12 h-12">
+                  <img
+                    className="rounded-full border-2 border-gray-900 shadow-sm"
+                    src="https://randomuser.me/api/portraits/men/31.jpg"
+                    alt="User Profile"
+                    title="User Profile"
+                  />
+                  {/* <div className="absolute top-0 right-0 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div> */}
+                </div>
                 <TbGridDots
                   onClick={togglemenu}
                   id="grid"
@@ -457,7 +475,7 @@ function Header() {
           setProgress(0);
         }}
       />
-        {Navbar}
+      {Navbar}
     </>
   );
 }

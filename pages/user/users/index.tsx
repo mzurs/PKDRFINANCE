@@ -11,6 +11,7 @@ import * as cookie from "cookie";
 import * as jose from "jose";
 import { useRouter } from "next/router";
 import Loading from "../../../components/loading/Loading";
+import Home from "./home";
 function index({ isAuthenticated }: any) {
   const router = useRouter();
 
@@ -27,16 +28,16 @@ function index({ isAuthenticated }: any) {
     }
   });
   if (auth) {
-    if(!verified){
-      console.log(`Register: ${verified}`)
-      router.push('/user/users/register')
-     }else{
-    if (info) {
-      return <div className="w-[100vw] flex flex-wrap overflow-x-hidden"> User: {JSON.stringify(info)}</div>;
+    if (!verified) {
+      console.log(`Register: ${verified}`);
+      router.push("/user/users/register");
+    } else {
+      if (info) {
+        return <Home />;
+      }
     }
-  }
   } else {
-    return <div>Login</div>;
+    return <div className="h-[100vh] flex items-center justify-center w-[100vw]">Login</div>;
   }
 }
 

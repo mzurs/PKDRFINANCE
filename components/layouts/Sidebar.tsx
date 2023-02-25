@@ -71,7 +71,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="hidden md:block right-0 top-[3rem] fixed bg-gray-800 text-gray-200 h-auto">
+      <div className="hidden md:block right-0 top-[4rem] fixed bg-gray-800 text-gray-200 h-auto">
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full">
             <div className="flex items-center justify-center pt-6">

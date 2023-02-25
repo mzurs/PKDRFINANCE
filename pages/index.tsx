@@ -88,7 +88,7 @@ const Home = ({ role, isAuth, userTag }: any) => {
   // }
   return (
     <div>
-      <Front />
+      <Front/>
     </div>
   );
 };

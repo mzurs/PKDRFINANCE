@@ -80,9 +80,9 @@ const Register = () => {
       .then(async (data) => {
         console.log(`RESPONSE: ${JSON.stringify(data)}`);
         setlLoadingState(false);
-        // router.push("/user/users/");
+        // router.push("/");
         if (data) {
-          console.log(`data: ${data}`);
+          console.log("🚀 ~ file: Register.tsx:85 ~ .then ~ data:", JSON.stringify(data))
           // try {
           //   await web3authState?.logout();
           //   // setProvider(null);

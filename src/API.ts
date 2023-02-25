@@ -31,7 +31,7 @@ export type UserExists = {
 
 export type Error = {
   __typename: "Error",
-  message?: string | null,
+  errorMessage?: string | null,
 };
 
 export type UpdateUser = {
@@ -82,6 +82,14 @@ export type UpdateContactList = {
   attributeValue?: string | null,
 };
 
+export type zkParams = {
+  cnic?: string | null,
+  privateKey?: string | null,
+  publicAddress?: string | null,
+  publicAddressAdmin?: string | null,
+  optionalParams?: string | null,
+};
+
 export type getUserResult = UserInfo | UserNotExists | Error
 
 
@@ -121,7 +129,7 @@ export type CreateUserMutation = {
       message?: string | null,
     } | {
       __typename: "Error",
-      message?: string | null,
+      errorMessage?: string | null,
     }
   ) | null,
 };
@@ -140,7 +148,7 @@ export type UpdateUserMutation = {
       message?: string | null,
     } | {
       __typename: "Error",
-      message?: string | null,
+      errorMessage?: string | null,
     }
   ) | null,
 };
@@ -159,7 +167,7 @@ export type DeleteUserMutation = {
       message?: string | null,
     } | {
       __typename: "Error",
-      message?: string | null,
+      errorMessage?: string | null,
     }
   ) | null,
 };
@@ -194,9 +202,17 @@ export type AddContactsMutation = {
       message?: string | null,
     } | {
       __typename: "Error",
-      message?: string | null,
+      errorMessage?: string | null,
     }
   ) | null,
+};
+
+export type ZeroKnowledgeProfileMutationVariables = {
+  zkp?: zkParams | null,
+};
+
+export type ZeroKnowledgeProfileMutation = {
+  zeroKnowledgeProfile?: string | null,
 };
 
 export type GetUserByEmailQueryVariables = {
@@ -212,7 +228,7 @@ export type GetUserByEmailQuery = {
       message?: string | null,
     } | {
       __typename: "Error",
-      message?: string | null,
+      errorMessage?: string | null,
     }
   ) | null,
 };
@@ -247,7 +263,7 @@ export type GetAddressByUserNameQuery = {
       message?: string | null,
     } | {
       __typename: "Error",
-      message?: string | null,
+      errorMessage?: string | null,
     }
   ) | null,
 };

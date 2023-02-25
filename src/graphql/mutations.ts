@@ -12,7 +12,7 @@ export const createUser = /* GraphQL */ `
         message
       }
       ... on Error {
-        message
+        errorMessage
       }
     }
   }
@@ -28,7 +28,7 @@ export const updateUser = /* GraphQL */ `
         message
       }
       ... on Error {
-        message
+        errorMessage
       }
     }
   }
@@ -44,7 +44,7 @@ export const deleteUser = /* GraphQL */ `
         message
       }
       ... on Error {
-        message
+        errorMessage
       }
     }
   }
@@ -70,8 +70,13 @@ export const addContacts = /* GraphQL */ `
         message
       }
       ... on Error {
-        message
+        errorMessage
       }
     }
+  }
+`;
+export const zeroKnowledgeProfile = /* GraphQL */ `
+  mutation ZeroKnowledgeProfile($zkp: zkParams) {
+    zeroKnowledgeProfile(zkp: $zkp)
   }
 `;

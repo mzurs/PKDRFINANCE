@@ -38,10 +38,7 @@ const Sidebar = () => {
     useEffect(() => {
       get_page();
     }, [window.location.href]);
-  } catch (error) {
-    
-  }
-  
+  } catch (error) {}
 
   const logout = async () => {
     if (!web3authState) {
@@ -69,7 +66,8 @@ const Sidebar = () => {
     }
   };
 
-  const style = "border-r-4 border-[#009ac9] bg-gradient-to-r from-[#021729] dark:from-gray-900 dark:to-gray-900 text-[#009ac9] font-extrabold";
+  const style =
+    "border-r-4 border-[#009ac9] bg-gradient-to-r from-[#021729] dark:from-gray-900 dark:to-gray-900 text-[#009ac9] font-extrabold";
 
   return (
     <>
@@ -81,28 +79,38 @@ const Sidebar = () => {
             </div>
             <nav className="mt-6">
               <div>
+                <div
+                  id="profile"
+                  className={`flex border-2 border-r-2 bg-gray-900 ${style} items-center justify-center w-full p-4 my-2 font-thin transition-colors duration-200`}
+                >
+                  <p className="mx-4 text-xl font-normal text-center">{userInfo?.name}</p>
+                </div>
                 <Link
                   id="profile"
-                  className={`${page==="profile"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  className={`${
+                    page === "profile" ? style : "text-gray-200"
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/profile"
-                  onClick={()=>setpage("profile")}
+                  onClick={() => setpage("profile")}
                 >
                   <span className="text-left">
                     <div>
-                      <BsFileEarmarkPerson className="text-2xl mr-3 ml-5"/>
+                      <BsFileEarmarkPerson className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
                   <span className="mx-4 text-lg font-normal">Your Profile</span>
                 </Link>
                 <Link
                   id="user_contacts"
-                  onClick={()=>setpage("user_contacts")}
-                  className={`${page==="user_contacts"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  onClick={() => setpage("user_contacts")}
+                  className={`${
+                    page === "user_contacts" ? style : "text-gray-200"
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/user/users/user_contacts"
                 >
                   <span className="text-left">
                     <div>
-                      <RiContactsBookLine className="text-2xl mr-3 ml-5"/>
+                      <RiContactsBookLine className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
                   <span className="mx-4 text-lg font-normal">
@@ -111,39 +119,45 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   id="settings"
-                  onClick={()=>setpage("settings")}
-                  className={`${page==="settings"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  onClick={() => setpage("settings")}
+                  className={`${
+                    page === "settings" ? style : "text-gray-200"
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/settings"
                 >
                   <span className="text-left">
                     <div>
-                      <FiSettings className="text-2xl mr-3 ml-5"/>
+                      <FiSettings className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
                   <span className="mx-4 text-lg font-normal">Settings</span>
                 </Link>
                 <Link
                   id="about"
-                  onClick={()=>setpage("about")}
-                  className={`${page==="about"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  onClick={() => setpage("about")}
+                  className={`${
+                    page === "about" ? style : "text-gray-200"
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/about"
                 >
                   <span className="text-left">
                     <div>
-                      <IoIosPeople className="text-2xl mr-3 ml-5"/>
+                      <IoIosPeople className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
                   <span className="mx-4 text-lg font-normal">About Us</span>
                 </Link>
                 <Link
                   id="contact"
-                  onClick={()=>setpage("contact")}
-                  className={`${page==="contact"?style:"text-gray-200"} flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  onClick={() => setpage("contact")}
+                  className={`${
+                    page === "contact" ? style : "text-gray-200"
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/contact"
                 >
                   <span className="text-left">
                     <div>
-                      <VscFeedback className="text-2xl mr-3 ml-5"/>
+                      <VscFeedback className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
                   <span className="mx-4 text-lg font-normal">Contact Us</span>
@@ -151,7 +165,7 @@ const Sidebar = () => {
                 <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-white transition-colors duration-200 dark:text-gray-200 hover:text-[#009ac9]">
                   <span className="text-left">
                     <div>
-                      <BiLogOut className="text-2xl mr-3 ml-5"/>
+                      <BiLogOut className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
                   <span

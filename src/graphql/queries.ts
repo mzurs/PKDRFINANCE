@@ -12,7 +12,7 @@ export const getUserByEmail = /* GraphQL */ `
         message
       }
       ... on Error {
-        message
+        errorMessage
       }
     }
   }
@@ -44,7 +44,7 @@ export const getAddressByUserName = /* GraphQL */ `
         message
       }
       ... on Error {
-        message
+        errorMessage
       }
     }
   }

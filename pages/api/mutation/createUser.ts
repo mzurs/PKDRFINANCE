@@ -1,5 +1,11 @@
 import { API, Amplify } from "aws-amplify";
-import type { CreateUser, createUserResult } from "../../../src/API";
+import type {
+  CreateUser,
+  Error,
+  UserExists,
+  UserInfo,
+  createUserResult,
+} from "../../../src/API";
 import awsExports from "../../../src/aws-exports";
 import { createUser } from "../../../src/graphql/mutations";
 import { keccak256 } from "js-sha3";
@@ -35,7 +41,7 @@ async function addUserToVerifiedGroup(oAuthIdToken: string) {
     }
   );
 }
-export const getUserInfo = async (idToken: string) => {
+const getUserInfo = async (idToken: string) => {
   const decoded: any = await jwt.decode(idToken);
   const email = decoded.email;
   const hash = keccak256(Buffer.from(decoded.wallets[0].public_key, "hex"));
@@ -50,10 +56,12 @@ async function createUserAPI(
   oAuthIdToken: string
 ) {
   let returnResult: boolean = false;
-  
+  // console.log("🚀 ~ file: createUser.ts:24 ~ oAuthIdToken", oAuthIdToken)
+  // console.log("🚀 ~ file: createUser.ts:24 ~ idToken", idToken)
+  // console.log("🚀 ~ file: createUser.ts:24 ~ userData", userData)
   const { email, eth_address } = await getUserInfo(idToken);
 
-  const formData:CreateUser = {
+  const formData = {
     ADDRESS: userData.data.ADDRESS,
     CITY: userData.data.CITY,
     COUNTRY: userData.data.COUNTRY,
@@ -72,19 +80,19 @@ async function createUserAPI(
   };
   const authToken = "abc";
   try {
-    const res: any = await API.graphql({
+    const res = (await API.graphql({
       query: createUser,
       variables,
       authToken,
-    });
-
-    try {
-      console.log("User Added to DynamoDB");
+    })) as { data: createUserResult };
+    console.log("🚀 ~ file: createUser.ts:88 ~ res:", res.data);
+    const response: any = res;
+    if (response.data?.createUser.userInfo) {
       await addUserToVerifiedGroup(oAuthIdToken);
       returnResult = true;
       return { res, returnResult };
-    } catch (error) {
-      const res = error as string;
+    } else {
+      returnResult = false;
       return { res, returnResult };
     }
   } catch (err: any) {
@@ -118,5 +126,5 @@ export default async function handler(request: any, response: any) {
   );
 
   console.log("🚀 ~ file: createUser.ts:57 ~ handler ~ response", res);
-  response.status(200).json({ message: JSON.stringify([res,returnResult])});
+  response.status(200).json({ message: JSON.stringify([res, returnResult]) });
 }

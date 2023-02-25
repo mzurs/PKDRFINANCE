@@ -32,7 +32,7 @@ function index({ isAuthenticated }: any) {
       router.push('/user/users/register')
      }else{
     if (info) {
-      return <div> User: {JSON.stringify(info)}</div>;
+      return <div className="w-[100vw] flex flex-wrap overflow-x-hidden"> User: {JSON.stringify(info)}</div>;
     }
   }
   } else {

@@ -22,6 +22,7 @@ import { useRouter } from "next/router";
 const clientId: string = CLIENT_ID;
 import RPC from "./config/ethersRPC";
 import Sidebar from "./Sidebar";
+import { float } from "aws-sdk/clients/cloudfront";
 
 function Header() {
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -38,6 +39,7 @@ function Header() {
   const router = useRouter();
   const [sidebar, setsidebar] = useState<boolean>(false);
   const [page, setpage] = useState<string>("home");
+  const [Money, setMoney] = useState<float>(0.00);
   const style = "sm:border-b-[4px] border-[#009ac9] text-[#11aede]";
 
   const get_page = () => {
@@ -248,7 +250,7 @@ function Header() {
   const Navbar = (
     <div>
       <nav className="bg-gray-800 fixed w-full">
-        <div className="lg:pr-2">
+        <div className="">
           <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
             <div
               className={`${
@@ -324,7 +326,7 @@ function Header() {
               <div
                 className={`${
                   auth && web3auth ? "sm:block" : "sm:hidden"
-                } hidden mx-auto`}
+                } mx-auto`}
               >
                 <div className="flex justify-between">
                   <Link
@@ -378,12 +380,12 @@ function Header() {
                   auth && web3auth ? "md:flex" : "hidden"
                 } items-center`}
               >
-                <div className="text-xl text-[#009ac9]">{userInfo?.name}</div>
+                <div className="text-[22px] text-[#009ac9]">{Money.toPrecision(3)}</div>
                 <TbGridDots
                   onClick={togglemenu}
                   id="grid"
                   title="Menu"
-                  className={`hidden duration-200 md:block  ml-4 mr-2 text-[22px] hover:text-[#009ac9] ${
+                  className={`hidden duration-200 md:block  ml-5 mr-3 text-[22px] hover:text-[#009ac9] ${
                     sidebar ? "rotate-45 text-[#009ac9]" : "text-white"
                   } cursor-pointer`}
                 />

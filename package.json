@@ -9,6 +9,7 @@
     "@aws-amplify/ui-react": "^4.3.4",
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^11.0.0",
+    "@stripe/stripe-js": "^1.20.3",
     "@types/cookie": "^0.5.1",
     "@types/js-cookie": "^3.0.2",
     "@types/jsonwebtoken": "^9.0.1",
@@ -32,8 +33,8 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.8.1",
     "react-top-loading-bar": "^2.3.1",
-    "@stripe/stripe-js": "^1.20.3",
-    "stripe": "^8.185.0"
+    "stripe": "^8.185.0",
+    "swr": "^2.0.4"
   },
   "devDependencies": {
     "@types/node": "18.11.3",

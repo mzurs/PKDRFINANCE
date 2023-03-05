@@ -12,6 +12,7 @@ import {
   providerAtom,
   privKeyAtom,
   userInfoAtom,
+  isVerified,
 } from "../../state/jotai";
 import { Web3AuthCore } from "@web3auth/core";
 import { SafeEventEmitterProvider, WALLET_ADAPTERS } from "@web3auth/base";
@@ -30,7 +31,7 @@ function Header() {
   const [userInfo, setUserInfo] = useAtom(userInfoAtom);
   const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
   const [providerAtomState, setProviderAtomState] = useAtom(providerAtom);
-
+  const [verified,useVerified]=useAtom(isVerified)
   const [web3auth, setWeb3auth] = useState<Web3AuthCore | null>(null);
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
@@ -224,7 +225,7 @@ function Header() {
       setAuth(null);
       setPrivKey(null);
       setUserInfo(null);
-
+      useVerified(false);
       Cookies.remove("web3auth");
       Cookies.remove("pub_key");
       Cookies.remove("idToken");

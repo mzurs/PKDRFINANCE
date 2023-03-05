@@ -1,19 +1,20 @@
-import React from "react";
-import { userInfoAtom, web3authAtom, loading } from "../../../state/jotai";
-import { useAtom, useAtomValue } from "jotai";
-import Loading from "../../../components/loading/Loading";
-function index() {
-  const [auth, setAuth] = useAtom(web3authAtom);
-  const info = useAtomValue(userInfoAtom);
-  <Loading state={true} />;
+  import React from 'react';
+  import { ToastContainer, toast } from 'react-toastify';
 
-  if (auth) {
-    if (info) {
-      return <div> Admin: {JSON.stringify(info)}</div>;
-    }
-  } else {
-    return <div>Login </div>;
+  import 'react-toastify/dist/ReactToastify.css';
+  // minified version is also included
+  // import 'react-toastify/dist/ReactToastify.min.css';
+
+  function Home(){
+    const notify = () => toast("Wow so easy !");
+
+    return (
+      <div><br></br><br></br><br></br><br></br>
+        <button onClick={notify}>Notify !</button>
+        {/* <ToastContainer /> */}
+      </div>
+    );
   }
-}
 
-export default index;
+  export default Home;
+  

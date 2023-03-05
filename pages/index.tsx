@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   loading,
   userRole,
@@ -50,47 +50,15 @@ const Home = ({ role, isAuth, userTag }: any) => {
     }
   }, [isAuth, role]);
 
-  // if (!auth) {
-  //   return <Front />;
-  // } else {
-  //   if (role == null || isAuth == false) {
-  //     return (
-  //       <div>
-  //         <Front />
-  //       </div>
-  //     );
-  //   } else {
-  //     if (isAuth && role) {
-  //       if (role == "users") {
-  //         // setIsAuthenticated(true);
-  //         // setRole(role);
-  //         router.push("/user/users/");
-  //       } else if (role == "admin") {
-  //         // setIsAuthenticated(true);
-  //         // setRole(role);
-  //         router.push("/user/admin/");
-  //       } else {
-  //         return (
-  //           <div>
-  //             <Front />
-  //           </div>
-  //         );
-  //       }
-  //     } else {
-  //       return (
-  //         <div>
-  //           <Front />
-  //         </div>
-  //       );
-  //     }
-  //   }
-
-  // }
-  return (
-    <div>
-      <Front/>
-    </div>
-  );
+  if (useAtomValue(isVerified) === true) {
+    return <></>;
+  } else {
+    return (
+      <div>
+        <Front />
+      </div>
+    );
+  }
 };
 export default Home;
 

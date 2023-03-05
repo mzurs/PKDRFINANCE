@@ -32,8 +32,7 @@ const loading = atom(false);
 
 const customAuthentication = atom<boolean>(false);
 
-const isVerified = atom<boolean>(false);
-
+const isVerified = atomWithStorage("verified",null,storage);
 const userRole = atom<string | null>(null);
 
 export {

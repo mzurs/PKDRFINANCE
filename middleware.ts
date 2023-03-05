@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import isAuthenticated from "./lib/auth/auth";
-import userIdenity from "./lib/users";
-import { web3AuthVerifyResult } from "./lib/types/types";
+// import isAuthenticated from "./lib/auth/auth";
+// import userIdenity from "./lib/users";
+// import { web3AuthVerifyResult } from "./lib/types/types";
 
 export default async function middleware(request: NextRequest) {
   // if (request.cookies.get("web3auth") && request.cookies.get("pub_key")) {

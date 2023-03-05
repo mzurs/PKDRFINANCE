@@ -251,7 +251,7 @@ function Header() {
 
   const Navbar = (
     <div>
-      <nav className="bg-gray-800 fixed w-full">
+      <nav className="  fixed w-full">
         <div className="">
           <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
             <div
@@ -305,10 +305,10 @@ function Header() {
                   : ""
               } flex items-center `}
             >
-              <div className="flex flex-shrink-0 items-center">
+             { (router.pathname === "/")? <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
                 <Image
                   className="block h-8 w-auto lg:hidden"
-                  src="/logo.png"
+                  src="/logo2.png"
                   alt="PKDR Finance"
                   width={60}
                   height={60}
@@ -316,27 +316,47 @@ function Header() {
                 <Link href={"/"} className="cursor-pointer">
                   <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                     <Image
-                      src="/logo.png"
+                      src="/logo1.png"
                       alt="PKDR Finance"
-                      width={65}
-                      height={65}
+                      width={200}
+                      height={200}
                     />
-                    <h2 className="text-xl">PKDR Finance</h2>
+                    {/* <h2 className="text-xl">PKDR Finance</h2> */}
                   </div>
                 </Link>
-              </div>
+              </div>:
+              <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
+                <Image
+                  className="block h-8 w-auto lg:hidden"
+                  src="/logo1.png"
+                  alt="PKDR Finance"
+                  width={60}
+                  height={60}
+                />
+                <Link href={"/"} className="cursor-pointer">
+                  <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+                    <Image
+                      src="/logo2.png"
+                      alt="PKDR Finance"
+                      width={200}
+                      height={200}
+                    />
+                    {/* <h2 className="text-xl">PKDR Finance</h2> */}
+                  </div>
+                </Link>
+              </div>}
               <div
                 className={`${
                   auth && web3auth ? "sm:block" : "sm:hidden"
                 } hidden mx-auto`}
               >
-                <div className="flex justify-between">
+                <div className=" border-b-4 border-black flex justify-between">
                   <Link
                     href={"/"}
                     onClick={() => setpage("home")}
                     className={`cursor-pointer ${
                       page === "home" ? style : ""
-                    } text-white px-4 mx-4 md:text-md py-5 text-xl font-medium hover:text-[#009ac9] ${
+                    } text-black px-4 mx-4 md:text-md py-5 text-xl font-medium hover:text-[#010f13] ${
                       page === "home" ? style : ""
                     }`}
                     aria-current="page"
@@ -350,8 +370,8 @@ function Header() {
                     onClick={() => setpage("profile")}
                     className={`cursor-pointer ${
                       page === "profile" ? style : ""
-                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${
-                      page === "profile" ? "border-b-[4px] text-[#009ac9]" : ""
+                    } text-black px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#010507] ${
+                      page === "profile" ? "border-b-[4px] text-[#020f13]" : ""
                     }`}
                     id="profile"
                   >
@@ -363,7 +383,7 @@ function Header() {
                     onClick={() => setpage("contact")}
                     className={`cursor-pointer ${
                       page === "contact" ? style : ""
-                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${
+                    } text-black px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#010c0f] ${
                       page === "contact" ? style : ""
                     }`}
                     id="contact"
@@ -376,7 +396,7 @@ function Header() {
                     onClick={() => setpage("about")}
                     className={`cursor-pointer ${
                       page === "about" ? style : ""
-                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#009ac9] ${
+                    } text-black px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#030f13] ${
                       page === "about" ? style : ""
                     }`}
                     id="about"
@@ -403,18 +423,18 @@ function Header() {
                   onClick={togglemenu}
                   id="grid"
                   title="Menu"
-                  className={`hidden duration-200 md:block  ml-5 mr-3 text-[22px] hover:text-[#009ac9] ${
-                    sidebar ? "rotate-45 text-[#009ac9]" : "text-white"
+                  className={`hidden duration-200 md:block  ml-5 mr-3 text-[22px] hover:text-[#010607] ${
+                    sidebar ? "rotate-45 text-[#051114]" : "text-black"
                   } cursor-pointer`}
                 />
               </div>
               <div
                 className={`${
                   auth && web3auth ? "hidden" : ""
-                } text-white absolute right-2 text-xl px-2 py-2 hover:text-[#009ac9] cursor-pointer`}
+                } text-black rounded border-solid border-2 border-black absolute right-2 text-xl px-2 py-2 hover:text-[#1da8d3] cursor-pointer`}
                 onClick={login}
               >
-                <button>Sign up</button>
+                <button >Sign in</button>
               </div>
             </div>
           </div>

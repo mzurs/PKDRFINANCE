@@ -20,7 +20,7 @@ function register() {
 
   return (
     <div>
-      {!verified}?<Register />
+      {!verified}<Register />
     </div>
   );
 }

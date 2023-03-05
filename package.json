@@ -21,6 +21,7 @@
     "aws-amplify": "^5.0.11",
     "aws-sdk": "^2.1301.0",
     "cookie": "^0.5.0",
+    "framer-motion": "^10.0.1",
     "jose": "^4.11.2",
     "jotai": "^1.13.0",
     "js-cookie": "^3.0.1",
@@ -34,6 +35,7 @@
     "react-router-dom": "^6.8.1",
     "react-top-loading-bar": "^2.3.1",
     "stripe": "^8.185.0",
+    "styled-components": "^5.3.8",
     "swr": "^2.0.4"
   },
   "devDependencies": {

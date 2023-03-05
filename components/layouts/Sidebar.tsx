@@ -71,24 +71,24 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="hidden md:block right-0 top-[4rem] fixed bg-gray-800 text-gray-200 h-auto">
+      <div className=" hidden md:block right-0 top-[4rem] fixed bg-white text-black h-auto">
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
-          <div className="h-full">
-            <div className="flex items-center justify-center pt-6">
-              <Image src="/logo.png" alt="logo" width="85" height="85" />
+          <div className="h-full" >
+            <div className="flex items-center justify-center pt-6 ">
+              <Image src="/logo2.png" alt="logo2" width="150" height="100" />
             </div>
             <nav className="mt-6">
               <div>
                 <div
                   id="profile"
-                  className={`flex border-2 border-r-2 bg-gray-900 ${style} items-center justify-center w-full p-4 my-2 font-thin transition-colors duration-200`}
+                  className={`flex border-2 border-r-2 bg-black text-white ${style} items-center justify-center w-full p-4 my-2 font-thin transition-colors duration-200`}
                 >
                   <p className="mx-4 text-xl font-normal text-center">{userInfo?.name}</p>
                 </div>
                 <Link
                   id="profile"
                   className={`${
-                    page === "profile" ? style : "text-gray-200"
+                    page === "profile" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/profile"
                   onClick={() => setpage("profile")}
@@ -104,7 +104,7 @@ const Sidebar = () => {
                   id="user_contacts"
                   onClick={() => setpage("user_contacts")}
                   className={`${
-                    page === "user_contacts" ? style : "text-gray-200"
+                    page === "user_contacts" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/user/users/user_contacts"
                 >
@@ -121,7 +121,7 @@ const Sidebar = () => {
                   id="settings"
                   onClick={() => setpage("settings")}
                   className={`${
-                    page === "settings" ? style : "text-gray-200"
+                    page === "settings" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/settings"
                 >
@@ -136,7 +136,7 @@ const Sidebar = () => {
                   id="about"
                   onClick={() => setpage("about")}
                   className={`${
-                    page === "about" ? style : "text-gray-200"
+                    page === "about" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/about"
                 >
@@ -151,7 +151,7 @@ const Sidebar = () => {
                   id="contact"
                   onClick={() => setpage("contact")}
                   className={`${
-                    page === "contact" ? style : "text-gray-200"
+                    page === "contact" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/contact"
                 >
@@ -162,7 +162,7 @@ const Sidebar = () => {
                   </span>
                   <span className="mx-4 text-lg font-normal">Contact Us</span>
                 </Link>
-                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-white transition-colors duration-200 dark:text-gray-200 hover:text-[#009ac9]">
+                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-black transition-colors duration-200 dark:text-black hover:text-[#009ac9]">
                   <span className="text-left">
                     <div>
                       <BiLogOut className="text-2xl mr-3 ml-5" />

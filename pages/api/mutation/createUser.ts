@@ -41,7 +41,7 @@ async function addUserToVerifiedGroup(oAuthIdToken: string) {
     }
   );
 }
-const getUserInfo = async (idToken: string) => {
+export const getUserInfo = async (idToken: string) => {
   const decoded: any = await jwt.decode(idToken);
   const email = decoded.email;
   const hash = keccak256(Buffer.from(decoded.wallets[0].public_key, "hex"));

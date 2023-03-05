@@ -44,7 +44,7 @@ const Home = () => {
 
   return (
     <div className="w-[100vw] h-[100vh] pt-20 overflow-x-hidden">
-      <div className="h-20%">
+      {/* <div className="h-20%">
         <div className="flex justify-between mx-4 py-2 border-b-2 border-gray-300">
           <p className="text-2xl font-semibold">What I Have</p>
           <div className="flex items-center ">
@@ -71,11 +71,11 @@ const Home = () => {
             <div className="mx-4 py-2 text-xl text-gray-800 font-light">
               <p>
                 Account Name :{" "}
-                <span className="text-[#009ac9] font-normal">{info.name}</span>
+                <span className="text-[#009ac9] font-normal">{info?.name}</span>
               </p>
               <p>
                 Account&nbsp; Email :{" "}
-                <span className="text-[#009ac9] font-normal">{info.email}</span>
+                <span className="text-[#009ac9] font-normal">{info?.email}</span>
               </p>
             </div>
           </div>
@@ -101,7 +101,7 @@ const Home = () => {
           </div>
           <p className="pt-2 text-center">Unlock To View Balance</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

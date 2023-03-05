@@ -12,7 +12,7 @@ function index() {
       return <div> Admin: {JSON.stringify(info)}</div>;
     }
   } else {
-    return <div>Login</div>;
+    return <div>Login </div>;
   }
 }
 

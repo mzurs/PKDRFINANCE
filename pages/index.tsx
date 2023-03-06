@@ -14,6 +14,7 @@ import * as cookie from "cookie";
 import { useRouter } from "next/router";
 import auth from "./api/auth";
 import { useHydrateAtoms } from "jotai/utils";
+import Cookies from "js-cookie";
 const Home = ({ role, isAuth, userTag }: any) => {
   const router = useRouter();
 
@@ -49,6 +50,47 @@ const Home = ({ role, isAuth, userTag }: any) => {
       router.push(`/user/${role}/`);
     }
   }, [isAuth, role]);
+  useEffect(() => {
+    const userRole = async () => {
+      if (!role || !isAuth || !userTag) {
+        if (
+          Cookies.get("idToken") ||
+          Cookies.get("pub_key") ||
+          Cookies.get("oAuthIdToken")
+        ) {
+          console.log("|Third UseEffect from Index PAge is running", role);
+
+          console.log(Cookies.get("idToken"));
+          console.log(Cookies.get("pub_key"));
+          console.log(Cookies.get("oAuthIdToken"));
+
+          const idToken = Cookies.get("idToken");
+          const pub_key = Cookies.get("pub_key");
+          const oAuthIdToken = Cookies.get("oAuthIdToken");
+          const data = {
+            idToken: idToken,
+            pub_key: pub_key,
+            oAuthIdToken: oAuthIdToken,
+          };
+          // const headers = new Headers();
+          // headers.append("content-type", "application/json");
+          // headers.append(
+          //   "x-custom-header",
+          //   JSON.stringify([idToken, pub_key, oAuthIdToken])
+          // );
+          await fetch("/api/clientAuth", {
+            method: "POST",
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then(async (data) => {
+              console.log(`RESPONSE: ${JSON.stringify(data)}`);
+            });
+        }
+      }
+    };
+    userRole();
+  });
 
   if (useAtomValue(isVerified) === true) {
     return <></>;

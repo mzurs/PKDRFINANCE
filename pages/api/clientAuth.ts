@@ -1,7 +1,6 @@
 import * as jose from "jose";
 import * as jwt from "jsonwebtoken";
-import { NextRequest, NextResponse } from "next/server";
-
+import type { NextApiRequest, NextApiResponse } from "next";
 type response = {
   userRole: string | null;
   result: boolean;
@@ -40,14 +39,19 @@ async function role(oAuthIdToken: string): Promise<roleResponse | null> {
   const userTag = false;
   return { result, userTag };
 }
-export default async function handler(req: any, response: any) {
-  //   console.log("🚀 ~ file: auth.ts:19 ~ oAuthIdToken", oAuthIdToken);
-  // console.log("🚀 ~ file: auth.ts:21 ~ pub_key", pub_key);
-  // console.log("🚀 ~ file: auth.ts:21 ~ idToken", idToken)
-//   const authTokens: any = JSON.parse(req.headers["x-custom-header"]);
-  const idToken =req.body.idToken;
-  const pub_key = req.body.pub_key
+export default async function handler(
+  req: NextApiRequest,
+  response: NextApiResponse
+) {
+  const idToken = req.body.idToken;
+  console.log("🚀 ~ file: clientAuth.ts:54 ~ handler ~ idToken:", idToken);
+  const pub_key = req.body.pub_key;
+  console.log("🚀 ~ file: clientAuth.ts:56 ~ handler ~ pub_key:", pub_key);
   const oAuthIdToken = req.body.oAuthIdToken;
+  console.log(
+    "🚀 ~ file: clientAuth.ts:56 ~ handler ~ oAuthIdToken:",
+    oAuthIdToken
+  );
 
   const res: response = {
     userRole: null,
@@ -67,12 +71,14 @@ export default async function handler(req: any, response: any) {
     const wallet: any = JSON.stringify(
       jwtDecoded.payload.wallets[0].public_key
     );
-    console.log("🚀 ~ file: auth.ts:37 ~ wallets", wallet);
+    console.log("🚀 ~ file: clientAuth.ts:78 ~ handler ~ wallet:", wallet);
 
     if (wallet === pub_key) {
       res.result = true;
 
       const { result, userTag }: any = await role(oAuthIdToken);
+      console.log("🚀 ~ file: clientAuth.ts:84 ~ handler ~ userTag:", userTag);
+      console.log("🚀 ~ file: clientAuth.ts:84 ~ handler ~ result:", result);
 
       if (result) {
         res.userRole = result;
@@ -88,6 +94,5 @@ export default async function handler(req: any, response: any) {
 
     response.status(200).json({ message: JSON.stringify(res) });
   }
-
   response.status(200).json({ message: JSON.stringify(res) });
 }

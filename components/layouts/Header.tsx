@@ -121,7 +121,7 @@ function Header() {
             },
           },
           loginSettings: {
-            mfaLevel: "optional",
+            mfaLevel: "none",
             sessionTime: 3000,
           },
         });

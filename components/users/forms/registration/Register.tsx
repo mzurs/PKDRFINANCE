@@ -10,10 +10,10 @@ import {
   userInfoAtom,
   web3authStateAtom,
   providerAtom,
-} from "../../../state/jotai";
+} from "../../../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
-import Loading from "../../loading/Loading";
-import PushNotification from "../../PushNotification";
+import Loading from "../../../shared/loading/Loading";
+import PushNotification from "../../../shared/PushNotification";
 import router, { Router, useRouter } from "next/router";
 import Cookies from "js-cookie";
 const Register = () => {

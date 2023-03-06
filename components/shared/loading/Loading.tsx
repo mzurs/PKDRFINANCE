@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { loading } from "../../state/jotai";
+import { loading } from "../../../state/jotai";
 import { useAtom } from "jotai";
 
 const Loading = ({ state }: any) => {

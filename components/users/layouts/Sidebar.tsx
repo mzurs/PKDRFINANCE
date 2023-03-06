@@ -9,7 +9,7 @@ import {
   privKeyAtom,
   userInfoAtom,
   isVerified,
-} from "../../state/jotai";
+} from "../../../state/jotai";
 import Cookies from "js-cookie";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";

@@ -13,7 +13,7 @@ import {
   privKeyAtom,
   userInfoAtom,
   isVerified,
-} from "../../state/jotai";
+} from "../../../state/jotai";
 import { Web3AuthCore } from "@web3auth/core";
 import { SafeEventEmitterProvider, WALLET_ADAPTERS } from "@web3auth/base";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";

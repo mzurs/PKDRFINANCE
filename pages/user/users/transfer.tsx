@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { userInfoAtom, web3authAtom, loading } from "../../../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { UserInfo } from "../../../Types/userTypes";
+import { UserInfo } from "../../../components/users/settingsLayout/Types/userTypes";
 import { useRouter } from "next/router";
-import Loading from "../../../components/loading/Loading";
+import Loading from "../../../components/shared/loading/Loading";
 
 const transfer = () => {
   const [auth, setAuth] = useAtom(web3authAtom);

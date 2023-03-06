@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Register from "../../../components/forms/registration/Register";
+import Register from "../../../components/users/forms/registration/Register";
 import { useAtom } from "jotai";
 import { isVerified, web3authAtom } from "../../../state/jotai";
 import { useRouter } from "next/router";

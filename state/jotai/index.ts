@@ -2,7 +2,7 @@ import { SafeEventEmitterProvider } from "@web3auth/base";
 import { Web3AuthCore } from "@web3auth/core";
 import { atom } from "jotai";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
-import { UserInfo } from "../../Types/userTypes";
+import { UserInfo } from "../../components/users/settingsLayout/type/userTypes";
 
 //storage object for local storage
 const storage = { ...createJSONStorage(() => localStorage), delayInit: true };

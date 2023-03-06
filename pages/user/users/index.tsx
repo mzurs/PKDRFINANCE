@@ -10,7 +10,7 @@ import { useAtom, useAtomValue } from "jotai";
 import * as cookie from "cookie";
 import * as jose from "jose";
 import { useRouter } from "next/router";
-import Loading from "../../../components/loading/Loading";
+import Loading from "../../../components/shared/loading/Loading";
 import Home from "./home";
 function index({ isAuthenticated }: any) {
   const router = useRouter();

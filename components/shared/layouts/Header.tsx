@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TbGridDots } from "react-icons/tb";
 import Image from "next/image";
 import Link from "next/link";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import LoadingBar from "react-top-loading-bar";
 import { getPublicCompressed } from "@toruslabs/eccrypto";
 import Cookies from "js-cookie";
@@ -13,6 +13,7 @@ import {
   privKeyAtom,
   userInfoAtom,
   isVerified,
+  userRole,
 } from "../../../state/jotai";
 import { Web3AuthCore } from "@web3auth/core";
 import { SafeEventEmitterProvider, WALLET_ADAPTERS } from "@web3auth/base";
@@ -22,16 +23,17 @@ import { CLIENT_ID } from "./config/constants";
 import { useRouter } from "next/router";
 const clientId: string = CLIENT_ID;
 import RPC from "./config/ethersRPC";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../users/Sidebar";
 import { float } from "aws-sdk/clients/cloudfront";
 
 function Header() {
+  const userRoleType = useAtomValue(userRole);
   const [auth, setAuth] = useAtom(web3authAtom);
   const [privKey, setPrivKey] = useAtom(privKeyAtom);
   const [userInfo, setUserInfo] = useAtom(userInfoAtom);
   const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
   const [providerAtomState, setProviderAtomState] = useAtom(providerAtom);
-  const [verified,useVerified]=useAtom(isVerified)
+  const [verified, useVerified] = useAtom(isVerified);
   const [web3auth, setWeb3auth] = useState<Web3AuthCore | null>(null);
   const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
     null
@@ -306,46 +308,49 @@ function Header() {
                   : ""
               } flex items-center `}
             >
-             { (router.pathname === "/")? <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
-                <Image
-                  className="block h-8 w-auto lg:hidden"
-                  src="/logo2.png"
-                  alt="PKDR Finance"
-                  width={60}
-                  height={60}
-                />
-                <Link href={"/"} className="cursor-pointer">
-                  <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
-                    <Image
-                      src="/logo1.png"
-                      alt="PKDR Finance"
-                      width={200}
-                      height={200}
-                    />
-                    {/* <h2 className="text-xl">PKDR Finance</h2> */}
-                  </div>
-                </Link>
-              </div>:
-              <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
-                <Image
-                  className="block h-8 w-auto lg:hidden"
-                  src="/logo1.png"
-                  alt="PKDR Finance"
-                  width={60}
-                  height={60}
-                />
-                <Link href={"/"} className="cursor-pointer">
-                  <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
-                    <Image
-                      src="/logo2.png"
-                      alt="PKDR Finance"
-                      width={200}
-                      height={200}
-                    />
-                    {/* <h2 className="text-xl">PKDR Finance</h2> */}
-                  </div>
-                </Link>
-              </div>}
+              {router.pathname === "/" ? (
+                <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
+                  <Image
+                    className="block h-8 w-auto lg:hidden"
+                    src="/logo2.png"
+                    alt="PKDR Finance"
+                    width={60}
+                    height={60}
+                  />
+                  <Link href={"/"} className="cursor-pointer">
+                    <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+                      <Image
+                        src="/logo1.png"
+                        alt="PKDR Finance"
+                        width={200}
+                        height={200}
+                      />
+                      {/* <h2 className="text-xl">PKDR Finance</h2> */}
+                    </div>
+                  </Link>
+                </div>
+              ) : (
+                <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
+                  <Image
+                    className="block h-8 w-auto lg:hidden"
+                    src="/logo1.png"
+                    alt="PKDR Finance"
+                    width={60}
+                    height={60}
+                  />
+                  <Link href={"/"} className="cursor-pointer">
+                    <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+                      <Image
+                        src="/logo2.png"
+                        alt="PKDR Finance"
+                        width={200}
+                        height={200}
+                      />
+                      {/* <h2 className="text-xl">PKDR Finance</h2> */}
+                    </div>
+                  </Link>
+                </div>
+              )}
               <div
                 className={`${
                   auth && web3auth ? "sm:block" : "sm:hidden"
@@ -435,7 +440,7 @@ function Header() {
                 } text-black rounded border-solid border-2 border-black absolute right-2 text-xl px-2 py-2 hover:text-[#1da8d3] cursor-pointer`}
                 onClick={login}
               >
-                <button >Sign in</button>
+                <button>Sign in</button>
               </div>
             </div>
           </div>
@@ -485,20 +490,25 @@ function Header() {
       </div>
     </div>
   );
-
-  return (
-    <>
-      <LoadingBar
-        color="#009ac9"
-        progress={progress}
-        waitingTime={400}
-        onLoaderFinished={() => {
-          setProgress(0);
-        }}
-      />
-      {Navbar}
-    </>
-  );
+  if (userRoleType === "admin") {
+    return <div>
+      <button onClick={logout}>Sign Out</button>
+    </div>;
+  } else {
+    return (
+      <>
+        <LoadingBar
+          color="#009ac9"
+          progress={progress}
+          waitingTime={400}
+          onLoaderFinished={() => {
+            setProgress(0);
+          }}
+        />
+        {Navbar}
+      </>
+    );
+  }
 }
 
 export default Header;

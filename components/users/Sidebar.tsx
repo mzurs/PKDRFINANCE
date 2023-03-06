@@ -9,7 +9,7 @@ import {
   privKeyAtom,
   userInfoAtom,
   isVerified,
-} from "../../../state/jotai";
+} from "../../state/jotai";
 import Cookies from "js-cookie";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
@@ -91,7 +91,7 @@ const Sidebar = () => {
                   className={`${
                     page === "profile" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
-                  href="users/profile"
+                  href="/user/users/profile"
                   onClick={() => setpage("profile")}
                 >
                   <span className="text-left">
@@ -124,7 +124,7 @@ const Sidebar = () => {
                   className={`${
                     page === "settings" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
-                  href="user/users/settings"
+                  href="/user/users/settings"
                 >
                   <span className="text-left">
                     <div>

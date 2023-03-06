@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import { Provider } from "jotai";
 import dynamic from "next/dynamic";
 import Layout from "../components/layouts/Layout";
-import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 // import Header from '../components/layouts/Header'
 // import Footer from '../components/layouts/Footer'
@@ -21,7 +20,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
         <Provider>
           <Layout>
-          <ReactNotifications />
             <Component {...pageProps} />
           </Layout>
         </Provider>

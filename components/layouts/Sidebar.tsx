@@ -8,6 +8,7 @@ import {
   providerAtom,
   privKeyAtom,
   userInfoAtom,
+  isVerified,
 } from "../../state/jotai";
 import Cookies from "js-cookie";
 import { BsFileEarmarkPerson } from "react-icons/bs";
@@ -24,7 +25,7 @@ const Sidebar = () => {
   const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
   const [providerAtomState, setProviderAtomState] = useAtom(providerAtom);
   const [page, setpage] = useState<string>("");
-
+  const [verified,setVerified]=useAtom(isVerified);
   const get_page = () => {
     let url = window.location.href;
     if (url !== "http://localhost:3000/") {
@@ -51,7 +52,7 @@ const Sidebar = () => {
       setAuth(null);
       setPrivKey(null);
       setUserInfo(null);
-
+      setVerified(false)
       Cookies.remove("web3auth");
       Cookies.remove("pub_key");
       Cookies.remove("idToken");
@@ -90,7 +91,7 @@ const Sidebar = () => {
                   className={`${
                     page === "profile" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
-                  href="/profile"
+                  href="users/profile"
                   onClick={() => setpage("profile")}
                 >
                   <span className="text-left">
@@ -123,7 +124,7 @@ const Sidebar = () => {
                   className={`${
                     page === "settings" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
-                  href="/settings"
+                  href="user/users/settings"
                 >
                   <span className="text-left">
                     <div>

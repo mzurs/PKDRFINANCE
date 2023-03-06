@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useAtomValue } from "jotai";
-import { userInfoAtom } from "../state/jotai";
-import { UserInfo } from "../Types/userTypes";
-import ProfileInfo from "../components/layouts/settingsLayout/ProfileInfo";
-import AccountInfo from "../components/layouts/settingsLayout/AccountInfo";
+import { userInfoAtom } from "../../../state/jotai";
+import { UserInfo } from "../../../Types/userTypes";
+import ProfileInfo from "../../../components/layouts/settingsLayout/ProfileInfo";
+import AccountInfo from "../../../components/layouts/settingsLayout/AccountInfo";
 
 const Settings = () => {
   

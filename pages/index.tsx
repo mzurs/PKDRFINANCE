@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import {
   loading,
@@ -110,12 +110,18 @@ const Home = ({ role, isAuth, userTag }: any) => {
     }
   });
 
-  if (useAtomValue(isVerified) === true || useAtomValue(web3authAtom)) {
-    return <></>;
+  if (useAtomValue(isVerified) === true) {
+    return (
+      <Suspense fallback={<Loading state={true} />}>
+        <></>
+      </Suspense>
+    );
   } else {
     return (
       <div>
-        <Front />
+        <Suspense fallback={<Loading state={true} />}>
+          <Front />
+        </Suspense>
       </div>
     );
   }

@@ -372,7 +372,7 @@ function Header() {
                   </Link>
 
                   <Link
-                    href={"/profile"}
+                    href={"/user/users/profile"}
                     onClick={() => setpage("profile")}
                     className={`cursor-pointer ${
                       page === "profile" ? style : ""

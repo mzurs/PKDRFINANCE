@@ -74,7 +74,6 @@ const Home = ({ role, isAuth, userTag }: any) => {
         // );
         // setCount(response);
         window.location.href = "/";
-       
       }
     }
   };
@@ -101,9 +100,9 @@ const Home = ({ role, isAuth, userTag }: any) => {
   }, [isAuth, role]);
 
   useEffect(() => {
-    console.log("Third=----",Cookies.get("idToken"))
+    console.log("Third=----", Cookies.get("idToken"));
     if (Cookies.get("idToken")) {
-      if (verified!=true) {
+      if (verified != true) {
         console.log("-----------User Role Function is Running------------");
         userRoleFunc();
         // setVerified(true);
@@ -111,7 +110,7 @@ const Home = ({ role, isAuth, userTag }: any) => {
     }
   });
 
-  if (useAtomValue(isVerified) === true) {
+  if (useAtomValue(isVerified) === true || useAtomValue(web3authAtom)) {
     return <></>;
   } else {
     return (

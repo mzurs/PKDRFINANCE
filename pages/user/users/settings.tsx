@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAtomValue } from "jotai";
 import { userInfoAtom } from "../../../state/jotai";
-import { UserInfo } from "../../../components/users/settingsLayout/Types/userTypes";
+import { UserInfo } from '../../../components/users/settingsLayout/type/userTypes'
 import ProfileInfo from "../../../components/users/settingsLayout/ProfileInfo";
 import AccountInfo from "../../../components/users/settingsLayout/AccountInfo";
 

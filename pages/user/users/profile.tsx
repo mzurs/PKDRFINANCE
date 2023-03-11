@@ -2,7 +2,7 @@ import React from "react";
 import { userInfoAtom, web3authAtom, loading } from "../../../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import Loading from "../../../components/shared/loading/Loading";
-import { UserInfo } from '../../../components/users/settingsLayout/Types/userTypes'
+import { UserInfo } from '../../../components/users/settingsLayout/type/userTypes'
 function profile() {
   const [auth, setAuth] = useAtom(web3authAtom);
   const info:UserInfo = useAtomValue(userInfoAtom);

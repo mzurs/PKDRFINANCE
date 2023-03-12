@@ -9,12 +9,9 @@
     "@aws-amplify/ui-react": "^4.3.4",
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^11.0.0",
-<<<<<<< HEAD
     "@faker-js/faker": "^7.6.0",
-=======
     "@fortawesome/fontawesome-free": "^6.3.0",
     "@popperjs/core": "^2.11.6",
->>>>>>> zf_l/zf_local
     "@stripe/stripe-js": "^1.20.3",
     "@tailwindcss/forms": "^0.5.3",
     "@types/chart.js": "^2.9.37",
@@ -29,11 +26,7 @@
     "@web3auth/web3auth": "^2.1.3",
     "aws-amplify": "^5.0.11",
     "aws-sdk": "^2.1301.0",
-<<<<<<< HEAD
     "chart.js": "^4.2.1",
-=======
-    "chart.js": "2.9.4",
->>>>>>> zf_l/zf_local
     "cookie": "^0.5.0",
     "faker-js": "^1.0.0",
     "framer-motion": "^10.0.1",
@@ -46,13 +39,8 @@
     "jsonwebtoken": "^9.0.0",
     "next": "latest",
     "react": "18.2.0",
-<<<<<<< HEAD
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "18.2.0",
-    "react-helmet": "^6.1.0",
-=======
     "react-dom": "^18.2.0",
->>>>>>> zf_l/zf_local
     "react-icons": "^4.7.1",
     "react-modal": "^3.16.1",
     "react-notifications-component": "^4.0.1",

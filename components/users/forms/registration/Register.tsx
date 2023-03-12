@@ -82,7 +82,10 @@ const Register = () => {
         setlLoadingState(false);
         // router.push("/");
         if (data) {
-          console.log("🚀 ~ file: Register.tsx:85 ~ .then ~ data:", JSON.stringify(data))
+          console.log(
+            "🚀 ~ file: Register.tsx:85 ~ .then ~ data:",
+            JSON.stringify(data)
+          );
           // try {
           //   await web3authState?.logout();
           //   // setProvider(null);
@@ -131,7 +134,7 @@ const Register = () => {
                 <>
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      Full Name
+                      <i>Full Name</i>
                     </label>
                     <input
                       className="border border-black p-2 w-full"
@@ -144,7 +147,7 @@ const Register = () => {
                   </div>
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      cnic{" "}
+                      <i>CNIC</i>{" "}
                     </label>
                     <input
                       className="border border-black p-2 w-full"
@@ -157,7 +160,7 @@ const Register = () => {
                   </div>{" "}
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      Address{" "}
+                      <i>Address</i>{" "}
                     </label>
                     <input
                       className="border border-black p-2 w-full"
@@ -173,7 +176,7 @@ const Register = () => {
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
                   >
                     <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                      Next
+                      <i> Next</i>
                     </span>
                   </button>{" "}
                 </>
@@ -182,7 +185,7 @@ const Register = () => {
                 <>
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      Postal Code{" "}
+                      <i>Postal Code</i>{" "}
                     </label>
                     <input
                       className="border border-black p-2 w-full"
@@ -195,11 +198,11 @@ const Register = () => {
                   </div>
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      Phone Number{" "}
+                      <i>Phone Number</i>{" "}
                     </label>
                     <input
                       className="border border-black p-2 w-full"
-                      type="text"
+                      type="number"
                       value={String(data.PHONE_NUMBER)}
                       onChange={(e) =>
                         setData({ ...data, PHONE_NUMBER: e.target.value })
@@ -208,7 +211,7 @@ const Register = () => {
                   </div>
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      Father/Husband Name{" "}
+                      <i> Father(or Husband Name)</i>{" "}
                     </label>
                     <input
                       className="border border-black p-2 w-full"
@@ -227,7 +230,7 @@ const Register = () => {
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
                   >
                     <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                      Go Back
+                      <i> Go Back</i>
                     </span>
                   </button>
                   <button
@@ -235,7 +238,7 @@ const Register = () => {
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
                   >
                     <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                      Next{" "}
+                      <i>Next</i>{" "}
                     </span>
                   </button>
                 </>
@@ -244,7 +247,7 @@ const Register = () => {
                 <>
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      City{" "}
+                      <i> City</i>{" "}
                     </label>
                     <input
                       className="border border-black p-2 w-full"
@@ -257,7 +260,7 @@ const Register = () => {
                   </div>
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      Country{" "}
+                      <i> Country</i>{" "}
                     </label>
                     <input
                       className="border border-black p-2 w-full"
@@ -270,12 +273,12 @@ const Register = () => {
                   </div>{" "}
                   <div className="mb-4">
                     <label className="block border-black font-medium mb-2">
-                      DateOfBirth{" "}
+                      <i> DateOfBirth</i>{" "}
                     </label>
                     <input
                       placeholder="mm-dd-yy"
                       className="border border-black p-2 w-full"
-                      type="text"
+                      type="date"
                       value={String(data.DOB)}
                       onChange={(e) =>
                         setData({ ...data, DOB: e.target.value })
@@ -287,7 +290,7 @@ const Register = () => {
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
                   >
                     <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                      Go Back{" "}
+                      <i>Go Back</i>{" "}
                     </span>
                   </button>
                   <button
@@ -295,7 +298,9 @@ const Register = () => {
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
                   >
                     <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                      Submit{" "}
+                      <i>
+                        <b>Submit</b>
+                      </i>{" "}
                     </span>
                   </button>
                 </>

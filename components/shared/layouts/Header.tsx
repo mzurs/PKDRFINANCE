@@ -25,6 +25,7 @@ const clientId: string = CLIENT_ID;
 import RPC from "./config/ethersRPC";
 import Sidebar from "../../users/Sidebar";
 import { float } from "aws-sdk/clients/cloudfront";
+import AdminSideBar from "../../admin/AdminSideBar";
 
 function Header() {
   const userRoleType = useAtomValue(userRole);
@@ -372,7 +373,7 @@ function Header() {
                   </Link>
 
                   <Link
-                    href={"/profile"}
+                    href={"/user/users/profile"}
                     onClick={() => setpage("profile")}
                     className={`cursor-pointer ${
                       page === "profile" ? style : ""
@@ -486,14 +487,232 @@ function Header() {
         id="menu"
         onMouseLeave={togglemenu}
       >
-        <Sidebar />
+        <AdminSideBar />
+      </div>
+    </div>
+  );
+
+  const AdminNavbar = (
+    <div>
+      <nav className=" bg-black fixed w-full">
+        <div className="">
+          <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
+            <div
+              className={`${
+                auth && web3auth ? "" : "hidden"
+              } absolute inset-y-0 left-0 flex items-center sm:hidden`}
+            >
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Open main menu</span>
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+                <svg
+                  className="hidden h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              className={`${
+                auth && web3auth
+                  ? " flex-1 justify-center sm:items-stretch sm:justify-center"
+                  : ""
+              } flex items-center `}
+            >
+              {router.pathname === "/" ? (
+                <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
+                  <Image
+                    className="block h-8 w-auto lg:hidden"
+                    src="/logo2.png"
+                    alt="PKDR Finance"
+                    width={60}
+                    height={60}
+                  />
+                  <Link href={"/"} className="cursor-pointer">
+                    <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+                      <Image
+                        src="/logo1.png"
+                        alt="PKDR Finance"
+                        width={200}
+                        height={200}
+                      />
+                      {/* <h2 className="text-xl">PKDR Finance</h2> */}
+                    </div>
+                  </Link>
+                </div>
+              ) : (
+                <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
+                  <Image
+                    className="block h-8 w-auto lg:hidden"
+                    src="/logo1.png"
+                    alt="PKDR Finance"
+                    width={60}
+                    height={60}
+                  />
+                  <Link href={"/"} className="cursor-pointer">
+                    <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+                      <Image
+                        src="/logo1.png"
+                        alt="PKDR Finance"
+                        width={200}
+                        height={200}
+                      />
+                      {/* <h2 className="text-xl">PKDR Finance</h2> */}
+                    </div>
+                  </Link>
+                </div>
+              )}
+              <div
+                className={`${
+                  auth && web3auth ? "sm:block" : "sm:hidden"
+                } hidden mx-auto`}
+              >
+                <div className=" border-b-4 border-black flex justify-between">
+                  <Link
+                    href={"/"}
+                    onClick={() => setpage("home")}
+                    className={`cursor-pointer ${
+                      page === "home" ? style : ""
+                    } text-white px-4 mx-4 md:text-md py-5 text-xl font-medium hover:text-[#17b2dd] ${
+                      page === "home" ? style : ""
+                    }`}
+                    aria-current="page"
+                    id="home"
+                  >
+                    Home
+                  </Link>
+
+                  <Link
+                    href={"/user/users/profile"}
+                    onClick={() => setpage("profile")}
+                    className={`cursor-pointer ${
+                      page === "profile" ? style : ""
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#17b2dd] ${
+                      page === "profile" ? "border-b-[4px] text-[#020f13]" : ""
+                    }`}
+                    id="profile"
+                  >
+                    Profile
+                  </Link>
+
+            
+                </div>
+              </div>
+              <div
+                className={`${
+                  auth && web3auth ? "md:flex" : "hidden"
+                } items-center`}
+              >
+              
+                <TbGridDots
+                  onClick={togglemenu}
+                  id="grid"
+                  title="Menu"
+                  className={`hidden duration-200 md:block  ml-5 mr-3 text-[22px] hover:text-[#1b7a8d] ${
+                    sidebar ? "rotate-45 text-white" : "text-white"
+                  } cursor-pointer`}
+                />
+              </div>
+              <div
+                className={`${
+                  auth && web3auth ? "hidden" : ""
+                } text-black rounded border-solid border-2 border-black absolute right-2 text-xl px-2 py-2 hover:text-[#1da8d3] cursor-pointer`}
+                onClick={login}
+              >
+                <button>Sign in</button>
+              </div>
+            </div>
+          </div>
+          <div
+            className={`${auth && web3auth ? "sm:hidden" : "hidden"} `}
+            id="mobile-menu"
+          >
+            <div className="space-y-1 px-2 pt-2 pb-3">
+              <Link
+                href={"/"}
+                className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                aria-current="page"
+              >
+                Home
+              </Link>
+
+              <Link
+                href="/profile"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Profile
+              </Link>
+
+              <Link
+                href={"/pkdrInfo/contact"}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Contact
+              </Link>
+
+              <Link
+                href={"/pkdrInfo/about"}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                About
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div
+        className={`${sidebar ? "block" : "hidden"}`}
+        id="menu"
+        onMouseLeave={togglemenu}
+      >
+        <AdminSideBar />
       </div>
     </div>
   );
   if (userRoleType === "admin") {
-    return <div>
-      <button onClick={logout}>Sign Out</button>
-    </div>;
+    return (
+      <>
+        <LoadingBar
+          color="#009ac9"
+          progress={progress}
+          waitingTime={400}
+          onLoaderFinished={() => {
+            setProgress(0);
+          }}
+        />
+        {AdminNavbar}
+      </>
+    );
+    
   } else {
     return (
       <>
@@ -508,7 +727,11 @@ function Header() {
         {Navbar}
       </>
     );
-  }
+  // }else{
+  //   <Link href="/" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Go Back Home</Link>
+
+  // 
+}
 }
 
 export default Header;

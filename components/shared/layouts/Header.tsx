@@ -26,7 +26,9 @@ import RPC from "./config/ethersRPC";
 import Sidebar from "../../users/Sidebar";
 import { float } from "aws-sdk/clients/cloudfront";
 import AdminSideBar from "../../admin/AdminSideBar";
-
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 function Header() {
   const userRoleType = useAtomValue(userRole);
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -44,7 +46,9 @@ function Header() {
   const [sidebar, setsidebar] = useState<boolean>(false);
   const [page, setpage] = useState<string>("home");
   const style = "sm:border-b-[4px] border-[#009ac9] text-[#11aede]";
-
+  function classNames(...classes: any[]) {
+    return classes.filter(Boolean).join(" ");
+  }
   const get_page = () => {
     let url = window.location.href;
     if (url !== undefined) {
@@ -487,7 +491,7 @@ function Header() {
         id="menu"
         onMouseLeave={togglemenu}
       >
-        <AdminSideBar />
+        <Sidebar />
       </div>
     </div>
   );
@@ -596,43 +600,302 @@ function Header() {
                   auth && web3auth ? "sm:block" : "sm:hidden"
                 } hidden mx-auto`}
               >
-                <div className=" border-b-4 border-black flex justify-between">
-                  <Link
-                    href={"/"}
-                    onClick={() => setpage("home")}
-                    className={`cursor-pointer ${
-                      page === "home" ? style : ""
-                    } text-white px-4 mx-4 md:text-md py-5 text-xl font-medium hover:text-[#17b2dd] ${
-                      page === "home" ? style : ""
-                    }`}
-                    aria-current="page"
-                    id="home"
-                  >
-                    Home
-                  </Link>
-
-                  <Link
-                    href={"/user/users/profile"}
-                    onClick={() => setpage("profile")}
+                <div className=" border-b-4 border-white flex justify-between">
+                  <Menu
+                    as="div"
                     className={`cursor-pointer ${
                       page === "profile" ? style : ""
                     } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#17b2dd] ${
                       page === "profile" ? "border-b-[4px] text-[#020f13]" : ""
-                    }`}
-                    id="profile"
+                    } relative inline-block text-center `}
                   >
-                    Profile
-                  </Link>
+                    <div>
+                      <Menu.Button className="inline-flex w-full justify-center gap-x-1.5  bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1  ring-gray-300">
+                        Home
+                        <ChevronDownIcon
+                          className="-mr-1 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                      </Menu.Button>
+                    </div>
 
-            
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <Link
+                                href="/user/admin/"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                Home
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                Support
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                License
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <form method="POST" action="#">
+                            <Menu.Item>
+                              {({ active }: any) => (
+                                <button
+                                  type="submit"
+                                  className={classNames(
+                                    active
+                                      ? "bg-gray-100 text-gray-900"
+                                      : "text-gray-700",
+                                    "block w-full px-4 py-2 text-center text-sm"
+                                  )}
+                                >
+                                  Sign out
+                                </button>
+                              )}
+                            </Menu.Item>
+                          </form>
+                        </div>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+
+                  <Menu
+                    as="div"
+                    className={`cursor-pointer ${
+                      page === "profile" ? style : ""
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#17b2dd] ${
+                      page === "profile" ? "border-b-[4px] text-[#020f13]" : ""
+                    } relative inline-block text-center `}
+                  >
+                    <div>
+                      <Menu.Button className="inline-flex w-full justify-center gap-x-1.5  bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1  ring-gray-300">
+                        Profile
+                        <ChevronDownIcon
+                          className="-mr-1 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                      </Menu.Button>
+                    </div>
+
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <Link
+                                href="/user/admin/profile"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                Go to Profile
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                Support
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                License
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <form method="POST" action="#">
+                            <Menu.Item>
+                              {({ active }: any) => (
+                                <button
+                                  type="submit"
+                                  className={classNames(
+                                    active
+                                      ? "bg-gray-100 text-gray-900"
+                                      : "text-gray-700",
+                                    "block w-full px-4 py-2 text-center text-sm"
+                                  )}
+                                >
+                                  Sign out
+                                </button>
+                              )}
+                            </Menu.Item>
+                          </form>
+                        </div>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+
+                  <Menu
+                    as="div"
+                    className={`cursor-pointer ${
+                      page === "profile" ? style : ""
+                    } text-white px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#17b2dd] ${
+                      page === "profile" ? "border-b-[4px] text-[#020f13]" : ""
+                    } relative inline-block text-center `}
+                  >
+                    <div>
+                      <Menu.Button className="inline-flex w-full justify-center gap-x-1.5  bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1  ring-gray-300">
+                        On-Chain Data
+                        <ChevronDownIcon
+                          className="-mr-1 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                      </Menu.Button>
+                    </div>
+
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                Account settings
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                Support
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                License
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <form method="POST" action="#">
+                            <Menu.Item>
+                              {({ active }: any) => (
+                                <button
+                                  type="submit"
+                                  className={classNames(
+                                    active
+                                      ? "bg-gray-100 text-gray-900"
+                                      : "text-gray-700",
+                                    "block w-full px-4 py-2 text-center text-sm"
+                                  )}
+                                >
+                                  Sign out
+                                </button>
+                              )}
+                            </Menu.Item>
+                          </form>
+                        </div>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
                 </div>
               </div>
+
               <div
                 className={`${
                   auth && web3auth ? "md:flex" : "hidden"
                 } items-center`}
               >
-              
                 <TbGridDots
                   onClick={togglemenu}
                   id="grid"
@@ -712,7 +975,6 @@ function Header() {
         {AdminNavbar}
       </>
     );
-    
   } else {
     return (
       <>
@@ -727,11 +989,11 @@ function Header() {
         {Navbar}
       </>
     );
-  // }else{
-  //   <Link href="/" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Go Back Home</Link>
+    // }else{
+    //   <Link href="/" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Go Back Home</Link>
 
-  // 
-}
+    //
+  }
 }
 
 export default Header;

@@ -93,7 +93,7 @@ const AdminSideBar = () => {
                   className={`${
                     page === "profile" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
-                  href="/user/users/profile"
+                  href="/user/admin/profile"
                   onClick={() => setpage("profile")}
                 >
                   <span className="text-left">
@@ -110,7 +110,7 @@ const AdminSideBar = () => {
                   className={`${
                     page === "settings" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
-                  href="/user/users/settings"
+                  href="/user/admin/settings"
                 >
                   <span className="text-left">
                     <div>

@@ -824,8 +824,8 @@ function Header() {
                         <div className="py-1">
                           <Menu.Item>
                             {({ active }: any) => (
-                              <a
-                                href="#"
+                              <Link
+                                href="/user/admin/view/transactions"
                                 className={classNames(
                                   active
                                     ? "bg-gray-100 text-gray-900"
@@ -833,8 +833,8 @@ function Header() {
                                   "block px-4 py-2 text-sm"
                                 )}
                               >
-                                Account settings
-                              </a>
+                                Recent Txn's
+                              </Link>
                             )}
                           </Menu.Item>
                           <Menu.Item>

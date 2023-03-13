@@ -1,121 +1,113 @@
-// import React, { useState } from "react";
-// import { userInfoAtom } from "../../../state/jotai";
-// import { useAtom, useAtomValue } from "jotai";
-// import { VscLock, VscUnlock } from "react-icons/vsc";
-// import { AiFillEyeInvisible } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import MultilineChart from "../../../components/users/MultilineChart";
+import Doughnet from "../../../components/users/Doughnut";
+import { userInfoAtom } from "../../../state/jotai";
+import { useAtom, useAtomValue } from "jotai";
+import Cards from "../../../components/users/Cards";
 
-// const Home = () => {
-//   const info = useAtomValue(userInfoAtom);
-//   const [ShowMoney, setShowMoney] = useState<boolean>(true);
-//   const [Money, setMoney] = useState<number>(0);
+// const [date, setDate] = useState<any>(" ");
 
-//   const noExponents = function (num: number) {
-//     var data = String(num).split(/[eE]/);
-//     if (data.length == 1) return data[0];
+const Home = () => {
+  const info = useAtomValue(userInfoAtom);
+  const [ShowMoney, setShowMoney] = useState<boolean>(true);
+  const [Money, setMoney] = useState<number>(0);
 
-//     var z = "",
-//       sign = num < 0 ? "-" : "",
-//       str = data[0].replace(".", ""),
-//       mag = Number(data[1]) + 1;
+  const noExponents = function (num: number) {
+    var data = String(num).split(/[eE]/);
+    if (data.length == 1) return data[0];
 
-//     if (mag < 0) {
-//       z = sign + "0.";
-//       while (mag++) z += "0";
-//       return z + str.replace(/^\-/, "");
-//     }
-//     mag -= str.length;
-//     while (mag--) z += "0";
-//     return str + z;
-//   };
+    var z = "",
+      sign = num < 0 ? "-" : "",
+      str = data[0].replace(".", ""),
+      mag = Number(data[1]) + 1;
 
-//   const Rupee = () => {
-//     let num = noExponents(Money);
-//     let arr = num.split(".");
-//     let len = arr.length;
-//     if (len == 1) {
-//       return num + ".00";
-//     }
-//     if (arr[1].length == 1) {
-//       return num + "0";
-//     } else {
-//       return num;
-//     }
-//   };
+    if (mag < 0) {
+      z = sign + "0.";
+      while (mag++) z += "0";
+      return z + str.replace(/^\-/, "");
+    }
+    mag -= str.length;
+    while (mag--) z += "0";
+    return str + z;
+  };
 
-//   return (
-//     <div className="w-[100vw] h-[100vh] pt-20 overflow-x-hidden">
-//       {/* <div className="h-20%">
-//         <div className="flex justify-between mx-4 py-2 border-b-2 border-gray-300">
-//           <p className="text-2xl font-semibold">What I Have</p>
-//           <div className="flex items-center ">
-//             <VscLock
-//               title="Unlock"
-//               className={`${
-//                 !ShowMoney ? "block" : "hidden"
-//               } text-3xl mr-3 text-[#009ac9] cursor-pointer`}
-//               onClick={() => setShowMoney(true)}
-//             />
-//             <VscUnlock
-//               title="Lock"
-//               className={`${
-//                 ShowMoney ? "block" : "hidden"
-//               } text-3xl mr-3 text-[#038fba] cursor-pointer`}
-//               onClick={() => setShowMoney(false)}
-//             />
-//             <p className="text-lg">PKR</p>
-//           </div>
-//         </div>
-//         <div className="flex items-center justify-between">
-//           <div className="mx-4 w-3/4 py-2">
-//             <p className="text-xl font-medium">Deposit Account</p>
-//             <div className="mx-4 py-2 text-xl text-gray-800 font-light">
-//               <p>
-//                 Account Name :{" "}
-//                 <span className="text-[#009ac9] font-normal">{info?.name}</span>
-//               </p>
-//               <p>
-//                 Account&nbsp; Email :{" "}
-//                 <span className="text-[#009ac9] font-normal">{info?.email}</span>
-//               </p>
-//             </div>
-//           </div>
-//           <div className="w-1/4 flex justify-end">
-//             <form action="/api/checkout/checkout_sessions" method="POST">
-//               <button className="mr-4 bg-[#028db7] mx-auto rounded-full text-white py-2 px-3 hover:bg-[#017699] text-xl hover:underline">
-//                 Load Money
-//               </button>
-//             </form>
-//           </div>
-//         </div>
-//       </div>
-//       <div className="h-[55%] flex items-center justify-center ">
-//         <div className={`${ShowMoney ? "block" : "hidden"}`}>
-//           <p className="text-center text-[#009ac9] text-9xl pb-2 border-b-2 border-gray-300 font-medium">
-//             {Rupee()}
-//           </p>
-//           <p className="pt-2 text-center">Avialable Balance</p>
-//         </div>
-//         <div className={`${!ShowMoney ? "block" : "hidden"}`}>
-//           <div className="border-b-2 border-gray-300 px-2">
-//             <AiFillEyeInvisible className="text-[#009ac9] lg:text-[170px] inline-block pb-2" />
-//           </div>
-//           <p className="pt-2 text-center">Unlock To View Balance</p>
-//         </div>
-//       </div> */}
-//     </div>
-//   );
-// };
+  const Rupee = (Num: number) => {
+    let num = noExponents(Num);
+    let arr = num.split(".");
+    let len = arr.length;
+    if (len == 1) {
+      return num + ".00";
+    }
+    if (arr[1].length == 1) {
+      return num + "0";
+    } else {
+      return num;
+    }
+  };
 
-// export default Home;
-
-
-
-import React from 'react'
-
-function Home() {
   return (
-    <div>Home</div>
-  )
-}
+    <div className="flex pt-[4.5rem] w-[100vw] h-[100vh] overflow-x-hidden">
+      <div className="w-4/12 h-full border-2 border-blue-500">
+        <div className="flex justify-center items-center flex-col">
+          <div className="font-medium text-gray-80 text-4xl pt-12">
+            Hello , {info.name}
+          </div>
+          <div className="pt-3">{new Date().toString()}</div>
+        </div>
+        <div
+          className="flex justify-between items-center m-12 bg-blue-100 border rounded-2xl border-blue-500 text-blue-700 px-4 py-3"
+          role="alert"
+        >
+          <div>
+            <p className="font-bold">New Messages</p>
+            <p className="text-sm">Some unread messages.</p>
+          </div>
+          <div>
+            <div className="text-blue-100 bg-blue-700 rounded-2xl w-9 p-1 text-center">
+              15
+            </div>
+          </div>
+        </div>
+        <div className="md:mt-24">
+          <Cards
+            title={"Available Balance"}
+            sub={info.email}
+            btn_txt={"View Statement"}
+            money={`$${Rupee(Money)}`}
+          />
+        </div>
+      </div>
 
-export default Home
+      <div className="w-8/12 h-full border-2 border-blue-500">
+        <div className="h-[35vh] border-2 border-blue-500 flex justify-center">
+          <MultilineChart />
+        </div>
+        <div className="flex justify-evenly">
+          <div className="w-6/12 h-[27vh]">
+            <Cards
+              title={"Upcoming Payments"}
+              sub={"AT&T Family Package Plan"}
+              btn_txt={"Pay Now"}
+              money={`$${Rupee(250)}`}
+            />
+          </div>
+
+          <div className="w-5/12 h-[27vh] m-4 border-2 shadow-lg">
+            <div className="flex justify-between">
+              <div className="text-2xl p-4 font-bold">Savings</div>
+              <div className="h-[20vh] w-[11vw]">
+                <Doughnet />
+              </div>
+            </div>
+            <div>
+              <button className="bg-blue-700 text-blue-100 text-lg font-medium mx-6 my-3 px-2 py-1 rounded-xl float-right">
+                Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Home;

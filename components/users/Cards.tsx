@@ -2,12 +2,12 @@ import React from "react";
 
 const Cards = (props: any) => {
   return (
-    <div className="border-blue-500 border-2">
+    <div>
       <div className="h-[27vh] m-2 border-2 shadow-lg">
         <div className="px-8 py-4 font-bold">
           <div className="text-2xl pb-3">{props.title}</div>
           <div className="text-lg">{props.sub}</div>
-          <div className="text-[4.5rem]">
+          <div className="text-[4rem]">
             {props.money}
           </div>
         </div>

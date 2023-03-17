@@ -47,15 +47,15 @@ const Home = () => {
 
   return (
     <div className="flex pt-[4.5rem] w-[100vw] h-[100vh] overflow-x-hidden">
-      <div className="w-4/12 h-full border-2 border-blue-500">
-        <div className="flex justify-center items-center flex-col">
+      <div className="w-5/12 h-full">
+        <div className="flex justify-center items-center flex-col mx-8">
           <div className="font-medium text-gray-80 text-4xl pt-12">
             Hello , {info.name}
           </div>
           <div className="pt-3">{new Date().toString()}</div>
         </div>
         <div
-          className="flex justify-between items-center m-12 bg-blue-100 border rounded-2xl border-blue-500 text-blue-700 px-4 py-3"
+          className="flex justify-between items-center m-12 bg-blue-100 rounded-2xl text-blue-700 px-4 py-3"
           role="alert"
         >
           <div>
@@ -68,7 +68,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="md:mt-24">
+        <div className="md:mt-28 mx-8">
           <Cards
             title={"Available Balance"}
             sub={info.email}
@@ -78,11 +78,11 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="w-8/12 h-full border-2 border-blue-500">
-        <div className="h-[35vh] border-2 border-blue-500 flex justify-center">
+      <div className="w-9/12 h-full">
+        <div className="h-[35vh] flex justify-center">
           <MultilineChart />
         </div>
-        <div className="flex justify-evenly">
+        <div className="flex justify-between mr-8">
           <div className="w-6/12 h-[27vh]">
             <Cards
               title={"Upcoming Payments"}
@@ -92,9 +92,9 @@ const Home = () => {
             />
           </div>
 
-          <div className="w-5/12 h-[27vh] m-4 border-2 shadow-lg">
+          <div className="w-[29vw] h-[27vh] my-2 border-2 shadow-lg">
             <div className="flex justify-between">
-              <div className="text-2xl p-4 font-bold">Savings</div>
+              <div className="text-2xl pt-3 px-4 font-bold">Savings</div>
               <div className="h-[20vh] w-[11vw]">
                 <Doughnet />
               </div>

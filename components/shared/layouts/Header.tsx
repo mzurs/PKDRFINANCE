@@ -68,8 +68,6 @@ function Header() {
         url === "http://localhost:3000"
       ) {
         setpage("home");
-      } else {
-        setpage("");
       }
     }
   };

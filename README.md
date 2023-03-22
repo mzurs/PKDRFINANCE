@@ -1,27 +1,55 @@
-# Next.js + Tailwind CSS Example
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+***ALL APIS and Components must using error handling to display messages to user using toastify react library
 
-## Deploy your own
+User:
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+1. SetUserName Component (mandatory for every user otherwise not allowing any operation -can be popup after successfull registration or when user didn't set the name, make an hook to check everytime for userName)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+2. Page to list contacts for user By userName 
 
-## How to use
+3. Search api by userName
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+4. Withdraw page(where user add IBAN number to withdraw the amount, always check for sufficient balance)
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+5. Deposit page where latest USD/PKR(conversion calculator) rate listed and on bottom there is a buy PKDR button given to direct to Stripe page.
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+6. User Transactions page
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+7. Purchase and withdraw page(inflow and outflow)
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+8. Approve component(button)
+
+9. User Account Balance- api will used Subscripton from GraphQL to get real-time data
+
+10. Level II verification component for zero knowledge profile
+
+
+
+Admin:
+
+
+1. All Transaction data page from PKDR Users (with Chart)
+
+2. Transaction fee component graph add to dashboard with subscription GraphQL
+
+3. page to set user config (retain(Level II verification and Multisig), revoke(Level II verification and Multisig), delete, update) User
+
+4. Total money inflow and outflow chart from PKDR
+
+5. on-chain components
+
+6. gas price component
+
+7. transfer activity component by userAddress
+
+8. set Profile Address API component
+
+9. Set platform fee api page
+
+10. List users component
+
+11. Burn-and Burm From PKDR component apis
+
+12. topUp API to user account component API
+
+Remember all apis have their view to integrate with (pages or components) the above  I listed is the most major ones other are also included and I didn't listed due to their obvious naming 

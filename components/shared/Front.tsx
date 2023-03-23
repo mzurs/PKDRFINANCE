@@ -145,7 +145,7 @@ function Front() {
     <div>
       {/* <img className="  " src="/a1.png" max-width="5000" alt="" /> */}
       <Image
-        className="w-screen h-screen  mx-auto rounded-lg shadow-xl dark:shadow-gray-800 "
+        className="  mx-auto rounded-lg shadow-xl dark:shadow-gray-800 "
         src="/a1.png"
         alt=""
         width={10000}

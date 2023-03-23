@@ -80,3 +80,94 @@ export const zeroKnowledgeProfile = /* GraphQL */ `
     zeroKnowledgeProfile(zkp: $zkp)
   }
 `;
+export const create_ETH_Profile = /* GraphQL */ `
+  mutation Create_ETH_Profile($address: String) {
+    create_ETH_Profile(address: $address) {
+      message
+      result
+    }
+  }
+`;
+export const topUpAddress = /* GraphQL */ `
+  mutation TopUpAddress($address: String) {
+    topUpAddress(address: $address) {
+      hash
+      message
+      result
+    }
+  }
+`;
+export const setProfileAddress = /* GraphQL */ `
+  mutation SetProfileAddress {
+    setProfileAddress
+  }
+`;
+export const mintPKDR = /* GraphQL */ `
+  mutation MintPKDR($mint: mintInfo) {
+    mintPKDR(mint: $mint) {
+      message
+      result
+    }
+  }
+`;
+export const approve = /* GraphQL */ `
+  mutation Approve($privateKey: String) {
+    approve(privateKey: $privateKey) {
+      message
+      result
+    }
+  }
+`;
+export const setPlatFormFee = /* GraphQL */ `
+  mutation SetPlatFormFee($fee: String) {
+    setPlatFormFee(fee: $fee) {
+      message
+      result
+    }
+  }
+`;
+export const transfer = /* GraphQL */ `
+  mutation Transfer($transferParams: TransferParams) {
+    transfer(transferParams: $transferParams) {
+      from
+      to
+      amount
+      message
+      result
+      hash
+    }
+  }
+`;
+export const transferFrom = /* GraphQL */ `
+  mutation TransferFrom($transferFromParams: TransferFromParams) {
+    transferFrom(transferFromParams: $transferFromParams) {
+      from
+      to
+      amount
+      message
+      result
+      hash
+    }
+  }
+`;
+export const burn = /* GraphQL */ `
+  mutation Burn($amount: String) {
+    burn(amount: $amount) {
+      hash
+      amount
+      result
+      message
+    }
+  }
+`;
+export const burnFrom = /* GraphQL */ `
+  mutation BurnFrom($burnFromParams: BurnFromParams) {
+    burnFrom(burnFromParams: $burnFromParams) {
+      hash
+      from
+      amount
+      result
+      message
+    }
+  }
+`;

@@ -49,3 +49,33 @@ export const getAddressByUserName = /* GraphQL */ `
     }
   }
 `;
+export const getUsersCount = /* GraphQL */ `
+  query GetUsersCount {
+    getUsersCount
+  }
+`;
+// export const getRateUSDPKR = /* GraphQL */ `
+//   query GetRateUSDPKR {
+//     getRateUSDPKR
+//   }
+// `;
+export const getProfileAddress = /* GraphQL */ `
+  query GetProfileAddress {
+    getProfileAddress
+  }
+`;
+export const getPlatFormFee = /* GraphQL */ `
+  query GetPlatFormFee {
+    getPlatFormFee
+  }
+`;
+export const getETHBalance = /* GraphQL */ `
+  query GetETHBalance($address: String!) {
+    getETHBalance(address: $address)
+  }
+`;
+export const totalSupply = /* GraphQL */ `
+  query TotalSupply {
+    totalSupply
+  }
+`;

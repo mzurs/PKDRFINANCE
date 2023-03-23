@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Line } from "react-chartjs-2";
 import {
@@ -13,7 +13,15 @@ import {
   Legend,
 } from "chart.js";
 import "react-toastify/dist/ReactToastify.css";
+import { useAtom } from "jotai";
+import { userInfoAtom, web3authAtom } from "../../state/jotai";
+import { time } from "console";
 function Dashboard({ users }: any) {
+  const [pkdrCapInPKR, setPkdrCapInPKR] = useState<number | null>(0);
+  const [pkdrCapInUSD, setPkdrCapInUSD] = useState<number | null>(0);
+  const [web3auth] = useAtom(web3authAtom);
+  const [userInfo, setUserInfo] = useAtom(userInfoAtom);
+  const [timer, setTimer] = useState(3000);
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -22,6 +30,59 @@ function Dashboard({ users }: any) {
     Tooltip,
     Legend
   );
+
+  const getUSDPKRRate = async ():Promise<number> => {
+   
+      const headers = new Headers();
+      headers.append("content-type", "application/json");
+      headers.append("x-custom-header", JSON.stringify(["abc"]));
+      const response = await fetch("/api/admin/query/getRateUSDPKR", {
+        method: "GET",
+        headers: headers,
+      });
+
+      const data = await response.json();
+      // setPkdrCapInUSD(data);
+      console.log("🚀 ~ file: Dashboard.tsx:47 ~ getUSDPKRRate ~ data:", data);
+    return data;
+  };
+  const getPKDRTotalSupply = async () => {
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    headers.append("x-custom-header", JSON.stringify(["abc"]));
+    const response = await fetch("/api/admin/query/totalSupply/", {
+      method: "GET",
+      headers: headers,
+    });
+    console.log(
+      "🚀 ~ file: Dashboard.tsx:55 ~ getPKDRTotalSupply ~ response:",
+      response
+    );
+
+    const data = await response.json();
+    setPkdrCapInPKR(data);
+    console.log(
+      "🚀 ~ file: Dashboard.tsx:47 ~ getPKDRTotalSupply ~ data:",
+      data
+    );
+    const rate=await getUSDPKRRate();
+    setPkdrCapInUSD(data/rate)
+  };
+
+  // useEffect(() => {
+  //   getPKDRTotalSupply();
+  // });
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // your effect code here
+      getPKDRTotalSupply();
+
+      console.log(timer);
+    }, timer);
+
+    // cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
   return (
     <div>
       <div className="w-screen flex items-center justify-center">
@@ -78,7 +139,7 @@ function Dashboard({ users }: any) {
                 M.Cap ($)
               </p>
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-3 text-white mt-3 md:mt-5">
-                $75,000
+                {pkdrCapInUSD?.toFixed(2)}
               </p>
               <div className="flex flex-col">
                 <div className="h-4" />
@@ -94,7 +155,7 @@ function Dashboard({ users }: any) {
                 M.Cap (PKR)
               </p>
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-3 text-white mt-3 md:mt-5">
-                3922
+                {pkdrCapInPKR} PKDR
               </p>
               <div className="flex flex-col md:w-64">
                 <div className="w-full flex justify-end">
@@ -148,15 +209,14 @@ function Dashboard({ users }: any) {
                 {
                   label: "T-Cap",
                   data: users.map((user: any) => user.items_delievered),
-                  // backgroundColor: "blue",
-                  borderColor: "white",
+                  backgroundColor: "blue",
+                  borderColor: "blue",
                   borderWidth: 1,
                 },
               ],
             }}
           />{" "}
         </div>
-    
       </div>
     </div>
   );

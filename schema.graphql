@@ -1,0 +1,241 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+union ListContactsResponse = Error | ListContactsResult | UserNotExists
+
+union createUserResult = Error | UserExists | UserInfo
+
+union deleteUserResult = DeletedResult | Error | UserNotExists
+
+union getAddressByUserNameResult = AddressInfo | Error | UserNotExists
+
+union getUserResult = Error | UserInfo | UserNotExists
+
+union updateUserResult = Error | UpdatedResult | UserNotExists
+
+type AddressInfo {
+  address: String
+}
+
+type BurnFromResult {
+  amount: String
+  from: String
+  hash: String
+  message: String
+  result: Boolean
+}
+
+type BurnResult {
+  amount: String
+  hash: String
+  message: String
+  result: Boolean
+}
+
+type Create_ETH_Profile_Result {
+  message: String
+  result: Boolean
+}
+
+type DeletedResult @aws_lambda {
+  id: ID!
+  message: String
+}
+
+type Error @aws_lambda {
+  errorMessage: String
+}
+
+type ListContactsResult {
+  contacts: [String]
+}
+
+type Mutation {
+  addContacts(user: UpdateContactList!): updateUserResult @aws_lambda
+  approve(privateKey: String): approveResult @aws_lambda
+  burn(amount: String): BurnResult @aws_lambda
+  burnFrom(burnFromParams: BurnFromParams): BurnFromResult @aws_lambda
+  createUser(user: CreateUser!): createUserResult @aws_lambda
+  create_ETH_Profile(address: String): Create_ETH_Profile_Result @aws_lambda
+  deleteUser(id: ID!): deleteUserResult @aws_lambda
+  mintPKDR(mint: mintInfo): mintResult @aws_lambda
+  setPlatFormFee(fee: String): SetPlatFormFeeResult @aws_lambda
+  setProfileAddress: Boolean @aws_lambda
+  setUserName(setname: SetUserName): String @aws_lambda
+  topUpAddress(address: String): TopUpAddressResult @aws_lambda
+  transfer(transferParams: TransferParams): TransferResult @aws_lambda
+  transferFrom(transferFromParams: TransferFromParams): TransferFromResult @aws_lambda
+  updateUser(user: UpdateUser!): updateUserResult @aws_lambda
+  zeroKnowledgeProfile(zkp: zkParams): AWSJSON
+  zkProfile(zkuser: ZKUserInfo): String @aws_lambda
+}
+
+type Query {
+  getAddressByUserName(userName: String): getAddressByUserNameResult @aws_lambda
+  getAllUserInfo: [User] @aws_lambda
+  getETHBalance(address: String!): String @aws_lambda
+  getPlatFormFee: String @aws_lambda
+  getProfileAddress: String @aws_lambda
+  getRateUSDPKR: String @aws_lambda
+  getUserByEmail(id: ID!): getUserResult @aws_lambda
+  getUserInfo(userInfoParams: UserInfoParams): UserInfoResult @aws_lambda
+  getUsersCount: Int @aws_lambda
+  listContacts(listContactsParams: ListContactsParams): ListContactsResponse @aws_lambda
+  totalSupply: String @aws_lambda
+}
+
+type SetPlatFormFeeResult {
+  message: String
+  result: Boolean
+}
+
+type TopUpAddressResult {
+  hash: String
+  message: String
+  result: String
+}
+
+type TransferFromResult {
+  amount: String
+  from: String
+  hash: String
+  message: String
+  result: Boolean
+  to: String
+}
+
+type TransferResult {
+  amount: String
+  from: String
+  hash: String
+  message: String
+  result: Boolean
+  to: String
+}
+
+type UpdatedResult @aws_lambda {
+  id: ID!
+  message: String
+}
+
+type User @aws_lambda {
+  ADDRESS: String
+  CITY: String
+  COUNTRY: String
+  DOB: String
+  ETH_ADDRESS: String
+  FATHER_OR_HUSBAND_NAME: String
+  FULL_NAME: String
+  PHONE_NUMBER: String
+  POSTAL_CODE: String
+  cnic: String
+  id: ID!
+}
+
+type UserExists @aws_lambda {
+  message: String
+}
+
+type UserInfo @aws_lambda {
+  userInfo: String
+}
+
+type UserInfoResult {
+  errorMessage: String
+  message: String
+  success: Boolean
+  value: String
+}
+
+type UserNotExists @aws_lambda {
+  message: String
+}
+
+type approveResult {
+  message: String
+  result: Boolean
+}
+
+type mintResult {
+  message: String
+  result: Boolean!
+}
+
+input BurnFromParams {
+  address: String!
+  amount: String
+}
+
+input CreateUser {
+  ADDRESS: String
+  CITY: String
+  COUNTRY: String
+  DOB: String
+  ETH_ADDRESS: String!
+  FATHER_OR_HUSBAND_NAME: String
+  FULL_NAME: String
+  PHONE_NUMBER: String!
+  POSTAL_CODE: String
+  cnic: String!
+  id: ID!
+}
+
+input ListContactsParams {
+  id: String
+}
+
+input SetUserName {
+  id: ID!
+  userName: String!
+}
+
+input TransferFromParams {
+  amount: String
+  from: String
+  to: String
+}
+
+input TransferParams {
+  amount: String
+  to: String
+}
+
+input UpdateContactList {
+  attributeValue: String
+  id: ID!
+}
+
+input UpdateUser {
+  attributeName: String
+  attributeValue: String
+  id: ID!
+}
+
+input UserInfoParams {
+  attributeInfo: String
+  id: String
+}
+
+input ZKUserInfo {
+  bit: Boolean
+  cnic: String
+  optionalParams: String
+  privateKey: String
+  publicAddress: String
+  publicAddressAdmin: String
+}
+
+input mintInfo {
+  address: String!
+  amount: String!
+}
+
+input zkParams {
+  cnic: String
+  optionalParams: String
+  privateKey: String
+  publicAddress: String
+  publicAddressAdmin: String
+}

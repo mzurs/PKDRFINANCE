@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pkdrfinancenextjs-dev-224025-authRole",
+      "UnauthRoleArn": "arn:aws:iam::990629862590:role/amplify-pkdrfinancenextjs-dev-224025-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::990629862590:role/amplify-pkdrfinancenextjs-dev-224025-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-pkdrfinancenextjs-dev-224025-deployment",
+      "UnauthRoleName": "amplify-pkdrfinancenextjs-dev-224025-unauthRole",
+      "StackName": "amplify-pkdrfinancenextjs-dev-224025",
+      "StackId": "arn:aws:cloudformation:us-west-2:990629862590:stack/amplify-pkdrfinancenextjs-dev-224025/8fcba6d0-9da0-11ed-8bdd-0a48c66ae8c7",
+      "AmplifyAppId": "d3s8bw0ngzfyot"
+    }
+  }
+}

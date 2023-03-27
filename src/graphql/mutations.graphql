@@ -1,0 +1,136 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateUser($user: CreateUser!) {
+  createUser(user: $user) {
+    ... on UserInfo {
+      userInfo
+    }
+    ... on UserExists {
+      message
+    }
+    ... on Error {
+      errorMessage
+    }
+  }
+}
+mutation UpdateUser($user: UpdateUser!) {
+  updateUser(user: $user) {
+    ... on UpdatedResult {
+      id
+      message
+    }
+    ... on UserNotExists {
+      message
+    }
+    ... on Error {
+      errorMessage
+    }
+  }
+}
+mutation DeleteUser($id: ID!) {
+  deleteUser(id: $id) {
+    ... on DeletedResult {
+      id
+      message
+    }
+    ... on UserNotExists {
+      message
+    }
+    ... on Error {
+      errorMessage
+    }
+  }
+}
+mutation ZkProfile($zkuser: ZKUserInfo) {
+  zkProfile(zkuser: $zkuser)
+}
+mutation SetUserName($setname: SetUserName) {
+  setUserName(setname: $setname)
+}
+mutation AddContacts($user: UpdateContactList!) {
+  addContacts(user: $user) {
+    ... on UpdatedResult {
+      id
+      message
+    }
+    ... on UserNotExists {
+      message
+    }
+    ... on Error {
+      errorMessage
+    }
+  }
+}
+mutation ZeroKnowledgeProfile($zkp: zkParams) {
+  zeroKnowledgeProfile(zkp: $zkp)
+}
+mutation Create_ETH_Profile($address: String) {
+  create_ETH_Profile(address: $address) {
+    message
+    result
+  }
+}
+mutation TopUpAddress($address: String) {
+  topUpAddress(address: $address) {
+    hash
+    message
+    result
+  }
+}
+mutation SetProfileAddress {
+  setProfileAddress
+}
+mutation MintPKDR($mint: mintInfo) {
+  mintPKDR(mint: $mint) {
+    message
+    result
+  }
+}
+mutation Approve($privateKey: String) {
+  approve(privateKey: $privateKey) {
+    message
+    result
+  }
+}
+mutation SetPlatFormFee($fee: String) {
+  setPlatFormFee(fee: $fee) {
+    message
+    result
+  }
+}
+mutation Transfer($transferParams: TransferParams) {
+  transfer(transferParams: $transferParams) {
+    from
+    to
+    amount
+    message
+    result
+    hash
+  }
+}
+mutation TransferFrom($transferFromParams: TransferFromParams) {
+  transferFrom(transferFromParams: $transferFromParams) {
+    from
+    to
+    amount
+    message
+    result
+    hash
+  }
+}
+mutation Burn($amount: String) {
+  burn(amount: $amount) {
+    hash
+    amount
+    result
+    message
+  }
+}
+mutation BurnFrom($burnFromParams: BurnFromParams) {
+  burnFrom(burnFromParams: $burnFromParams) {
+    hash
+    from
+    amount
+    result
+    message
+  }
+}

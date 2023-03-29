@@ -17,6 +17,7 @@ import { FiSettings } from "react-icons/fi";
 import { IoIosPeople } from "react-icons/io";
 import { VscFeedback } from "react-icons/vsc";
 import { RiContactsBookLine } from "react-icons/ri";
+import { AiOutlineHistory } from "react-icons/ai";
 
 const Sidebar = () => {
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -68,21 +69,21 @@ const Sidebar = () => {
   };
 
   const style =
-    "border-r-4 border-[#009ac9] bg-gradient-to-r from-[#021729] dark:from-gray-900 dark:to-gray-900 text-[#009ac9] font-extrabold";
+    "border-r-4 border-[#009ac9] font-extrabold bg-gradient-to-l from-gray-900 to-gray-500 text-gray-100";
 
   return (
     <>
-      <div className=" hidden md:block right-0 top-[4rem] fixed bg-white text-black h-auto z-10">
+      <div className=" hidden md:block right-0 top-[3rem] fixed bg-white text-black h-auto z-10">
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full" >
-            <div className="flex items-center justify-center pt-6 ">
-              <Image src="/logo2.png" alt="logo2" width="150" height="100" />
+            <div className="flex items-center justify-center pt-2 ">
+              <Image src="/logo2.png" alt="logo2" width="170" height="170" />
             </div>
-            <nav className="mt-6">
+            <nav className="mt-2">
               <div>
                 <div
                   id="profile"
-                  className={`flex border-2 border-r-2 bg-black text-white ${style} items-center justify-center w-full p-4 my-2 font-thin transition-colors duration-200`}
+                  className={`flex  font-extrabold bg-black text-white items-center justify-center w-full px-4 py-5 my-2 transition-colors duration-200`}
                 >
                   <p className="mx-4 text-xl font-normal text-center">{userInfo?.name}</p>
                 </div>
@@ -165,7 +166,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   id="transaction"
-                  onClick={() => setpage("contact")}
+                  onClick={() => setpage("transaction")}
                   className={`${
                     page === "transaction" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
@@ -173,12 +174,12 @@ const Sidebar = () => {
                 >
                   <span className="text-left">
                     <div>
-                      <VscFeedback className="text-2xl mr-3 ml-5" />
+                      <AiOutlineHistory className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
-                  <span className="mx-4 text-lg font-normal">Transaction Details</span>
+                  <span className="mx-4 text-lg font-normal">Transaction History</span>
                 </Link>
-                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-black transition-colors duration-200 dark:text-black hover:text-[#009ac9]">
+                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-black transition-colors duration-200 dark:text-black">
                   <span className="text-left">
                     <div>
                       <BiLogOut className="text-2xl mr-3 ml-5" />

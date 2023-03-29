@@ -145,11 +145,11 @@ function Front() {
     <div>
       {/* <img className="  " src="/a1.png" max-width="5000" alt="" /> */}
       <Image
-        className="  mx-auto rounded-lg shadow-xl dark:shadow-gray-800 "
+        className="dark:shadow-gray-800 bg-cover h-[100vh] w-[100vw] object-cover"
         src="/a1.png"
         alt=""
-        width={10000}
-        height={10000}
+        width={1000}
+        height={1000}
       />
     </div>
   );

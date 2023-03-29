@@ -1,7 +1,7 @@
 import React from "react";
 import { GoPerson } from "react-icons/go";
 
-const List = (props: any) => {
+const Recent = (props: any) => {
   return (
     <div>
       <div className="w-[96vw] mx-auto my-3">
@@ -80,4 +80,4 @@ const List = (props: any) => {
   );
 };
 
-export default List;
+export default Recent;

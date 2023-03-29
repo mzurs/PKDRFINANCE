@@ -257,7 +257,7 @@ function Header() {
 
   const Navbar = (
     <div>
-      <nav className="  fixed w-full">
+      <nav className="fixed w-full">
         <div className="">
           <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
             <div
@@ -365,7 +365,7 @@ function Header() {
                     onClick={() => setpage("home")}
                     className={`cursor-pointer ${
                       page === "home" ? style : ""
-                    } text-black px-4 mx-4 md:text-md py-5 text-xl font-medium hover:text-[#010f13] ${
+                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010f13] ${
                       page === "home" ? style : ""
                     }`}
                     aria-current="page"
@@ -379,7 +379,7 @@ function Header() {
                     onClick={() => setpage("profile")}
                     className={`cursor-pointer ${
                       page === "profile" ? style : ""
-                    } text-black px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#010507] ${
+                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010507] ${
                       page === "profile" ? "border-b-[4px] text-[#020f13]" : ""
                     }`}
                     id="profile"
@@ -392,7 +392,7 @@ function Header() {
                     onClick={() => setpage("contact")}
                     className={`cursor-pointer ${
                       page === "contact" ? style : ""
-                    } text-black px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#010c0f] ${
+                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010c0f] ${
                       page === "contact" ? style : ""
                     }`}
                     id="contact"
@@ -405,7 +405,7 @@ function Header() {
                     onClick={() => setpage("about")}
                     className={`cursor-pointer ${
                       page === "about" ? style : ""
-                    } text-black px-4 mx-4 md:text-md p-5 text-xl font-medium hover:text-[#030f13] ${
+                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#030f13] ${
                       page === "about" ? style : ""
                     }`}
                     id="about"
@@ -420,27 +420,20 @@ function Header() {
                 } items-center`}
               >
                 <div className=" w-12 h-12">
-                  <img
-                    className="rounded-full border-2 border-gray-900 shadow-sm"
-                    src="https://randomuser.me/api/portraits/men/31.jpg"
-                    alt="User Profile"
-                    title="User Profile"
-                  />
-                  {/* <div className="absolute top-0 right-0 h-4 w-4 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div> */}
                 </div>
                 <TbGridDots
                   onClick={togglemenu}
                   id="grid"
                   title="Menu"
-                  className={`hidden duration-200 md:block  ml-5 mr-3 text-[22px] hover:text-[#010607] ${
-                    sidebar ? "rotate-45 text-[#051114]" : "text-black"
+                  className={`hidden duration-200 text-black md:block  ml-5 mr-4 text-[22px] hover:text-[#010607] ${
+                    sidebar ? "rotate-45" : ""
                   } cursor-pointer`}
                 />
               </div>
               <div
                 className={`${
                   auth && web3auth ? "hidden" : ""
-                } text-black rounded border-solid border-2 border-black absolute right-2 text-xl px-2 py-2 hover:text-[#1da8d3] cursor-pointer`}
+                } text-black rounded border-solid border-2 border-black absolute right-2 text-xl px-2 py-1 hover:bg-[#01010184] hover:text-[#ffffff] cursor-pointer mx-3`}
                 onClick={login}
               >
                 <button>Sign in</button>
@@ -969,6 +962,7 @@ function Header() {
           onLoaderFinished={() => {
             setProgress(0);
           }}
+          height={4}
         />
         {AdminNavbar}
       </>
@@ -983,6 +977,7 @@ function Header() {
           onLoaderFinished={() => {
             setProgress(0);
           }}
+          height={4}
         />
         {Navbar}
       </>

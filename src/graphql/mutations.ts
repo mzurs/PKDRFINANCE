@@ -171,3 +171,27 @@ export const burnFrom = /* GraphQL */ `
     }
   }
 `;
+export const withdraw = /* GraphQL */ `
+  mutation Withdraw($withdrawParams: WithdrawParams) {
+    withdraw(withdrawParams: $withdrawParams) {
+      burnResult {
+        hash
+        from
+        amount
+        result
+        message
+      }
+      withdrawResult {
+        IBAN
+        accountHolderName
+        amount
+        id
+        address
+        userName
+      }
+      result
+      message
+      errorMessage
+    }
+  }
+`;

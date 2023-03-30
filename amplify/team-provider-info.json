@@ -1,15 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-pkdrfinancenextjs-dev-224025-authRole",
-      "UnauthRoleArn": "arn:aws:iam::990629862590:role/amplify-pkdrfinancenextjs-dev-224025-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::990629862590:role/amplify-pkdrfinancenextjs-dev-224025-authRole",
+      "AuthRoleName": "amplify-pkdrfinancenextjszfl-dev-202308-authRole",
+      "UnauthRoleArn": "arn:aws:iam::662538652517:role/amplify-pkdrfinancenextjszfl-dev-202308-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::662538652517:role/amplify-pkdrfinancenextjszfl-dev-202308-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-pkdrfinancenextjs-dev-224025-deployment",
-      "UnauthRoleName": "amplify-pkdrfinancenextjs-dev-224025-unauthRole",
-      "StackName": "amplify-pkdrfinancenextjs-dev-224025",
-      "StackId": "arn:aws:cloudformation:us-west-2:990629862590:stack/amplify-pkdrfinancenextjs-dev-224025/8fcba6d0-9da0-11ed-8bdd-0a48c66ae8c7",
-      "AmplifyAppId": "d3s8bw0ngzfyot"
+      "DeploymentBucketName": "amplify-pkdrfinancenextjszfl-dev-202308-deployment",
+      "UnauthRoleName": "amplify-pkdrfinancenextjszfl-dev-202308-unauthRole",
+      "StackName": "amplify-pkdrfinancenextjszfl-dev-202308",
+      "StackId": "arn:aws:cloudformation:us-west-2:662538652517:stack/amplify-pkdrfinancenextjszfl-dev-202308/ca2d6da0-cf0e-11ed-8489-06cce571a28d",
+      "AmplifyAppId": "d1gme2xd92ln8f"
     }
   }
 }

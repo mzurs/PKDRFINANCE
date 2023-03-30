@@ -179,6 +179,34 @@ export type BurnFromResult = {
   message?: string | null,
 };
 
+export type WithdrawParams = {
+  IBAN?: string | null,
+  accountHolderName?: string | null,
+  amount?: number | null,
+  id?: string | null,
+  address?: string | null,
+  userName?: string | null,
+};
+
+export type WithdrawParamsResult = {
+  __typename: "WithdrawParamsResult",
+  burnResult?: BurnFromResult | null,
+  withdrawResult?: WithdrawParam | null,
+  result?: boolean | null,
+  message?: string | null,
+  errorMessage?: string | null,
+};
+
+export type WithdrawParam = {
+  __typename: "WithdrawParam",
+  IBAN?: string | null,
+  accountHolderName?: string | null,
+  amount?: number | null,
+  id?: string | null,
+  address?: string | null,
+  userName?: string | null,
+};
+
 export type getUserResult = UserInfo | UserNotExists | Error
 
 
@@ -203,6 +231,31 @@ export type getAddressByUserNameResult = AddressInfo | UserNotExists | Error
 export type AddressInfo = {
   __typename: "AddressInfo",
   address?: string | null,
+};
+
+export type ListContactsParams = {
+  id?: string | null,
+};
+
+export type ListContactsResponse = ListContactsResult | UserNotExists | Error
+
+
+export type ListContactsResult = {
+  __typename: "ListContactsResult",
+  contacts?: Array< string | null > | null,
+};
+
+export type UserInfoParams = {
+  id?: string | null,
+  attributeInfo?: string | null,
+};
+
+export type UserInfoResult = {
+  __typename: "UserInfoResult",
+  success?: boolean | null,
+  message?: string | null,
+  value?: string | null,
+  errorMessage?: string | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -430,6 +483,36 @@ export type BurnFromMutation = {
   } | null,
 };
 
+export type WithdrawMutationVariables = {
+  withdrawParams?: WithdrawParams | null,
+};
+
+export type WithdrawMutation = {
+  withdraw?:  {
+    __typename: "WithdrawParamsResult",
+    burnResult?:  {
+      __typename: "BurnFromResult",
+      hash?: string | null,
+      from?: string | null,
+      amount?: string | null,
+      result?: boolean | null,
+      message?: string | null,
+    } | null,
+    withdrawResult?:  {
+      __typename: "WithdrawParam",
+      IBAN?: string | null,
+      accountHolderName?: string | null,
+      amount?: number | null,
+      id?: string | null,
+      address?: string | null,
+      userName?: string | null,
+    } | null,
+    result?: boolean | null,
+    message?: string | null,
+    errorMessage?: string | null,
+  } | null,
+};
+
 export type GetUserByEmailQueryVariables = {
   id: string,
 };
@@ -485,6 +568,42 @@ export type GetAddressByUserNameQuery = {
 
 export type GetUsersCountQuery = {
   getUsersCount?: number | null,
+};
+
+export type ListContactsQueryVariables = {
+  listContactsParams?: ListContactsParams | null,
+};
+
+export type ListContactsQuery = {
+  listContacts: ( {
+      __typename: "ListContactsResult",
+      contacts?: Array< string | null > | null,
+    } | {
+      __typename: "UserNotExists",
+      message?: string | null,
+    } | {
+      __typename: "Error",
+      errorMessage?: string | null,
+    }
+  ) | null,
+};
+
+export type GetUserInfoQueryVariables = {
+  userInfoParams?: UserInfoParams | null,
+};
+
+export type GetUserInfoQuery = {
+  getUserInfo?:  {
+    __typename: "UserInfoResult",
+    success?: boolean | null,
+    message?: string | null,
+    value?: string | null,
+    errorMessage?: string | null,
+  } | null,
+};
+
+export type GetRateUSDPKRQuery = {
+  getRateUSDPKR?: string | null,
 };
 
 export type GetProfileAddressQuery = {

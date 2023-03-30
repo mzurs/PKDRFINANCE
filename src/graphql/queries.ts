@@ -54,11 +54,36 @@ export const getUsersCount = /* GraphQL */ `
     getUsersCount
   }
 `;
-// export const getRateUSDPKR = /* GraphQL */ `
-//   query GetRateUSDPKR {
-//     getRateUSDPKR
-//   }
-// `;
+export const listContacts = /* GraphQL */ `
+  query ListContacts($listContactsParams: ListContactsParams) {
+    listContacts(listContactsParams: $listContactsParams) {
+      ... on ListContactsResult {
+        contacts
+      }
+      ... on UserNotExists {
+        message
+      }
+      ... on Error {
+        errorMessage
+      }
+    }
+  }
+`;
+export const getUserInfo = /* GraphQL */ `
+  query GetUserInfo($userInfoParams: UserInfoParams) {
+    getUserInfo(userInfoParams: $userInfoParams) {
+      success
+      message
+      value
+      errorMessage
+    }
+  }
+`;
+export const getRateUSDPKR = /* GraphQL */ `
+  query GetRateUSDPKR {
+    getRateUSDPKR
+  }
+`;
 export const getProfileAddress = /* GraphQL */ `
   query GetProfileAddress {
     getProfileAddress

@@ -120,7 +120,10 @@ const AdminSideBar = () => {
                   <span className="mx-4 text-lg font-normal">Settings</span>
                 </Link>
 
-                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-white transition-colors duration-200 dark:text-black hover:text-[#009ac9]">
+                <div className={`${
+                    page === "settings" ? style : "text-white"
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                 >
                   <span className="text-left">
                     <div>
                       <BiLogOut className="text-2xl mr-3 ml-5" />

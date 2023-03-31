@@ -20,7 +20,7 @@ async function setUserNameAPI(userData: any, idToken: string, oAuthIdToken: stri
         user : user
     }
 
-    const authToken = oAuthIdToken;
+    const authToken = "abc";
 
     try {
         const res: any = await API.graphql({
@@ -32,16 +32,20 @@ async function setUserNameAPI(userData: any, idToken: string, oAuthIdToken: stri
         return { res, returnResult };
     
     } catch (error) {
+        console.log("ERROR OCCURRED!");
         const res=error;
         return { res, returnResult };
     }
 }
 
 
-export default async function handler(request: any, response: any){
+export default async function handler(request:any, response:any) {
+    if (request.method === 'POST') {
+
     const authTokens = JSON.parse(request.headers["x-custom-header"]);
 
     const { res, returnResult } = await setUserNameAPI(request.body, authTokens[0], authTokens[1]);
 
+    console.log("SET USERNAME API = "+ Object.values({ message: JSON.stringify([res,returnResult])}));
     response.status(200).json({ message: JSON.stringify([res,returnResult])});
-}
+}}

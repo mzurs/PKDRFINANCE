@@ -90,6 +90,123 @@ export type zkParams = {
   optionalParams?: string | null,
 };
 
+export type Create_ETH_Profile_Result = {
+  __typename: "Create_ETH_Profile_Result",
+  message?: string | null,
+  result?: boolean | null,
+};
+
+export type TopUpAddressResult = {
+  __typename: "TopUpAddressResult",
+  hash?: string | null,
+  message?: string | null,
+  result?: string | null,
+};
+
+export type mintInfo = {
+  address: string,
+  amount: string,
+};
+
+export type mintResult = {
+  __typename: "mintResult",
+  message?: string | null,
+  result: boolean,
+};
+
+export type approveResult = {
+  __typename: "approveResult",
+  message?: string | null,
+  result?: boolean | null,
+};
+
+export type SetPlatFormFeeResult = {
+  __typename: "SetPlatFormFeeResult",
+  message?: string | null,
+  result?: boolean | null,
+};
+
+export type TransferParams = {
+  to?: string | null,
+  amount?: string | null,
+};
+
+export type TransferResult = {
+  __typename: "TransferResult",
+  from?: string | null,
+  to?: string | null,
+  amount?: string | null,
+  message?: string | null,
+  result?: boolean | null,
+  hash?: string | null,
+};
+
+export type TransferFromParams = {
+  from?: string | null,
+  to?: string | null,
+  amount?: string | null,
+};
+
+export type TransferFromResult = {
+  __typename: "TransferFromResult",
+  from?: string | null,
+  to?: string | null,
+  amount?: string | null,
+  message?: string | null,
+  result?: boolean | null,
+  hash?: string | null,
+};
+
+export type BurnResult = {
+  __typename: "BurnResult",
+  hash?: string | null,
+  amount?: string | null,
+  result?: boolean | null,
+  message?: string | null,
+};
+
+export type BurnFromParams = {
+  address: string,
+  amount?: string | null,
+};
+
+export type BurnFromResult = {
+  __typename: "BurnFromResult",
+  hash?: string | null,
+  from?: string | null,
+  amount?: string | null,
+  result?: boolean | null,
+  message?: string | null,
+};
+
+export type WithdrawParams = {
+  IBAN?: string | null,
+  accountHolderName?: string | null,
+  amount?: number | null,
+  id?: string | null,
+  address?: string | null,
+  userName?: string | null,
+};
+
+export type WithdrawParamsResult = {
+  __typename: "WithdrawParamsResult",
+  burnResult?: BurnFromResult | null,
+  withdrawResult?: WithdrawParam | null,
+  result?: boolean | null,
+  message?: string | null,
+  errorMessage?: string | null,
+};
+
+export type WithdrawParam = {
+  __typename: "WithdrawParam",
+  IBAN?: string | null,
+  accountHolderName?: string | null,
+  amount?: number | null,
+  id?: string | null,
+  address?: string | null,
+  userName?: string | null,
+};
+
 export type getUserResult = UserInfo | UserNotExists | Error
 
 
@@ -114,6 +231,31 @@ export type getAddressByUserNameResult = AddressInfo | UserNotExists | Error
 export type AddressInfo = {
   __typename: "AddressInfo",
   address?: string | null,
+};
+
+export type ListContactsParams = {
+  id?: string | null,
+};
+
+export type ListContactsResponse = ListContactsResult | UserNotExists | Error
+
+
+export type ListContactsResult = {
+  __typename: "ListContactsResult",
+  contacts?: Array< string | null > | null,
+};
+
+export type UserInfoParams = {
+  id?: string | null,
+  attributeInfo?: string | null,
+};
+
+export type UserInfoResult = {
+  __typename: "UserInfoResult",
+  success?: boolean | null,
+  message?: string | null,
+  value?: string | null,
+  errorMessage?: string | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -215,6 +357,162 @@ export type ZeroKnowledgeProfileMutation = {
   zeroKnowledgeProfile?: string | null,
 };
 
+export type Create_ETH_ProfileMutationVariables = {
+  address?: string | null,
+};
+
+export type Create_ETH_ProfileMutation = {
+  create_ETH_Profile?:  {
+    __typename: "Create_ETH_Profile_Result",
+    message?: string | null,
+    result?: boolean | null,
+  } | null,
+};
+
+export type TopUpAddressMutationVariables = {
+  address?: string | null,
+};
+
+export type TopUpAddressMutation = {
+  topUpAddress?:  {
+    __typename: "TopUpAddressResult",
+    hash?: string | null,
+    message?: string | null,
+    result?: string | null,
+  } | null,
+};
+
+export type SetProfileAddressMutation = {
+  setProfileAddress?: boolean | null,
+};
+
+export type MintPKDRMutationVariables = {
+  mint?: mintInfo | null,
+};
+
+export type MintPKDRMutation = {
+  mintPKDR?:  {
+    __typename: "mintResult",
+    message?: string | null,
+    result: boolean,
+  } | null,
+};
+
+export type ApproveMutationVariables = {
+  privateKey?: string | null,
+};
+
+export type ApproveMutation = {
+  approve?:  {
+    __typename: "approveResult",
+    message?: string | null,
+    result?: boolean | null,
+  } | null,
+};
+
+export type SetPlatFormFeeMutationVariables = {
+  fee?: string | null,
+};
+
+export type SetPlatFormFeeMutation = {
+  setPlatFormFee?:  {
+    __typename: "SetPlatFormFeeResult",
+    message?: string | null,
+    result?: boolean | null,
+  } | null,
+};
+
+export type TransferMutationVariables = {
+  transferParams?: TransferParams | null,
+};
+
+export type TransferMutation = {
+  transfer?:  {
+    __typename: "TransferResult",
+    from?: string | null,
+    to?: string | null,
+    amount?: string | null,
+    message?: string | null,
+    result?: boolean | null,
+    hash?: string | null,
+  } | null,
+};
+
+export type TransferFromMutationVariables = {
+  transferFromParams?: TransferFromParams | null,
+};
+
+export type TransferFromMutation = {
+  transferFrom?:  {
+    __typename: "TransferFromResult",
+    from?: string | null,
+    to?: string | null,
+    amount?: string | null,
+    message?: string | null,
+    result?: boolean | null,
+    hash?: string | null,
+  } | null,
+};
+
+export type BurnMutationVariables = {
+  amount?: string | null,
+};
+
+export type BurnMutation = {
+  burn?:  {
+    __typename: "BurnResult",
+    hash?: string | null,
+    amount?: string | null,
+    result?: boolean | null,
+    message?: string | null,
+  } | null,
+};
+
+export type BurnFromMutationVariables = {
+  burnFromParams?: BurnFromParams | null,
+};
+
+export type BurnFromMutation = {
+  burnFrom?:  {
+    __typename: "BurnFromResult",
+    hash?: string | null,
+    from?: string | null,
+    amount?: string | null,
+    result?: boolean | null,
+    message?: string | null,
+  } | null,
+};
+
+export type WithdrawMutationVariables = {
+  withdrawParams?: WithdrawParams | null,
+};
+
+export type WithdrawMutation = {
+  withdraw?:  {
+    __typename: "WithdrawParamsResult",
+    burnResult?:  {
+      __typename: "BurnFromResult",
+      hash?: string | null,
+      from?: string | null,
+      amount?: string | null,
+      result?: boolean | null,
+      message?: string | null,
+    } | null,
+    withdrawResult?:  {
+      __typename: "WithdrawParam",
+      IBAN?: string | null,
+      accountHolderName?: string | null,
+      amount?: number | null,
+      id?: string | null,
+      address?: string | null,
+      userName?: string | null,
+    } | null,
+    result?: boolean | null,
+    message?: string | null,
+    errorMessage?: string | null,
+  } | null,
+};
+
 export type GetUserByEmailQueryVariables = {
   id: string,
 };
@@ -266,4 +564,64 @@ export type GetAddressByUserNameQuery = {
       errorMessage?: string | null,
     }
   ) | null,
+};
+
+export type GetUsersCountQuery = {
+  getUsersCount?: number | null,
+};
+
+export type ListContactsQueryVariables = {
+  listContactsParams?: ListContactsParams | null,
+};
+
+export type ListContactsQuery = {
+  listContacts: ( {
+      __typename: "ListContactsResult",
+      contacts?: Array< string | null > | null,
+    } | {
+      __typename: "UserNotExists",
+      message?: string | null,
+    } | {
+      __typename: "Error",
+      errorMessage?: string | null,
+    }
+  ) | null,
+};
+
+export type GetUserInfoQueryVariables = {
+  userInfoParams?: UserInfoParams | null,
+};
+
+export type GetUserInfoQuery = {
+  getUserInfo?:  {
+    __typename: "UserInfoResult",
+    success?: boolean | null,
+    message?: string | null,
+    value?: string | null,
+    errorMessage?: string | null,
+  } | null,
+};
+
+export type GetRateUSDPKRQuery = {
+  getRateUSDPKR?: string | null,
+};
+
+export type GetProfileAddressQuery = {
+  getProfileAddress?: string | null,
+};
+
+export type GetPlatFormFeeQuery = {
+  getPlatFormFee?: string | null,
+};
+
+export type GetETHBalanceQueryVariables = {
+  address: string,
+};
+
+export type GetETHBalanceQuery = {
+  getETHBalance?: string | null,
+};
+
+export type TotalSupplyQuery = {
+  totalSupply?: string | null,
 };

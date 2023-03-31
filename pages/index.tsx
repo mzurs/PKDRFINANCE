@@ -9,7 +9,6 @@ import {
   web3authStateAtom,
 } from "../state/jotai";
 import Loading from "../components/shared/loading/Loading";
-import Image from "next/image";
 import Front from "../components/shared/Front";
 import * as cookie from "cookie";
 import { useRouter } from "next/router";

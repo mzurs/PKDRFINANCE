@@ -4,7 +4,7 @@ import Doughnet from "../../../components/users/Doughnut";
 import { userInfoAtom } from "../../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
 import Cards from "../../../components/users/Cards";
-import List from "../../../components/users/List";
+import Recent from "../../../components/users/Recent";
 
 // const [date, setDate] = useState<any>(" ");
 
@@ -116,7 +116,7 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <List />
+        <Recent title={"Recent Transactions"} sub={"Details and informations about recent transactions."}/>
       </div>
     </div>
   );

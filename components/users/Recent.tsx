@@ -1,16 +1,16 @@
 import React from "react";
 import { GoPerson } from "react-icons/go";
 
-const List = () => {
+const Recent = (props: any) => {
   return (
     <div>
       <div className="w-[96vw] mx-auto my-3">
         <div className="w-full px-4 py-4 mb-2 bg-white border rounded-md shadow sm:px-6 dark:bg-gray-800">
-          <h3 className="text-xl font-semibold font-medium leading-6 text-gray-900 dark:text-white">
-            Recent Transactions
+          <h3 className="text-xl font-semibold leading-6 text-gray-900 dark:text-white">
+            {props.title}
           </h3>
           <p className="max-w-2xl mt-1 text-sm text-gray-500 dark:text-gray-200">
-            Details and informations about recent transactions.
+            {props.sub}
           </p>
         </div>
         <ul className="flex flex-col">
@@ -80,4 +80,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default Recent;

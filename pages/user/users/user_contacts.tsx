@@ -31,6 +31,12 @@ function contacts() {
     console.log(searchResults);
   };
 
+  function highlightText(text: string, searchTerm: string) {
+    const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedSearchTerm, 'gi');
+    return text.replace(regex, (match) => `<span style="color: #009ac9; background-color:white;">${match}</span>`);
+  }
+
   return (
     <>
       <div className=" text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden">
@@ -54,33 +60,43 @@ function contacts() {
             </button>
           </div>
           {display
-            ? searchResults.map((result: Contact) => (
-                <div
-                  key={result.id}
-                  className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col"
-                >
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        {result.username}
-                      </h2>
-                      <p className="text-lg">{result.email}</p>
+            ? searchResults.map((result) => {
+                const highlightedUsername = highlightText(
+                  result.username,
+                  searchTerm
+                );
+
+                return (
+                  <div
+                    key={result.id}
+                    className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col"
+                  >
+                    <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
+                      <GoPerson className="text-3xl text-gray-100" />
                     </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: result.username, email: result.email },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
+                    <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
+                      <div className="mx-4 float-left">
+                        <h2
+                          className="text-gray-900 text-xl title-font font-medium mb-1"
+                          dangerouslySetInnerHTML={{
+                            __html: highlightedUsername,
+                          }}
+                        ></h2>
+                        <p className="text-lg">{result.email}</p>
+                      </div>
+                      <Link
+                        className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
+                        href={{
+                          pathname: "/user/users/transfer",
+                          query: { name: result.username, email: result.email },
+                        }}
+                      >
+                        Pay Now
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              ))
+                );
+              })
             : ""}
           {!display ? (
             <>

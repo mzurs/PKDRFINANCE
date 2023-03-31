@@ -392,9 +392,7 @@ function Header() {
                     onClick={() => setpage("contact")}
                     className={`cursor-pointer ${
                       page === "contact" ? style : ""
-                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010c0f] ${
-                      page === "contact" ? style : ""
-                    }`}
+                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010c0f] `}
                     id="contact"
                   >
                     Contact
@@ -405,9 +403,7 @@ function Header() {
                     onClick={() => setpage("about")}
                     className={`cursor-pointer ${
                       page === "about" ? style : ""
-                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#030f13] ${
-                      page === "about" ? style : ""
-                    }`}
+                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#030f13] `}
                     id="about"
                   >
                     About
@@ -419,7 +415,10 @@ function Header() {
                   auth && web3auth ? "md:flex" : "hidden"
                 } items-center`}
               >
-                <div className=" w-12 h-12">
+                <div className=" flex flex-grow h-12 mt-5 text-xl hover:text-[#127a97] font-normal cursor-pointer hover:underline">
+                  <form action="/api/checkout/checkout_sessions" method="POST">
+                    <button type="submit">Buy PKDR</button>
+                  </form>
                 </div>
                 <TbGridDots
                   onClick={togglemenu}

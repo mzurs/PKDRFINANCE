@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MultilineChart from "../../../components/users/MultilineChart";
-import Doughnet from "../../../components/users/Doughnut";
 import { userInfoAtom } from "../../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
 import Cards from "../../../components/users/Cards";
@@ -48,7 +47,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="flex pt-[4.5rem] w-[100vw] overflow-x-hidden">
+      <div className="flex pt-[4.6rem] w-[100vw] overflow-x-hidden">
         <div className="w-5/12 h-full">
           <div className="flex justify-center items-center flex-col mx-8">
             <div className="font-medium text-gray-80 text-4xl pt-12">
@@ -81,42 +80,16 @@ const Home = () => {
         </div>
 
         <div className="w-9/12 h-full">
-          <div className="h-[35vh] flex justify-center">
+          <div className="h-[43vh] flex justify-center">
             <MultilineChart />
           </div>
-          <div className="flex justify-between mr-8">
-            <div className="w-6/12 h-[27vh]">
-              <Cards
-                title={"Upcoming Payments"}
-                sub={"AT&T Family Package Plan"}
-                btn_txt={"Pay Now"}
-                money={`$${Rupee(250)}`}
-              />
-            </div>
-
-            <div className="w-[29vw] h-[27vh] my-2 border-2 shadow-lg">
-              <div className="flex justify-between">
-                <div className="pt-3 px-4">
-                  <p className="text-2xl font-extrabold">Savings</p>
-                  <div className="text-lg font-bold py-1">
-                    Checkout our saving plans for maximum savings
-                  </div>
-                </div>
-                <div className="h-[20vh] w-[11vw]">
-                  <Doughnet />
-                </div>
-              </div>
-              <div>
-                <button className="bg-blue-700 text-blue-100 text-lg font-medium mx-6 my-3 px-2 py-1 rounded-xl float-right">
-                  Details
-                </button>
-              </div>
-            </div>
+          <div className="flex justify-between">
+            <Recent
+              title={"Recent Transactions"}
+              sub={"Details and informations about recent transactions."}
+            />
           </div>
         </div>
-      </div>
-      <div>
-        <Recent title={"Recent Transactions"} sub={"Details and informations about recent transactions."}/>
       </div>
     </div>
   );

@@ -179,14 +179,14 @@ const Sidebar = () => {
                   </span>
                   <span className="mx-4 text-lg font-normal">Transaction History</span>
                 </Link>
-                <div className="flex items-center justify-start w-full p-4 my-2 font-thin text-black transition-colors duration-200 dark:text-black">
+                <div className="flex hover:text-[#009ac9] items-center justify-start w-full p-4 my-2 font-thin text-black transition-colors duration-200 dark:text-black">
                   <span className="text-left">
                     <div>
                       <BiLogOut className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
                   <span
-                    className="cursor-pointer mx-4 text-lg font-normal"
+                    className="cursor-pointer mx-4 text-lg font-normal hover:translate-x-1"
                     onClick={logout}
                   >
                     Signout

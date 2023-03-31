@@ -19,6 +19,7 @@ function contacts() {
   // );
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+    handleSearch();
   };
 
   const handleSearch = async () => {

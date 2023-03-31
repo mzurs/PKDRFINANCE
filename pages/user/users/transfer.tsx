@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { userInfoAtom, web3authAtom, loading } from "../../../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { UserInfo } from '../../../components/users/settingsLayout/type/userTypes'
+import { UserInfo } from "../../../components/users/settingsLayout/type/userTypes";
 import { useRouter } from "next/router";
 import Loading from "../../../components/shared/loading/Loading";
 
@@ -37,6 +37,8 @@ const transfer = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
+
+      location.reload();
   };
 
   if (auth) {
@@ -44,7 +46,7 @@ const transfer = () => {
       return (
         <div className="w-[100vw] mx-auto h-[100vh] overflow-x-hidden">
           <div>
-            <h1 className="md:pt-[5.5rem] pt-3 md:text-3xl text-2xl font-bold pl-4 pb-0 mb-0">
+            <h1 className="md:pt-[5.5rem] pt-3 md:text-4xl text-2xl font-bold pl-8 pb-0 mb-0">
               Send Money
             </h1>
           </div>
@@ -125,7 +127,7 @@ const transfer = () => {
                     className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Amount
+                    Amount<span title="required" className="cursor-pointer text-md">&nbsp;*</span>
                   </label>
                   <input
                     className="text-lg appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -138,6 +140,13 @@ const transfer = () => {
                     required
                     name="amount"
                   />
+                  {Amount<2 ? (
+                    <label htmlFor="less_amount" className="text-red-700">
+                      Please enter amount greator than or equal to 2
+                    </label>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-2">
@@ -146,7 +155,7 @@ const transfer = () => {
                     className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                     htmlFor="grid-state"
                   >
-                    Purpose of Payment
+                    Purpose of Payment<span title="required" className="cursor-pointer text-md">&nbsp;*</span>
                   </label>
                   <div className="relative">
                     <select
@@ -158,7 +167,7 @@ const transfer = () => {
                         setPurpose(e.target.value);
                       }}
                     >
-                      <option value={"none"}>Select Purpose of Payment</option>
+                      <option value={"none"} selected>Select Purpose of Payment</option>
                       <option value={"Courier Service"}>Courier Service</option>
                       <option value={"Donations"}>Donations</option>
                       <option value={"Educational Payment"}>
@@ -192,12 +201,19 @@ const transfer = () => {
                       </svg>
                     </div>
                   </div>
+                  {Purpose=="none" ? (
+                    <label htmlFor="less_amount" className="text-red-700">
+                      Please select purpose of your payment
+                    </label>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div className="w-ful flex mt-6">
                 <button
                   className={`${
-                    Amount <= 0 || Purpose == "none" || data == null
+                    Amount<2||Purpose=="none"||data == null
                       ? "bg-[#81adba] disabled cursor-default"
                       : "bg-[#028db7] hover:bg-[#017699] hover:underline"
                   } px-6 py-2  mx-auto rounded-full text-white  text-xl`}

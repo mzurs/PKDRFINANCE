@@ -30,6 +30,7 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 function Header() {
+
   const userRoleType = useAtomValue(userRole);
   const [auth, setAuth] = useAtom(web3authAtom);
   const [privKey, setPrivKey] = useAtom(privKeyAtom);
@@ -415,11 +416,18 @@ function Header() {
                   auth && web3auth ? "md:flex" : "hidden"
                 } items-center`}
               >
-                <div className=" flex flex-grow h-12 mt-5 text-xl hover:text-[#127a97] font-normal cursor-pointer hover:underline">
-                  <form action="/api/checkout/checkout_sessions" method="POST">
-                    <button type="submit">Buy PKDR</button>
-                  </form>
-                </div>
+                {useAtomValue(userRole) === "users" && Boolean(verified) ? (
+                  <div className=" flex flex-grow h-12 mt-5 text-xl hover:text-[#127a97] font-normal cursor-pointer hover:underline">
+                    <form
+                      action="/api/checkout/checkout_sessions"
+                      method="POST"
+                    >
+                      <button type="submit">Buy PKDR</button>
+                    </form>
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <TbGridDots
                   onClick={togglemenu}
                   id="grid"

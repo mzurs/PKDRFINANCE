@@ -1,17 +1,59 @@
 import React, { useEffect, useState } from "react";
 import MultilineChart from "../../../components/users/MultilineChart";
-import { userInfoAtom } from "../../../state/jotai";
+import { userBalance, userInfoAtom, web3authAtom } from "../../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
 import Cards from "../../../components/users/Cards";
 import Recent from "../../../components/users/Recent";
 
-// const [date, setDate] = useState<any>(" ");
 
 const Home = () => {
   const info = useAtomValue(userInfoAtom);
   const [ShowMoney, setShowMoney] = useState<boolean>(true);
-  const [Money, setMoney] = useState<number>(0);
+  const [Money, setMoney] = useAtom<number>(userBalance);
+  const [timer, setTimer] = useState(9000);
+  const [web3auth] = useAtom(web3authAtom);
+  const [userInfo, setUserInfo] = useAtom(userInfoAtom);
 
+  const getPKDRTotalSupply = async () => {
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([
+        (userInfo as unknown as any).email,
+        (web3auth as unknown as any).idToken,
+        (userInfo as unknown as any).oAuthIdToken,
+      ])
+    );
+    const response = await fetch("/api/user/query/getUserBalance", {
+      method: "GET",
+      headers: headers,
+    });
+    console.log(
+      "🚀 ~ file: Dashboard.tsx:55 ~ getPKDRTotalSupply ~ response:",
+      response
+    );
+
+    const data = await response.json();
+    //@ts-ignore
+    setMoney(data.getETHBalance);
+    console.log(
+      "🚀 ~ file: Dashboard.tsx:47 ~ getPKDRTotalSupply ~ data:",
+      data
+    );
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // your effect code here
+      getPKDRTotalSupply();
+      // getUsersCount();
+      console.log(timer);
+    }, timer);
+
+    // cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
   const noExponents = function (num: number) {
     var data = String(num).split(/[eE]/);
     if (data.length == 1) return data[0];
@@ -74,7 +116,7 @@ const Home = () => {
               title={"Available Balance"}
               sub={info.email}
               btn_txt={"View Statement"}
-              money={`$${Rupee(Money)}`}
+              money={`PKDR ${Rupee(Money)}`}
             />
           </div>
         </div>

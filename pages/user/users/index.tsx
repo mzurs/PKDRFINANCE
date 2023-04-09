@@ -15,7 +15,6 @@ import Home from "./home";
 function index({ isAuthenticated }: any) {
   const router = useRouter();
 
-  // const [isAuthenticated, setIsAuthenticated] = useAtom(customAuthentication);
   const [verified, setVerified] = useAtom(isVerified);
   const [role, setRole] = useAtom(userRole);
   const [auth, setAuth] = useAtom(web3authAtom);

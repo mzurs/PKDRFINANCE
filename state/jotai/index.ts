@@ -35,6 +35,9 @@ const customAuthentication = atom<boolean>(false);
 const isVerified = atomWithStorage("verified", null, storage);
 const userRole = atom<string | null>(null);
 
+
+const userBalance=atom<number>(0);
+
 export {
   web3authAtom,
   auth,
@@ -46,4 +49,5 @@ export {
   customAuthentication,
   userRole,
   isVerified,
+  userBalance
 };

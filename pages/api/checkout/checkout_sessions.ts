@@ -9,7 +9,7 @@ export default async function handler(req: any, res: any) {
         payment_method_types: ["card"],
         mode: "payment",
         success_url: `${req.headers.origin}/user/users/purchase/result?success=true&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/user/users/purchase/?canceled=true`,
+        cancel_url: `${req.headers.origin}/user/users/purchase/cancel?canceled=true`,
       });
       console.log(
         "🚀 ~ file: checkout_sessions.ts:14 ~ handler ~ session:",

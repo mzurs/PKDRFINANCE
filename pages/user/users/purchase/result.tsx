@@ -38,8 +38,8 @@ export default function Result() {
     data ? router.push("/") : "";
   });
   return (
-    <div>
-      <h1>Payment Result</h1>
+    <div className="flex pt-[4.6rem] w-[100vw] overflow-x-hidden">
+    {/* <h1>Payment Result.....</h1> */}
       <pre>
         {!data ? <Loading state={true} /> : JSON.stringify(data, null, 2)}
       </pre>

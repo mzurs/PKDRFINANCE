@@ -18,8 +18,6 @@ type ReturnResult = {
   ETH_ADDRESS?: string;
 };
 
-
-
 const getUserInfo = async (id: string): Promise<ReturnResult> => {
   console.log("🚀 ~ file: [id].ts:28 ~ getUserInfo ~ id:", id);
   const res: ReturnResult = {
@@ -71,31 +69,32 @@ const checkAndUpdateCheckoutTable = async (
   const Item = data?.Item;
 
   if (Item == undefined) {
-  const num: number = amount_received;
-  const floatNum: number = parseFloat((num / 100).toFixed(2));
+    const num: number = amount_received;
+    const floatNum: number = parseFloat((num / 100).toFixed(2));
 
-  const rate = await getRateUSDPKR();
+    const rate = await getRateUSDPKR();
 
-  const amount = floatNum * rate;
+    const amount = floatNum * rate;
 
-  const input = {
-    TableName: CHECKOUT_TABLE,
-    Item: marshall({
-      id: sessionId,
-      isClaimed: true,
-      amount: amount,
-    }),
-  };
-  const command = new PutItemCommand(input);
-  const response = await client.send(command);
-  const mintRes: mintResult = await mintPkdr(
-    authTokens,
-    address,
-    String(amount)
-  );
-  console.log("🚀 ~ file: [id].ts:100 ~ mintRes:", mintRes);
-  res.message = mintRes.message!;
-  res.result = mintRes.result ? true : false;
+    const input = {
+      TableName: CHECKOUT_TABLE,
+      Item: marshall({
+        id: sessionId,
+        isClaimed: true,
+        amount: amount,
+        TimeStamp: Date.now(),
+      }),
+    };
+    const command = new PutItemCommand(input);
+    const response = await client.send(command);
+    const mintRes: mintResult = await mintPkdr(
+      authTokens,
+      address,
+      String(amount)
+    );
+    console.log("🚀 ~ file: [id].ts:100 ~ mintRes:", mintRes);
+    res.message = mintRes.message!;
+    res.result = mintRes.result ? true : false;
   } else {
     res.message = "session already claimed";
     console.log("🚀 ~ file: [id].ts:105 ~ res:", res);
@@ -104,7 +103,6 @@ const checkAndUpdateCheckoutTable = async (
   }
   return res;
 };
-
 
 const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY), {
   //@ts-ignore
@@ -130,8 +128,7 @@ export default async (req: any, res: any) => {
   console.log("🚀 ~ file: [id].ts:19 ~ amount_received:", amount_received);
   const { status }: any = payment_intent;
   if (status === "succeeded") {
-    
-    const resCheckoutTable:ReturnResult = await checkAndUpdateCheckoutTable(
+    const resCheckoutTable: ReturnResult = await checkAndUpdateCheckoutTable(
       id,
       amount_received,
       authTokens,

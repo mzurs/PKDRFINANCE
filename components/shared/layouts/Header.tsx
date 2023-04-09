@@ -30,7 +30,6 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 function Header() {
-
   const userRoleType = useAtomValue(userRole);
   const [auth, setAuth] = useAtom(web3authAtom);
   const [privKey, setPrivKey] = useAtom(privKeyAtom);
@@ -418,12 +417,12 @@ function Header() {
               >
                 {useAtomValue(userRole) === "users" && Boolean(verified) ? (
                   <div className=" flex flex-grow h-12 mt-5 text-xl hover:text-[#127a97] font-normal cursor-pointer hover:underline">
-                    <form
-                      action="/api/checkout/checkout_sessions"
-                      method="POST"
+                    <Link
+                      className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                      href="/user/users/purchase/"
                     >
-                      <button type="submit">Buy PKDR</button>
-                    </form>
+                      Buy PKDR
+                    </Link>
                   </div>
                 ) : (
                   <></>

@@ -36,7 +36,7 @@ function index({ isAuthenticated }: any) {
       }
     }
   } else {
-    return <div className="h-[100vh] flex items-center justify-center w-[100vw]">Login</div>;
+    return <div className="h-[100vh] flex items-center justify-center w-[100vw]"><Loading state={true}/></div>;
   }
 }
 

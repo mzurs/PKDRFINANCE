@@ -121,7 +121,7 @@ function profile() {
       );
     }
   } else {
-    return <div>Login</div>;
+    return <div><Loading state={true}/></div>;
   }
 }
 

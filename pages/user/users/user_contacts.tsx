@@ -38,7 +38,7 @@ function contacts() {
       "x-custom-header",
       JSON.stringify([info.idToken, info.oAuthIdToken])
     );
-    await fetch("/api/mutation/listContacts", {
+    await fetch("/api/user/query/listContacts", {
       method: "POST",
       headers: headers,
       body: JSON.stringify(formData),
@@ -456,7 +456,7 @@ function contacts() {
                   title="Add Contacts"
                   onClick={list_contacts}
                 >
-                  <BsPlusCircleFill className=" text-6xl" />
+                  <BsPlusCircleFill className=" text-5xl" />
                 </div>
               </>
             ) : (

@@ -1,7 +1,7 @@
 import { API, Amplify } from "aws-amplify";
-import type { ListContactsParams, ListContactsResponse } from "../../../src/API";
-import awsExports from "../../../src/aws-exports";
-import { listContacts } from "../../../src/graphql/queries";
+import type { ListContactsParams, ListContactsResponse } from "../../../../src/API";
+import awsExports from "../../../../src/aws-exports";
+import { listContacts } from "../../../../src/graphql/queries";
 // import {getUserInfo} from "../mutation/createUser";
 Amplify.configure(awsExports);
 
@@ -11,7 +11,7 @@ async function listContactAPI(userData: any, idToken: string, oAuthIdToken: stri
     // const { email, eth_address } = await getUserInfo(idToken);
 
     let user:ListContactsParams = {
-        id: "k190155@nu.edu.pk"//userData.data.id
+        id: userData.data.id
     }
 
     let variables = {
@@ -21,16 +21,17 @@ async function listContactAPI(userData: any, idToken: string, oAuthIdToken: stri
     const authToken = "abc";
 
     try {
-        const res: any = await API.graphql({
+        const res: any = (await API.graphql({
             query: listContacts,
             variables,
             authToken,
-        });
+        }))as { data: ListContactsResponse };
+        console.log(res);
         returnResult = true;
         return { res, returnResult };
     
     } catch (error) {
-        const res=error;
+        const res=error as string;
         return { res, returnResult };
     }
 }

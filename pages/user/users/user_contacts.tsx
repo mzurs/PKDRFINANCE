@@ -27,14 +27,6 @@ function contacts() {
   //   }
   // );
 
-  let user = {
-    id: "k190155@nu.edu.pk", //userData.data.id
-  };
-
-  let variables = {
-    user: user,
-  };
-
   const list_contacts = async () => {
     const data: ListContactsParams = { id: info.email };
     const formData = {

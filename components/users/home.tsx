@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import MultilineChart from "../../../components/users/MultilineChart";
-import { userBalance, userInfoAtom, web3authAtom } from "../../../state/jotai";
+import MultilineChart from "./MultilineChart";
+import { userBalance, userInfoAtom, web3authAtom } from "../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
-import Cards from "../../../components/users/Cards";
-import Recent from "../../../components/users/Recent";
+import Cards from "./Cards";
+import Recent from "./Recent";
 
 
 const Home = () => {

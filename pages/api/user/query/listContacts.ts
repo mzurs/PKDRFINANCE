@@ -7,10 +7,10 @@ Amplify.configure(awsExports);
 
 const listUserContacts = async function (
   authTokens: string[],
-  userName: string
+  id: string
 ): Promise<ListContactsQuery> {
   const listContactsParams: ListContactsParams = {
-    id: userName
+    id: id
   }
   const authToken = "abc";
   const variables = {

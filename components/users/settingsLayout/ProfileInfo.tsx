@@ -12,7 +12,6 @@ const ProfileInfo = () => {
   });
 
   const handleSubmit = async () => {
-    console.log(`Id Token : ${info.idToken}`);
     const formData = {
       data,
     };

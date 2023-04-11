@@ -11,7 +11,7 @@ import * as cookie from "cookie";
 import * as jose from "jose";
 import { useRouter } from "next/router";
 import Loading from "../../../components/shared/loading/Loading";
-import Home from "./home";
+import Home from "../../../components/users/home";
 function index({ isAuthenticated }: any) {
   const router = useRouter();
 

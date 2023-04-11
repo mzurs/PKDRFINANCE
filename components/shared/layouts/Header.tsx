@@ -29,6 +29,7 @@ import AdminSideBar from "../../admin/AdminSideBar";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
 function Header() {
   const userRoleType = useAtomValue(userRole);
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -388,14 +389,14 @@ function Header() {
                   </Link>
 
                   <Link
-                    href={"/pkdrInfo/contact"}
-                    onClick={() => setpage("contact")}
+                    href={"/user/users/user_contacts"}
+                    onClick={() => setpage("user_contacts")}
                     className={`cursor-pointer ${
-                      page === "contact" ? style : ""
+                      page === "user_contacts" ? style : ""
                     } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010c0f] `}
                     id="contact"
                   >
-                    Contact
+                    Contacts
                   </Link>
 
                   <Link

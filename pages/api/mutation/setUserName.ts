@@ -1,5 +1,5 @@
 import { API, Amplify } from "aws-amplify";
-import {SetUserName} from "../../../src/API"
+import {SetUserName, SetUserNameMutation} from "../../../src/API"
 import awsExports from "../../../src/aws-exports";
 import { setUserName } from "../../../src/graphql/mutations";
 import {getUserInfo} from "../mutation/createUser";
@@ -14,7 +14,7 @@ async function setUserNameAPI(userData: any, idToken: string, oAuthIdToken: stri
     let user:SetUserName = {
         id: email,
         userName: userData.data.userName
-    }
+    } 
 
     let variables = {
         user : user
@@ -27,7 +27,7 @@ async function setUserNameAPI(userData: any, idToken: string, oAuthIdToken: stri
             query: setUserName,
             variables,
             authToken,
-        });
+        })as {data : SetUserNameMutation};
         returnResult = true;
         return { res, returnResult };
     
@@ -44,8 +44,10 @@ export default async function handler(request:any, response:any) {
 
     const authTokens = JSON.parse(request.headers["x-custom-header"]);
 
+    // console.log("Request = ",request.body);
+
     const { res, returnResult } = await setUserNameAPI(request.body, authTokens[0], authTokens[1]);
 
-    console.log("SET USERNAME API = "+ Object.values({ message: JSON.stringify([res,returnResult])}));
+    // console.log("SET USERNAME API = "+ Object.values({ message: JSON.stringify([res,returnResult])}));
     response.status(200).json({ message: JSON.stringify([res,returnResult])});
 }}

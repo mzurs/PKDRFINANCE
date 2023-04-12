@@ -2,8 +2,51 @@ import React, { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { userInfoAtom, web3authAtom } from "../../../state/jotai";
 import { UserInfo } from "./type/userTypes";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+export const notify = (message: string, type:string) => {
+  switch (type) {
+    case "success":
+      toast.success(message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+      break;
+    case "warn":
+      toast.warn(message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+      break;
+    case "error":
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+      break;
+  
+    default :
+      break;
+  }
+};
 
 const ProfileInfo = () => {
   const info: UserInfo = useAtomValue(userInfoAtom);
@@ -14,49 +57,7 @@ const ProfileInfo = () => {
     setName(event.target.value);
   };
 
-  const notify = (message: string, type:string) => {
-    switch (type) {
-      case "success":
-        toast.success(message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          });
-        break;
-      case "warn":
-        toast.warn(message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          });
-        break;
-      case "error":
-        toast.error(message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          });
-        break;
-    
-      default :
-        break;
-    }
-  };
+  
 
   const handleSubmit = async () => {
     const headers = new Headers();
@@ -80,7 +81,6 @@ const ProfileInfo = () => {
   return (
     <div>
       <div className="pl-4">
-        <ToastContainer />
         <h1 className="md:text-2xl text-xl font-medium md:pt-10 pt-8">
           Profile Information
         </h1>

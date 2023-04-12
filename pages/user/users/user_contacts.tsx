@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useAtom } from "jotai";
-import { isVerified, web3authAtom } from "../../../state/jotai";
-import { useRouter } from "next/router";
 import { GoPerson } from "react-icons/go";
 import { FiSearch } from "react-icons/fi";
 import Link from "next/link";
@@ -9,11 +6,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { UserInfo } from "../../../components/users/settingsLayout/type/userTypes";
 import { useAtomValue } from "jotai";
 import { userInfoAtom } from "../../../state/jotai";
-import type {
-  ListContactsParams,
-  ListContactsResponse,
-} from "../../../src/API";
-import { json } from "stream/consumers";
+import { notify } from "../../../components/users/settingsLayout/ProfileInfo";
 
 function contacts() {
   let info: UserInfo = {
@@ -34,6 +27,8 @@ function contacts() {
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [display, setDisplay] = useState<boolean>(false);
   const [contacts, setContacts] = useState<string[]>([]);
+  const [contactName, setContactName] = useState<string>("");
+  const [show, setShow] = useState<boolean>(false);
   useEffect(() => {
     //   if (!auth) {
     //     router.push("/");
@@ -91,6 +86,37 @@ function contacts() {
     }
   };
 
+  const add_contacts = async () => {
+    try {
+      const headers = new Headers();
+      headers.append("content-type", "application/json");
+      headers.append(
+        "x-custom-header",
+        JSON.stringify([info.idToken, info.oAuthIdToken, contactName])
+      );
+      await fetch("/api/user/mutation/addContacts", {
+        method: "POST",
+        headers: headers,
+        body: "",
+      })
+        .then((response) => response.json())
+        .then(async (data) => {
+          const msg = data.data.addContacts;
+
+          if (msg.message.includes("List updated")) {
+            notify(msg.message, "success");
+            list_contacts();
+          } else if (msg.message.includes("USERNAME Not Exists")) {
+            notify(msg.message, "warn");
+          } else {
+            notify(msg.errorMessage, "error");
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
     handleSearch();
@@ -101,17 +127,16 @@ function contacts() {
       setDisplay(true);
       const headers = new Headers();
       headers.append("content-type", "application/json");
-      headers.append(
-        "x-custom-header",
-        JSON.stringify(contacts)
+      headers.append("x-custom-header", JSON.stringify(contacts));
+
+      const response = await fetch(
+        `/api/user/search_user?searchTerm=${searchTerm}`,
+        {
+          method: "POST",
+          headers: headers,
+          body: "",
+        }
       );
-      // ["Zohaib","Sarfaraz","mzohaib10092001@gmail.com"]
-      
-      const response = await fetch(`/api/user/search_user?searchTerm=${searchTerm}`, {
-        method: "POST",
-        headers: headers,
-        body: "",
-      });
 
       const results: string[] = await response.json();
       setSearchResults(results);
@@ -133,8 +158,8 @@ function contacts() {
 
   return (
     <>
-      <div className=" text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden">
-        <div className="w-[50%] px-2 mx-auto pt-24 pb-4">
+      <div className=" text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10">
+        <div className={`${show?"opacity-40":""} w-[50%]  px-2 mx-auto pt-24 pb-4`}>
           <div className="mx-auto flex items-center justify-between lg:w-[82%] border-b border-gray-200 md:mb-12">
             <input
               type="text"
@@ -156,10 +181,7 @@ function contacts() {
           <div>
             {display
               ? searchResults.map((result) => {
-                  const highlightedUsername = highlightText(
-                    result,
-                    searchTerm
-                  );
+                  const highlightedUsername = highlightText(result, searchTerm);
 
                   return (
                     <div
@@ -228,12 +250,76 @@ function contacts() {
                 })
               : ""}
           </div>
-          <div
+          <button
             className="absolute bottom-8 right-8 hover:shadow-lg rounded-full hover:cursor-pointer"
             title="Add Contacts"
-            onClick={()=>{}}
+            onClick={() => {
+              setShow(true);
+            }}
           >
             <BsPlusCircleFill className=" text-5xl" />
+          </button>
+        </div>
+        <div
+          id="authentication-modal"
+          tabIndex={-1}
+          aria-hidden="true"
+          className={`fixed flex items-center justify-center  top-0 left-0 right-0 z-50  w-[100vw] p-4 ${
+            !show ? "hidden" : ""
+          } overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
+        >
+          <div className="absolute w-[35vw] bg-white rounded-lg border-2 dark:bg-gray-700 shadow-md">
+            <button
+              type="button"
+              className="absolute right-2.5 mt-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+              onClick={() => setShow(false)}
+            >
+              <svg
+                aria-hidden="true"
+                className="w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+              <span className="sr-only">Close modal</span>
+            </button>
+            <div className="px-6 py-6 lg:px-8">
+              <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                Add Contact
+              </h3>
+                <div>
+                  <label
+                    htmlFor="contactname"
+                    className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+                  >
+                    Enter Contact Name <span className="text-red-800" title="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="contactname"
+                    id="contact"
+                    value={contactName}
+                    className="bg-gray-50 border text-md border-gray-300 text-gray-900 rounded-lg focus:ring-[#0890b9] focus:border-[#0890b9] block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    placeholder="Enter Contact Name"
+                    onChange={(e) => setContactName(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <button
+                  className={`w-full mt-3 text-white ${contactName==''?"bg-[#8bbcca]":"bg-[#0890b9] hover:underline hover:bg-[#06799c]"}   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-[#0890b9] dark:hover:bg-[#087b9e] dark:focus:ring-[#0890b9]`}
+                  disabled={contactName==''?true:false}
+                  onClick={()=>{add_contacts();setShow(false);}}
+                >
+                  Add to your Contact
+                </button>
+            </div>
           </div>
         </div>
       </div>

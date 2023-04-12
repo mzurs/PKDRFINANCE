@@ -1,32 +1,24 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export interface Contact {
-  id: number;
-  username: string;
-  email: string
-}
-
-//To be fetch from DynamoDB
-const users: Contact[] = [
-  { id: 1, username: "example1", email: "example@example.com" },
-  { id: 2, username: "example2", email: "example@example.com" },
-  { id: 3, username: "example3", email: "example@example.com" },
-];
-
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Contact[]>
+  req: any,
+  res: any
 ) {
-  const searchTerm = req.query.searchTerm as string;
+  if (req.method === "POST") {
+    const users: any = JSON.parse(req.headers["x-custom-header"]);
+    console.log("USERS = " + users);
 
-  const searchResults = await searchUsers(searchTerm);
+    const searchTerm = req.query.searchTerm as string;
 
-  res.status(200).json(searchResults);
+    const searchResults = await searchUsers(searchTerm, users);
+
+    res.status(200).json(searchResults);
+  }
 }
 
-async function searchUsers(searchTerm: string): Promise<Contact[]> {
-  const filteredUsers = users.filter((user) =>
-    user.username.toLowerCase().includes(searchTerm.toLowerCase())
+async function searchUsers(searchTerm: string, users: string[]): Promise<string[]> {
+  const filteredUsers = users.filter((item) =>
+    item.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return filteredUsers;

@@ -6,7 +6,6 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const users: any = JSON.parse(req.headers["x-custom-header"]);
-    console.log("USERS = " + users);
 
     const searchTerm = req.query.searchTerm as string;
 

@@ -231,7 +231,7 @@ function contacts() {
           <div
             className="absolute bottom-8 right-8 hover:shadow-lg rounded-full hover:cursor-pointer"
             title="Add Contacts"
-            onClick={list_contacts}
+            onClick={()=>{}}
           >
             <BsPlusCircleFill className=" text-5xl" />
           </div>

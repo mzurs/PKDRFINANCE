@@ -2,36 +2,77 @@ import React, { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { userInfoAtom, web3authAtom } from "../../../state/jotai";
 import { UserInfo } from "./type/userTypes";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProfileInfo = () => {
   const info: UserInfo = useAtomValue(userInfoAtom);
-  const [data, setData] = useState<{
-    userName: string;
-  }>({
-    userName: "CHECK",
-  });
+  const [name, setName] = useState<string>(info?.name);
+  const [dis, setDis] = useState<boolean>(false);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const notify = (message: string, type:string) => {
+    switch (type) {
+      case "success":
+        toast.success(message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+        break;
+      case "warn":
+        toast.warn(message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+        break;
+      case "error":
+        toast.error(message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+        break;
+    
+      default :
+        break;
+    }
+  };
 
   const handleSubmit = async () => {
-    const formData = {
-      data,
-    };
     const headers = new Headers();
     headers.append("content-type", "application/json");
     headers.append(
       "x-custom-header",
-      JSON.stringify([info.idToken, info.oAuthIdToken])
+      JSON.stringify([info.idToken, info.oAuthIdToken, name])
     );
     await fetch("/api/mutation/setUserName", {
       method: "POST",
       headers: headers,
-      body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then(async (data) => {
-        
         if (data) {
-          console.log(`RESPONSE: ${Object.values(data)}`
-          );
+          notify(data.data.setUserName,"error");
         }
       });
   };
@@ -39,6 +80,7 @@ const ProfileInfo = () => {
   return (
     <div>
       <div className="pl-4">
+        <ToastContainer />
         <h1 className="md:text-2xl text-xl font-medium md:pt-10 pt-8">
           Profile Information
         </h1>
@@ -56,13 +98,38 @@ const ProfileInfo = () => {
                   <dt className="text-md font-sm md:text-lg text-gray-500">
                     Full name
                   </dt>
-                  <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
-                    {info?.name}
+                  <dd
+                    className={`mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0`}
+                  >
+                    <input
+                      type="text"
+                      value={name}
+                      disabled={dis ? false : true}
+                      onChange={handleInputChange}
+                      className={`${
+                        !dis ? "outline-none" : "border border-black"
+                      }`}
+                    />
                     <button
-                      className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline"
-                      onClick={handleSubmit}
+                      className={`${
+                        dis ? "hidden" : ""
+                      } float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline`}
+                      onClick={() => {
+                        dis ? setDis(false) : setDis(true);
+                      }}
                     >
                       Update
+                    </button>
+                    <button
+                      className={`${
+                        !dis ? "hidden" : ""
+                      } float-right py-0.5 px-2 mr-5 rounded-lg text-[#009ac9] hover:underline hover:text-[#037da2]`}
+                      onClick={() => {
+                        handleSubmit();
+                        dis ? setDis(false) : setDis(true);
+                      }}
+                    >
+                      Save
                     </button>
                   </dd>
                 </div>

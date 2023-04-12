@@ -46,7 +46,7 @@
     "react-notifications-component": "^4.0.1",
     "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1",
-    "react-toastify": "^9.1.1",
+    "react-toastify": "^9.1.2",
     "react-top-loading-bar": "^2.3.1",
     "request": "^2.88.2",
     "stripe": "^8.185.0",

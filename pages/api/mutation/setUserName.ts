@@ -1,53 +1,53 @@
 import { API, Amplify } from "aws-amplify";
-import {SetUserName, SetUserNameMutation} from "../../../src/API"
+import {SetUserName, SetUserNameMutation, SetUserNameMutationVariables} from "../../../src/API"
 import awsExports from "../../../src/aws-exports";
 import { setUserName } from "../../../src/graphql/mutations";
 import {getUserInfo} from "../mutation/createUser";
 
 Amplify.configure(awsExports);
 
-async function setUserNameAPI(userData: any, idToken: string, oAuthIdToken: string)
+async function setUserNameAPI(id:string, attrvalue:string):Promise<SetUserNameMutation|any>
 {
-    let returnResult: boolean = false;
-    const { email, eth_address } = await getUserInfo(idToken);
-
-    let user:SetUserName = {
-        id: email,
-        userName: userData.data.userName
+    let username:SetUserName = {
+        id: id,
+        userName: attrvalue
     } 
 
-    let variables = {
-        user : user
+    let variables:SetUserNameMutationVariables = {
+        setname : username
     }
 
     const authToken = "abc";
 
     try {
-        const res: any = await API.graphql({
-            query: setUserName,
-            variables,
-            authToken,
-        })as {data : SetUserNameMutation};
-        returnResult = true;
-        return { res, returnResult };
+        const res = (await API.graphql({
+          query: setUserName,
+          variables,
+          authToken,
+        })) as { data: SetUserNameMutation };
     
-    } catch (error) {
-        console.log("ERROR OCCURRED!");
-        const res=error;
-        return { res, returnResult };
-    }
+        console.log(
+          "🚀 ~ file: getUsersCount.ts:16 ~ getTotalSupply ~ res:",
+          res.data
+        );
+        return res;
+      } catch (error) {
+        return error as SetUserNameMutation;
+      }
 }
 
 
-export default async function handler(request:any, response:any) {
-    if (request.method === 'POST') {
+export default async function handler(req:any, res:any) {
+    if (req.method === 'POST') {
 
-    const authTokens = JSON.parse(request.headers["x-custom-header"]);
+    // console.log("Request = ",req.body);
 
-    // console.log("Request = ",request.body);
+    const authTokens = JSON.parse(req.headers["x-custom-header"]);
+    const { email, eth_address } = await getUserInfo(authTokens[0]);
 
-    const { res, returnResult } = await setUserNameAPI(request.body, authTokens[0], authTokens[1]);
-
-    // console.log("SET USERNAME API = "+ Object.values({ message: JSON.stringify([res,returnResult])}));
-    response.status(200).json({ message: JSON.stringify([res,returnResult])});
+    const  result = await setUserNameAPI(
+        email,
+        authTokens[2]
+      );
+      res.status(200).json(result);
 }}

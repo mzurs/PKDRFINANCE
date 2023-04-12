@@ -14,25 +14,25 @@ import type {
   ListContactsParams,
   ListContactsResponse,
 } from "../../../src/API";
+import { json } from "stream/consumers";
 
 function contacts() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<Contact[]>([]);
   const [display, setDisplay] = useState<boolean>(false);
+  const [contacts, setContacts] = useState<string[]>([]);
   const info: UserInfo = useAtomValue(userInfoAtom);
-  // useEffect(() => {
-  //   if (!auth) {
-  //     router.push("/");
-  //   }
-  //   }
-  // );
+  useEffect(() => {
+    //   if (!auth) {
+    //     router.push("/");
+    //   }
+    list_contacts();
+    setDisplay(false);
+  }, []);
 
   const list_contacts = async () => {
-    const data: ListContactsParams = { id: info.email };
-    const formData = {
-      data,
-    };
-    const headers = new Headers();
+    try {
+      const headers = new Headers();
     headers.append("content-type", "application/json");
     headers.append(
       "x-custom-header",
@@ -41,14 +41,42 @@ function contacts() {
     await fetch("/api/user/query/listContacts", {
       method: "POST",
       headers: headers,
-      body: JSON.stringify(formData),
+      body: ""
     })
       .then((response) => response.json())
       .then(async (data) => {
-        if (data) {
-          console.log(`RESPONSE of list contacts: ${Object.values(data)}`);
+        const listContacts = data.data.listContacts;
+
+        if ("contacts" in listContacts) {
+          setContacts(Object.values(listContacts.contacts));
+          console.log(`List of contacts = ${listContacts.contacts}`);
+        } else if ("message" in listContacts) {
+          console.log(`Message = ${listContacts.message}`);
+        } else {
+          console.log(`Error Message = ${listContacts.errorMessage}`);
         }
+        // Comment as '__typename' is not in resoponse
+        // switch (listContacts.__typename) {
+        //   case 'ListContactsResult':
+        //     const contacts = listContacts.contacts;
+        //     console.log('Contacts:', contacts);
+        //     break;
+        //   case 'UserNotExists':
+        //     const message = listContacts.message;
+        //     console.log('Message:', message);
+        //     break;
+        //   case 'Error':
+        //     const errorMessage = listContacts.errorMessage;
+        //     console.log('Error:', errorMessage);
+        //     break;
+        //   default:
+        //     console.log('Unknown data type:', listContacts.__typename);
+        //     break;
+        // }
       });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,13 +85,18 @@ function contacts() {
   };
 
   const handleSearch = async () => {
-    setDisplay(true);
+    if(searchTerm!=""){
+      setDisplay(true);
     const response = await fetch(
       `/api/user/search_user?searchTerm=${searchTerm}`
     );
     const results: Contact[] = await response.json();
     setSearchResults(results);
     console.log(searchResults);
+    }
+    else{
+      setDisplay(false);
+    }
   };
 
   function highlightText(text: string, searchTerm: string) {
@@ -130,7 +163,7 @@ function contacts() {
                             pathname: "/user/users/transfer",
                             query: {
                               name: result.username,
-                              email: result.email,
+                              email: "example@example.com",
                             },
                           }}
                         >
@@ -141,327 +174,44 @@ function contacts() {
                   );
                 })
               : ""}
-            {!display ? (
-              <>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
+            {!display
+              ? contacts.map((result) => {
+                  return (
+                    <div
+                      key={result}
+                      className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col"
                     >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
+                      <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
+                        <GoPerson className="text-3xl text-gray-100" />
+                      </div>
+                      <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
+                        <div className="mx-4 float-left">
+                          <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
+                            {result}
+                          </h2>
+                          <p className="text-lg">example@gmail.com</p>
+                        </div>
+                        <Link
+                          className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
+                          href={{
+                            pathname: "/user/users/transfer",
+                            query: { name: result, email: "example@gmail.com" },
+                          }}
+                        >
+                          Pay Now
+                        </Link>
+                      </div>
                     </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex items-center mx-auto lg:w-[95%] border-b pb-4 mb-10 border-gray-200 sm:flex-row flex-col">
-                  <div className="rounded-full p-2 bg-[#0ab0e3] mx-2">
-                    <GoPerson className="text-3xl text-gray-100" />
-                  </div>
-                  <div className="flex-grow flex items-center justify-between  sm:text-left text-center mt-6 sm:mt-0 text-sm">
-                    <div className="mx-4 float-left">
-                      <h2 className="text-gray-900 text-xl title-font font-medium mb-1">
-                        Zohaib
-                      </h2>
-                      <p className="text-lg">example@gmail.com</p>
-                    </div>
-                    <Link
-                      className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
-                      href={{
-                        pathname: "/user/users/transfer",
-                        query: { name: "Zohaib", email: "example@gmail.com" },
-                      }}
-                    >
-                      Pay Now
-                    </Link>
-                  </div>
-                </div>
-                <div
-                  className="absolute bottom-8 right-8 hover:shadow-lg rounded-full hover:cursor-pointer"
-                  title="Add Contacts"
-                  onClick={list_contacts}
-                >
-                  <BsPlusCircleFill className=" text-5xl" />
-                </div>
-              </>
-            ) : (
-              ""
-            )}
+                  );
+                })
+              : ""}
+          </div>
+          <div
+            className="absolute bottom-8 right-8 hover:shadow-lg rounded-full hover:cursor-pointer"
+            title="Add Contacts"
+            onClick={list_contacts}
+          >
+            <BsPlusCircleFill className=" text-5xl" />
           </div>
         </div>
       </div>

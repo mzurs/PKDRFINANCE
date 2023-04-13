@@ -7,6 +7,7 @@ import { UserInfo } from "../../../components/users/settingsLayout/type/userType
 import { useAtomValue } from "jotai";
 import { userInfoAtom } from "../../../state/jotai";
 import { notify } from "../../../components/users/settingsLayout/ProfileInfo";
+import { ThreeDots } from "react-loader-spinner";
 
 function contacts() {
   let info: UserInfo = {
@@ -29,6 +30,8 @@ function contacts() {
   const [contacts, setContacts] = useState<string[]>([]);
   const [contactName, setContactName] = useState<string>("");
   const [show, setShow] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(false);
+
   useEffect(() => {
     //   if (!auth) {
     //     router.push("/");
@@ -87,6 +90,7 @@ function contacts() {
   };
 
   const add_contacts = async () => {
+    setLoader(true);
     try {
       const headers = new Headers();
       headers.append("content-type", "application/json");
@@ -103,7 +107,7 @@ function contacts() {
         .then(async (data) => {
           const msg = data.data.addContacts;
           setContactName("");
-
+          setLoader(false);
           if (msg.message.includes("List updated")) {
             notify(msg.message, "success");
             list_contacts();
@@ -159,7 +163,7 @@ function contacts() {
 
   return (
     <>
-      <div className=" text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10">
+      <div className={`${loader?"opacity-40":""} text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}>
         <div className={`${show?"opacity-40":""} w-[50%]  px-2 mx-auto pt-24 pb-4`}>
           <div className="mx-auto flex items-center justify-between lg:w-[82%] border-b border-gray-200 md:mb-12">
             <input
@@ -323,7 +327,29 @@ function contacts() {
             </div>
           </div>
         </div>
+        
       </div>
+      <div
+            id="loader"
+            tabIndex={-1}
+            aria-hidden="true"
+            className={`fixed flex items-center justify-center  top-0 left-0 right-0 z-50  w-[100vw] p-4 ${
+              !loader ? "hidden" : ""
+            } overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
+          >
+            <div className="absolute w-[5vw] bg-transparent dark:bg-gray-700 flex items-center justify-center">
+              <ThreeDots
+                height="120"
+                width="120"
+                radius="9"
+                color="#028db7"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={loader}
+              />
+            </div>
+          </div>
     </>
   );
 }

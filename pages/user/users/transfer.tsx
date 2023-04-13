@@ -3,7 +3,6 @@ import { userInfoAtom, web3authAtom, loading } from "../../../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { UserInfo } from "../../../components/users/settingsLayout/type/userTypes";
 import { useRouter } from "next/router";
-import Loading from "../../../components/shared/loading/Loading";
 import { ThreeDots } from "react-loader-spinner";
 import { notify } from "../../../components/users/settingsLayout/ProfileInfo";
 
@@ -67,24 +66,34 @@ const transfer = () => {
         .then((response) => response.json())
         .then(async (d) => {
           console.log(d);
+          setLoader(false);
           if (d.message.includes("Successfully transfer")) {
             notify(
               `Amount of ${Amount} PKDR has been transfered to ${obj.to_name} successfully 🎉`,
               "success"
-            );
-            setLoader(false);
-            setTimeout(() => {
-              router.push("/user/users/user_contacts");
-            }, 2000);
-          } else {
-            notify(d.message, "error");
+            );            
+            
+          } else if (d.message.includes("cannot estimate gas")) {
+            notify("Transaction failed due to some internal problem ❌", "error");
           }
+          else{
+            notify(d.message, "warn");
+          }
+          setTimeout(() => {
+            router.push("/user/users/user_contacts");
+          }, 2000);
         });
     } catch (error) {
       console.log(error);
+      setLoader(false);
       notify(error as string, "error");
     }
+    setAmount("0");
+    setName("");
+    setPurpose("none");
   }
+  
+
 
   if (auth) {
     if (info) {
@@ -156,6 +165,7 @@ const transfer = () => {
                       Account Holder Name
                     </label>
                     <input
+
                       className="text-lg appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       disabled
                       id="grid-last-name"

@@ -102,6 +102,7 @@ function contacts() {
         .then((response) => response.json())
         .then(async (data) => {
           const msg = data.data.addContacts;
+          setContactName("");
 
           if (msg.message.includes("List updated")) {
             notify(msg.message, "success");

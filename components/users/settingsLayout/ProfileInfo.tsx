@@ -73,7 +73,13 @@ const ProfileInfo = () => {
       .then((response) => response.json())
       .then(async (data) => {
         if (data) {
-          notify(data.data.setUserName,"error");
+          let msg = data.data.setUserName;
+          if(msg.toLowerCase().includes("username created")){
+            notify(data.data.setUserName,"success");
+          }
+          else{
+            notify(data.data.setUserName,"error");
+          }
         }
       });
   };

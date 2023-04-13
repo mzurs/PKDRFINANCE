@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import auth from "./api/auth";
 import { useHydrateAtoms } from "jotai/utils";
 import Cookies from "js-cookie";
+
 const Home = ({ role, isAuth, userTag }: any) => {
   const router = useRouter();
 

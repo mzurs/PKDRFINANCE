@@ -7,35 +7,39 @@ import getAddressFromUserName from "./getAddressByUserName";
 import { ReturnParamsForAddressByUserName } from "./types";
 import { API, Amplify } from "aws-amplify";
 import awsExports from "../../../../../src/aws-exports";
+import { parsedData } from "../../../../user/users/transfer";
 
 Amplify.configure(awsExports);
 
 const transfer = async (
-  tokens: string[],
+  authTokens: string[],
   transferFromParams: TransferFromParams
-): Promise<TransferFromMutation> => {
+): Promise<TransferFromMutation | any> => {
   const authToken = "abc";
   const variables = {
     transferFromParams: transferFromParams,
   };
-  // try {
-  const res = (await API.graphql({
-    query: transferFrom,
-    variables,
-    authToken,
-  })) as { data: TransferFromMutation };
+  try {
+    const res = (await API.graphql({
+      query: transferFrom,
+      variables,
+      authToken,
+    })) as { data: TransferFromMutation };
 
-  console.log(res.data);
-  return res.data;
-  // } catch (err) {}
+    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
 };
 
 export default async function handler(req: any, res: any) {
-  //request params val's
-  const tokens = ["a"];
-  const fromUserName = "Sarfaraz";//req.body
-  const toUserName = "Zohaib";//req.body
-  const amount = "10";//req.body
+  const authTokens = JSON.parse(req.headers["x-custom-header"]);
+  let body:parsedData = req.body;
+  const fromUserName = body.from_name;
+  const toUserName = body.to_name;
+  const amount:string = body.amount;
 
   //res values
   let message: string = "";
@@ -43,23 +47,23 @@ export default async function handler(req: any, res: any) {
 
   //params obj
   const transferFromParams: TransferFromParams = {
-    from: null,
-    to: null,
-    amount: null,
+    from: "",
+    to: "",
+    amount: "",
   };
 
   const fromAddress: ReturnParamsForAddressByUserName =
-    await getAddressFromUserName(tokens, fromUserName);
+    await getAddressFromUserName(authTokens, fromUserName);
   const toAddress: ReturnParamsForAddressByUserName =
-    await getAddressFromUserName(tokens, toUserName);
-  console.log(fromAddress);
-  console.log(toAddress);
+    await getAddressFromUserName(authTokens, toUserName);
+    
   if (fromAddress.result && toAddress.result) {
     transferFromParams.from = fromAddress.value;
     transferFromParams.to = toAddress.value;
     transferFromParams.amount = amount;
+
     const transferResult: TransferFromMutation = await transfer(
-      tokens,
+      authTokens,
       transferFromParams
     );
     message = transferResult.transferFrom!.message!;

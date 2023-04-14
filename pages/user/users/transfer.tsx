@@ -55,7 +55,7 @@ const transfer = () => {
 
   useEffect(() => {
     if (!isVerified) {
-      router.push("/user/users/settings");
+      router.push("/user/users/");
     } else {
       if (user == "") {
         setLoader(true);

@@ -2,10 +2,16 @@ import { API, Amplify } from "aws-amplify";
 import {SetUserName, SetUserNameMutation, SetUserNameMutationVariables} from "../../../src/API"
 import awsExports from "../../../src/aws-exports";
 import { setUserName } from "../../../src/graphql/mutations";
-import {getUserInfo} from "../mutation/createUser";
+import * as jwt from "jsonwebtoken";
 
 Amplify.configure(awsExports);
 
+export const getUserInfo = async (idToken: string) => {
+  const decoded: any = await jwt.decode(idToken);
+  const email = decoded.email;
+ 
+  return { email };
+};
 async function setUserNameAPI(id:string, attrvalue:string):Promise<SetUserNameMutation|any>
 {
     let username:SetUserName = {
@@ -43,7 +49,7 @@ export default async function handler(req:any, res:any) {
     // console.log("Request = ",req.body);
 
     const authTokens = JSON.parse(req.headers["x-custom-header"]);
-    const { email, eth_address } = await getUserInfo(authTokens[0]);
+    const { email } = await getUserInfo(authTokens[0]);
 
     const  result = await setUserNameAPI(
         email,

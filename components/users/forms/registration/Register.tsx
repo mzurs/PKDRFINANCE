@@ -16,6 +16,8 @@ import Loading from "../../../shared/loading/Loading";
 import PushNotification from "../../../shared/PushNotification";
 import router, { Router, useRouter } from "next/router";
 import Cookies from "js-cookie";
+import { notify } from "../../settingsLayout/ProfileInfo";
+
 const Register = () => {
   const [data, setData] = useState<{
     ADDRESS: string;
@@ -51,8 +53,34 @@ const Register = () => {
   const [showModal, setShowModal] = useState(true);
   const [web3auth] = useAtom(web3authAtom);
   const [verified, setVerified] = useAtom(isVerified);
-
+  const [signOut, setSignOut] = useState<boolean>(false);
   const [loadingState, setlLoadingState] = useAtom(loading);
+
+
+  // const approveHandler = async () => {
+  //   const headers = new Headers();
+  //   headers.append("content-type", "application/json");
+  //   headers.append(
+  //     "x-custom-header",
+  //     JSON.stringify([
+  //       (web3auth as unknown as any).idToken,
+  //       (userInfo as unknown as any).oAuthIdToken,
+  //       privKey!,
+  //     ])
+  //   );
+
+  //   await fetch("/api/mutation/approve", {
+  //     method: "POST",
+  //     headers: headers,
+  //   })
+  //     .then((res) => res.json())
+  //     .then(async (data) => {
+  //       console.log("Approve Data: ", data);
+  //       if (data.result) {
+  //         setApprove(false);
+  //       }
+  //     });
+  // };
   const handleSubmit = async () => {
     // const idToken = (web3auth as any).idToken;
     const formData = {
@@ -61,7 +89,7 @@ const Register = () => {
     };
 
     handleCloseModal();
-    setlLoadingState(true);
+    setlLoadingState(false);
     const headers = new Headers();
     headers.append("content-type", "application/json");
     headers.append(
@@ -69,6 +97,7 @@ const Register = () => {
       JSON.stringify([
         (web3auth as unknown as any).idToken,
         (userInfo as unknown as any).oAuthIdToken,
+        privKey!,
       ])
     );
     await fetch("/api/mutation/createUser", {
@@ -76,36 +105,46 @@ const Register = () => {
       headers: headers,
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then(async (data) => {
-        console.log(`RESPONSE: ${JSON.stringify(data)}`);
-        setlLoadingState(false);
-        // router.push("/");
-        if (data) {
-          console.log(
-            "🚀 ~ file: Register.tsx:85 ~ .then ~ data:",
-            JSON.stringify(data)
-          );
-          // try {
-          //   await web3authState?.logout();
-          //   // setProvider(null);
-          //   setAuth(null);
-          //   setPrivKey(null);
-          //   setUserInfo(null);
-          //   Cookies.remove("web3auth");
-          //   Cookies.remove("pub_key");
-          //   Cookies.remove("idToken");
-          //   Cookies.remove("oAuthIdToken");
-          //   window.location.href =
-          //     "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=http://localhost:3000&redirect_uri=http://localhost:3000";
-          // } catch (error: any) {
-          //   console.log(
-          //     `Error while signing out from Header Component: \n ERROR MESSAGE: ${error.message}`
-          //   );
-          // }
+        console.log("🚀 ~ file: Register.tsx:80 ~ handleSubmit ~ data:", data.data.createUser.errorMessage);
+        if (data.result) {
+          // setApprove(true);
+          notify("User Created Successfully!!!", "success");
+        } else {
+          notify(data.data.createUser.errorMessage, "error");
         }
+        // console.log(data); --------------------------------error hadling logic and change of states-----------------------
+        setSignOut(true);
       });
   };
+
+  const logout = async () => {
+    if (!web3authState) {
+      console.log("web3auth not initialized yet");
+      return;
+    }
+    try {
+      await web3authState.logout();
+      setProviderAtomState(null);
+      setAuth(null);
+      setPrivKey(null);
+      setUserInfo(null);
+      setVerified(false);
+      Cookies.remove("web3auth");
+      Cookies.remove("pub_key");
+      Cookies.remove("idToken");
+      Cookies.remove("oAuthIdToken");
+      window.location.href =
+        "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=http://localhost:3000&redirect_uri=http://localhost:3000 hover:font-xl";
+      localStorage.clear();
+    } catch (error: any) {
+      console.log(
+        `Error while signing out from Registerw Component: \n ERROR MESSAGE: ${error.message}`
+      );
+    }
+  };
+
   const handleNextClick = () => {
     setCurrentPage(currentPage + 1);
   };
@@ -120,6 +159,21 @@ const Register = () => {
   if (loadingState == true) {
     // return <PushNotification/>
     return <Loading state={true} />;
+  } else if (signOut == true) {
+    return (
+      <div className="flex pt-[20.6rem] w-[100vw] overflow-x-hidden">
+        <div className="max-w-100 mx-auto bg-white">
+          {" "}
+          <button
+            type="button"
+            className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+            onClick={logout}
+          >
+            Sign Out{" "}
+          </button>
+        </div>
+      </div>
+    );
   } else {
     return (
       <>
@@ -137,6 +191,7 @@ const Register = () => {
                       <i>Full Name</i>
                     </label>
                     <input
+                      required
                       className="border border-black p-2 w-full"
                       type="text"
                       value={String(data.FULL_NAME)}
@@ -150,6 +205,7 @@ const Register = () => {
                       <i>CNIC</i>{" "}
                     </label>
                     <input
+                      required
                       className="border border-black p-2 w-full"
                       type="text"
                       value={String(data.cnic)}
@@ -163,6 +219,7 @@ const Register = () => {
                       <i>Address</i>{" "}
                     </label>
                     <input
+                      required
                       className="border border-black p-2 w-full"
                       type="text"
                       value={String(data.ADDRESS)}
@@ -188,6 +245,7 @@ const Register = () => {
                       <i>Postal Code</i>{" "}
                     </label>
                     <input
+                      required
                       className="border border-black p-2 w-full"
                       type="text"
                       value={String(data.POSTAL_CODE)}
@@ -201,6 +259,7 @@ const Register = () => {
                       <i>Phone Number</i>{" "}
                     </label>
                     <input
+                      required
                       className="border border-black p-2 w-full"
                       type="number"
                       value={String(data.PHONE_NUMBER)}
@@ -214,6 +273,7 @@ const Register = () => {
                       <i> Father(or Husband Name)</i>{" "}
                     </label>
                     <input
+                      required
                       className="border border-black p-2 w-full"
                       type="text"
                       value={String(data.FATHER_OR_HUSBAND_NAME)}
@@ -250,6 +310,7 @@ const Register = () => {
                       <i> City</i>{" "}
                     </label>
                     <input
+                      required
                       className="border border-black p-2 w-full"
                       type="text"
                       value={String(data.CITY)}
@@ -263,6 +324,7 @@ const Register = () => {
                       <i> Country</i>{" "}
                     </label>
                     <input
+                      required
                       className="border border-black p-2 w-full"
                       type="text"
                       value={String(data.COUNTRY)}
@@ -276,6 +338,7 @@ const Register = () => {
                       <i> DateOfBirth</i>{" "}
                     </label>
                     <input
+                      required
                       placeholder="mm-dd-yy"
                       className="border border-black p-2 w-full"
                       type="date"

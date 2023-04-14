@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { userInfoAtom, web3authAtom, loading } from "../../../state/jotai";
+import React, { useEffect, useState } from "react";
+import {
+  userInfoAtom,
+  web3authAtom,
+  loading,
+  isVerified,
+} from "../../../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { UserInfo } from "../../../components/users/settingsLayout/type/userTypes";
 import { useRouter } from "next/router";
@@ -22,21 +27,84 @@ export type parsedData = {
   amount: string;
 };
 
-const transfer = () => {
+const transfer = (d: any) => {
+  let info: UserInfo = {
+    email: "",
+    name: "",
+    profileImage: "",
+    aggregateVerifier: "",
+    verifier: "",
+    verifierId: "",
+    typeOfLogin: "",
+    dappShare: "",
+    idToken: "",
+    oAuthIdToken: "",
+    oAuthAccessToken: "",
+  };
+
   const [auth, setAuth] = useAtom(web3authAtom);
-  const info: UserInfo = useAtomValue(userInfoAtom);
+  info = useAtomValue(userInfoAtom);
   const [Amount, setAmount] = useState<string>("0");
   const [Purpose, setPurpose] = useState<string>("none");
-  const [name, setName] = useState<string>("");
   const [loader, setLoader] = useState<boolean>(false);
   const router = useRouter();
   const data = router.query;
+  const [username, setUserName] = useState<string>("");
+  let count=1;
+
+  useEffect(() => {
+    if (!isVerified) {
+      router.push("/user/users/settings");
+    } else {
+      if (username == "" && count==1) {
+        count++;
+        checkUser();
+      }
+    }
+  }, []);
+
+  async function checkUser() {
+    if(username!=""){
+      if(await fetchUserName()==false){
+        notify("Username is not set: Set your Username first","error");
+        setTimeout(()=>{router.push("/user/users/settings");}, 3000);          
+      }
+    }
+  }
+
+  async function fetchUserName(): Promise<boolean> {
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([info.idToken, info.oAuthIdToken])
+    );
+    try {
+      await fetch("http://localhost:3000/api/user/query/getUserAttrInfo", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ attr_name: "USERNAME" }),
+      })
+        .then((response) => response.json())
+        .then(async (d) => {
+          setUserName(d.data.getUserInfo.value);
+          console.log("UserName = " + d.data.getUserInfo.value);
+          if(d.data.getUserInfo.message.includes("Not found")){
+            return false;
+          }
+          return d.data.getUserInfo.success;
+        });
+    } catch (error) {
+      return false;
+    }
+    return false;
+  }
 
   async function handletransfer(e: any) {
     setLoader(true);
     e.preventDefault();
     let obj: transferData = {
-      from_name: name,
+      from_name: username,
       to_name: data.name as string,
       amount: Amount,
       purpose: Purpose,
@@ -71,12 +139,13 @@ const transfer = () => {
             notify(
               `Amount of ${Amount} PKDR has been transfered to ${obj.to_name} successfully 🎉`,
               "success"
-            );            
-            
+            );
           } else if (d.message.includes("cannot estimate gas")) {
-            notify("Transaction failed due to some internal problem ❌", "error");
-          }
-          else{
+            notify(
+              "Transaction failed due to some internal problem ❌",
+              "error"
+            );
+          } else {
             notify(d.message, "warn");
           }
           setTimeout(() => {
@@ -89,17 +158,18 @@ const transfer = () => {
       notify(error as string, "error");
     }
     setAmount("0");
-    setName("");
     setPurpose("none");
   }
-  
-
 
   if (auth) {
     if (info) {
       return (
         <>
-          <div className={`${loader?"opacity-40":""} w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}>
+          <div
+            className={`${
+              loader ? "opacity-40" : ""
+            } w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}
+          >
             <div>
               <h1 className="md:pt-[5.5rem] pt-3 md:text-4xl text-2xl font-bold pl-8 pb-0 mb-0">
                 Send Money
@@ -132,11 +202,11 @@ const transfer = () => {
                     </label>
                     <input
                       className="text-lg appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      // disabled
+                      disabled
                       id="grid-last-name"
                       type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      value={username}
+                      // onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                 </div>
@@ -165,7 +235,6 @@ const transfer = () => {
                       Account Holder Name
                     </label>
                     <input
-
                       className="text-lg appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       disabled
                       id="grid-last-name"
@@ -280,7 +349,7 @@ const transfer = () => {
                       Number(Amount) < 2 ||
                       Purpose == "none" ||
                       data == null ||
-                      name === ""
+                      username === ""
                         ? "bg-[#81adba] disabled cursor-default"
                         : "bg-[#028db7] hover:bg-[#017699] hover:underline"
                     } px-6 py-2  mx-auto rounded-full text-white  text-xl`}
@@ -289,7 +358,7 @@ const transfer = () => {
                       Number(Amount) < 2 ||
                       Purpose == "none" ||
                       data == null ||
-                      name === ""
+                      username === ""
                         ? true
                         : false
                     }
@@ -327,5 +396,29 @@ const transfer = () => {
     }
   }
 };
+
+// export async function getServerSideProps() {
+//   let info =
+//     "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlRZT2dnXy01RU9FYmxhWS1WVlJZcVZhREFncHRuZktWNDUzNU1aUEMwdzAifQ.eyJpYXQiOjE2ODE0Nzc1NzAsImF1ZCI6IkJHVE1qSUw4Uk9MZ3FSSzhZdng5b3JHWF9ad0dmQVA3aDE5ckdrdVVvX1VPQXFRWmlHTURtRFVMc2pISGdoVFNNUmFfQXJYODVuNEVuX0FhMzZvQzE2dy1feXMiLCJub25jZSI6IjAzZGM5MTAzNjg3OTZmNTVhMjZmMDJjMTljMjZiY2E2NzE2NjQ0YzAwZDBiYWZlZjgxNTQ2YjliOTk3OTA5ODRlNSIsImlzcyI6Imh0dHBzOi8vYXBpLm9wZW5sb2dpbi5jb20iLCJ3YWxsZXRzIjpbeyJwdWJsaWNfa2V5IjoiMDJkNGZiNWIxOTliM2UxY2ViOTMzZTE5NmU4YjI0Zjk2YjMxNDI0MjMzYmIyYzQzOTUzODg1OTUzN2RhNmFiOGUzIiwidHlwZSI6IndlYjNhdXRoX2FwcF9rZXkiLCJjdXJ2ZSI6InNlY3AyNTZrMSJ9XSwiZW1haWwiOiJrMTkwMTU1QG51LmVkdS5wayIsIm5hbWUiOiJrMTkwMTU1IFN5ZWQgQW1tYXIgQWxhbSIsInZlcmlmaWVyIjoidGVzdC1wa2RyLWZpbmFuY2UiLCJ2ZXJpZmllcklkIjoiazE5MDE1NUBudS5lZHUucGsiLCJhZ2dyZWdhdGVWZXJpZmllciI6InRlc3QtcGtkci1maW5hbmNlIiwiZXhwIjoxNjgxNDgwNTcwfQ.zcOmzW9rkFBSBLCvkYFAuwemQ7ymlRhHV5lV_oBjYqtHRLWWOyjw0hmbM9d542lICn13BRe0IsNvkldIdaanGw";
+//   const headers = new Headers();
+//   headers.append("content-type", "application/json");
+//   headers.append("x-custom-header", JSON.stringify([info]));
+//   let data:any;
+//   try {
+//     await fetch("http://localhost:3000/api/user/query/getUserAttrInfo", {
+//       method: "POST",
+//       headers: headers,
+//       body: JSON.stringify({ attr_name: "USERNAME" }),
+//     })
+//       .then((response) => response.json())
+//       .then(async (d) => {
+//         console.log(d);
+//         data=d;
+//       });
+//   } catch (error) {
+//     return { props: { message: error } };
+//   }
+//   return { props: { data } };
+// }
 
 export default transfer;

@@ -65,24 +65,6 @@ function contacts() {
           } else {
             console.log(`Error Message = ${listContacts.errorMessage}`);
           }
-          // Comment as '__typename' is not in resoponse
-          // switch (listContacts.__typename) {
-          //   case 'ListContactsResult':
-          //     const contacts = listContacts.contacts;
-          //     console.log('Contacts:', contacts);
-          //     break;
-          //   case 'UserNotExists':
-          //     const message = listContacts.message;
-          //     console.log('Message:', message);
-          //     break;
-          //   case 'Error':
-          //     const errorMessage = listContacts.errorMessage;
-          //     console.log('Error:', errorMessage);
-          //     break;
-          //   default:
-          //     console.log('Unknown data type:', listContacts.__typename);
-          //     break;
-          // }
         });
     } catch (error) {
       console.log(error);

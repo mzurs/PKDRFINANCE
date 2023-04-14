@@ -27,7 +27,7 @@ export type parsedData = {
   amount: string;
 };
 
-const transfer = (d: any) => {
+const transfer = () => {
   let info: UserInfo = {
     email: "",
     name: "",
@@ -50,26 +50,36 @@ const transfer = (d: any) => {
   const router = useRouter();
   const data = router.query;
   const [username, setUserName] = useState<string>("");
-  let count=1;
+  let count = 1;
+  let user:string="";
 
   useEffect(() => {
     if (!isVerified) {
       router.push("/user/users/settings");
     } else {
-      if (username == "" && count==1) {
-        count++;
+      if (user == "") {
+        setLoader(true);
         checkUser();
       }
     }
   }, []);
 
   async function checkUser() {
-    if(username!=""){
-      if(await fetchUserName()==false){
-        notify("Username is not set: Set your Username first","error");
-        setTimeout(()=>{router.push("/user/users/settings");}, 3000);          
+    await fetchUserName().then((result) => {
+      if (result === false && user==="") {
+          if(count==1){
+            notify(
+              "Username Not Found: Set your Username first to perform transaction",
+              "error"
+            );
+            ++count;
+          }
+          setTimeout(() => {
+            router.push("/user/users/settings");
+          }, 3000);
       }
-    }
+        setLoader(false);
+    });
   }
 
   async function fetchUserName(): Promise<boolean> {
@@ -88,10 +98,8 @@ const transfer = (d: any) => {
         .then((response) => response.json())
         .then(async (d) => {
           setUserName(d.data.getUserInfo.value);
-          console.log("UserName = " + d.data.getUserInfo.value);
-          if(d.data.getUserInfo.message.includes("Not found")){
-            return false;
-          }
+          user=d.data.getUserInfo.value;
+          console.log(d);
           return d.data.getUserInfo.success;
         });
     } catch (error) {

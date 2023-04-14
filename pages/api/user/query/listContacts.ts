@@ -3,7 +3,7 @@ import awsExports from "../../../../src/aws-exports";
 import { ListContactsParams, ListContactsQuery } from "../../../../src/API";
 import { listContacts } from "../../../../src/graphql/queries";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getUserInfo } from "../../mutation/createUser";
+import { getUserInfo } from "../mutation/addContacts";
 
 Amplify.configure(awsExports);
 
@@ -38,7 +38,7 @@ const listUserContacts = async function (
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
     const authTokens = JSON.parse(req.headers["x-custom-header"]);
-    const { email, eth_address } = await getUserInfo(authTokens[0]);
+    const { email } = await getUserInfo(authTokens[0]);
     const  result = await listUserContacts(
         authTokens,
         email

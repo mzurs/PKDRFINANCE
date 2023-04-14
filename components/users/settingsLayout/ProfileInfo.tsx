@@ -76,9 +76,9 @@ const ProfileInfo = () => {
           let msg = data.data.setUserName;
           setLoader(false);
           if (msg.toLowerCase().includes("username created")) {
-            notify(data.data.setUserName, "success");
+            notify(msg+" You can now perform transaction 🎉", "success");
           } else {
-            notify(data.data.setUserName, "error");
+            notify(msg, "error");
           }
         }
       });

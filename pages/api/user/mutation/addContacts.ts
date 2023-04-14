@@ -6,6 +6,7 @@ import * as jwt from "jsonwebtoken";
 
 
 Amplify.configure(awsExports);
+
 export const getUserInfo = async (idToken: string) => {
   const decoded: any = await jwt.decode(idToken);
   const email = decoded.email;

@@ -3,7 +3,7 @@ import awsExports from "../../../../src/aws-exports";
 import { UserInfoParams, GetUserInfoQuery } from "../../../../src/API";
 import { getUserInfo } from "../../../../src/graphql/queries";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getUserInfo as getInfo } from "../../mutation/createUser";
+import { getUserInfo as getInfo } from "../../user/mutation/addContacts";
 
 Amplify.configure(awsExports);
 
@@ -41,7 +41,7 @@ export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
     const authTokens = JSON.parse(req.headers["x-custom-header"]);
     const attr_name:string = req.body.attr_name;
-    const { email, eth_address } = await getInfo(authTokens[0]);
+    const { email } = await getInfo(authTokens[0]);
     const  result = await getAttrInfo(
         authTokens,
         email,

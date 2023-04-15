@@ -36,6 +36,7 @@ function contacts() {
     //   if (!auth) {
     //     router.push("/");
     //   }
+    setLoader(true);
     list_contacts();
     setDisplay(false);
   }, []);
@@ -59,7 +60,7 @@ function contacts() {
 
           if ("contacts" in listContacts) {
             setContacts(Object.values(listContacts.contacts));
-            console.log(`List of contacts = ${listContacts.contacts}`);
+            console.log(`List of contacts = ${listContacts.contacts}`);            
           } else if ("message" in listContacts) {
             console.log(`Message = ${listContacts.message}`);
           } else {
@@ -69,6 +70,7 @@ function contacts() {
     } catch (error) {
       console.log(error);
     }
+    setLoader(false);
   };
 
   const add_contacts = async () => {

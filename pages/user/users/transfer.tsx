@@ -4,6 +4,7 @@ import {
   web3authAtom,
   loading,
   isVerified,
+  userName
 } from "../../../state/jotai";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { UserInfo } from "../../../components/users/settingsLayout/type/userTypes";
@@ -49,15 +50,15 @@ const transfer = () => {
   const [loader, setLoader] = useState<boolean>(false);
   const router = useRouter();
   const data = router.query;
-  const [username, setUserName] = useState<string>("");
+  const [username, setUserName] = useAtom(userName);
+  let user:string=username;
   let count = 1;
-  let user:string="";
 
   useEffect(() => {
     if (!isVerified) {
       router.push("/user/users/");
     } else {
-      if (user == "") {
+      if (username == "") {
         setLoader(true);
         checkUser();
       }
@@ -66,7 +67,7 @@ const transfer = () => {
 
   async function checkUser() {
     await fetchUserName().then((result) => {
-      if (result === false && user==="") {
+      if (result === false && username==="" && user=="") {
           if(count==1){
             notify(
               "Username Not Found: Set your Username first to perform transaction",
@@ -97,9 +98,9 @@ const transfer = () => {
       })
         .then((response) => response.json())
         .then(async (d) => {
-          setUserName(d.data.getUserInfo.value);
+          console.log("🚀 ~ file: transfer.tsx:100 ~ .then ~ d:", d);
           user=d.data.getUserInfo.value;
-          console.log(d);
+          setUserName(d.data.getUserInfo.value);
           return d.data.getUserInfo.success;
         });
     } catch (error) {
@@ -150,14 +151,14 @@ const transfer = () => {
             );
           } else if (d.message.includes("cannot estimate gas")) {
             notify(
-              "Transaction failed due to some internal problem ❌",
+              "Transaction failed due to internal server error ❌",
               "error"
             );
           } else {
             notify(d.message, "warn");
           }
           setTimeout(() => {
-            router.push("/user/users/user_contacts");
+            router.push("/user/users/");
           }, 2000);
         });
     } catch (error) {

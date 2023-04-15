@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
-import { userInfoAtom, web3authAtom } from "../../../state/jotai";
+import { userInfoAtom, userName, web3authAtom } from "../../../state/jotai";
 import { UserInfo } from "./type/userTypes";
 import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
@@ -50,10 +50,11 @@ export const notify = (message: string, type: string) => {
 };
 
 const ProfileInfo = () => {
-  const info: UserInfo = useAtomValue(userInfoAtom);
-  const [name, setName] = useState<string>(info?.name);
+  const info: UserInfo = useAtomValue(userInfoAtom);  
   const [dis, setDis] = useState<boolean>(false);
   const [loader, setLoader] = useState<boolean>(false);
+  const [username, setUserName] = useAtom(userName);
+  const [name, setName] = useState<string>(username);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -77,6 +78,7 @@ const ProfileInfo = () => {
           setLoader(false);
           if (msg.toLowerCase().includes("username created")) {
             notify(msg+" You can now perform transaction 🎉", "success");
+            setUserName(name);
           } else {
             notify(msg, "error");
           }
@@ -113,8 +115,9 @@ const ProfileInfo = () => {
                         value={name}
                         disabled={dis ? false : true}
                         onChange={handleInputChange}
+                        placeholder={name==""?"Set your Username":""}
                         className={`${
-                          !dis ? "outline-none" : "border border-black"
+                          !dis ? "outline-none" : "border border-[#009ac9]"
                         }`}
                       />
                       <button

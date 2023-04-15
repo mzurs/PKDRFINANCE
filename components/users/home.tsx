@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MultilineChart from "./MultilineChart";
-import { userBalance, userInfoAtom, web3authAtom } from "../../state/jotai";
+import { userBalance, userInfoAtom, userName, web3authAtom } from "../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
 import Cards from "./Cards";
 import Recent from "./Recent";
@@ -13,6 +13,43 @@ const Home = () => {
   const [timer, setTimer] = useState(60000);
   const [web3auth] = useAtom(web3authAtom);
   const [userInfo, setUserInfo] = useAtom(userInfoAtom);
+  const [username, setUserName] = useAtom(userName);
+
+  async function checkUser() {
+    await fetchUserName();
+  }
+
+  async function fetchUserName(): Promise<boolean> {
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([info.idToken, info.oAuthIdToken])
+    );
+    try {
+      await fetch("http://localhost:3000/api/user/query/getUserAttrInfo", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ attr_name: "USERNAME" }),
+      })
+        .then((response) => response.json())
+        .then(async (d) => {
+          console.log("🚀 ~ file: transfer.tsx:100 ~ .then ~ d:", d)
+          setUserName(d.data.getUserInfo.value);
+          return d.data.getUserInfo.success;
+        });
+    } catch (error) {
+      return false;
+    }
+    return false;
+  }
+
+  useEffect(() => {
+    if(username==""){
+      checkUser();
+    }
+  }, [])
+  
 
   const noExponents = function (num: number) {
     var data = String(num).split(/[eE]/);
@@ -53,7 +90,7 @@ const Home = () => {
         <div className="w-5/12 h-full">
           <div className="flex justify-center items-center flex-col mx-8">
             <div className="font-medium text-gray-80 text-4xl pt-12">
-              Hello , {info.name}
+              Hello , {username==""?info.name:username}
             </div>
             <div className="pt-3">{new Date().toString()}</div>
           </div>

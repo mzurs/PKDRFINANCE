@@ -4,10 +4,12 @@ import {
 } from "../../../../../src/API";
 import { transferFrom } from "../../../../../src/graphql/mutations";
 import getAddressFromUserName from "./getAddressByUserName";
-import { ReturnParamsForAddressByUserName } from "./types";
+import { CreditParams, DebitParams, ReturnParamsForAddressByUserName } from "./types";
 import { API, Amplify } from "aws-amplify";
 import awsExports from "../../../../../src/aws-exports";
 import { parsedData } from "../../../../user/users/transfer";
+import add_To_Credit_Table from "./addToCreditTable";
+import add_To_Debit_Table from "./addToDebitTable";
 
 Amplify.configure(awsExports);
 
@@ -66,6 +68,26 @@ export default async function handler(req: any, res: any) {
       authTokens,
       transferFromParams
     );
+    if(transferResult.transferFrom?.result){
+      const timeStamp:number=Date.now();
+      const debitParams: DebitParams = {
+        id: fromUserName!,
+        TimeStamp:timeStamp ,
+        To: toUserName,
+        Amount: parseFloat(amount),
+      };
+      const creditParams: CreditParams = {
+        id: toUserName,
+        TimeStamp: timeStamp,
+        From: fromUserName,
+        Amount: parseFloat(amount),
+      };
+
+
+      await add_To_Credit_Table(creditParams);
+      await add_To_Debit_Table(debitParams);
+      
+    }
     message = transferResult.transferFrom!.message!;
     result = transferResult.transferFrom!.result!;
   } else {

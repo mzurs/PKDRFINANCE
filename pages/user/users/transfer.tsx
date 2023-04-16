@@ -387,7 +387,7 @@ const transfer = () => {
               !loader ? "hidden" : ""
             } overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
           >
-            <div className="absolute w-[5vw] bg-transparent dark:bg-gray-700 flex items-center justify-center">
+            <div className="absolute w-[5vw] bg-transparent flex items-center justify-center">
               <ThreeDots
                 height="120"
                 width="120"

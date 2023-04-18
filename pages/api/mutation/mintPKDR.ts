@@ -1,9 +1,11 @@
-
 import { API, Amplify } from "aws-amplify";
-import {  mintInfo, mintResult } from "../../../src/API";
+import { mintInfo, mintResult } from "../../../src/API";
 import awsExports from "../../../src/aws-exports";
+import { v4 as uuidv4 } from "uuid";
 
 import { mintPKDR } from "../../../src/graphql/mutations";
+import { Transaction } from "../user/mutation/transferFrom/types";
+import addToTransactionTable from "./addToTransactionTable";
 Amplify.configure(awsExports);
 
 const mintPkdr = async (
@@ -15,8 +17,8 @@ const mintPkdr = async (
     address: address,
     amount: amount,
   };
-    console.log("🚀 ~ file: mintPKDR.ts:19 ~ amount:", amount)
-    console.log("🚀 ~ file: mintPKDR.ts:19 ~ address:", address)
+  console.log("🚀 ~ file: mintPKDR.ts:19 ~ amount:", amount);
+  console.log("🚀 ~ file: mintPKDR.ts:19 ~ address:", address);
   const variables = {
     mint: mintParams,
   };
@@ -27,8 +29,8 @@ const mintPkdr = async (
       variables,
       authToken,
     })) as { data: mintResult };
-    console.log("🚀 ~ file: mintPKDR.ts:29 ~ res:", res.data)
-
+    console.log("🚀 ~ file: mintPKDR.ts:29 ~ res:", res.data);
+ 
     return res.data;
   } catch (err) {
     const resError: mintResult = {
@@ -37,7 +39,7 @@ const mintPkdr = async (
       result: false,
     };
     resError.message = JSON.stringify((err as unknown as any).message);
-    console.log("🚀 ~ file: mintPKDR.ts:38 ~ resError:", resError)
+    console.log("🚀 ~ file: mintPKDR.ts:38 ~ resError:", resError);
     resError.result = false;
     return resError;
   }

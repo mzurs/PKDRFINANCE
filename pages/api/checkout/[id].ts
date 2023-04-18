@@ -11,9 +11,11 @@ import getRateUSDPKR from "../get_USD_PKDR_rate";
 import { mintResult } from "../../../src/API";
 import mintPkdr from "../mutation/mintPKDR";
 import Stripe from "stripe";
-import { CreditParams } from "../user/mutation/transferFrom/types";
+import { CreditParams, Transaction } from "../user/mutation/transferFrom/types";
 import add_To_Credit_Table from "../user/mutation/transferFrom/addToCreditTable";
 import conversion from "./convertToPKR";
+import { v4 as uuidv4 } from "uuid";
+import addToTransactionTable from "../mutation/addToTransactionTable";
 
 type ReturnResult = {
   result: boolean;
@@ -124,6 +126,24 @@ const checkAndUpdateCheckoutTable = async (
     // console.log("🚀 ~ file: [id].ts:156 ~ creditParams:", creditParams);
 
     await add_To_Credit_Table(creditParams);
+    
+    console.log(
+      "-------------Minting Data Tx--------------------------------"
+    );
+
+    const params: Transaction = {
+      id: uuidv4(),
+      From: "PKDR_FINANCE",
+      To: userName,
+      Amount: Number(amount),
+      Type: "DEPOSIT",
+      TimeStamp: Date.now(),
+    };
+   await  addToTransactionTable(params);
+
+   console.log("////////////////////////////////");
+
+
   } else {
     res.message = "session already claimed";
     // console.log("🚀 ~ file: [id].ts:105 ~ res:", res);

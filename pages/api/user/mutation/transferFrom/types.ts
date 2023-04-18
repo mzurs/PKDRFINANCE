@@ -18,6 +18,13 @@ type DebitParams = {
   Amount: number;
   To: string;
 };
+type Transaction = {
+  id: string;
+  From: string;
+  To: string;
+  Amount: number;
+  TimeStamp: number;
+  Type: string;
+};
 
-
-export type { ReturnParamsForAddressByUserName,DebitParams ,CreditParams};
+export type { ReturnParamsForAddressByUserName,DebitParams ,CreditParams,Transaction};

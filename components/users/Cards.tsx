@@ -31,8 +31,9 @@ const Cards = (props: any) => {
     );
 
     const data = await response.json();
+    const balance =parseFloat((data.getETHBalance) )
     //@ts-ignore
-    setMoney(data.getETHBalance);
+    setMoney(Number(balance.toFixed(2)));
     console.log(
       "🚀 ~ file: Dashboard.tsx:47 ~ getETHBalance ~ data:",
       data

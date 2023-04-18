@@ -53,16 +53,16 @@ const Cards = (props: any) => {
   return (
 
     <div>
-      <div className="h-[54vh] m-2 border-2 shadow-lg rounded-lg">
-        <div className="px-8 py-4 font-bold">
-          <div className="text-2xl pb-3">{props.title}</div>
-          <div className="text-lg pl-9">{props.sub}</div>
+      <div className="h-[46vh] m-2 border-2 shadow-md mt-2.5 rounded-lg overflow-x-hidden w-auto">
+        <div className="px-8 font-bold pt-4">
+          <div className="text-3xl">{props.title}</div>
+          <div className="text-xl pt-2 text-[#009ac9]">{props.sub}</div>
         </div>
-       {Money? <div className="text-[4rem] font-medium flex items-center justify-center h-[30vh]">{Money} PKDR</div>: (
-              <div role="status">
+       {Money? <div className="text-[4rem] font-medium flex items-center justify-center h-[28vh]">{Money} PKDR</div>: (
+              <div role="status" className="flex items-center justify-center h-[28vh]">
                 <svg
                   aria-hidden="true"
-                  className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  className="w-12 h-12 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-[#009ac9]"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ const Cards = (props: any) => {
               </div>
             )}
         <div>
-          <button className="mt-12 bg-blue-700 text-blue-100 text-lg font-medium mb-2 mx-6 px-3 py-2 rounded-xl float-right">
+          <button className="bg-[#009ac9] text-white text-lg font-medium mb-2 mx-6 px-3 py-2 rounded-xl float-right">
             {props.btn_txt}
           </button>
         </div>

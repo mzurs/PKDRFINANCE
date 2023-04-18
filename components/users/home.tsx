@@ -86,29 +86,15 @@ const Home = () => {
 
   return (
     <div>
-      <div className="flex pt-[4.6rem] w-[100vw] overflow-x-hidden">
-        <div className="w-5/12 h-full">
-          <div className="flex justify-center items-center flex-col mx-8">
-            <div className="font-medium text-gray-80 text-4xl pt-12">
+      <div className="flex pt-20 w-[100vw] overflow-x-hidden h-[100vh]">
+        <div className="w-5/12">
+          <div className="flex rounded-lg pt-28 pb-[170px] justify-center items-center flex-col mr-4 ml-10 border-2 shadow-lg">
+            <div className={`${username==""?"text-4xl pb-2":"text-5xl"} font-medium text-gray-80 pt-12`}>
               Hello , {username==""?info.name:username}
             </div>
-            <div className="pt-3">{new Date().toString()}</div>
+            <div className="pt-3 text-lg">{new Date().toString()}</div>
           </div>
-          <div
-            className="flex justify-between items-center m-16 bg-blue-100 rounded-2xl text-blue-700 px-4 py-3"
-            role="alert"
-          >
-            <div>
-              <p className="font-bold">New Messages</p>
-              <p className="text-sm">Some unread messages.</p>
-            </div>
-            <div>
-              <div className="text-blue-100 bg-blue-700 rounded-2xl w-9 p-1 text-center">
-                15
-              </div>
-            </div>
-          </div>
-          <div className="md:mt-24 mx-8">
+          <div className="ml-8 mr-2">
             <Cards
               title={"Available Balance"}
               sub={info.email}
@@ -118,7 +104,7 @@ const Home = () => {
         </div>
 
         <div className="w-9/12 h-full">
-          <div className="h-[43vh] flex justify-center">
+          <div className="h-[43vh] flex justify-center border shadow-md -ml-0.5 mx-6 rounded-md pb-1">
             <MultilineChart />
           </div>
           <div className="flex justify-between">

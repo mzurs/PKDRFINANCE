@@ -406,28 +406,4 @@ const transfer = () => {
   }
 };
 
-// export async function getServerSideProps() {
-//   let info =
-//     "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlRZT2dnXy01RU9FYmxhWS1WVlJZcVZhREFncHRuZktWNDUzNU1aUEMwdzAifQ.eyJpYXQiOjE2ODE0Nzc1NzAsImF1ZCI6IkJHVE1qSUw4Uk9MZ3FSSzhZdng5b3JHWF9ad0dmQVA3aDE5ckdrdVVvX1VPQXFRWmlHTURtRFVMc2pISGdoVFNNUmFfQXJYODVuNEVuX0FhMzZvQzE2dy1feXMiLCJub25jZSI6IjAzZGM5MTAzNjg3OTZmNTVhMjZmMDJjMTljMjZiY2E2NzE2NjQ0YzAwZDBiYWZlZjgxNTQ2YjliOTk3OTA5ODRlNSIsImlzcyI6Imh0dHBzOi8vYXBpLm9wZW5sb2dpbi5jb20iLCJ3YWxsZXRzIjpbeyJwdWJsaWNfa2V5IjoiMDJkNGZiNWIxOTliM2UxY2ViOTMzZTE5NmU4YjI0Zjk2YjMxNDI0MjMzYmIyYzQzOTUzODg1OTUzN2RhNmFiOGUzIiwidHlwZSI6IndlYjNhdXRoX2FwcF9rZXkiLCJjdXJ2ZSI6InNlY3AyNTZrMSJ9XSwiZW1haWwiOiJrMTkwMTU1QG51LmVkdS5wayIsIm5hbWUiOiJrMTkwMTU1IFN5ZWQgQW1tYXIgQWxhbSIsInZlcmlmaWVyIjoidGVzdC1wa2RyLWZpbmFuY2UiLCJ2ZXJpZmllcklkIjoiazE5MDE1NUBudS5lZHUucGsiLCJhZ2dyZWdhdGVWZXJpZmllciI6InRlc3QtcGtkci1maW5hbmNlIiwiZXhwIjoxNjgxNDgwNTcwfQ.zcOmzW9rkFBSBLCvkYFAuwemQ7ymlRhHV5lV_oBjYqtHRLWWOyjw0hmbM9d542lICn13BRe0IsNvkldIdaanGw";
-//   const headers = new Headers();
-//   headers.append("content-type", "application/json");
-//   headers.append("x-custom-header", JSON.stringify([info]));
-//   let data:any;
-//   try {
-//     await fetch("http://localhost:3000/api/user/query/getUserAttrInfo", {
-//       method: "POST",
-//       headers: headers,
-//       body: JSON.stringify({ attr_name: "USERNAME" }),
-//     })
-//       .then((response) => response.json())
-//       .then(async (d) => {
-//         console.log(d);
-//         data=d;
-//       });
-//   } catch (error) {
-//     return { props: { message: error } };
-//   }
-//   return { props: { data } };
-// }
-
 export default transfer;

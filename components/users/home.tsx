@@ -98,7 +98,7 @@ const Home = () => {
             <Cards
               title={"Available Balance"}
               sub={info.email}
-              btn_txt={"View Statement"}
+              // btn_txt={"View Statement"}
             />
           </div>
         </div>

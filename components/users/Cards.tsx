@@ -81,9 +81,9 @@ const Cards = (props: any) => {
               </div>
             )}
         <div>
-          <button className="bg-[#009ac9] text-white text-lg font-medium mb-2 mx-6 px-3 py-2 rounded-xl float-right">
+          {/* <button className="bg-[#009ac9] text-white text-lg font-medium mb-2 mx-6 px-3 py-2 rounded-xl float-right">
             {props.btn_txt}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

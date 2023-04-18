@@ -15,7 +15,7 @@ const Settings = () => {
     <>
       <div className="md:pt-16 pt-20 md:pb-8 p-6 w-[100vw] h-[100vh] overflow-x-hidden">
         <h1 className="md:pt-9 md:pb-6 pt-3 pb-3 md:text-[35px] text-2xl font-bold pl-4">
-          Settings
+          {/* Settings */}
         </h1>
         <div>
           <ul className="flex ml-2 mr-2 border-b-2 border-gray-300 sm:text-lg md:text-xl text-gray-500">

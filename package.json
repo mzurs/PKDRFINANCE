@@ -22,6 +22,7 @@
     "@types/jsonwebtoken": "^9.0.1",
     "@types/react-helmet": "^6.1.6",
     "@types/react-modal": "^3.13.1",
+    "@types/uuid": "^9.0.1",
     "@web3auth/base": "^4.2.2",
     "@web3auth/core": "^4.2.2",
     "@web3auth/openlogin-adapter": "^4.2.2",
@@ -52,7 +53,8 @@
     "request": "^2.88.2",
     "stripe": "^8.185.0",
     "styled-components": "^5.3.8",
-    "swr": "^2.0.4"
+    "swr": "^2.0.4",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "18.11.3",

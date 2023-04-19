@@ -46,9 +46,9 @@ function profile() {
                       </h2>
                       <div className="w-12 h-1 bg-[#009ac9] rounded mt-2 mb-4"></div>
                       <p className="text-lg">
-                        Raclette knausgaard hella meggs normcore williamsburg
+                        {/* Raclette knausgaard hella meggs normcore williamsburg
                         enamel pin sartorial venmo tbh hot chicken gentrify
-                        portland.
+                        portland. */}
                       </p>
                     </div>
                   </div>
@@ -77,7 +77,7 @@ function profile() {
                               Account ID
                             </dt>
                             <dd className="mt-1 text-lg text-gray-900 sm:col-span-2 sm:mt-0">
-                              14674503895621
+                            {info.email}
                             </dd>
                           </div>
                           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -88,15 +88,15 @@ function profile() {
                               {info.email}
                             </dd>
                           </div>
-                          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          {/* <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-lg font-medium text-gray-500">
                               Salary expectation
                             </dt>
                             <dd className="mt-1 text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                               $120,000
                             </dd>
-                          </div>
-                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
+                          </div> */}
+                          {/* <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
                             <dt className="text-lg font-medium text-gray-500">
                               About
                             </dt>
@@ -108,7 +108,7 @@ function profile() {
                               proident. Irure nostrud pariatur mollit ad
                               adipisicing reprehenderit deserunt qui eu.
                             </dd>
-                          </div>
+                          </div> */}
                         </dl>
                       </div>
                     </div>

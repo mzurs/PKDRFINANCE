@@ -171,7 +171,7 @@ const withdraw = () => {
           >
             <div>
               <h1 className="md:pt-[5.5rem] pt-3 md:text-4xl text-2xl font-bold pl-8 pb-0 mb-0">
-                Withdraw PKDR
+                {/* Withdraw PKDR */}
               </h1>
             </div>
             <div className="body-font w-full md:pt-[4rem]">

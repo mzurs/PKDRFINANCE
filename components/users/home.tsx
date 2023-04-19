@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import MultilineChart from "./MultilineChart";
-import { userBalance, userInfoAtom, userName, web3authAtom } from "../../state/jotai";
+import {
+  userBalance,
+  userInfoAtom,
+  userName,
+  web3authAtom,
+} from "../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
 import Cards from "./Cards";
 import Recent from "./Recent";
-
+import Link from "next/link";
 
 const Home = () => {
   const info = useAtomValue(userInfoAtom);
@@ -34,7 +39,7 @@ const Home = () => {
       })
         .then((response) => response.json())
         .then(async (d) => {
-          console.log("🚀 ~ file: transfer.tsx:100 ~ .then ~ d:", d)
+          console.log("🚀 ~ file: transfer.tsx:100 ~ .then ~ d:", d);
           setUserName(d.data.getUserInfo.value);
           return d.data.getUserInfo.success;
         });
@@ -45,11 +50,10 @@ const Home = () => {
   }
 
   useEffect(() => {
-    if(username==""){
+    if (username == "") {
       checkUser();
     }
-  }, [])
-  
+  }, []);
 
   const noExponents = function (num: number) {
     var data = String(num).split(/[eE]/);
@@ -89,11 +93,38 @@ const Home = () => {
       <div className="flex pt-20 w-[100vw] overflow-x-hidden h-[100vh]">
         <div className="w-5/12">
           <div className="flex rounded-lg pt-28 pb-[170px] justify-center items-center flex-col mr-4 ml-10 border-2 shadow-lg">
-            <div className={`${username==""?"text-4xl pb-2":"text-5xl"} font-medium text-gray-80 pt-12`}>
-              Hello , {username==""?info.name:username}
+            <div
+              className={`${
+                username == "" ? "text-4xl pb-2" : "text-5xl"
+              } font-medium text-gray-80 pt-12 italic`}
+            >
+              Hello , {username == "" ? info.name : username}
             </div>
-            <div className="pt-3 text-lg">{new Date().toString()}</div>
+            <div className="pt-3 text-lg italic">{new Date().toString()}</div>
+            <br />
+            <br />
+            <Link
+              href="/user/users/user_contacts"
+              className="text-xl
+               text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Send Money
+              <svg
+                aria-hidden="true"
+                className="w-10 h-10 ml-15 -mr-15"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </Link>
           </div>
+
           <div className="ml-8 mr-2">
             <Cards
               title={"Available Balance"}

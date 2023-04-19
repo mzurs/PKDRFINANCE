@@ -399,7 +399,7 @@ function Header() {
                     Contacts
                   </Link>
 
-                  <Link
+                  {/* <Link
                     href={"/pkdrInfo/about"}
                     onClick={() => setpage("about")}
                     className={`cursor-pointer ${
@@ -408,7 +408,7 @@ function Header() {
                     id="about"
                   >
                     About
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
               <div

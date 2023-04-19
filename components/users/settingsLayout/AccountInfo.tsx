@@ -26,9 +26,9 @@ const AccountInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.name}
-                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
+                    {/* <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                       Update
-                    </button>
+                    </button> */}
                   </dd>
                 </div>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -37,9 +37,9 @@ const AccountInfo = () => {
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
                     {info?.email}
-                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
+                    {/* <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                       Update
-                    </button>
+                    </button> */}
                   </dd>
                 </div>
                 <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -47,13 +47,13 @@ const AccountInfo = () => {
                     Account Number
                   </dt>
                   <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
-                    14674503895621
-                    <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
+                  {info?.email}
+                    {/* <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                       Update
-                    </button>
+                    </button> */}
                   </dd>
                 </div>
-                <div className="py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                {/* <div className="py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                   <dt className="text-md font-sm md:text-lg text-gray-500">
                     Profile Photo
                   </dt>
@@ -63,7 +63,7 @@ const AccountInfo = () => {
                       Update
                     </button>
                   </dd>
-                </div>
+                </div> */}
               </dl>
             </div>
           </div>

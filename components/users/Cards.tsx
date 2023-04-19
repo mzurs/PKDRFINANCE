@@ -31,8 +31,9 @@ const Cards = (props: any) => {
     );
 
     const data = await response.json();
+    const balance =parseFloat((data.getETHBalance) )
     //@ts-ignore
-    setMoney(data.getETHBalance);
+    setMoney(Number(balance.toFixed(2)));
     console.log(
       "🚀 ~ file: Dashboard.tsx:47 ~ getETHBalance ~ data:",
       data
@@ -80,9 +81,9 @@ const Cards = (props: any) => {
               </div>
             )}
         <div>
-          <button className="bg-[#009ac9] text-white text-lg font-medium mb-2 mx-6 px-3 py-2 rounded-xl float-right">
+          {/* <button className="bg-[#009ac9] text-white text-lg font-medium mb-2 mx-6 px-3 py-2 rounded-xl float-right">
             {props.btn_txt}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

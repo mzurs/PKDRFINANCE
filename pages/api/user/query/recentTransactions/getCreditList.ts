@@ -52,4 +52,16 @@ const getCreditsListOfUser = async (
   }
 };
 
-//export handler-----
+export default async function handler(req:any, res:any) {
+  if (req.method === "POST") {
+    const authTokens = JSON.parse(req.headers["x-custom-header"]);
+    const username:string = req.body.username;
+    const  result = await getCreditsListOfUser(
+        authTokens,
+        username
+      );
+      res.status(200).json(result);
+  } else {
+    // Handle any other HTTP method
+  }
+}

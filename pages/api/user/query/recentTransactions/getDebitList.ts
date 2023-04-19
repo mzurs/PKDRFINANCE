@@ -46,7 +46,6 @@ const getDebitsListOfUser = async (
     for (let i = 0; i < Items.length; i++) {
       items[i] = unmarshall(Items[i]);
     }
-    console.log(items);
 
     return items;
   }

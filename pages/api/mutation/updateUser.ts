@@ -2,13 +2,24 @@ import { API, Amplify } from "aws-amplify";
 import type { UpdateUser, updateUserResult } from "../../../src/API";
 import awsExports from "../../../src/aws-exports";
 import { updateUser } from "../../../src/graphql/mutations";
-import {getUserInfo} from "../mutation/createUser";
+// import {getUserInfo} from "../mutation/createUser";
 Amplify.configure(awsExports);
+import * as jwt from "jsonwebtoken";
+
+
+const getUserInfo = async (idToken: string) => {
+    const decoded: any = await jwt.decode(idToken);
+    const email = decoded.email;
+
+  
+    return { email };
+  };
+
 
 async function updateUserAPI(userData: any, idToken: string, oAuthIdToken: string)
 {
     let returnResult: boolean = false;
-    const { email, eth_address } = await getUserInfo(idToken);
+    const { email } = await getUserInfo(idToken);
 
     let user:UpdateUser = {
         id: email,

@@ -313,7 +313,7 @@ function Header() {
               } flex items-center `}
             >
               {router.pathname === "/" ? (
-                <div className="  border-b-15 border-white flex flex-shrink-0 items-center z-50">
+                <div className="  border-b-15 border-white flex flex-shrink-0 items-center ">
                   <Image
                     className="block h-8 w-auto lg:hidden"
                     src="/logo2.png"

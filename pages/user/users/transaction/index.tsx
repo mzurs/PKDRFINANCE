@@ -1,10 +1,11 @@
 import { useAtom, useAtomValue } from "jotai";
 import React, { useEffect, useState } from "react";
-import { userInfoAtom, userName, isVerified } from "../../../state/jotai";
+import { userInfoAtom, userName, isVerified } from "../../../../state/jotai";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { useRouter } from "next/router";
-import { notify } from "../../../components/users/settingsLayout/ProfileInfo";
+import { notify } from "../../../../components/users/settingsLayout/ProfileInfo";
 import { ThreeDots } from "react-loader-spinner";
+import Link from "next/link";
 
 const transaction = () => {
   type ReturnParams = {
@@ -176,7 +177,22 @@ const transaction = () => {
                                         <div className="text-xl text-gray-600 dark:text-gray-200">
                                           Rs.&nbsp;{tx.Amount}
                                         </div>
-                                        <button className="flex justify-end ml-5 pl-4 py-5 text-right hover:text-gray-800  dark:hover:text-white dark:text-gray-200">
+                                        <button
+                                          onClick={() => {
+                                            router.push({
+                                              pathname: "/user/users/transaction/record",
+                                              query: {
+                                                id: tx.id,
+                                                From: tx.From,
+                                                Amount: tx.Amount,
+                                                time: tx.time,
+                                                date: tx.date,
+                                                type: tx.type,
+                                              },
+                                            });
+                                          }}
+                                          className="flex justify-end ml-5 pl-4 py-5 text-right hover:text-gray-800  dark:hover:text-white dark:text-gray-200"
+                                        >
                                           <svg
                                             width="18"
                                             fill="currentColor"
@@ -213,7 +229,22 @@ const transaction = () => {
                                         <div className="text-xl text-gray-600 dark:text-gray-200">
                                           Rs.&nbsp;{tx.Amount}
                                         </div>
-                                        <button className="flex justify-end ml-5 pl-4 py-5 text-right hover:text-gray-800  dark:hover:text-white dark:text-gray-200">
+                                        <button
+                                          onClick={() => {
+                                            router.push({
+                                              pathname: "/user/users/transaction/record",
+                                              query: {
+                                                id: tx.id,
+                                                To: tx.From,
+                                                Amount: tx.Amount,
+                                                time: tx.time,
+                                                date: tx.date,
+                                                type: tx.type,
+                                              },
+                                            });
+                                          }}
+                                          className="flex justify-end ml-5 pl-4 py-5 text-right hover:text-gray-800  dark:hover:text-white dark:text-gray-200"
+                                        >
                                           <svg
                                             width="18"
                                             fill="currentColor"

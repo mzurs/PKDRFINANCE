@@ -347,8 +347,8 @@ function Header() {
                       <Image
                         src="/logo2.png"
                         alt="PKDR Finance"
-                        width={200}
-                        height={200}
+                        width={140}
+                        height={140}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>

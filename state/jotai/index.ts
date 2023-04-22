@@ -33,7 +33,7 @@ const loading = atom(false);
 const customAuthentication = atom<boolean>(false);
 
 //Username of User
-const userName = atom<string>("");
+const userName = atomWithStorage("username", "");;
 
 const isVerified = atomWithStorage("verified", null, storage);
 const userRole = atom<string | null>(null);

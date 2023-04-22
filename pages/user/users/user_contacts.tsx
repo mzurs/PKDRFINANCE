@@ -4,10 +4,11 @@ import { FiSearch } from "react-icons/fi";
 import Link from "next/link";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { UserInfo } from "../../../components/users/settingsLayout/type/userTypes";
-import { useAtomValue } from "jotai";
-import { userInfoAtom } from "../../../state/jotai";
+import { useAtom, useAtomValue } from "jotai";
+import { isVerified, userInfoAtom, web3authAtom } from "../../../state/jotai";
 import { notify } from "../../../components/users/settingsLayout/ProfileInfo";
 import { ThreeDots } from "react-loader-spinner";
+import { useRouter } from "next/router";
 
 function contacts() {
   let info: UserInfo = {
@@ -25,20 +26,26 @@ function contacts() {
   };
   info = useAtomValue(userInfoAtom);
   const [searchTerm, setSearchTerm] = useState("");
+  const [auth, setAuth] = useAtom(web3authAtom);
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [display, setDisplay] = useState<boolean>(false);
   const [contacts, setContacts] = useState<string[]>([]);
   const [contactName, setContactName] = useState<string>("");
   const [show, setShow] = useState<boolean>(false);
   const [loader, setLoader] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
-    //   if (!auth) {
-    //     router.push("/");
-    //   }
-    setLoader(true);
-    list_contacts();
-    setDisplay(false);
+    if (!auth) {
+      router.push("/");
+    }
+    if (!isVerified) {
+      router.push("/user/users/");
+    } else {
+      setLoader(true);
+      list_contacts();
+      setDisplay(false);
+    }
   }, []);
 
   const list_contacts = async () => {
@@ -60,7 +67,7 @@ function contacts() {
 
           if ("contacts" in listContacts) {
             setContacts(Object.values(listContacts.contacts));
-            console.log(`List of contacts = ${listContacts.contacts}`);            
+            console.log(`List of contacts = ${listContacts.contacts}`);
           } else if ("message" in listContacts) {
             console.log(`Message = ${listContacts.message}`);
           } else {
@@ -147,8 +154,16 @@ function contacts() {
 
   return (
     <>
-      <div className={`${loader?"opacity-40":""} text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}>
-        <div className={`${show?"opacity-40":""} w-[50%]  px-2 mx-auto pt-24 pb-4`}>
+      <div
+        className={`${
+          loader ? "opacity-40" : ""
+        } text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}
+      >
+        <div
+          className={`${
+            show ? "opacity-40" : ""
+          } w-[50%]  px-2 mx-auto pt-24 pb-4`}
+        >
           <div className="mx-auto flex items-center justify-between lg:w-[82%] border-b border-gray-200 md:mb-12">
             <input
               type="text"
@@ -282,58 +297,67 @@ function contacts() {
               <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                 Add Contact
               </h3>
-                <div>
-                  <label
-                    htmlFor="contactname"
-                    className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
-                  >
-                    Enter Contact Name <span className="text-red-800" title="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="contactname"
-                    id="contact"
-                    value={contactName}
-                    className="bg-gray-50 border text-md border-gray-300 text-gray-900 rounded-lg focus:ring-[#0890b9] focus:border-[#0890b9] block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Enter Contact Name"
-                    onChange={(e) => setContactName(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <button
-                  className={`w-full mt-3 text-white ${contactName==''?"bg-[#8bbcca]":"bg-[#0890b9] hover:underline hover:bg-[#06799c]"}   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-[#0890b9] dark:hover:bg-[#087b9e] dark:focus:ring-[#0890b9]`}
-                  disabled={contactName==''?true:false}
-                  onClick={()=>{add_contacts();setShow(false);}}
+              <div>
+                <label
+                  htmlFor="contactname"
+                  className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
                 >
-                  Add to your Contact
-                </button>
+                  Enter Contact Name{" "}
+                  <span className="text-red-800" title="required">
+                    *
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="contactname"
+                  id="contact"
+                  value={contactName}
+                  className="bg-gray-50 border text-md border-gray-300 text-gray-900 rounded-lg focus:ring-[#0890b9] focus:border-[#0890b9] block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter Contact Name"
+                  onChange={(e) => setContactName(e.target.value)}
+                  required
+                />
+              </div>
+
+              <button
+                className={`w-full mt-3 text-white ${
+                  contactName == ""
+                    ? "bg-[#8bbcca]"
+                    : "bg-[#0890b9] hover:underline hover:bg-[#06799c]"
+                }   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-[#0890b9] dark:hover:bg-[#087b9e] dark:focus:ring-[#0890b9]`}
+                disabled={contactName == "" ? true : false}
+                onClick={() => {
+                  add_contacts();
+                  setShow(false);
+                }}
+              >
+                Add to your Contact
+              </button>
             </div>
           </div>
         </div>
-        
       </div>
       <div
-            id="loader"
-            tabIndex={-1}
-            aria-hidden="true"
-            className={`fixed flex items-center justify-center  top-0 left-0 right-0 z-50  w-[100vw] p-4 ${
-              !loader ? "hidden" : ""
-            } overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
-          >
-            <div className="absolute w-[5vw] bg-transparent flex items-center justify-center">
-              <ThreeDots
-                height="120"
-                width="120"
-                radius="9"
-                color="#028db7"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={loader}
-              />
-            </div>
-          </div>
+        id="loader"
+        tabIndex={-1}
+        aria-hidden="true"
+        className={`fixed flex items-center justify-center  top-0 left-0 right-0 z-50  w-[100vw] p-4 ${
+          !loader ? "hidden" : ""
+        } overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
+      >
+        <div className="absolute w-[5vw] bg-transparent flex items-center justify-center">
+          <ThreeDots
+            height="120"
+            width="120"
+            radius="9"
+            color="#028db7"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={loader}
+          />
+        </div>
+      </div>
     </>
   );
 }

@@ -19,6 +19,7 @@ import { VscFeedback } from "react-icons/vsc";
 import { RiContactsBookLine } from "react-icons/ri";
 import { AiOutlineHistory } from "react-icons/ai";
 import { TbTransferIn } from "react-icons/tb";
+import router from "next/router";
 
 const Sidebar = () => {
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -27,7 +28,7 @@ const Sidebar = () => {
   const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
   const [providerAtomState, setProviderAtomState] = useAtom(providerAtom);
   const [page, setpage] = useState<string>("");
-  const [verified,setVerified]=useAtom(isVerified);
+  const [verified, setVerified] = useAtom(isVerified);
   const get_page = () => {
     let url = window.location.href;
     if (url !== "http://localhost:3000/") {
@@ -54,7 +55,7 @@ const Sidebar = () => {
       setAuth(null);
       setPrivKey(null);
       setUserInfo(null);
-      setVerified(false)
+      setVerified(false);
       Cookies.remove("web3auth");
       Cookies.remove("pub_key");
       Cookies.remove("idToken");
@@ -76,7 +77,7 @@ const Sidebar = () => {
     <>
       <div className=" hidden md:block right-0 top-[4rem] fixed bg-white text-black h-auto z-10">
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
-          <div className="h-full" >
+          <div className="h-full">
             <div className="flex items-center justify-center pt-0 ">
               <Image src="/logo2.png" alt="logo2" width="170" height="150" />
             </div>
@@ -86,7 +87,9 @@ const Sidebar = () => {
                   id="profile"
                   className={`flex  font-extrabold bg-black text-white items-center justify-center w-full px-4 my-1 py-5 transition-colors duration-200`}
                 >
-                  <p className="mx-4 text-xl font-normal text-center">{userInfo?.name}</p>
+                  <p className="mx-4 text-xl font-normal text-center">
+                    {userInfo?.name}
+                  </p>
                 </div>
                 <Link
                   id="profile"
@@ -152,21 +155,25 @@ const Sidebar = () => {
                     Withdraw PKDR
                   </span>
                 </Link>
-                <Link
+                <button
                   id="transaction"
-                  onClick={() => setpage("transaction")}
+                  onClick={() => {
+                    setpage("transaction");
+                    router.push("/user/users/transaction");
+                  }}
                   className={`${
                     page === "transaction" ? style : "text-black"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
-                  href="/user/users/transaction"
                 >
                   <span className="text-left">
                     <div>
                       <AiOutlineHistory className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
-                  <span className="mx-4 text-lg font-normal">Transaction History</span>
-                </Link>
+                  <span className="mx-4 text-lg font-normal">
+                    Transaction History
+                  </span>
+                </button>
                 <Link
                   id="about"
                   onClick={() => setpage("about")}
@@ -197,7 +204,7 @@ const Sidebar = () => {
                   </span>
                   <span className="mx-4 text-lg font-normal">Contact Us</span>
                 </Link>
-                
+
                 <div className="flex hover:text-[#009ac9] items-center justify-start w-full p-4 my-2 font-thin text-black transition-colors duration-200 dark:text-black">
                   <span className="text-left">
                     <div>

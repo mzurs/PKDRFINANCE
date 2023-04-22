@@ -54,13 +54,13 @@ const Cards = (props: any) => {
   return (
 
     <div>
-      <div className="h-[46vh] m-2 border-2 shadow-md mt-2.5 rounded-lg overflow-x-hidden w-auto">
+      <div className="h-[45.6vh] m-2 border-2 shadow-md mt-2.5 rounded-lg overflow-x-hidden w-auto">
         <div className="px-8 font-bold pt-4">
           <div className="text-3xl">{props.title}</div>
           <div className="text-xl pt-2 text-[#009ac9]">{props.sub}</div>
         </div>
-       {Money? <div className="text-[4rem] font-medium flex items-center justify-center h-[28vh]">{Money} PKDR</div>: (
-              <div role="status" className="flex items-center justify-center h-[28vh]">
+       {Money? <div className="text-[4rem] font-medium flex items-center justify-center h-[27vh]">{Money} PKDR</div>: (
+              <div role="status" className="flex items-center justify-center h-[27vh]">
                 <svg
                   aria-hidden="true"
                   className="w-12 h-12 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-[#009ac9]"

@@ -6,14 +6,14 @@ const client = new DynamoDBClient({ region });
 
 const TABLE_NAME_DEBIT: string = "DEBIT";
 
-type DebitReturnParams = {
+export type DebitReturnParams = {
   id: string;
   To: string;
   Amount: number;
   TimeStamp: number;
 };
 
-const getDebitsListOfUser = async (
+export const getDebitsListOfUser = async (
   tokens: string[],
   userName: string
 ): Promise<null | DebitReturnParams[]> => {
@@ -50,17 +50,3 @@ const getDebitsListOfUser = async (
     return items;
   }
 };
-
-export default async function handler(req:any, res:any) {
-  if (req.method === "POST") {
-    const authTokens = JSON.parse(req.headers["x-custom-header"]);
-    const username:string = req.body.username;
-    const  result = await getDebitsListOfUser(
-        authTokens,
-        username
-      );
-      res.status(200).json(result);
-  } else {
-    // Handle any other HTTP method
-  }
-}

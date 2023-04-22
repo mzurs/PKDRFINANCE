@@ -6,7 +6,7 @@ Amplify.configure(awsExports);
 
 export default async (req: any, res: any) => {
   const authTokens = JSON.parse(req.headers["x-custom-header"]);
-  console.log("🚀 ~ file: [id].ts:156 ~ authTokens:", authTokens);
+  // console.log("🚀 ~ file: [id].ts:156 ~ authTokens:", authTokens);
   const resUserInfo = await getUserInfo(authTokens[0]);
   const variables = {
     address: resUserInfo.ETH_ADDRESS!,

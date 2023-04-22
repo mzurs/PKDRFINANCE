@@ -92,7 +92,7 @@ const Home = () => {
     <div>
       <div className="flex pt-20 w-[100vw] overflow-x-hidden h-[100vh]">
         <div className="w-5/12">
-          <div className="flex rounded-lg pt-28 pb-[170px] justify-center items-center flex-col mr-4 ml-10 border-2 shadow-lg">
+          <div className="flex rounded-lg pt-20 pb-24 justify-center items-center flex-col mr-4 ml-10 border-2 shadow-lg">
             <div
               className={`${
                 username == "" ? "text-4xl pb-2" : "text-5xl"

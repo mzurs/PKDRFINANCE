@@ -258,7 +258,7 @@ function Header() {
 
   const Navbar = (
     <div>
-      <nav className="fixed w-full">
+      <nav className={`fixed w-full ${auth && web3auth ? "bg-white":""}`}>
         <div className="">
           <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
             <div
@@ -313,7 +313,7 @@ function Header() {
               } flex items-center `}
             >
               {router.pathname === "/" ? (
-                <div className="  border-b-15 border-white flex flex-shrink-0 items-center bg-white z-50">
+                <div className="  border-b-15 border-white flex flex-shrink-0 items-center z-50">
                   <Image
                     className="block h-8 w-auto lg:hidden"
                     src="/logo2.png"

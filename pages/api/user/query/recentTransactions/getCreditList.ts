@@ -13,7 +13,7 @@ type CreditReturnParams = {
   TimeStamp: number;
 };
 
-const getCreditsListOfUser = async (
+export const getCreditsListOfUser = async (
   tokens: string[],
   userName: string
 ): Promise<null | CreditReturnParams[]> => {
@@ -50,17 +50,3 @@ const getCreditsListOfUser = async (
     return items;
   }
 };
-
-export default async function handler(req:any, res:any) {
-  if (req.method === "POST") {
-    const authTokens = JSON.parse(req.headers["x-custom-header"]);
-    const username:string = req.body.username;
-    const  result = await getCreditsListOfUser(
-        authTokens,
-        username
-      );
-      res.status(200).json(result);
-  } else {
-    // Handle any other HTTP method
-  }
-}

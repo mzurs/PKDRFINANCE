@@ -155,7 +155,7 @@ const withdraw = () => {
     } catch (error) {
       console.log(error);
       setLoader(false);
-      notify(error as string, "error");
+      notify("Error Occurred, Can't withdraw amount yet ❌", "error");
     }
     setAmount("0");
   }

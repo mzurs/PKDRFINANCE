@@ -1,12 +1,10 @@
 import { useAtom, useAtomValue } from "jotai";
 import React, { useEffect, useState } from "react";
-import { GoPerson } from "react-icons/go";
 import { userInfoAtom, userName } from "../../state/jotai";
 import { notify } from "./settingsLayout/ProfileInfo";
 import { useRouter } from "next/router";
 import { Triangle } from "react-loader-spinner";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
-import MultilineChart from "./MultilineChart";
 
 const Recent = (props: any) => {
   const info = useAtomValue(userInfoAtom);
@@ -21,6 +19,7 @@ const Recent = (props: any) => {
   useEffect(() => {
     callApi();
   }, []);
+
   useEffect(() => {
     if (transactions != null) {
       console.log(
@@ -211,7 +210,7 @@ const Recent = (props: any) => {
                 width="80"
                 color="#017699"
                 ariaLabel="triangle-loading"
-                wrapperStyle={{fontWeight: "bolder"}}
+                wrapperStyle={{}}
                 wrapperClass=""
                 visible={true}
               />

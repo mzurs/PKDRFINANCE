@@ -106,9 +106,10 @@ const Home = () => {
             <Link
               href="/user/users/user_contacts"
               className="text-xl
-               text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          
+            text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Send Money
+              Send Money&nbsp;&nbsp;
               <svg
                 aria-hidden="true"
                 className="w-10 h-10 ml-15 -mr-15"
@@ -127,7 +128,7 @@ const Home = () => {
 
           <div className="ml-8 mr-2">
             <Cards
-              title={"Available Balance"}
+              title={"ACCOUNT BALANCE"}
               sub={info.email}
               // btn_txt={"View Statement"}
             />

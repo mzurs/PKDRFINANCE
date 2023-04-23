@@ -113,7 +113,13 @@ const Home = ({ role, isAuth, userTag }: any) => {
   if (useAtomValue(isVerified) === true) {
     return (
       <Suspense fallback={<Loading state={true} />}>
-        <></>
+        <>
+          <div className="flex pt-20 w-[100vw] overflow-x-hidden h-[100vh]">
+            <div className="w-[100vw] ">
+              <Loading state={true} />
+            </div>
+          </div>
+        </>
       </Suspense>
     );
   } else {

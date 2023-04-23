@@ -62,7 +62,7 @@ const record = () => {
               .
             </div>
             <div className="mx-auto text-2xl font-medium py-3">
-              Debit Amount
+              {data.type==="credit"?"Credit":"Debit"} Amount
             </div>
             <div className="w-full border-t-2 border-gray-200"></div>
             <div className="mx-auto text-6xl text-[#017699] font-semibold py-3 text-center">

@@ -8,12 +8,6 @@ import { ThreeDots } from "react-loader-spinner";
 import Link from "next/link";
 
 const transaction = () => {
-  type ReturnParams = {
-    id: string;
-    From: string;
-    Amount: number;
-    TimeStamp: number;
-  };
 
   const info = useAtomValue(userInfoAtom);
   const [username, setUserName] = useAtom(userName);
@@ -108,7 +102,7 @@ const transaction = () => {
         JSON.stringify([info.idToken, info.oAuthIdToken])
       );
       await fetch(
-        "http://localhost:3000/api/user/query/recentTransactions/getTransactions",
+        "http://localhost:3000/api/user/query/recentTransactions",
         {
           method: "POST",
           headers: headers,
@@ -159,8 +153,20 @@ const transaction = () => {
                               if (tx.type == "credit") {
                                 return (
                                   <>
-                                    <li className="flex flex-row mb-2 rounded-md border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300">
-                                      <div className="transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-3">
+                                    <li className="flex flex-row mb-2 rounded-md border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300" onClick={() => {
+                                            router.push({
+                                              pathname: "/user/users/transaction/record",
+                                              query: {
+                                                id: tx.id,
+                                                From: tx.From,
+                                                Amount: tx.Amount,
+                                                time: tx.time,
+                                                date: tx.date,
+                                                type: tx.type,
+                                              },
+                                            });
+                                          }}>
+                                      <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-3">
                                         <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
                                           <div className="rounded-full p-2 bg-white border-2 border-green-600 mx-2">
                                             <BsArrowDown className="text-3xl text-green-600" />
@@ -267,7 +273,15 @@ const transaction = () => {
                     </>
                   );
                 })
-              : ""}
+              : <div
+              tabIndex={-1}
+              aria-hidden="true"
+              className={`h-[100vh] ${loader?"hidden":""} relative flex items-center justify-center top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 `}
+            >
+              <div className="fixed w-full bg-transparent flex items-center justify-center">
+                <p className="text-2xl font-medium">No Transactions to Show</p>
+              </div>
+            </div>}
           </ul>
         </div>
       </div>

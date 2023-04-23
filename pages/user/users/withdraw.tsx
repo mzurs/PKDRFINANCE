@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import {
   userInfoAtom,
   web3authAtom,
-  loading,
   isVerified,
   userName,
 } from "../../../state/jotai";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { UserInfo } from "../../../components/users/settingsLayout/type/userTypes";
 import { useRouter } from "next/router";
 import { ThreeDots } from "react-loader-spinner";

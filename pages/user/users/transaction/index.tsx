@@ -5,7 +5,6 @@ import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { notify } from "../../../../components/users/settingsLayout/ProfileInfo";
 import { ThreeDots } from "react-loader-spinner";
-import Link from "next/link";
 
 const transaction = () => {
 

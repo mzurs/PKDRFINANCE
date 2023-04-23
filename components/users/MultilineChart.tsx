@@ -38,7 +38,6 @@ const MultilineChart = () => {
   const [debitList, setDebitList] = useState<any[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
   let Amounts: number[] = [];
-  
 
   const setLabelsList = () => {
     add_dateproperty();
@@ -60,7 +59,10 @@ const MultilineChart = () => {
               });
               diff--;
             }
-            console.log("🚀 ~ file: MultilineChart.tsx:55 ~ dateList.forEach ~ debitList:", debitList)
+            console.log(
+              "🚀 ~ file: MultilineChart.tsx:55 ~ dateList.forEach ~ debitList:",
+              debitList
+            );
           } else if (debit_count > credit_count) {
             let diff = debit_count - credit_count;
 
@@ -77,43 +79,53 @@ const MultilineChart = () => {
         }
       });
     }
-    
-    
-    setLabels(getSortedDates(creditList.map(record=>record.date)));
+
+    setLabels(getSortedDates(creditList.map((record) => record.date)));
 
     sortByDate();
   };
 
   useEffect(() => {
     setAmount();
-  }, [labels])
-  
+  }, [labels]);
+
+  useEffect(() => {
+    get_transaction();
+  }, []);
+
+  useEffect(() => {
+    if (transactions != null) {
+      SetDateList(transactions);
+      setLoader(false);
+    }
+  }, [transactions]);
+
   function sortByDate() {
     creditList.sort((a, b) => {
-      const [dayA, monthA] = a.date.split('/');
-      const [dayB, monthB] = b.date.split('/');
-      const dateA:any = new Date(`${monthA}/${dayA}`);
-      const dateB:any = new Date(`${monthB}/${dayB}`);
+      const [dayA, monthA] = a.date.split("/");
+      const [dayB, monthB] = b.date.split("/");
+      const dateA: any = new Date(`${monthA}/${dayA}`);
+      const dateB: any = new Date(`${monthB}/${dayB}`);
       return dateA - dateB;
     });
 
     debitList.sort((a, b) => {
-      const [dayA, monthA] = a.date.split('/');
-      const [dayB, monthB] = b.date.split('/');
-      const dateA:any = new Date(`${monthA}/${dayA}`);
-      const dateB:any = new Date(`${monthB}/${dayB}`);
+      const [dayA, monthA] = a.date.split("/");
+      const [dayB, monthB] = b.date.split("/");
+      const dateA: any = new Date(`${monthA}/${dayA}`);
+      const dateB: any = new Date(`${monthB}/${dayB}`);
       return dateA - dateB;
     });
   }
 
-  function getSortedDates(dates:any[]){
+  function getSortedDates(dates: any[]) {
     const sortedDates = dates.sort((a, b) => {
-      const [dayA, monthA] = a.split('/');
-      const [dayB, monthB] = b.split('/');
-      const dateA:any = new Date(2021, monthA - 1, dayA);
-      const dateB:any = new Date(2021, monthB - 1, dayB);
+      const [dayA, monthA] = a.split("/");
+      const [dayB, monthB] = b.split("/");
+      const dateA: any = new Date(2021, monthA - 1, dayA);
+      const dateB: any = new Date(2021, monthB - 1, dayB);
       return dateA - dateB;
-    });   
+    });
 
     return sortedDates;
   }
@@ -166,25 +178,12 @@ const MultilineChart = () => {
     if (creditList != null) {
       let c = creditList.flatMap((record: any) => record.Amount);
       setCreditAmount(c);
-      console.log("🚀 ~ file: MultilineChart.tsx:129 ~ setAmount ~ creditAmount:", c)
     }
     if (debitList != null) {
       let d = debitList.flatMap((record: any) => record.Amount);
       setDebitAmount(d);
-      console.log("🚀 ~ file: MultilineChart.tsx:133 ~ setAmount ~ debitAmount:", d)
     }
   };
-
-  useEffect(() => {
-    get_transaction();
-  }, []);
-
-  useEffect(() => {
-    if (transactions != null) {
-      SetDateList(transactions);
-      setLoader(false);
-    }
-  }, [transactions]);
 
   const get_transaction = async () => {
     try {

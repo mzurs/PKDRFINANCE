@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import React, { useEffect, useState } from "react";
 import { userInfoAtom, userName } from "../../state/jotai";
-import { notify } from "./settingsLayout/ProfileInfo";
 import { useRouter } from "next/router";
 import { Triangle } from "react-loader-spinner";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
@@ -10,10 +9,8 @@ const Recent = (props: any) => {
   const info = useAtomValue(userInfoAtom);
   const [username, setUserName] = useAtom(userName);
   const [transactions, setTransactions] = useState<any[] | null>(null);
-  const [dateList, setDateList] = useState<Set<string> | null>(null);
   const [loader, setLoader] = useState<boolean>(false);
   let user: string = username;
-  let count = 1;
   const router = useRouter();
 
   useEffect(() => {
@@ -87,11 +84,7 @@ const Recent = (props: any) => {
           }
         });
     } catch (error) {
-      if (count == 1) {
-        notify("Error Occurred: while fetching transactions", "error");
-        console.log(error);
-        count++;
-      }
+      console.log(error);
     }
   };
   return (

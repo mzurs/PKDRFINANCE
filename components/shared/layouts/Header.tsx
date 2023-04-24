@@ -974,7 +974,7 @@ function Header() {
         {AdminNavbar}
       </>
     );
-  } else {
+  } else if(userRoleType === "users") {
     return (
       <>
         <LoadingBar

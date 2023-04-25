@@ -7,7 +7,6 @@ import { notify } from "../../../../components/users/settingsLayout/ProfileInfo"
 import { ThreeDots } from "react-loader-spinner";
 
 const transaction = () => {
-
   const info = useAtomValue(userInfoAtom);
   const [username, setUserName] = useAtom(userName);
   const [transactions, setTransactions] = useState<any[] | null>(null);
@@ -100,14 +99,11 @@ const transaction = () => {
         "x-custom-header",
         JSON.stringify([info.idToken, info.oAuthIdToken])
       );
-      await fetch(
-        "http://localhost:3000/api/user/query/recentTransactions",
-        {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify({ username: username }),
-        }
-      )
+      await fetch("http://localhost:3000/api/user/query/recentTransactions", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ username: username }),
+      })
         .then((response) => response.json())
         .then(async (data) => {
           setTransactions(data);
@@ -134,153 +130,181 @@ const transaction = () => {
             </p>
           </div>
           <ul className="flex flex-col">
-            {dateList != null
-              ? Array.from(dateList).map((d) => {
-                  return (
-                    <>
-                      <div className="flex flex-row items-stretch justify-between">
-                        <div className="border-b-2 border-gray-400 w-1/2 mb-5"></div>
-                        <div className="px-4 py-2 text-xl font-semibold text-[#005c79] -z-10 w-48 flex justify-center">
-                          {d}
-                        </div>
-                        <div className="w-1/2 border-b-2 border-gray-400 mb-5"></div>
+            {dateList != null ? (
+              Array.from(dateList).map((d) => {
+                return (
+                  <>
+                    <div className="flex flex-row items-stretch justify-between">
+                      <div className="border-b-2 border-gray-400 w-1/2 mb-5"></div>
+                      <div className="px-4 py-2 text-xl font-semibold text-[#005c79] -z-10 w-48 flex justify-center">
+                        {d}
                       </div>
+                      <div className="w-1/2 border-b-2 border-gray-400 mb-5"></div>
+                    </div>
 
-                      {transactions != null
-                        ? transactions?.map((tx) => {
-                            if (tx.date === d) {
-                              if (tx.type == "credit") {
-                                return (
-                                  <>
-                                    <li className="flex flex-row mb-2 rounded-md border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300" onClick={() => {
-                                            router.push({
-                                              pathname: "/user/users/transaction/record",
-                                              query: {
-                                                id: tx.id,
-                                                From: tx.From,
-                                                Amount: tx.Amount,
-                                                time: tx.time,
-                                                date: tx.date,
-                                                type: tx.type,
-                                              },
-                                            });
-                                          }}>
-                                      <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-3">
-                                        <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
-                                          <div className="rounded-full p-2 bg-white border-2 border-green-600 mx-2">
-                                            <BsArrowDown className="text-3xl text-green-600" />
-                                          </div>
+                    {transactions != null
+                      ? transactions?.map((tx) => {
+                          if (tx.date === d) {
+                            if (tx.type == "credit") {
+                              return (
+                                <>
+                                  <li
+                                    className="flex flex-row mb-2 rounded-md border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300"
+                                    onClick={() => {
+                                      router.push({
+                                        pathname:
+                                          "/user/users/transaction/record",
+                                        query: {
+                                          id: tx.id,
+                                          From: tx.From,
+                                          Amount: tx.Amount,
+                                          time: tx.time,
+                                          date: tx.date,
+                                          type: tx.type,
+                                        },
+                                      });
+                                    }}
+                                  >
+                                    <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-3">
+                                      <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
+                                        <div className="rounded-full p-2 bg-white border-2 border-green-600 mx-2">
+                                          <BsArrowDown className="text-3xl text-green-600" />
                                         </div>
-                                        <div className="flex-1 pl-1 md:mr-16">
-                                          <div className="font-medium text-lg dark:text-white">
-                                            {tx.From}
-                                          </div>
-                                          <div className="text-md text-gray-600 dark:text-gray-200">
-                                            {tx.type}
-                                          </div>
-                                        </div>
-                                        <div className="text-xl text-gray-600 dark:text-gray-200">
-                                          Rs.&nbsp;{tx.Amount}
-                                        </div>
-                                        <button
-                                          onClick={() => {
-                                            router.push({
-                                              pathname: "/user/users/transaction/record",
-                                              query: {
-                                                id: tx.id,
-                                                From: tx.From,
-                                                Amount: tx.Amount,
-                                                time: tx.time,
-                                                date: tx.date,
-                                                type: tx.type,
-                                              },
-                                            });
-                                          }}
-                                          className="flex justify-end ml-5 pl-4 py-5 text-right hover:text-gray-800  dark:hover:text-white dark:text-gray-200"
-                                        >
-                                          <svg
-                                            width="18"
-                                            fill="currentColor"
-                                            height="18"
-                                            className="text-gray-300 hover:text-gray-600"
-                                            viewBox="0 0 1792 1792"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                          >
-                                            <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
-                                          </svg>
-                                        </button>
                                       </div>
-                                    </li>
-                                  </>
-                                );
-                              } else {
-                                return (
-                                  <>
-                                    <li className="flex flex-row mb-2 rounded-md border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300 hover:border">
-                                      <div className="transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-md select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-3">
-                                        <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
-                                          <div className="rounded-full p-2 bg-white border-2 border-red-800 mx-2">
-                                            <BsArrowUp className="text-3xl text-red-800" />
-                                          </div>
+                                      <div className="flex-1 pl-1 md:mr-16">
+                                        <div className="font-medium text-lg dark:text-white">
+                                          {tx.From}
                                         </div>
-                                        <div className="flex-1 pl-1 md:mr-16">
-                                          <div className="font-medium text-lg dark:text-white">
-                                            {tx.To}
-                                          </div>
-                                          <div className="text-md text-gray-600 dark:text-gray-200">
-                                            {tx.type}
-                                          </div>
+                                        <div className="text-md text-gray-600 dark:text-gray-200">
+                                          {tx.type}
                                         </div>
-                                        <div className="text-xl text-gray-600 dark:text-gray-200">
-                                          Rs.&nbsp;{tx.Amount}
-                                        </div>
-                                        <button
-                                          onClick={() => {
-                                            router.push({
-                                              pathname: "/user/users/transaction/record",
-                                              query: {
-                                                id: tx.id,
-                                                To: tx.From,
-                                                Amount: tx.Amount,
-                                                time: tx.time,
-                                                date: tx.date,
-                                                type: tx.type,
-                                              },
-                                            });
-                                          }}
-                                          className="flex justify-end ml-5 pl-4 py-5 text-right hover:text-gray-800  dark:hover:text-white dark:text-gray-200"
-                                        >
-                                          <svg
-                                            width="18"
-                                            fill="currentColor"
-                                            height="18"
-                                            className="text-gray-300 hover:text-gray-600"
-                                            viewBox="0 0 1792 1792"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                          >
-                                            <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
-                                          </svg>
-                                        </button>
                                       </div>
-                                    </li>
-                                  </>
-                                );
-                              }
+                                      <div className="text-xl text-gray-600 dark:text-gray-200">
+                                        Rs.&nbsp;{tx.Amount}
+                                      </div>
+                                      <button
+                                        onClick={() => {
+                                          router.push({
+                                            pathname:
+                                              "/user/users/transaction/record",
+                                            query: {
+                                              id: tx.id,
+                                              From: tx.From,
+                                              Amount: tx.Amount,
+                                              time: tx.time,
+                                              date: tx.date,
+                                              type: tx.type,
+                                            },
+                                          });
+                                        }}
+                                        className="flex justify-end ml-5 pl-4 py-5 text-right hover:text-gray-800  dark:hover:text-white dark:text-gray-200"
+                                      >
+                                        <svg
+                                          width="18"
+                                          fill="currentColor"
+                                          height="18"
+                                          className="text-gray-300 hover:text-gray-600"
+                                          viewBox="0 0 1792 1792"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </li>
+                                </>
+                              );
+                            } else {
+                              return (
+                                <>
+                                  <li
+                                    className="flex flex-row mb-2 rounded-md border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300 hover:border"
+                                    onClick={() => {
+                                      router.push({
+                                        pathname:
+                                          "/user/users/transaction/record",
+                                        query: {
+                                          id: tx.id,
+                                          To: tx.To,
+                                          Amount: tx.Amount,
+                                          time: tx.time,
+                                          date: tx.date,
+                                          type: tx.type,
+                                        },
+                                      });
+                                    }}
+                                  >
+                                    <div className="transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-md select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-3">
+                                      <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
+                                        <div className="rounded-full p-2 bg-white border-2 border-red-800 mx-2">
+                                          <BsArrowUp className="text-3xl text-red-800" />
+                                        </div>
+                                      </div>
+                                      <div className="flex-1 pl-1 md:mr-16">
+                                        <div className="font-medium text-lg dark:text-white">
+                                          {tx.To}
+                                        </div>
+                                        <div className="text-md text-gray-600 dark:text-gray-200">
+                                          {tx.type}
+                                        </div>
+                                      </div>
+                                      <div className="text-xl text-gray-600 dark:text-gray-200">
+                                        Rs.&nbsp;{tx.Amount}
+                                      </div>
+                                      <button
+                                        onClick={() => {
+                                          router.push({
+                                            pathname:
+                                              "/user/users/transaction/record",
+                                            query: {
+                                              id: tx.id,
+                                              To: tx.To,
+                                              Amount: tx.Amount,
+                                              time: tx.time,
+                                              date: tx.date,
+                                              type: tx.type,
+                                            },
+                                          });
+                                        }}
+                                        className="flex justify-end ml-5 pl-4 py-5 text-right hover:text-gray-800  dark:hover:text-white dark:text-gray-200"
+                                      >
+                                        <svg
+                                          width="18"
+                                          fill="currentColor"
+                                          height="18"
+                                          className="text-gray-300 hover:text-gray-600"
+                                          viewBox="0 0 1792 1792"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </li>
+                                </>
+                              );
                             }
-                          })
-                        : ""}
-                    </>
-                  );
-                })
-              : <div
-              tabIndex={-1}
-              aria-hidden="true"
-              className={`h-[100vh] ${loader?"hidden":""} relative flex items-center justify-center top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 `}
-            >
-              <div className="fixed w-full bg-transparent flex items-center justify-center">
-                <p className="text-2xl font-medium">No Transactions to Show</p>
+                          }
+                        })
+                      : ""}
+                  </>
+                );
+              })
+            ) : (
+              <div
+                tabIndex={-1}
+                aria-hidden="true"
+                className={`h-[100vh] ${
+                  loader ? "hidden" : ""
+                } relative flex items-center justify-center top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 `}
+              >
+                <div className="fixed w-full bg-transparent flex items-center justify-center">
+                  <p className="text-2xl font-medium">
+                    No Transactions to Show
+                  </p>
+                </div>
               </div>
-            </div>}
+            )}
           </ul>
         </div>
       </div>

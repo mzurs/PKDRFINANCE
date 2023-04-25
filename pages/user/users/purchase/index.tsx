@@ -2,11 +2,24 @@ import React, { useEffect, useState } from "react";
 import get_USD_PKDR_rate from "../../../api/get_USD_PKDR_rate";
 import { isVerified, userRole } from "../../../../state/jotai";
 import { useAtom, useAtomValue } from "jotai";
+import Link from "next/link";
 
 const buyPKDRList = ({ rate }: any) => {
   const [latestRate, setLatestRate] = useState(0);
   const [verified, useVerified] = useAtom(isVerified);
+  const [input1Value, setInput1Value] = useState<number>(0);
+  const [input2Value, setInput2Value] = useState<number>(0);
 
+  const handleInputChange = (event: { target: { name: any; value: any } }) => {
+    const { name, value } = event.target;
+
+    if (name === "input1") {
+      setInput1Value(value);
+      setInput2Value(value);
+    } else if (name === "input2") {
+      setInput2Value(value);
+    }
+  };
   const checkout = async () => {
     fetch("/api/checkout/checkout_sessions");
   };
@@ -15,109 +28,181 @@ const buyPKDRList = ({ rate }: any) => {
     setLatestRate(rate);
   });
   return (
-    <div className="flex pt-[4.6rem] w-[100vw] overflow-x-hidden">
+    <div className=" flex pt-[10rem] w-[100vw] overflow-x-hidden">
       <div className="max-w-100 mx-auto bg-white">
         {/* <!-- component -->
         {/* <!-- This is an example component --> */}
-  
 
-        <h1 className=" mt-20	mb-20 text-4xl	text-blue-700 not-italic  underline text-center">
-          USD-PKR Conversion Rate
-        </h1>
-        <div className=" relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="border-x-1  mx-auto	 text-center text-black">
-            <thead
-              className=" border-b-4
-
- uppercase text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >
-              <tr className="rounded-lg">
-                <th scope="col" className="p-4"></th>
+        <div className="shadow-lg shadow-black  relative overflow-x-auto  sm:rounded-lg">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr className="border-2">
+                <th scope="col" className="px-4 pt-5 ">
+                  <h4 className="text-2xl  dark:text-gray-400 font-mono">
+                    USD-PKR Exchange Rates
+                  </h4>
+                </th>
+                <th scope="col" className="px-6 py-3"></th>
+                <th scope="col" className="px-6 py-3"></th>
+                <th scope="col" className="px-6 py-3"></th>
+              </tr>
+            </thead>
+            <thead className="text-center text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr className="border-2">
                 <th scope="col" className="px-6 py-3">
-                  Amount($)
+                  Exchange name
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Amount(PKR)
+                  <div className="flex items-center">Amount ($)</div>
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  <div className="flex items-center">Amount (Rs)</div>
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  <div className="flex items-center">Quantity</div>
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr className=" border-b text-black">
-                <td className="w-4 p-4"></td>
+              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
-                  className="text-center  px-6 py-4 font-medium text-black  whitespace-nowrap"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  1
+                  <Link
+                    className="italic text-cyan-500	"
+                    href="https://wise.com/gb/send-money/"
+                  >
+                    wise.com
+                  </Link>
                 </th>
-                <td className="text-center px-6 py-4">
-                  {(1 * rate).toFixed(0)}
-                </td>
+                <td className="px-6 py-4"> $1</td>
+                <td className="px-6 py-4">{(1 * rate).toFixed(2)}</td>
+                <td className="px-6 py-4">{(1 * rate).toFixed(2)}</td>
               </tr>
-              <tr className=" border-b text-black">
-                <td className="w-4 p-4"></td>
+              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
-                  className="text-center  px-6 py-4 font-medium text-black  whitespace-nowrap"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  5
+                  <Link
+                    className="italic text-cyan-500	"
+                    href="https://wise.com/gb/send-money/"
+                  >
+                    wise.com
+                  </Link>
                 </th>
-                <td className="text-center px-6 py-4">
-                  {(5 * rate).toFixed(0)}
-                </td>
+                <td className="px-6 py-4"> $5</td>
+                <td className="px-6 py-4">{(5 * rate).toFixed(2)}</td>
+                <td className="px-6 py-4">{(5 * rate).toFixed(2)}</td>
               </tr>
-              <tr className=" border-b text-black">
-                <td className="w-4 p-4"></td>
+              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
-                  className="text-center  px-6 py-4 font-medium text-black  whitespace-nowrap"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  10
+                  <Link
+                    className="italic text-cyan-500	"
+                    href="https://wise.com/gb/send-money/"
+                  >
+                    wise.com
+                  </Link>
                 </th>
-                <td className="text-center px-6 py-4">
-                  {(10 * rate).toFixed(0)}
-                </td>
+                <td className="px-6 py-4"> $10</td>
+                <td className="px-6 py-4">{(10 * rate).toFixed(2)}</td>
+                <td className="px-6 py-4">{(10 * rate).toFixed(2)}</td>
               </tr>
-              <tr className=" border-b text-black">
-                <td className="w-4 p-4"></td>
+              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
-                  className="text-center  px-6 py-4 font-medium text-black  whitespace-nowrap"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  50
+                  <Link
+                    className="italic text-cyan-500	"
+                    href="https://wise.com/gb/send-money/"
+                  >
+                    wise.com
+                  </Link>
                 </th>
-                <td className="text-center px-6 py-4">
-                  {(50 * rate).toFixed(0)}
-                </td>
+                <td className="px-6 py-4"> $20</td>
+                <td className="px-6 py-4">{(20 * rate).toFixed(2)}</td>
+                <td className="px-6 py-4">{(20 * rate).toFixed(2)}</td>
               </tr>
-              <tr className=" border-b text-black">
-                <td className="w-4 p-4"></td>
+              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
-                  className="text-center  px-6 py-4 font-medium text-black  whitespace-nowrap"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  100
+                  <Link
+                    className="italic text-cyan-500	"
+                    href="https://wise.com/gb/send-money/"
+                  >
+                    wise.com
+                  </Link>
                 </th>
-                <td className="text-center px-6 py-4">
-                  {(100 * rate).toFixed(0)}
+                <td className="px-6 py-4"> $50</td>
+                <td className="px-6 py-4">{(50 * rate).toFixed(2)}</td>
+                <td className="px-6 py-4">{(50 * rate).toFixed(2)}</td>
+              </tr>
+
+              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  <Link
+                    className="italic text-cyan-500	"
+                    href="https://wise.com/gb/send-money/"
+                  >
+                    wise.com
+                  </Link>
+                </th>
+                <td className="px-6 py-4"> $100</td>
+                <td className="px-6 py-4">{(100 * rate).toFixed(2)}</td>
+                <td className="px-6 py-4">{(100 * rate).toFixed(2)}</td>
+              </tr>
+
+              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-mono text-cyan-500 whitespace-nowrap "
+                >
+                  Calculate
+                </th>
+                <td className="px-6 py-4">{(input1Value / rate).toFixed(2)}</td>
+                <td className="px-6 py-4">
+                  {" "}
+                  <input
+                    type="text"
+                    name="input1"
+                    value={input1Value}
+                    onChange={handleInputChange}
+                    className="text-center text-white  dark:bg-gray-700 "
+                  />
+                </td>
+                <td className="px-6 py-4">{input1Value}</td>
+              </tr>
+
+              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-mono text-gray-900 whitespace-nowrap  dark:text-gray-400"
+                ></th>
+                <td className="px-6 py-4"></td>
+                <td className="px-6 py-4"> </td>
+                <td className="px-6 py-4">
+                  <form action="/api/checkout/checkout_sessions" method="POST">
+                    <button
+                      type="submit"
+                      className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    >
+                      BUY NOW
+                    </button>
+                  </form>
                 </td>
               </tr>
             </tbody>
           </table>
-          {useAtomValue(userRole) === "users" && Boolean(verified) ? (
-            <div className=" flex flex-grow h-12 mt-5 text-xl hover:text-[#127a97] font-normal cursor-pointer hover:underline">
-              <form action="/api/checkout/checkout_sessions" method="POST">
-                <button
-                  className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                  type="submit"
-                >
-                  Buy PKDR
-                </button>
-              </form>
-            </div>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
     </div>

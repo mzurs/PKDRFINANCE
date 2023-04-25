@@ -366,51 +366,53 @@ function Front() {
     <div className="main">
       <div className="overlay"></div>
       <video src="/vid.mp4" autoPlay loop muted></video>
-      <div className="logo"> <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
-                  <Image
-                    className="block h-8 w-auto lg:hidden"
-                    src="/logo1.png"
-                    alt="PKDR Finance"
-                    width={60}
-                    height={60}
-                  />
-                  <Link href={"/"} className="cursor-pointer">
-                    <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
-                      <Image
-                        src="/logo1.png"
-                        alt="PKDR Finance"
-                        width={200}
-                        height={170}
-                      />
-                      {/* <h2 className="text-xl">PKDR Finance</h2> */}
-                    </div>
-                  </Link>
-                </div></div>
+      <div className="logo">
+        {" "}
+        <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
+          <Image
+            className="block h-8 w-auto lg:hidden"
+            src="/logo1.png"
+            alt="PKDR Finance"
+            width={60}
+            height={60}
+          />
+          <Link href={"/"} className="cursor-pointer">
+            <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+              <Image
+                src="/logo1.png"
+                alt="PKDR Finance"
+                width={200}
+                height={170}
+              />
+              {/* <h2 className="text-xl">PKDR Finance</h2> */}
+            </div>
+          </Link>
+        </div>
+      </div>
       <div
         className="content text-5xl font-mono
 "
       >
-        
-        <h1 className="underline italic mb-4 text-8xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        <h1 className="  italic mb-4 text-8xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
           PKDR Finance
         </h1>
 
-        <p className="text-xl italic  ">
+        <p className="text-xl italic underline ">
           The Optimal Solution for Next-Gen Online Banking
         </p>
         <br />
         <div className="flex font-sans">
           <button
             onClick={login}
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+            className="shadow-lg shadow-cyan-500/50 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
           >
             <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-               &nbsp;Sign Up&nbsp;
+              &nbsp;Sign Up&nbsp;
             </span>
           </button>
           <button
             onClick={login}
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+            className="shadow-lg shadow-cyan-500/50 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
           >
             <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
               &nbsp;Sign in&nbsp;&nbsp;

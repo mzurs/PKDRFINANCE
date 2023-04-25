@@ -183,7 +183,7 @@ const buyPKDRList = ({ rate }: any) => {
                 <td className="px-6 py-4">{input1Value}</td>
               </tr>
 
-              <tr className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <tr className="border-4 border-white text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
                   className="px-6 py-4 font-mono text-gray-900 whitespace-nowrap  dark:text-gray-400"

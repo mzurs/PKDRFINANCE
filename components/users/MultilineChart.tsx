@@ -39,6 +39,43 @@ const MultilineChart = () => {
   const [labels, setLabels] = useState<string[]>([]);
   let Amounts: number[] = [];
 
+  useEffect(() => {
+    if (username == "") {
+      setLoader(true);
+      fetchUserName();
+    }
+  }, []);
+
+  useEffect(() => {
+    setLoader(true);
+    get_transaction();
+  }, [username])
+
+  async function fetchUserName(): Promise<boolean> {
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([info.idToken, info.oAuthIdToken])
+    );
+    try {
+      await fetch("http://localhost:3000/api/user/query/getUserAttrInfo", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ attr_name: "USERNAME" }),
+      })
+        .then((response) => response.json())
+        .then(async (d) => {
+          console.log("🚀 ~ file: transfer.tsx:100 ~ .then ~ d:", d);
+          setUserName(d.data.getUserInfo.value);
+          return d.data.getUserInfo.success;
+        });
+    } catch (error) {
+      return false;
+    }
+    return false;
+  }
+
   const setLabelsList = () => {
     add_dateproperty();
     if (dateList != null) {
@@ -80,12 +117,11 @@ const MultilineChart = () => {
       });
     }
 
-    setLabels(getSortedDates(creditList.map((record) => record.date)));
-
-    sortByDate();
+    setLabels(getSortedDates(creditList.map((record) => record.date)));    
   };
 
   useEffect(() => {
+    sortByDate();
     setAmount();
   }, [labels]);
 
@@ -95,10 +131,15 @@ const MultilineChart = () => {
 
   useEffect(() => {
     if (transactions != null) {
-      SetDateList(transactions);
+      SetDateList();
       setLoader(false);
     }
   }, [transactions]);
+
+  useEffect(() => {
+    setLabelsList();
+  }, [dateList])
+  
 
   function sortByDate() {
     creditList.sort((a, b) => {
@@ -154,10 +195,10 @@ const MultilineChart = () => {
     return count;
   };
 
-  const SetDateList = (tx: any[]) => {
+  const SetDateList = () => {
     let dates: any[] = [];
 
-    tx.forEach((element) => {
+    transactions?.forEach((element) => {
       dates.push(
         element.map((record: any) => {
           let date = new Date(record.TimeStamp);
@@ -171,7 +212,6 @@ const MultilineChart = () => {
 
     const uniqueDates = new Set(dates);
     setDateList(uniqueDates);
-    setLabelsList();
   };
 
   const setAmount = () => {
@@ -208,7 +248,6 @@ const MultilineChart = () => {
           setDebitList(data[1]);
         });
     } catch (error) {
-      notify("Error Occurred: while fetching transactions details", "error");
       console.log(error);
     }
   };

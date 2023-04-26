@@ -14,8 +14,17 @@ const Recent = (props: any) => {
   const router = useRouter();
 
   useEffect(() => {
-    callApi();
+    if (username == "") {
+      setLoader(true);
+      fetchUserName();
+    }
   }, []);
+
+  useEffect(() => {
+    setLoader(true);
+    get_transaction();
+  }, [username])
+  
 
   useEffect(() => {
     if (transactions != null) {
@@ -26,15 +35,6 @@ const Recent = (props: any) => {
       setLoader(false);
     }
   }, [transactions]);
-
-  const callApi = async () => {
-    if (username == "") {
-      setLoader(true);
-      await fetchUserName();
-    }
-    setLoader(true);
-    await get_transaction();
-  };
 
   async function fetchUserName(): Promise<boolean> {
     const headers = new Headers();

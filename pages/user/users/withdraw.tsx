@@ -144,7 +144,7 @@ const withdraw = () => {
             }
           } else {
             notify(
-              `Amount Withdrawl Successfull: Amount of ${Amount} PKDR has been deposited at ${obj.iban} successfully 🎉`,
+              `Amount of Rs ${Amount} withdrawn successfully 🎉`,
               "success"
             );
           }

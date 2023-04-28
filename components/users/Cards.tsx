@@ -65,12 +65,12 @@ const Cards = (props: any) => {
             className="text-[4rem] font-serif text-white 
  font-medium flex items-center justify-center h-[28vh]"
           >
-            Rs.{Money}{" "}
+            Rs&nbsp;{Money}
           </div>
         ) : (
           <div
             role="status"
-            className="flex items-center justify-center h-[28vh]"
+            className="flex items-center justify-center h-[39vh]"
           >
             <svg
               aria-hidden="true"

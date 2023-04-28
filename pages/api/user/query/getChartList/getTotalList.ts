@@ -29,7 +29,6 @@ export default async function handler(req: any, res: any) {
     const username: string = req.body.username;
 
     const result = await getLists(authTokens, username);
-    console.log("🚀 ~ file: getTotalList.ts:32 ~ handler ~ result:", result)
 
     res.status(200).json(result);
   } else {

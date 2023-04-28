@@ -66,7 +66,7 @@ const record = () => {
             </div>
             <div className="w-full border-t-2 border-gray-200"></div>
             <div className="mx-auto text-6xl text-[#017699] font-semibold py-3 text-center">
-              {data.Amount}&nbsp;PKDR
+              Rs&nbsp;{data.Amount}
             </div>
           </div>
         </div>

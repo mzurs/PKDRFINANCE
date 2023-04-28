@@ -50,7 +50,6 @@ import { CreditReturnParams } from "./type";
             TimeStamp: unmarshall(Items[i]).TimeStamp,
           };
         }
-      //   console.log(items);
     
         return items;
       }

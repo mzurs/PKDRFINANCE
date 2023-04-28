@@ -12,11 +12,12 @@ const record = () => {
 
   return (
     <>
-      <div>
-        <div className="h-[20vh] pt-16">
-          <HiOutlineArrowLeft className="h-[20vh] pt-20 -mt-24 ml-5 hover:text-[#017699] text-4xl cursor-pointer" onClick={()=>router.back()}/>
+      <div className="dark:bg-slate-900">
+        <div className="h-[20vh] pt-16 dark:bg-slate-900">
+          <br /><br />
+          <HiOutlineArrowLeft className="h-[20vh] pt-20 -mt-24 ml-5 text-white hover:text-[#017699] text-4xl cursor-pointer" onClick={()=>router.back()}/>
         </div>
-        <div className="flex justify-center h-[70vh]">
+        <div className="flex justify-center h-[70vh] dark:bg-slate-900">
           <div className="flex flex-col w-[35vw] mx-auto pt-12">
             {data.type === "credit" ? (
               <BsArrowDown className="mb-6 p-2 mx-auto border-4 font-extrabold border-green-600 rounded-full text-green-600 text-[85px]" />
@@ -27,7 +28,7 @@ const record = () => {
               <div>{data.id}</div>
               <div>{info.email}</div>
             </div>
-            <div className="text-2xl px-8 pt-6 text-center">
+            <div className=" text-white text-2xl px-8 pt-6 text-center">
               {data.type === "credit" ? (
                 <>
                   Funds have been recieved From{" "}
@@ -61,7 +62,7 @@ const record = () => {
               </span>
               .
             </div>
-            <div className="mx-auto text-2xl font-medium py-3">
+            <div className="mx-auto text-2xl text-white font-medium py-3">
               {data.type==="credit"?"Credit":"Debit"} Amount
             </div>
             <div className="w-full border-t-2 border-gray-200"></div>

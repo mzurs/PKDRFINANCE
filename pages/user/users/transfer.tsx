@@ -177,25 +177,25 @@ const transfer = () => {
           <div
             className={`${
               loader ? "opacity-40" : ""
-            } w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}
+            } w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10 dark:bg-slate-900`}
           >
-            <div>
-              <h1 className="md:pt-[5.5rem] pt-3 md:text-4xl text-2xl font-bold pl-8 pb-0 mb-0">
-                Send Money
+            <div><br /><br />
+              <h1 className="md:pt-[5.5rem] font-serif text-white md:text-4xl text-center pt-10 text-3xl font-bold pl-8 pb-0 mb-0">
+                Transfer to Your Contacts
               </h1>
-            </div>
-            <div className="body-font w-full md:pt-[4rem]">
-              <div className="w-full max-w-2xl mx-auto pb-4">
+            </div><br />
+            <div className="body-font w-full md:pt-[4rem] ">
+              <div className="w-full max-w-2xl mx-auto pb-4 shadow-lg shadow-black border-14  border-transparent">
                 <div className="flex flex-wrap -mx-3 mb-6">
-                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 " >
                     <label
-                      className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                      className="block uppercase tracking-wide mt-6 ml-3 text-white text-sm font-bold mb-2"
                       htmlFor="grid-first-name"
                     >
                       From Account
                     </label>
                     <input
-                      className="text-lg appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight"
+                      className="text-lg italic appearance-none block w-full bg-transparent text-white rounded py-3 px-4 mb-3 leading-tight"
                       disabled
                       id="grid-first-name"
                       type="text"
@@ -204,13 +204,13 @@ const transfer = () => {
                   </div>
                   <div className="w-full md:w-1/2 px-3">
                     <label
-                      className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                      className="block uppercase tracking-wide text-white mt-6 ml-3 text-sm font-bold mb-2"
                       htmlFor="grid-last-name"
                     >
                       Account Holder Name
                     </label>
                     <input
-                      className="text-lg appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      className="text-lg italic appearance-none block w-full bg-transparent text-white border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       disabled
                       id="grid-last-name"
                       type="text"
@@ -219,8 +219,8 @@ const transfer = () => {
                     />
                   </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
-                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div className="flex flex-wrap -mx-3 mb-6 mt-6 ml-3 ">
+                  {/* <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label
                       className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                       htmlFor="grid-first-name"
@@ -235,16 +235,16 @@ const transfer = () => {
                       name="Benificiary Email"
                       value={data.email}
                     />
-                  </div>
-                  <div className="w-full md:w-1/2 px-3">
+                  </div> */}
+                  <div className="w-full md:w-1/2 px-3 ">
                     <label
-                      className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                      className="block uppercase tracking-wide text-white text-sm font-bold mb-2"
                       htmlFor="grid-last-name"
                     >
-                      Account Holder Name
+                    Account Holder Name
                     </label>
                     <input
-                      className="text-lg appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      className="text-lg appearance-none block w-full bg-transparent italic  text-white  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       disabled
                       id="grid-last-name"
                       type="text"
@@ -256,7 +256,7 @@ const transfer = () => {
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label
-                      className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                      className="block uppercase tracking-wide mt-6 ml-3 text-white text-sm font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Amount
@@ -265,7 +265,7 @@ const transfer = () => {
                       </span>
                     </label>
                     <input
-                      className="text-lg appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      className="text-lg mt-6 ml-3 appearance-none block  bg-transparent text-gray-700 border  border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       id="grid-password"
                       type="number"
                       value={Amount}
@@ -276,7 +276,7 @@ const transfer = () => {
                       name="amount"
                     />
                     {Number(Amount) < 2 ? (
-                      <label htmlFor="less_amount" className="text-red-700">
+                      <label htmlFor="less_amount" className="mt-6 ml-3 text-red-700">
                         Please enter amount greator than or equal to 2
                       </label>
                     ) : (
@@ -287,7 +287,7 @@ const transfer = () => {
                 <div className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full px-3 mb-6 md:mb-0">
                     <label
-                      className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                      className="mt-6 ml-3 block uppercase tracking-wide text-white text-sm font-bold mb-2"
                       htmlFor="grid-state"
                     >
                       Purpose of Payment
@@ -295,9 +295,9 @@ const transfer = () => {
                         &nbsp;*
                       </span>
                     </label>
-                    <div className="relative">
+                    <div className="relative mt-6 ml-3">
                       <select
-                        className="text-lg block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        className="text-lg block appearance-none  bg-transparent border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="grid-state"
                         name="purpose"
                         value={Purpose}
@@ -334,17 +334,17 @@ const transfer = () => {
                         <option value={"Others"}>Others</option>
                       </select>
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg
+                        {/* <svg
                           className="fill-current h-4 w-4"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                         >
                           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
+                        </svg> */}
                       </div>
                     </div>
                     {Purpose == "none" ? (
-                      <label htmlFor="less_amount" className="text-red-700">
+                      <label htmlFor="less_amount" className="mt-6 ml-3 text-red-700">
                         Please select purpose of your payment
                       </label>
                     ) : (
@@ -359,8 +359,8 @@ const transfer = () => {
                       Purpose == "none" ||
                       data == null ||
                       username === ""
-                        ? "bg-[#81adba] disabled cursor-default"
-                        : "bg-[#028db7] hover:bg-[#017699] hover:underline"
+                        ? "bg-[#5a061b] disabled cursor-default"
+                        : "bg-[#0d7896] hover:bg-[#017699] hover:underline"
                     } px-6 py-2  mx-auto rounded-full text-white  text-xl`}
                     onClick={handletransfer}
                     disabled={

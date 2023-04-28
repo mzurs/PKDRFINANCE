@@ -259,7 +259,7 @@ function Header() {
   const Navbar = (
     <div>
       <nav className={`fixed w-full ${auth && web3auth ? "bg-white" : ""}`}>
-        <div className="dark:bg-slate-900 shadow shadow-black border-transparent border-b-4">
+        <div className="dark:bg-slate-900 shadow shadow-blue-900 border-transparent border-b-8">
           <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
             <div
               className={`${
@@ -974,7 +974,7 @@ function Header() {
         {AdminNavbar}
       </>
     );
-  } else if (userRoleType === "users") {
+  } else if(userRoleType==="users") {
     return (
       <>
         <LoadingBar

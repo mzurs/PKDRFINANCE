@@ -100,7 +100,7 @@ const Home = () => {
             >
               Hello , {username == "" ? info.name : username}
             </div>
-            <div className="pt-3 text-lg  font-sans text-white">{new Date().toString()}</div>
+            <div className="pt-3 text-sm  font-sans text-white">{new Date().toString()}</div>
             <br />
             <br />
             <Link

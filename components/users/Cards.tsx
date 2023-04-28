@@ -55,17 +55,17 @@ const Cards = (props: any) => {
           className="text-[4rem] font-mono  flex items-center justify-center  px-8 
  font-bold pt-4 "
         >
-          <div className="text-3xl text-white italic font-serif">
+          <div className="text-3xl  text-white  underline  font-serif">
             {props.title}
           </div>
           {/* <div className="text-xl pt-2 text-[#009ac9]">{props.sub}</div> */}
         </div>
         {Money ? (
           <div
-            className="text-[4rem] font-serif text-white 
+            className="text-[4rem] font-serif  text-white  
  font-medium flex items-center justify-center h-[28vh]"
           >
-            Rs&nbsp;{Money}
+            Rs.&nbsp;{Money}
           </div>
         ) : (
           <div

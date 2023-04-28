@@ -85,7 +85,7 @@ const Sidebar = () => {
               <div>
                 <div
                   id="profile"
-                  className={`flex  font-extrabold bg-black text-white items-center justify-center w-full px-4 my-1 py-5 transition-colors duration-200`}
+                  className={`flex  font-extrabold bg-transparent border-2 italic text-white items-center justify-center w-full px-4 my-1 py-5 transition-colors duration-200`}
                 >
                   <p className="mx-4 text-xl font-normal text-center">
                     {userInfo?.name}

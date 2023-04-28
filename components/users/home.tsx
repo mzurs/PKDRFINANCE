@@ -89,25 +89,25 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <div className="flex pt-20 w-[100vw] overflow-x-hidden h-[100vh]">
-        <div className="w-5/12">
-          <div className="flex rounded-lg pt-20 pb-24 justify-center items-center flex-col mr-4 ml-10 border-2 shadow-lg">
+    <div><br />
+      <div className="flex pt-20 w-[100vw] overflow-x-hidden h-[100vh]  dark:bg-slate-900">
+        <div className="w-5/12   ">
+          <div className="  shadow-black flex rounded-lg pt-20 pb-24 justify-center items-center flex-col mr-4 ml-10  shadow-sm">
             <div
               className={`${
                 username == "" ? "text-4xl pb-2" : "text-5xl"
-              } font-medium text-gray-80 pt-12 italic`}
+              } font-medium text-white pt-12 italic	`}
             >
               Hello , {username == "" ? info.name : username}
             </div>
-            <div className="pt-3 text-lg italic">{new Date().toString()}</div>
+            <div className="pt-3 text-lg  font-sans text-white">{new Date().toString()}</div>
             <br />
             <br />
             <Link
               href="/user/users/user_contacts"
               className="text-xl
           
-            text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            text-white shadow-black shadow-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-slate-900 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Send Money&nbsp;&nbsp;
               <svg
@@ -126,7 +126,7 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="ml-8 mr-2">
+          <div className="ml-8 mr-2 border-transparent">
             <Cards
               title={"ACCOUNT BALANCE"}
               sub={info.email}
@@ -136,7 +136,7 @@ const Home = () => {
         </div>
 
         <div className="w-9/12 h-full">
-          <div className="h-[43vh] flex justify-center border shadow-md -ml-0.5 mx-6 rounded-md pb-1">
+          <div className="h-[43vh] flex justify-center border-transparent  dark:bg-slate-900 shadow-light shadow-lg -ml-0.5 mx-6 rounded-md pb-1">
             <MultilineChart />
           </div>
           <div className="flex justify-between">

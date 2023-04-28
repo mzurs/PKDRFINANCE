@@ -75,11 +75,11 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className=" hidden md:block right-0 top-[4rem] fixed bg-white text-black h-auto z-10">
+      <div className=" hidden md:block right-0 top-[4rem] fixed dark:bg-slate-900 text-whote h-auto z-10">
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full">
             <div className="flex items-center justify-center pt-0 ">
-              <Image src="/logo2.png" alt="logo2" width="170" height="150" />
+              <Image src="/logo1.png" alt="logo2" width="170" height="150" />
             </div>
             <nav className="mt-0">
               <div>
@@ -94,7 +94,7 @@ const Sidebar = () => {
                 <Link
                   id="profile"
                   className={`${
-                    page === "profile" ? style : "text-black"
+                    page === "profile" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/user/users/profile"
                   onClick={() => setpage("profile")}
@@ -110,7 +110,7 @@ const Sidebar = () => {
                   id="user_contacts"
                   onClick={() => setpage("user_contacts")}
                   className={`${
-                    page === "user_contacts" ? style : "text-black"
+                    page === "user_contacts" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/user/users/user_contacts"
                 >
@@ -127,7 +127,7 @@ const Sidebar = () => {
                   id="settings"
                   onClick={() => setpage("settings")}
                   className={`${
-                    page === "settings" ? style : "text-black"
+                    page === "settings" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/user/users/settings"
                 >
@@ -142,7 +142,7 @@ const Sidebar = () => {
                   id="withdraw"
                   onClick={() => setpage("withdraw")}
                   className={`${
-                    page === "withdraw" ? style : "text-black"
+                    page === "withdraw" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/user/users/withdraw"
                 >
@@ -162,7 +162,7 @@ const Sidebar = () => {
                     router.push("/user/users/transaction");
                   }}
                   className={`${
-                    page === "transaction" ? style : "text-black"
+                    page === "transaction" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                 >
                   <span className="text-left">
@@ -178,7 +178,7 @@ const Sidebar = () => {
                   id="about"
                   onClick={() => setpage("about")}
                   className={`${
-                    page === "about" ? style : "text-black"
+                    page === "about" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/about"
                 >
@@ -193,7 +193,7 @@ const Sidebar = () => {
                   id="contact"
                   onClick={() => setpage("contact")}
                   className={`${
-                    page === "contact" ? style : "text-black"
+                    page === "contact" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
                   href="/pkdrInfo/contact"
                 >
@@ -205,7 +205,7 @@ const Sidebar = () => {
                   <span className="mx-4 text-lg font-normal">Contact Us</span>
                 </Link>
 
-                <div className="flex hover:text-[#009ac9] items-center justify-start w-full p-4 my-2 font-thin text-black transition-colors duration-200 dark:text-black">
+                <div className="flex hover:text-[#009ac9] items-center justify-start w-full p-4 my-2 font-thin text-white font-serif   transition-colors duration-200 dark:text-white">
                   <span className="text-left">
                     <div>
                       <BiLogOut className="text-2xl mr-3 ml-5" />

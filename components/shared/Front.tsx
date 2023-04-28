@@ -363,9 +363,15 @@ function Front() {
   };
 
   return (
-    <div className="main">
+    <div className="main h-[100vh] w-[100vw] overflow-x-hidden">
       <div className="overlay"></div>
-      <video src="/vid.mp4" autoPlay loop muted></video>
+      <video
+        src="/vid.mp4"
+        autoPlay
+        loop
+        muted
+        className="h-[100vh] w-[100vw] overflow-hidden"
+      ></video>
       <div className="logo">
         {" "}
         <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
@@ -390,14 +396,14 @@ function Front() {
         </div>
       </div>
       <div
-        className="content text-5xl font-mono
+        className="content text-5xl font-serif italic
 "
       >
-        <h1 className="  italic mb-4 text-8xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        <h1 className="  italic mb-4 text-8xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">
           PKDR Finance
         </h1>
 
-        <p className="text-xl italic underline ">
+        <p className="text-xl italic underline font-sans">
           The Optimal Solution for Next-Gen Online Banking
         </p>
         <br />
@@ -406,16 +412,16 @@ function Front() {
             onClick={login}
             className="shadow-lg shadow-cyan-500/50 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              &nbsp;Sign Up&nbsp;
+            <span className="relative text-xl px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              SignUp
             </span>
           </button>
           <button
             onClick={login}
             className="shadow-lg shadow-cyan-500/50 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              &nbsp;Sign in&nbsp;&nbsp;
+            <span className="relative text-xl px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            &nbsp;Login&nbsp;
             </span>
           </button>
         </div>

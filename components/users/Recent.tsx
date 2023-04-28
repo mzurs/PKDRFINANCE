@@ -89,9 +89,9 @@ const Recent = (props: any) => {
   };
   return (
     <>
-      <div className="relative pr-2">
+      <div className="relative pr-2 shadow-lg  shadow-transparent">
         <div className="w-[63vw] mx-auto mt-3.5 mb-1">
-          <div className="flex justify-between py-4 px-4 mb-2 bg-white border rounded-md shadow pr-6 dark:bg-gray-800">
+          <div className="flex justify-between py-4 px-4 mb-2 bg-white border-transparent rounded-md shadow-sm pr-6 shadow-black dark:bg-slate-900">
             <div>
               <h3 className="text-xl font-semibold leading-6 text-gray-900 dark:text-white">
                 {props.title}
@@ -118,16 +118,16 @@ const Recent = (props: any) => {
               </svg>
             </button>
           </div>
-          <ul className="flex flex-col">
+          <ul className="flex flex-col ">
             {transactions != null ? (
               transactions?.map((tx) => {
                 if (tx.type == "credit") {
                   return (
                     <>
-                      <li className="flex flex-row rounded-md mb-0.5 border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300">
-                        <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-1.5">
+                      <li className="flex flex-row rounded-md mb-0.5 border-1 border-transparent hover:border-gray-200 hover:bg-gray-300">
+                        <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-slate-900 rounded-md flex flex-1 items-center px-4 py-1.5">
                           <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
-                            <div className="rounded-full p-2 bg-white border-2 border-green-600 mx-2">
+                            <div className="rounded-full p-2 dark:bg-slate-900 border-2 border-green-600 mx-2">
                               <BsArrowDown className="text-2xl text-green-600" />
                             </div>
                           </div>
@@ -149,10 +149,10 @@ const Recent = (props: any) => {
                 } else {
                   return (
                     <>
-                      <li className="flex flex-row rounded-md mb-0.5 border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300 hover:border">
-                        <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-1.5">
+                      <li className="flex flex-row rounded-md mb-0.5 border-1 border-transparent hover:border-gray-200 hover:bg-gray-300 hover:border">
+                        <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white  dark:bg-slate-900 rounded-md flex flex-1 items-center px-4 py-1.5">
                           <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
-                            <div className="rounded-full p-2 bg-white border-2 border-red-800 mx-2">
+                            <div className="rounded-full p-2 dark:bg-slate-900 border-2 border-red-800 mx-2">
                               <BsArrowUp className="text-2xl text-red-800" />
                             </div>
                           </div>

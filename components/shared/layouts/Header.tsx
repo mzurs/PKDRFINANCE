@@ -258,8 +258,8 @@ function Header() {
 
   const Navbar = (
     <div>
-      <nav className={`fixed w-full ${auth && web3auth ? "bg-white":""}`}>
-        <div className="">
+      <nav className={`fixed w-full ${auth && web3auth ? "bg-white" : ""}`}>
+        <div className="dark:bg-slate-900 shadow shadow-black border-transparent border-b-4">
           <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
             <div
               className={`${
@@ -345,7 +345,7 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/logo2.png"
+                        src="/logo1.png"
                         alt="PKDR Finance"
                         width={140}
                         height={140}
@@ -360,13 +360,13 @@ function Header() {
                   auth && web3auth ? "sm:block" : "sm:hidden"
                 } hidden mx-auto`}
               >
-                <div className=" border-b-4 border-black flex justify-between">
+                <div className=" border-b-4 border-white flex justify-between">
                   <Link
                     href={"/"}
                     onClick={() => setpage("home")}
                     className={`cursor-pointer ${
                       page === "home" ? style : ""
-                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010f13] ${
+                    } text-white px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#2297d1] ${
                       page === "home" ? style : ""
                     }`}
                     aria-current="page"
@@ -380,7 +380,7 @@ function Header() {
                     onClick={() => setpage("profile")}
                     className={`cursor-pointer ${
                       page === "profile" ? style : ""
-                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010507] ${
+                    } text-white px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#2297d1] ${
                       page === "profile" ? "border-b-[4px] text-[#020f13]" : ""
                     }`}
                     id="profile"
@@ -393,7 +393,7 @@ function Header() {
                     onClick={() => setpage("user_contacts")}
                     className={`cursor-pointer ${
                       page === "user_contacts" ? style : ""
-                    } text-black px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#010c0f] `}
+                    } text-white px-4 mx-4 md:text-md pt-5 pb-3 text-xl font-medium hover:text-[#2297d1] `}
                     id="contact"
                   >
                     Contacts
@@ -419,10 +419,10 @@ function Header() {
                 {useAtomValue(userRole) === "users" && Boolean(verified) ? (
                   <div className=" flex flex-grow h-12 mt-5 text-xl hover:text-[#127a97] font-normal cursor-pointer hover:underline">
                     <Link
-                      className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                      className="text-white font-serif dark:bg-slate-900 relative transition-all ease-in duration-75 bg-white  rounded-md group-hover:bg-opacity-0 items-center"
                       href="/user/users/purchase/"
                     >
-                      Buy PKDR
+                      Buy PKR
                     </Link>
                   </div>
                 ) : (
@@ -432,7 +432,7 @@ function Header() {
                   onClick={togglemenu}
                   id="grid"
                   title="Menu"
-                  className={`hidden duration-200 text-black md:block  ml-5 mr-4 text-[22px] hover:text-[#010607] ${
+                  className={`hidden duration-200 text-white md:block  ml-5 mr-4 text-[22px] hover:text-[#158ba0] ${
                     sidebar ? "rotate-45" : ""
                   } cursor-pointer`}
                 />
@@ -974,7 +974,7 @@ function Header() {
         {AdminNavbar}
       </>
     );
-  } else if(userRoleType === "users") {
+  } else if (userRoleType === "users") {
     return (
       <>
         <LoadingBar

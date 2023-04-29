@@ -12,6 +12,7 @@ const Recent = (props: any) => {
   const [loader, setLoader] = useState<boolean>(false);
   let user: string = username;
   const router = useRouter();
+  let count=0;
 
   useEffect(() => {
     if (username == "") {
@@ -36,7 +37,7 @@ const Recent = (props: any) => {
     }
   }, [transactions]);
 
-  async function fetchUserName(): Promise<boolean> {
+  async function fetchUserName(){
     const headers = new Headers();
     headers.append("content-type", "application/json");
     headers.append(
@@ -57,9 +58,8 @@ const Recent = (props: any) => {
           return d.data.getUserInfo.success;
         });
     } catch (error) {
-      return false;
+      console.log(error);
     }
-    return false;
   }
 
   const get_transaction = async () => {
@@ -124,7 +124,7 @@ const Recent = (props: any) => {
                 if (tx.type == "credit") {
                   return (
                     <>
-                      <li className="flex flex-row rounded-md mb-0.5 border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300">
+                      <li key={tx.TimeStamp.toString()} className="flex flex-row rounded-md mb-0.5 border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300">
                         <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-1.5">
                           <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
                             <div className="rounded-full p-2 bg-white border-2 border-green-600 mx-2">
@@ -149,7 +149,7 @@ const Recent = (props: any) => {
                 } else {
                   return (
                     <>
-                      <li className="flex flex-row rounded-md mb-0.5 border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300 hover:border">
+                      <li key={tx.TimeStamp.toString()} className="flex flex-row rounded-md mb-0.5 border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300 hover:border">
                         <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-1.5">
                           <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
                             <div className="rounded-full p-2 bg-white border-2 border-red-800 mx-2">

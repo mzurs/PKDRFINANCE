@@ -396,14 +396,14 @@ function Front() {
         </div>
       </div>
       <div
-        className="content text-5xl font-mono
+        className="content text-5xl font-serif italic
 "
       >
         <h1 className="  italic mb-4 text-8xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">
           PKDR Finance
         </h1>
 
-        <p className="text-xl italic underline ">
+        <p className="text-xl italic underline font-sans">
           The Optimal Solution for Next-Gen Online Banking
         </p>
         <br />
@@ -413,7 +413,7 @@ function Front() {
             className="shadow-lg shadow-cyan-500/50 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
           >
             <span className="relative text-xl px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              Sign Up
+              SignUp
             </span>
           </button>
           <button
@@ -421,7 +421,7 @@ function Front() {
             className="shadow-lg shadow-cyan-500/50 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
           >
             <span className="relative text-xl px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              Sign in
+            &nbsp;Login&nbsp;
             </span>
           </button>
         </div>

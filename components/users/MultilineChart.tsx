@@ -142,6 +142,7 @@ const MultilineChart = () => {
   
 
   function sortByDate() {
+    try{
     creditList.sort((a, b) => {
       const [dayA, monthA] = a.date.split("/");
       const [dayB, monthB] = b.date.split("/");
@@ -157,6 +158,9 @@ const MultilineChart = () => {
       const dateB: any = new Date(`${monthB}/${dayB}`);
       return dateA - dateB;
     });
+  }catch(e){
+    console.log(e as string)
+  }
   }
 
   function getSortedDates(dates: any[]) {
@@ -260,7 +264,8 @@ const MultilineChart = () => {
       },
       title: {
         display: true,
-        text: "Transactions Graph",
+        text: "Transactions Graph (1W)",
+        color:"grey"
       },
     },
   };
@@ -271,14 +276,20 @@ const MultilineChart = () => {
       {
         label: "Credit",
         data: creditAmount,
-        borderColor: "rgb(22,163,74)",
-        backgroundColor: "rgb(22, 163, 74, 0.5)",
+        borderColor: "rgb(106, 90, 205)",
+        backgroundColor: "rgb(106, 90, 205)"
+
+        // borderColor: "rgb(22,163,74)",
+        // backgroundColor: "rgb(22, 163, 74, 0.5)",
       },
       {
         label: "Debit",
         data: debitAmount,
-        borderColor: "rgb(153, 27, 27)",
-        backgroundColor: "rgba(153, 27, 27, 0.5)",
+        borderColor: "rgb(90, 90, 90)",
+
+        backgroundColor: "rgb(90, 90, 90)"
+        // borderColor: "rgb(153, 27, 27)",
+        // backgroundColor: "rgba(153, 27, 27, 0.5)",
       },
     ],
   };

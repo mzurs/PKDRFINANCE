@@ -50,19 +50,22 @@ const Cards = (props: any) => {
   }, []);
   return (
     <div>
-      <div className="h-[46vh] m-2 border-2 shadow-md mt-2.5 rounded-lg overflow-x-hidden w-auto">
+      <div className="h-[46vh] m-2 shadow-black shadow-md mt-2.5 rounded-lg overflow-x-hidden w-auto">
         <div
           className="text-[4rem] font-mono  flex items-center justify-center  px-8 
  font-bold pt-4 "
         >
-          <div className="text-3xl">{props.title}</div>
+          <div className="text-3xl  text-white  underline  font-serif">
+            {props.title}
+          </div>
           {/* <div className="text-xl pt-2 text-[#009ac9]">{props.sub}</div> */}
         </div>
         {Money ? (
           <div
-            className="text-[4rem] font-mono font-medium flex items-center justify-center h-[39vh]"
+            className="text-[4rem] font-serif  text-white  
+ font-medium flex items-center justify-center h-[28vh]"
           >
-            Rs&nbsp;{Money}
+            Rs.&nbsp;{Money}
           </div>
         ) : (
           <div

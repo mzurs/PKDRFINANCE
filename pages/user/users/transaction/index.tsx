@@ -116,16 +116,16 @@ const transaction = () => {
 
   return (
     <>
-      <div className="pt-[4.5rem] w-[100vw] h-[100vh] overflow-x-hidden -z-10">
-        <div className="w-[94vw] mx-auto my-3">
-          <div className="w-full p-4 mb-2 bg-white sm:px-6 dark:bg-gray-800">
+      <div className="pt-[4.5rem] w-[100vw] h-[100vh] overflow-x-hidden -z-10 dark:bg-slate-900">
+        <div className="w-[94vw] mx-auto my-3 dark:bg-slate-900">
+          <div className="w-full p-4 mb-2 dark:bg-slate-900 sm:px-6 shadow-black border-2 border-transparent">
             <h3
-              className="text-2xl font-semibold leading-6 text-gray-900 dark:text-white"
+              className="text-3xl pt-5 text-center font-serif font-semibold leading-6 text-gray-900 dark:text-white shadow-black"
               onClick={get_transaction}
             >
               Transaction Records
             </h3>
-            <p className="max-w-2xl mt-1 text-lg text-gray-500 dark:text-gray-200">
+            <p className="text-sm pt-5 text-center font-semibold leading-6 text-gray-900 dark:text-white shadow-black">
               Details and informations about all transactions.
             </p>
           </div>
@@ -136,7 +136,7 @@ const transaction = () => {
                   <>
                     <div className="flex flex-row items-stretch justify-between">
                       <div className="border-b-2 border-gray-400 w-1/2 mb-5"></div>
-                      <div className="px-4 py-2 text-xl font-semibold text-[#005c79] -z-10 w-48 flex justify-center">
+                      <div className="px-4 py-2 text-xl font-semibold text-white w-48 flex justify-center">
                         {d}
                       </div>
                       <div className="w-1/2 border-b-2 border-gray-400 mb-5"></div>
@@ -149,7 +149,7 @@ const transaction = () => {
                               return (
                                 <>
                                   <li
-                                    className="flex flex-row mb-2 rounded-md border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300"
+                                    className="flex flex-row mb-2 rounded-md border-2 border-transparent hover:border-gray-200 hover:bg-gray-300"
                                     onClick={() => {
                                       router.push({
                                         pathname:
@@ -165,9 +165,9 @@ const transaction = () => {
                                       });
                                     }}
                                   >
-                                    <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-3">
+                                    <div className="text-gray-800 transition duration-500 dark:bg-slate-800 ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white  rounded-md flex flex-1 items-center px-4 py-3">
                                       <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
-                                        <div className="rounded-full p-2 bg-white border-2 border-green-600 mx-2">
+                                        <div className="rounded-full p-2 dark:bg-slate-900 border-2 border-green-600 mx-2">
                                           <BsArrowDown className="text-3xl text-green-600" />
                                         </div>
                                       </div>
@@ -218,7 +218,7 @@ const transaction = () => {
                               return (
                                 <>
                                   <li
-                                    className="flex flex-row mb-2 rounded-md border-2 border-gray-100 hover:border-gray-200 hover:bg-gray-300 hover:border"
+                                    className="flex flex-row mb-2 rounded-md border-2 border-transparent hover:border-gray-200 hover:bg-gray-300 hover:border"
                                     onClick={() => {
                                       router.push({
                                         pathname:
@@ -234,9 +234,9 @@ const transaction = () => {
                                       });
                                     }}
                                   >
-                                    <div className="transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-md select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center px-4 py-3">
+                                    <div className="transition duration-500 dark:bg-slate-800 ease-in-out transform hover:-translate-x-1 hover:shadow-md select-none cursor-pointer bg-white  rounded-md flex flex-1 items-center px-4 py-3">
                                       <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
-                                        <div className="rounded-full p-2 bg-white border-2 border-red-800 mx-2">
+                                        <div className="rounded-full p-2 dark:bg-slate-900 border-2 border-red-800 mx-2">
                                           <BsArrowUp className="text-3xl text-red-800" />
                                         </div>
                                       </div>
@@ -332,5 +332,4 @@ const transaction = () => {
     </>
   );
 };
-
 export default transaction;

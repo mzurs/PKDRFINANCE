@@ -14,9 +14,6 @@ import Cookies from "js-cookie";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
-import { IoIosPeople } from "react-icons/io";
-import { VscFeedback } from "react-icons/vsc";
-import { RiContactsBookLine } from "react-icons/ri";
 
 const AdminSideBar = () => {
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -68,23 +65,23 @@ const AdminSideBar = () => {
   };
 
   const style =
-    "border-r-4 border-[#009ac9] bg-gradient-to-r from-[#021729] dark:from-gray-900 dark:to-gray-900 text-[#009ac9] font-extrabold";
+    "border-r-4 border-[#659157] bg-gradient-to-r from-[#162F0E] dark:from-gray-900 dark:to-gray-900 text-[#659157] font-extrabold";
 
   return (
     <>
-      <div className=" hidden md:block right-0 top-[4rem] fixed bg-black text-white h-auto">
+      <div className=" hidden md:block right-0 top-[4rem] fixed bg-black text-white h-auto border-2 shadow-md border-[#171717]">
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full">
             <div className="flex items-center justify-center pt-6 ">
-              <Image src="/logo1.png" alt="logo1" width="150" height="100" />
+              <Image src="/pkdrlogo2.png" alt="pkdr logo" width="200" height="200" />
             </div>
             <nav className="mt-6">
               <div>
                 <div
                   id="profile"
-                  className={`flex border-2 border-r-2 bg-black text-white ${style} items-center justify-center w-full p-4 my-2 font-thin transition-colors duration-200`}
+                  className={`flex text-[#659157] font-extrabold items-center justify-center w-full p-4 my-2`}
                 >
-                  <p className="mx-4 text-xl font-normal text-center">
+                  <p className="mx-4 text-2xl text-center">
                     {userInfo?.name}
                   </p>
                 </div>
@@ -92,7 +89,7 @@ const AdminSideBar = () => {
                   id="profile"
                   className={`${
                     page === "profile" ? style : "text-white"
-                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#659157]`}
                   href="/user/admin/profile"
                   onClick={() => setpage("profile")}
                 >
@@ -109,7 +106,7 @@ const AdminSideBar = () => {
                   onClick={() => setpage("settings")}
                   className={`${
                     page === "settings" ? style : "text-white"
-                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#659157]`}
                   href="/user/admin/settings"
                 >
                   <span className="text-left">
@@ -119,10 +116,25 @@ const AdminSideBar = () => {
                   </span>
                   <span className="mx-4 text-lg font-normal">Settings</span>
                 </Link>
+                <Link
+                  id="test"
+                  onClick={() => setpage("test")}
+                  className={`${
+                    page === "test" ? style : "text-white"
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#659157]`}
+                  href="/user/admin/test"
+                >
+                  <span className="text-left">
+                    <div>
+                      <FiSettings className="text-2xl mr-3 ml-5" />
+                    </div>
+                  </span>
+                  <span className="mx-4 text-lg font-normal">Test</span>
+                </Link>
 
                 <div className={`${
                     page === "settings" ? style : "text-white"
-                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#009ac9]`}
+                  } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#659157]`}
                  >
                   <span className="text-left">
                     <div>

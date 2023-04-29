@@ -13,9 +13,8 @@ const record = () => {
   return (
     <>
       <div className="dark:bg-slate-900">
-        <div className="h-[20vh] pt-16 dark:bg-slate-900">
-          <br /><br />
-          <HiOutlineArrowLeft className="h-[20vh] pt-20 -mt-24 ml-5 text-white hover:text-[#017699] text-4xl cursor-pointer" onClick={()=>router.back()}/>
+        <div className="h-[20vh] pt-4 dark:bg-slate-900">
+          <HiOutlineArrowLeft className="h-[20vh] ml-5 text-white hover:text-[#017699] text-4xl cursor-pointer" onClick={()=>router.back()}/>
         </div>
         <div className="flex justify-center h-[70vh] dark:bg-slate-900">
           <div className="flex flex-col w-[35vw] mx-auto pt-12">

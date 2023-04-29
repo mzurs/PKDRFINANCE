@@ -316,7 +316,7 @@ function Header() {
                 <div className="  border-b-15 border-white flex flex-shrink-0 items-center ">
                   <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="/logo2.png"
+                    src="/pkdrlogo1.png"
                     alt="PKDR Finance"
                     width={60}
                     height={60}
@@ -324,9 +324,9 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/logo1.png"
+                        src="/pkdrlogo1.png"
                         alt="PKDR Finance"
-                        width={200}
+                        width={225}
                         height={200}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
@@ -334,10 +334,10 @@ function Header() {
                   </Link>
                 </div>
               ) : (
-                <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
+                <div className="  border-b-15 border-white flex flex-shrink-0 lg:ml-3 items-center mt-1.5">
                   <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="/logo1.png"
+                    src="/pkdrlogo1.png"
                     alt="PKDR Finance"
                     width={60}
                     height={60}
@@ -345,10 +345,10 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/logo1.png"
+                        src="/pkdrlogo1.png"
                         alt="PKDR Finance"
-                        width={140}
-                        height={140}
+                        width={225}
+                        height={200}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>
@@ -496,7 +496,7 @@ function Header() {
 
   const AdminNavbar = (
     <div>
-      <nav className=" bg-black fixed w-full">
+      <nav className=" bg-black fixed w-full z-50 border-b-[4px] border-[#436139]">
         <div className="">
           <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
             <div
@@ -554,7 +554,7 @@ function Header() {
                 <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
                   <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="/logo2.png"
+                    src="/pkdrlogo2.png"
                     alt="PKDR Finance"
                     width={60}
                     height={60}
@@ -562,9 +562,9 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/logo1.png"
+                        src="/pkdrlogo2.png"
                         alt="PKDR Finance"
-                        width={200}
+                        width={225}
                         height={200}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
@@ -575,7 +575,7 @@ function Header() {
                 <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
                   <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="/logo1.png"
+                    src="/pkdrlogo2.png"
                     alt="PKDR Finance"
                     width={60}
                     height={60}
@@ -583,9 +583,9 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/logo1.png"
+                        src="/pkdrlogo2.png"
                         alt="PKDR Finance"
-                        width={200}
+                        width={225}
                         height={200}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
@@ -598,7 +598,7 @@ function Header() {
                   auth && web3auth ? "sm:block" : "sm:hidden"
                 } hidden mx-auto`}
               >
-                <div className=" border-b-4 border-white flex justify-between">
+                <div className="flex justify-between">
                   <Menu
                     as="div"
                     className={`cursor-pointer ${
@@ -955,7 +955,7 @@ function Header() {
         id="menu"
         onMouseLeave={togglemenu}
       >
-        <AdminSideBar />
+        <AdminSideBar/>
       </div>
     </div>
   );
@@ -963,7 +963,7 @@ function Header() {
     return (
       <>
         <LoadingBar
-          color="#009ac9"
+          color="#165300"
           progress={progress}
           waitingTime={400}
           onLoaderFinished={() => {
@@ -974,7 +974,7 @@ function Header() {
         {AdminNavbar}
       </>
     );
-  } else if(userRoleType==="users") {
+  } else if (userRoleType === "users") {
     return (
       <>
         <LoadingBar
@@ -993,6 +993,8 @@ function Header() {
     //   <Link href="/" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Go Back Home</Link>
 
     //
+  } else {
+    return <></>;
   }
 }
 

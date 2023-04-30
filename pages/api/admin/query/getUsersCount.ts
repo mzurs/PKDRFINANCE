@@ -9,8 +9,8 @@ import { GetUsersCountQuery } from "../../../../src/API";
 const AWS = require("aws-sdk");
 Amplify.configure(awsExports);
 
-const getTotalSupply = async (): Promise<number | null> => {
-  const authToken = "abc";
+const getTotalSupply = async (tokens:string[]): Promise<number | null> => {
+  const authToken = tokens[1];
   try {
     const res = (await API.graphql({
       query: getUsersCount,
@@ -34,7 +34,7 @@ export default async function handler(request: any, response: any) {
     "🚀 ~ file: createUser.ts:58 ~ handler ~ oAuthIdToken",
     authTokens
   );
-  const totalUsers = await getTotalSupply();
+  const totalUsers = await getTotalSupply(authTokens);
   console.log("🚀 ~ file: getUsersCount.ts:37 ~ handler ~ totalUsers:", totalUsers);
   console.log("🚀 ~ file: getTotalSupply.ts:108 ~ handler ~ totalUsers:", totalUsers);
   response.status(200).json(totalUsers);

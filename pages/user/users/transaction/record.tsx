@@ -8,7 +8,7 @@ import { userInfoAtom } from "../../../../state/jotai";
 const record = () => {
   const router = useRouter();
   const data: any = router.query;
-  const info = useAtomValue(userInfoAtom);
+  const info:any = useAtomValue(userInfoAtom);
 
   return (
     <>
@@ -25,7 +25,7 @@ const record = () => {
             )}
             <div className="mx-auto justify-center items-center font-medium text-[#017699] text-3xl flex flex-col">
               <div>{data.id}</div>
-              <div>{info.email}</div>
+              <div>{info?.email}</div>
             </div>
             <div className=" text-white text-2xl px-8 pt-6 text-center">
               {data.type === "credit" ? (

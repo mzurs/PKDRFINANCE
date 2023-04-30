@@ -55,7 +55,7 @@ const Cards = (props: any) => {
           className="text-[4rem] font-mono  flex items-center justify-center  px-8 
  font-bold pt-4 "
         >
-          <div className="text-3xl  text-white  underline  font-serif">
+          <div className="text-3xl  text-white  pt-4 italic  font-sans">
             {props.title}
           </div>
           {/* <div className="text-xl pt-2 text-[#009ac9]">{props.sub}</div> */}

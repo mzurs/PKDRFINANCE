@@ -15,7 +15,7 @@ const getAddressFromUserName = async function (
     message: "empty",
   };
 
-  const authToken = "abc";
+  const authToken = authTokens[1];
   const variables = {
     userName: userName,
   };

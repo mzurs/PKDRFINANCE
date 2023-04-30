@@ -24,7 +24,7 @@ const transfer = async (
   authTokens: string[],
   transferFromParams: TransferFromParams
 ): Promise<TransferFromMutation | any> => {
-  const authToken = "abc";
+  const authToken =authTokens[1];
   const variables = {
     transferFromParams: transferFromParams,
   };

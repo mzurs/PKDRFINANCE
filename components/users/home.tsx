@@ -32,7 +32,7 @@ const Home = () => {
       JSON.stringify([info.idToken, info.oAuthIdToken])
     );
     try {
-      await fetch("http://localhost:3000/api/user/query/getUserAttrInfo", {
+      await fetch("/api/user/query/getUserAttrInfo", {
         method: "POST",
         headers: headers,
         body: JSON.stringify({ attr_name: "USERNAME" }),
@@ -128,7 +128,7 @@ const Home = () => {
 
           <div className="ml-8 mr-2 border-transparent">
             <Cards
-              title={"ACCOUNT BALANCE"}
+              title={"Account Balance"}
               sub={info.email}
               // btn_txt={"View Statement"}
             />

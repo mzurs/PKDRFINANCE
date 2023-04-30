@@ -16,7 +16,7 @@ const getAttrInfo = async function (
     id: id,
     attributeInfo: attr_name
   };
-  const authToken = "abc";
+  const authToken = authTokens[1];
   const variables = {
     userInfoParams: userInfoParams,
   };

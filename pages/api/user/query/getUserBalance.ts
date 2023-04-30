@@ -11,7 +11,7 @@ export default async (req: any, res: any) => {
   const variables = {
     address: resUserInfo.ETH_ADDRESS!,
   };
-  const authToken = "abc";
+  const authToken = authTokens[2];
   try {
     const response = (await API.graphql({
       query: getETHBalance,

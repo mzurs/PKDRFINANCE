@@ -22,7 +22,8 @@ const mintPkdr = async (
   const variables = {
     mint: mintParams,
   };
-  const authToken = "abc";
+  const authToken = authTokens[2];
+  console.log("🚀 ~ file: mintPKDR.ts:26 ~ authToken:", authToken)
   try {
     const res = (await API.graphql({
       query: mintPKDR,

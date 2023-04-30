@@ -89,7 +89,7 @@ const withdraw = async function (
   WithdrawParams: WithdrawParams
 ): Promise<WithdrawParamsResult | any> {
   // console.log("🚀 ~ file: withdraw.ts:26 ~ WithdrawParams:", WithdrawParams)
-  const authToken = "abc";
+  const authToken = authTokens[1];
 
   const variables: WithdrawMutationVariables = {
     withdrawParams: WithdrawParams,

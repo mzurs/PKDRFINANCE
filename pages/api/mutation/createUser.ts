@@ -106,7 +106,7 @@ async function createUserAPI(
   const variables = {
     user: formData,
   };
-  const authToken = "abc";
+  const authToken = oAuthIdToken;
   try {
     const res = (await API.graphql({
       query: createUser,

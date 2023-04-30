@@ -14,7 +14,7 @@ const listUserContacts = async function (
   const listContactsParams: ListContactsParams = {
     id: id,
   };
-  const authToken = "abc";
+  const authToken = authTokens[1];
   const variables = {
     listContactsParams: listContactsParams,
   };

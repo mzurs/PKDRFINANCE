@@ -91,7 +91,7 @@ const transfer = () => {
       JSON.stringify([info.idToken, info.oAuthIdToken])
     );
     try {
-      await fetch("http://localhost:3000/api/user/query/getUserAttrInfo", {
+      await fetch("/api/user/query/getUserAttrInfo", {
         method: "POST",
         headers: headers,
         body: JSON.stringify({ attr_name: "USERNAME" }),

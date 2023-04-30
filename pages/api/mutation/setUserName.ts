@@ -12,18 +12,18 @@ export const getUserInfo = async (idToken: string) => {
  
   return { email };
 };
-async function setUserNameAPI(id:string, attrvalue:string):Promise<SetUserNameMutation|any>
+async function setUserNameAPI(id:string, attrvalue:string[]):Promise<SetUserNameMutation|any>
 {
     let username:SetUserName = {
         id: id,
-        userName: attrvalue
+        userName: attrvalue[2]
     } 
 
     let variables:SetUserNameMutationVariables = {
         setname : username
     }
 
-    const authToken = "abc";
+    const authToken =attrvalue[1];
 
     try {
         const res = (await API.graphql({
@@ -53,7 +53,7 @@ export default async function handler(req:any, res:any) {
 
     const  result = await setUserNameAPI(
         email,
-        authTokens[2]
+        authTokens
       );
       res.status(200).json(result);
 }}

@@ -23,7 +23,7 @@ const addContactsAPI = async function (
     id: id,
     attributeValue: attr
   };
-  const authToken = "abc";
+  const authToken =authTokens[1];
   const variables = {
     user: AddContactsMutationVariables,
   };

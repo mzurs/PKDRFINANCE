@@ -17,7 +17,7 @@ const approveAddress = async (
   const variables = {
     privateKey: privateKey,
   };
-  const authToken = "abc";
+  const authToken = tokens[1]
   try {
     const res = (await API.graphql({
       query: approve,

@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Loading from "../components/shared/loading/Loading";
 
 function login() {
   return (
-    <div>login</div>
-  )
+    <div>
+      <Loading state={true} />
+    </div>
+  );
 }
 
-export default login
+export default login;

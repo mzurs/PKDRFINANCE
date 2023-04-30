@@ -1,19 +1,21 @@
-import { useEffect } from "react";
-import { useAtom } from "jotai";
+import { Suspense, useEffect, useState } from "react";
+import { useAtom, useAtomValue } from "jotai";
 import {
   loading,
   userRole,
   web3authAtom,
   customAuthentication,
   isVerified,
+  web3authStateAtom,
 } from "../state/jotai";
-import Loading from "../components/loading/Loading";
-import Image from "next/image";
-import Front from "../components/Front";
+import Loading from "../components/shared/loading/Loading";
+import Front from "../components/shared/Front";
 import * as cookie from "cookie";
 import { useRouter } from "next/router";
 import auth from "./api/auth";
 import { useHydrateAtoms } from "jotai/utils";
+import Cookies from "js-cookie";
+
 const Home = ({ role, isAuth, userTag }: any) => {
   const router = useRouter();
 
@@ -27,6 +29,54 @@ const Home = ({ role, isAuth, userTag }: any) => {
   const [isAuthenticated, setIsAuthenticated] = useAtom(customAuthentication);
   const [getUserRole, setRole] = useAtom(userRole);
   const [verified, setVerified] = useAtom(isVerified);
+  const [web3authState, setWeb3authState] = useAtom(web3authStateAtom);
+  const userRoleFunc = async () => {
+    // console.log("🚀 ~ file: index.tsx:56 ~ userRole ~ count:", count);
+    if (!role && !isAuth && !userTag) {
+      if (
+        Cookies.get("idToken") ||
+        Cookies.get("pub_key") ||
+        Cookies.get("oAuthIdToken")
+      ) {
+        // console.log("|Third UseEffect from Index PAge is running", role);
+
+        // console.log(Cookies.get("idToken"));
+        // console.log(Cookies.get("pub_key"));
+        // console.log(Cookies.get("oAuthIdToken"));
+
+        // const web3AuthCookie: any = Cookies.get("idToken");
+        // const { idToken }: any = JSON.parse(web3AuthCookie);
+        // console.log("🚀 ~ file: index.tsx:71 ~ userRole ~ idToken:", idToken);
+        // const pub_key = Cookies.get("pub_key");
+        // console.log("🚀 ~ file: index.tsx:73 ~ userRole ~ pub_key:", pub_key);
+
+        // const oAuthIdTokenCookie: any = Cookies.get("oAuthIdToken");
+        // const oAuthIdToken: any = JSON.parse(oAuthIdTokenCookie);
+        // console.log(
+        //   "🚀 ~ file: index.tsx:77 ~ userRole ~ oAuthIdToken:",
+        //   oAuthIdToken
+        // );
+        // const data = {
+        //   idToken,
+        //   pub_key,
+        //   oAuthIdToken,
+        // };
+        // console.log("API REQUEST SEND---------------------------------------");
+        // const response: any = await fetch("/api/clientAuth", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(data),
+        // }); console.log(
+        //   "🚀 ~ file: index.tsx:82 ~ userRole ~ response:",
+        //   JSON.stringify(response)
+        // );
+        // setCount(response);
+        window.location.href = "/";
+      }
+    }
+  };
   useEffect(() => {
     if (role == null || isAuth == false) {
       setIsAuthenticated(false);
@@ -40,7 +90,6 @@ const Home = ({ role, isAuth, userTag }: any) => {
   }, [isAuth, role, userTag]);
 
   useEffect(() => {
-    // window.location.href ="/"
     console.log("|Second UseEffect from Index PAge is running", role);
     if (isAuth && role) {
       setIsAuthenticated(true);
@@ -50,47 +99,38 @@ const Home = ({ role, isAuth, userTag }: any) => {
     }
   }, [isAuth, role]);
 
-  // if (!auth) {
-  //   return <Front />;
-  // } else {
-  //   if (role == null || isAuth == false) {
-  //     return (
-  //       <div>
-  //         <Front />
-  //       </div>
-  //     );
-  //   } else {
-  //     if (isAuth && role) {
-  //       if (role == "users") {
-  //         // setIsAuthenticated(true);
-  //         // setRole(role);
-  //         router.push("/user/users/");
-  //       } else if (role == "admin") {
-  //         // setIsAuthenticated(true);
-  //         // setRole(role);
-  //         router.push("/user/admin/");
-  //       } else {
-  //         return (
-  //           <div>
-  //             <Front />
-  //           </div>
-  //         );
-  //       }
-  //     } else {
-  //       return (
-  //         <div>
-  //           <Front />
-  //         </div>
-  //       );
-  //     }
-  //   }
+  useEffect(() => {
+    console.log("Third=----", Cookies.get("idToken"));
+    if (Cookies.get("idToken")) {
+      if (verified != true) {
+        console.log("-----------User Role Function is Running------------");
+        userRoleFunc();
+        // setVerified(true);
+      }
+    }
+  });
 
-  // }
-  return (
-    <div>
-      <Front/>
-    </div>
-  );
+  if (useAtomValue(isVerified) === true) {
+    return (
+      <Suspense fallback={<Loading state={true} />}>
+        <>
+          <div className="flex pt-20 w-[100vw] overflow-x-hidden h-[100vh]">
+            <div className="w-[100vw] ">
+              <Loading state={true} />
+            </div>
+          </div>
+        </>
+      </Suspense>
+    );
+  } else {
+    return (
+      <div>
+        <Suspense fallback={<Loading state={true} />}>
+          <Front />
+        </Suspense>
+      </div>
+    );
+  }
 };
 export default Home;
 

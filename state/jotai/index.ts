@@ -2,7 +2,7 @@ import { SafeEventEmitterProvider } from "@web3auth/base";
 import { Web3AuthCore } from "@web3auth/core";
 import { atom } from "jotai";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
-import { UserInfo } from "../../Types/userTypes";
+import { UserInfo } from "../../components/users/settingsLayout/type/userTypes";
 
 //storage object for local storage
 const storage = { ...createJSONStorage(() => localStorage), delayInit: true };
@@ -32,9 +32,14 @@ const loading = atom(false);
 
 const customAuthentication = atom<boolean>(false);
 
-const isVerified = atom<boolean>(false);
+//Username of User
+const userName = atomWithStorage("username", "");;
 
+const isVerified = atomWithStorage("verified", null, storage);
 const userRole = atom<string | null>(null);
+
+
+const userBalance=atom<number>(0);
 
 export {
   web3authAtom,
@@ -47,4 +52,6 @@ export {
   customAuthentication,
   userRole,
   isVerified,
+  userBalance,
+  userName
 };

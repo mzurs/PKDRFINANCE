@@ -10,12 +10,11 @@ import { useAtom, useAtomValue } from "jotai";
 import * as cookie from "cookie";
 import * as jose from "jose";
 import { useRouter } from "next/router";
-import Loading from "../../../components/loading/Loading";
-import Home from "./home";
+import Loading from "../../../components/shared/loading/Loading";
+import Home from "../../../components/users/home";
 function index({ isAuthenticated }: any) {
   const router = useRouter();
 
-  // const [isAuthenticated, setIsAuthenticated] = useAtom(customAuthentication);
   const [verified, setVerified] = useAtom(isVerified);
   const [role, setRole] = useAtom(userRole);
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -37,7 +36,7 @@ function index({ isAuthenticated }: any) {
       }
     }
   } else {
-    return <div className="h-[100vh] flex items-center justify-center w-[100vw]">Login</div>;
+    return <div className="h-[100vh] flex items-center justify-center w-[100vw]"><Loading state={true}/></div>;
   }
 }
 

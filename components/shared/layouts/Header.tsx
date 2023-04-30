@@ -326,8 +326,8 @@ function Header() {
                       <Image
                         src="/pkdrlogo1.png"
                         alt="PKDR Finance"
-                        width={225}
-                        height={200}
+                        width={250}
+                        height={225}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>
@@ -347,8 +347,8 @@ function Header() {
                       <Image
                         src="/pkdrlogo1.png"
                         alt="PKDR Finance"
-                        width={225}
-                        height={200}
+                        width={250}
+                        height={225}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>
@@ -564,8 +564,8 @@ function Header() {
                       <Image
                         src="/pkdrlogo2.png"
                         alt="PKDR Finance"
-                        width={225}
-                        height={200}
+                        width={250}
+                        height={225}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>
@@ -585,8 +585,8 @@ function Header() {
                       <Image
                         src="/pkdrlogo2.png"
                         alt="PKDR Finance"
-                        width={225}
-                        height={200}
+                        width={250}
+                        height={225}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>
@@ -955,7 +955,7 @@ function Header() {
         id="menu"
         onMouseLeave={togglemenu}
       >
-        <AdminSideBar/>
+        <AdminSideBar />
       </div>
     </div>
   );

@@ -76,10 +76,10 @@ const Sidebar = () => {
   return (
     <>
       <div className=" hidden md:block right-0 top-[4rem] fixed dark:bg-slate-900 text-whote h-auto z-10">
-        <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
+        <div className="relative hidden h-screen mt-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full">
-            <div className="flex items-center justify-center pt-0 ">
-              <Image src="/logo1.png" alt="logo2" width="170" height="150" />
+            <div className="pt-4 pb-2 flex items-center justify-center ">
+              <Image src="/pkdrlogo1.png" alt="logo2" width="200" height="200" />
             </div>
             <nav className="mt-0">
               <div>

@@ -11,30 +11,34 @@ const Cards = (props: any) => {
   const [userInfo, setUserInfo] = useAtom(userInfoAtom);
 
   const getETHBalance = async () => {
-    const headers = new Headers();
-    headers.append("content-type", "application/json");
-    headers.append(
-      "x-custom-header",
-      JSON.stringify([
-        (userInfo as unknown as any).email,
-        (web3auth as unknown as any).idToken,
-        (userInfo as unknown as any).oAuthIdToken,
-      ])
-    );
-    const response = await fetch("/api/user/query/getUserBalance", {
-      method: "GET",
-      headers: headers,
-    });
-    console.log(
-      "🚀 ~ file: Dashboard.tsx:55 ~ getETHBalance ~ response:",
-      response
-    );
+    try {
+      const headers = new Headers();
+      headers.append("content-type", "application/json");
+      headers.append(
+        "x-custom-header",
+        JSON.stringify([
+          (userInfo as unknown as any).email,
+          (web3auth as unknown as any).idToken,
+          (userInfo as unknown as any).oAuthIdToken,
+        ])
+      );
+      const response = await fetch("/api/user/query/getUserBalance", {
+        method: "GET",
+        headers: headers,
+      });
+      console.log(
+        "🚀 ~ file: Dashboard.tsx:55 ~ getETHBalance ~ response:",
+        response
+      );
 
-    const data = await response.json();
-    const balance = parseFloat(data.getETHBalance);
-    //@ts-ignore
-    setMoney(Number(balance.toFixed(2)));
-    console.log("🚀 ~ file: Dashboard.tsx:47 ~ getETHBalance ~ data:", data);
+      const data = await response.json();
+      const balance = parseFloat(data.getETHBalance);
+      //@ts-ignore
+      setMoney(Number(balance.toFixed(2)));
+      console.log("🚀 ~ file: Dashboard.tsx:47 ~ getETHBalance ~ data:", data);
+    } catch (error) {
+      console.log(error as string);
+    }
   };
 
   useEffect(() => {

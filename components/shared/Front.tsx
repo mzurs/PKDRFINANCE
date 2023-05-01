@@ -197,18 +197,18 @@ function Front() {
     if (url !== undefined) {
       if (
         !(
-          url === "http://localhost:3000/" ||
-          url === "http://localhost:3000/user/users" ||
-          url === "http://localhost:3000"
+          url === "https://pkdrfinance.vercel.app/" ||
+          url === "https://pkdrfinance.vercel.app/user/users" ||
+          url === "https://pkdrfinance.vercel.app/"
         )
       ) {
         let url_fragment = url.split("/");
         let len = url_fragment.length;
         setpage(url_fragment[len - 1]);
       } else if (
-        url === "http://localhost:3000/" ||
-        url === "http://localhost:3000/user/users" ||
-        url === "http://localhost:3000"
+        url === "https://pkdrfinance.vercel.app/" ||
+        url === "https://pkdrfinance.vercel.app/user/users" ||
+        url === "https://pkdrfinance.vercel.app/"
       ) {
         setpage("home");
       }

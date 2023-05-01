@@ -31,7 +31,7 @@ const Sidebar = () => {
   const [verified, setVerified] = useAtom(isVerified);
   const get_page = () => {
     let url = window.location.href;
-    if (url !== "http://localhost:3000/") {
+    if (url !== "https://pkdrfinance.vercel.app/") {
       let url_fragment = url.split("/");
       let len = url_fragment.length;
       setpage(url_fragment[len - 1]);
@@ -61,7 +61,7 @@ const Sidebar = () => {
       Cookies.remove("idToken");
       Cookies.remove("oAuthIdToken");
       window.location.href =
-        "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=http://localhost:3000&redirect_uri=http://localhost:3000 hover:font-xl";
+        "https://pkdr-finance-test.auth.us-west-2.amazoncognito.com/logout?client_id=3tihr2r882rhmgvfmkdh56vdqe&logout_uri=https://pkdrfinance.vercel.app&redirect_uri=https://pkdrfinance.vercel.app hover:font-xl";
       localStorage.clear();
     } catch (error: any) {
       console.log(

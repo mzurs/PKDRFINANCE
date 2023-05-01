@@ -14,6 +14,7 @@ export type CreateUser = {
   COUNTRY?: string | null,
   POSTAL_CODE?: string | null,
   ADDRESS?: string | null,
+  privateKey?: string | null,
 };
 
 export type createUserResult = UserInfo | UserExists | Error
@@ -205,6 +206,18 @@ export type WithdrawParam = {
   id?: string | null,
   address?: string | null,
   userName?: string | null,
+};
+
+export type RevokeVerificationResult = {
+  __typename: "RevokeVerificationResult",
+  message?: string | null,
+  result?: boolean | null,
+};
+
+export type RetainVerificationResult = {
+  __typename: "RetainVerificationResult",
+  message?: string | null,
+  result?: boolean | null,
 };
 
 export type getUserResult = UserInfo | UserNotExists | Error
@@ -510,6 +523,30 @@ export type WithdrawMutation = {
     result?: boolean | null,
     message?: string | null,
     errorMessage?: string | null,
+  } | null,
+};
+
+export type RevokeVerificationMutationVariables = {
+  userName?: string | null,
+};
+
+export type RevokeVerificationMutation = {
+  revokeVerification?:  {
+    __typename: "RevokeVerificationResult",
+    message?: string | null,
+    result?: boolean | null,
+  } | null,
+};
+
+export type RetainVerificationMutationVariables = {
+  userName?: string | null,
+};
+
+export type RetainVerificationMutation = {
+  retainVerification?:  {
+    __typename: "RetainVerificationResult",
+    message?: string | null,
+    result?: boolean | null,
   } | null,
 };
 

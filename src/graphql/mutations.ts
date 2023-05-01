@@ -195,3 +195,19 @@ export const withdraw = /* GraphQL */ `
     }
   }
 `;
+export const revokeVerification = /* GraphQL */ `
+  mutation RevokeVerification($userName: String) {
+    revokeVerification(userName: $userName) {
+      message
+      result
+    }
+  }
+`;
+export const retainVerification = /* GraphQL */ `
+  mutation RetainVerification($userName: String) {
+    retainVerification(userName: $userName) {
+      message
+      result
+    }
+  }
+`;

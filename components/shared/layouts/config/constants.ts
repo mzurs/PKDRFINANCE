@@ -1,1 +1,1 @@
-export const CLIENT_ID:string="BGTMjIL8ROLgqRK8Yvx9orGX_ZwGfAP7h19rGkuUo_UOAqQZiGMDmDULsjHHghTSMRa_ArX85n4En_Aa36oC16w-_ys";
+export const CLIENT_ID:string="BNTzvwHR5tTPrYrnE6DfXhtboSJfbhlbRC2mF4-eU-KqC5mBzMQMXPcTWd-kvrTEXQyQfFmPOJNPnM69U4ppxYw";

@@ -91,9 +91,9 @@ const Recent = (props: any) => {
     <>
       <div className="relative pr-2 shadow-lg  shadow-transparent">
         <div className="w-[63vw] mx-auto mt-3.5 mb-1">
-          <div className="flex justify-between py-4 px-4 mb-2 bg-white border-transparent rounded-md shadow-sm pr-6 shadow-black dark:bg-slate-900">
+          <div className="flex justify-between py-4 px-4 mb-2  border-transparent rounded-md shadow-sm pr-6 shadow-black bg-slate-900">
             <div>
-              <h3 className="text-xl font-semibold leading-6 text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold leading-6  text-white">
                 {props.title}
               </h3>
               <p className="max-w-2xl mt-1 text-sm text-gray-500 dark:text-gray-200">
@@ -125,9 +125,9 @@ const Recent = (props: any) => {
                   return (
                     <>
                       <li className="flex flex-row rounded-md mb-0.5 border-1 border-transparent hover:border-gray-200 hover:bg-gray-300">
-                        <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-slate-900 rounded-md flex flex-1 items-center px-4 py-1.5">
+                        <div className="text-white transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer  bg-slate-900 rounded-md flex flex-1 items-center px-4 py-1.5">
                           <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
-                            <div className="rounded-full p-2 dark:bg-slate-900 border-2 border-green-600 mx-2">
+                            <div className="rounded-full p-2 bg-slate-900 border-2 border-green-600 mx-2">
                               <BsArrowDown className="text-2xl text-green-600" />
                             </div>
                           </div>
@@ -150,9 +150,9 @@ const Recent = (props: any) => {
                   return (
                     <>
                       <li className="flex flex-row rounded-md mb-0.5 border-1 border-transparent hover:border-gray-200 hover:bg-gray-300 hover:border">
-                        <div className="text-gray-800 transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer bg-white  dark:bg-slate-900 rounded-md flex flex-1 items-center px-4 py-1.5">
+                        <div className=" transition duration-500  ease-in-out transform hover:-translate-x-1 hover:shadow-lg select-none cursor-pointer text-white  bg-slate-900 rounded-md flex flex-1 items-center px-4 py-1.5">
                           <div className="flex flex-col items-center justify-center w-10 h-10 mr-4 border-2 border-black rounded-full">
-                            <div className="rounded-full p-2 dark:bg-slate-900 border-2 border-red-800 mx-2">
+                            <div className="rounded-full p-2 bg-slate-900 border-2 border-red-800 mx-2">
                               <BsArrowUp className="text-2xl text-red-800" />
                             </div>
                           </div>

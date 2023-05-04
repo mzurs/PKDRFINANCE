@@ -165,12 +165,12 @@ const withdraw = () => {
       return (
         <>
           <div
-            className={`${
+            className={`bg-slate-900 ${
               loader ? "opacity-40" : ""
-            } w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}
+            } w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`} 
           >
-            <div>
-              <h1 className="md:pt-[5.5rem] pt-3 md:text-4xl text-2xl font-bold pl-8 pb-0 mb-0">
+            <div className="w-full p-4 mb-2 bg-slate-900 sm:px-6 shadow-black border-2 border-transparent text-center text-white">
+              <h1 className="md:pt-[5.5rem] pt-3 md:text-4xl text-2xl font-bold pl-8 pb-0 mb-0 font-serif">
                 Withdraw PKDR
               </h1>
             </div>

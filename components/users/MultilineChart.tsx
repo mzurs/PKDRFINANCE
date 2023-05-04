@@ -49,7 +49,7 @@ const MultilineChart = () => {
   useEffect(() => {
     setLoader(true);
     get_transaction();
-  }, [username])
+  }, [username]);
 
   async function fetchUserName(): Promise<boolean> {
     const headers = new Headers();
@@ -117,7 +117,7 @@ const MultilineChart = () => {
       });
     }
 
-    setLabels(getSortedDates(creditList.map((record) => record.date)));    
+    setLabels(getSortedDates(creditList.map((record) => record.date)));
   };
 
   useEffect(() => {
@@ -138,29 +138,28 @@ const MultilineChart = () => {
 
   useEffect(() => {
     setLabelsList();
-  }, [dateList])
-  
+  }, [dateList]);
 
   function sortByDate() {
-    try{
-    creditList.sort((a, b) => {
-      const [dayA, monthA] = a.date.split("/");
-      const [dayB, monthB] = b.date.split("/");
-      const dateA: any = new Date(`${monthA}/${dayA}`);
-      const dateB: any = new Date(`${monthB}/${dayB}`);
-      return dateA - dateB;
-    });
+    try {
+      creditList.sort((a, b) => {
+        const [dayA, monthA] = a.date.split("/");
+        const [dayB, monthB] = b.date.split("/");
+        const dateA: any = new Date(`${monthA}/${dayA}`);
+        const dateB: any = new Date(`${monthB}/${dayB}`);
+        return dateA - dateB;
+      });
 
-    debitList.sort((a, b) => {
-      const [dayA, monthA] = a.date.split("/");
-      const [dayB, monthB] = b.date.split("/");
-      const dateA: any = new Date(`${monthA}/${dayA}`);
-      const dateB: any = new Date(`${monthB}/${dayB}`);
-      return dateA - dateB;
-    });
-  }catch(e){
-    console.log(e as string)
-  }
+      debitList.sort((a, b) => {
+        const [dayA, monthA] = a.date.split("/");
+        const [dayB, monthB] = b.date.split("/");
+        const dateA: any = new Date(`${monthA}/${dayA}`);
+        const dateB: any = new Date(`${monthB}/${dayB}`);
+        return dateA - dateB;
+      });
+    } catch (e) {
+      console.log(e as string);
+    }
   }
 
   function getSortedDates(dates: any[]) {
@@ -201,21 +200,25 @@ const MultilineChart = () => {
 
   const SetDateList = () => {
     let dates: any[] = [];
+    try {
+      transactions?.forEach((element) => {
+        dates.push(
+          element.map((record: any) => {
+            let date = new Date(record.TimeStamp);
+            Amounts.push(record.Amount);
+            let d =
+              date.getDate().toString() + "/" + date.getMonth().toString();
+            return d;
+          })
+        );
+      });
+      dates = dates[0].concat(dates[1]);
 
-    transactions?.forEach((element) => {
-      dates.push(
-        element.map((record: any) => {
-          let date = new Date(record.TimeStamp);
-          Amounts.push(record.Amount);
-          let d = date.getDate().toString() + "/" + date.getMonth().toString();
-          return d;
-        })
-      );
-    });
-    dates = dates[0].concat(dates[1]);
-
-    const uniqueDates = new Set(dates);
-    setDateList(uniqueDates);
+      const uniqueDates = new Set(dates);
+      setDateList(uniqueDates);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const setAmount = () => {
@@ -237,14 +240,11 @@ const MultilineChart = () => {
         "x-custom-header",
         JSON.stringify([info.idToken, info.oAuthIdToken])
       );
-      await fetch(
-        "/api/user/query/getChartList/getTotalList",
-        {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify({ username: username }),
-        }
-      )
+      await fetch("/api/user/query/getChartList/getTotalList", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ username: username }),
+      })
         .then((response) => response.json())
         .then(async (data) => {
           setTransactions(data);
@@ -265,7 +265,7 @@ const MultilineChart = () => {
       title: {
         display: true,
         text: "Transactions Graph (1W)",
-        color:"grey"
+        color: "grey",
       },
     },
   };
@@ -277,7 +277,7 @@ const MultilineChart = () => {
         label: "Credit",
         data: creditAmount,
         borderColor: "rgb(106, 90, 205)",
-        backgroundColor: "rgb(106, 90, 205)"
+        backgroundColor: "rgb(106, 90, 205)",
 
         // borderColor: "rgb(22,163,74)",
         // backgroundColor: "rgb(22, 163, 74, 0.5)",
@@ -287,7 +287,7 @@ const MultilineChart = () => {
         data: debitAmount,
         borderColor: "rgb(90, 90, 90)",
 
-        backgroundColor: "rgb(90, 90, 90)"
+        backgroundColor: "rgb(90, 90, 90)",
         // borderColor: "rgb(153, 27, 27)",
         // backgroundColor: "rgba(153, 27, 27, 0.5)",
       },

@@ -6,7 +6,7 @@ const Cards = (props: any) => {
   const info = useAtomValue(userInfoAtom);
   const [ShowMoney, setShowMoney] = useState<boolean>(true);
   const [Money, setMoney] = useAtom<number>(userBalance);
-  const [timer, setTimer] = useState(6000);
+  const [timer, setTimer] = useState(2000);
   const [web3auth] = useAtom(web3authAtom);
   const [userInfo, setUserInfo] = useAtom(userInfoAtom);
 

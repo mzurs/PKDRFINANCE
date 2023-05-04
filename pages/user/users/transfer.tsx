@@ -177,7 +177,7 @@ const transfer = () => {
           <div
             className={`${
               loader ? "opacity-40" : ""
-            } w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10 dark:bg-slate-900`}
+            } w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10 bg-slate-900`}
           >
             <div><br /><br />
               <h1 className="md:pt-[5.5rem] font-serif text-white md:text-4xl text-center pt-10 text-3xl font-bold pl-8 pb-0 mb-0">

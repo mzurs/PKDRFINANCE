@@ -157,7 +157,7 @@ function contacts() {
       <div
         className={`${
           loader ? "opacity-40" : ""
-        } dark:bg-slate-900 text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}
+        } bg-slate-900 text-gray-600 body-font w-[100vw] mx-auto h-[100vh] overflow-x-hidden -z-10`}
       >
         <div
           className={`${
@@ -237,7 +237,7 @@ function contacts() {
                           <h2 className="text-[#009ac9] text-xl title-font font-medium mb-1">
                             {result}
                           </h2>
-                          {/* <p className="text-lg">example@gmail.com</p>dark:bg-slate-900 */}
+                          {/* <p className="text-lg">example@gmail.com</p>bg-slate-900 */}
                         </div>
                         <Link
                           className="text-lg p-2 text-[#009ac9] hover:underline hover:text-[#096897]"
@@ -272,7 +272,7 @@ function contacts() {
             !show ? "hidden" : ""
           } overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
         >
-          <div className="absolute w-[35vw] shadow-lg shadow-blue-500/40 bg-white rounded-lg border-2 dark:bg-slate-900 ">
+          <div className="absolute w-[35vw] shadow-lg shadow-blue-500/40  rounded-lg border-2 bg-slate-900 ">
             <button
               type="button"
               className="absolute right-2.5 mt-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
@@ -294,13 +294,13 @@ function contacts() {
               <span className="sr-only">Close modal</span>
             </button>
             <div className="px-6 py-6 lg:px-8">
-              <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+              <h3 className="mb-4 text-xl font-medium text-white dark:text-white">
                 Add Contact
               </h3>
               <div>
                 <label
                   htmlFor="contactname"
-                  className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-md font-medium text-white dark:text-white"
                 >
                   Enter Contact Name{" "}
                   <span className="text-red-800" title="required">

@@ -259,7 +259,7 @@ function Header() {
   const Navbar = (
     <div>
       <nav className={`fixed w-full ${auth && web3auth ? "bg-white" : ""}`}>
-        <div className="dark:bg-slate-900 shadow shadow-blue-900 border-transparent border-b-8">
+        <div className="bg-slate-900 shadow shadow-blue-900 border-transparent border-b-8">
           <div className="relative flex h-20 sm:h-[72px] items-center justify-between">
             <div
               className={`${
@@ -316,7 +316,7 @@ function Header() {
                 <div className="  border-b-15 border-white flex flex-shrink-0 items-center ">
                   <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="/pkdrlogo1.png"
+                    src="/logo1.png"
                     alt="PKDR Finance"
                     width={60}
                     height={60}
@@ -324,7 +324,7 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/pkdrlogo1.png"
+                        src="/logo1.png"
                         alt="PKDR Finance"
                         width={250}
                         height={225}
@@ -337,7 +337,7 @@ function Header() {
                 <div className="  border-b-15 border-white flex flex-shrink-0 lg:ml-3 items-center mt-1.5">
                   <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="/pkdrlogo1.png"
+                    src="/logo1.png"
                     alt="PKDR Finance"
                     width={60}
                     height={60}
@@ -345,7 +345,7 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/pkdrlogo1.png"
+                        src="/logo1.png"
                         alt="PKDR Finance"
                         width={250}
                         height={225}
@@ -419,7 +419,7 @@ function Header() {
                 {useAtomValue(userRole) === "users" && Boolean(verified) ? (
                   <div className=" flex flex-grow h-12 mt-5 text-xl hover:text-[#127a97] font-normal cursor-pointer hover:underline">
                     <Link
-                      className="text-white font-serif dark:bg-slate-900 relative transition-all ease-in duration-75 bg-white  rounded-md group-hover:bg-opacity-0 items-center"
+                      className="text-white font-serif bg-slate-900 relative transition-all ease-in duration-75  rounded-md group-hover:bg-opacity-0 items-center"
                       href="/user/users/purchase/"
                     >
                       Buy PKR
@@ -554,7 +554,7 @@ function Header() {
                 <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
                   <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="/pkdrlogo2.png"
+                    src="/logo1.png"
                     alt="PKDR Finance"
                     width={60}
                     height={60}
@@ -562,7 +562,7 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/pkdrlogo2.png"
+                        src="/logo1.png"
                         alt="PKDR Finance"
                         width={250}
                         height={225}
@@ -575,7 +575,7 @@ function Header() {
                 <div className="  border-b-15 border-white flex flex-shrink-0 items-center">
                   <Image
                     className="block h-8 w-auto lg:hidden"
-                    src="/pkdrlogo2.png"
+                    src="/logo1.png"
                     alt="PKDR Finance"
                     width={60}
                     height={60}
@@ -583,7 +583,7 @@ function Header() {
                   <Link href={"/"} className="cursor-pointer">
                     <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
-                        src="/pkdrlogo2.png"
+                        src="/logo1.png"
                         alt="PKDR Finance"
                         width={250}
                         height={225}

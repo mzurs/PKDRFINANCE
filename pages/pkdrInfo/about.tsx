@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 const about = () => {
   return (
     <>
-      <section className="flex pt-[182px] justify-center text-gray-600 body-font w-[100vw] h-[100vh] overflow-x-hidden">
+      <section className="flex pt-[182px] justify-center text-gray-600 body-font w-[100vw] h-[100vh] overflow-x-hidden bg-slate-900">
         <div className="container px-5 mx-auto">
           <div className="text-center md:mb-10">
-            <h1 className="md:text-[35px] text-2xl font-medium text-center title-font text-gray-900 md:mb-6 md:pt-0 pt-4">
+            <h1 className="md:text-[35px] text-2xl font-medium text-center title-font text-white md:mb-6 md:pt-0 pt-4">
               About PKDR Finance
             </h1>
             <p className="text-lg leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">

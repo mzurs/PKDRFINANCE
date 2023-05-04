@@ -3,10 +3,10 @@ import React from "react";
 function contact() {
   return (
     <>
-      <section className="text-gray-600 body-font md:pt-10 w-[100vw] h-[100vh] overflow-x-hidden flex justify-center items-center">
+      <section className="bg-slate-900 text-gray-600 body-font md:pt-10 w-[100vw] h-[100vh] overflow-x-hidden flex justify-center items-center">
         <div className="container px-2 pb-3 mx-auto">
           <div className="flex flex-col text-center mb-9">
-            <h1 className="md:text-[35px] text-2xl font-medium title-font mb-2 text-gray-900">
+            <h1 className="md:text-[35px] text-2xl font-medium title-font mb-2 text-white">
               Contact Us
             </h1>
             <p className="lg:w-2/3 text-lg mx-auto leading-relaxed mt-4">

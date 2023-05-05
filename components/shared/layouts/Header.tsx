@@ -326,8 +326,8 @@ function Header() {
                       <Image
                         src="/logo1.png"
                         alt="PKDR Finance"
-                        width={250}
-                        height={225}
+                        width={100}
+                        height={100}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>
@@ -347,8 +347,8 @@ function Header() {
                       <Image
                         src="/logo1.png"
                         alt="PKDR Finance"
-                        width={250}
-                        height={225}
+                        width={100}
+                        height={100}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>
@@ -560,12 +560,12 @@ function Header() {
                     height={60}
                   />
                   <Link href={"/"} className="cursor-pointer">
-                    <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+                    <div className="ml-4 hidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
                         src="/logo1.png"
                         alt="PKDR Finance"
-                        width={250}
-                        height={225}
+                        width={100}
+                        height={100}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>
@@ -581,12 +581,12 @@ function Header() {
                     height={60}
                   />
                   <Link href={"/"} className="cursor-pointer">
-                    <div className="hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+                    <div className="ml-4 sshidden h-8 w-auto text-white lg:flex items-center md:text-md">
                       <Image
                         src="/logo1.png"
                         alt="PKDR Finance"
-                        width={250}
-                        height={225}
+                        width={100}
+                        height={100}
                       />
                       {/* <h2 className="text-xl">PKDR Finance</h2> */}
                     </div>

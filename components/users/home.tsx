@@ -89,10 +89,10 @@ const Home = () => {
   };
 
   return (
-    <div><br />
-      <div className="flex pt-20 w-[100vw] overflow-x-hidden h-[100vh]  bg-slate-900">
-        <div className="w-5/12   ">
-          <div className="  shadow-black flex rounded-lg pt-20 pb-24 justify-center items-center flex-col mr-4 ml-10  shadow-sm">
+    <div>
+      <div className="flex pt-[82px] w-[100vw] overflow-x-hidden h-[100vh]  bg-slate-900">
+        <div className="w-5/12">
+          <div className="shadow-black flex rounded-lg pt-20 pb-24 justify-center items-center flex-col mr-4 ml-10  shadow-sm">
             <div
               className={`${
                 username == "" ? "text-4xl pb-2" : "text-5xl"
@@ -128,12 +128,12 @@ const Home = () => {
 
           <div className="ml-8 mr-2 border-transparent">
             <Cards
-              title={"Account Balance"}
+              title={"ACCOUNT BALANCE"}
               sub={info.email}
-              // btn_txt={"View Statement"}
             />
           </div>
         </div>
+
 
         <div className="w-9/12 h-full">
           <div className="h-[43vh] flex justify-center border-transparent  bg-slate-900 shadow-light shadow-lg -ml-0.5 mx-6 rounded-md pb-1">

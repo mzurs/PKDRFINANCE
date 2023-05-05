@@ -74,7 +74,7 @@ const debits = async (): Promise<object | null> => {
     return null;
   }
 };
-const credits = async (): Promise<object | null> => {
+const credits = async (): Promise<any | null> => {
   const input = {
     TableName: TABLE_NAME_CREDIT,
     AttributesToGet: ["TimeStamp", "Amount"],
@@ -113,10 +113,25 @@ const credits = async (): Promise<object | null> => {
 
 // getTotalList();
 
-
-
-
-
-
 /// handler for lists--------------------
-// ????
+export default async function handler(req: any, res: any) {
+  if (req.method === "POST") {
+    const debitList = await debits();
+    const creditList = await credits();
+    let result: any[] = [];
+    if (creditList != null && debitList != null) {
+      result.push(creditList);
+      result.push(debitList);
+    }
+    else if(debitList===null){
+      result.push("credit",creditList)
+    }
+    else if(creditList===null){
+      result.push("debit",debitList)
+    }
+
+    res.status(200).json(result);
+  } else {
+    // Handle any other HTTP method
+  }
+}

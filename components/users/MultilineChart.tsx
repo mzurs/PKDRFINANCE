@@ -11,7 +11,6 @@ import {
   elements,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
 import { useAtom, useAtomValue } from "jotai";
 import { userInfoAtom, userName } from "../../state/jotai";
 import { notify } from "./settingsLayout/ProfileInfo";
@@ -166,8 +165,9 @@ const MultilineChart = () => {
     const sortedDates = dates.sort((a, b) => {
       const [dayA, monthA] = a.split("/");
       const [dayB, monthB] = b.split("/");
-      const dateA: any = new Date(2021, monthA - 1, dayA);
-      const dateB: any = new Date(2021, monthB - 1, dayB);
+      let date = new Date();
+      const dateA: any = new Date(date.getFullYear(), monthA - 1, dayA);
+      const dateB: any = new Date(date.getFullYear(), monthB - 1, dayB);
       return dateA - dateB;
     });
 

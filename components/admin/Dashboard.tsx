@@ -17,6 +17,7 @@ import { useAtom } from "jotai";
 import { userInfoAtom, web3authAtom } from "../../state/jotai";
 import { time } from "console";
 import { BarChart } from "./charts/BarChart";
+import { LineChart } from "./charts/LineChart";
 function Dashboard({ users }: any) {
   const [userCount, setUserCount] = useState<number | null>(0);
   const [pkdrCapInPKR, setPkdrCapInPKR] = useState<number | null>(0);
@@ -215,20 +216,7 @@ function Dashboard({ users }: any) {
       {/* chart */}
       <div className="flex justify-evenly pt-20">
         <div className="h-[55vh] bg-[#0e0e0e] w-[48.5vw] shadow-md rounded-xl border-2 border-[#171717]">
-          <Line
-            data={{
-              labels: users.map((user: any) => user.items_delievered),
-              datasets: [
-                {
-                  label: "T-Cap",
-                  data: users.map((user: any) => user.items_delievered),
-                  backgroundColor: "green",
-                  borderColor: "green",
-                  borderWidth: 2,
-                },
-              ],
-            }}
-          />
+          <LineChart/>
         </div>
         <div className="h-[55vh] bg-[#0e0e0e] w-[48.5vw] shadow-md rounded-xl border-2 border-[#171717]">
           <BarChart/>

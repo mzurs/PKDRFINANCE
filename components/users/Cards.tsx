@@ -74,7 +74,7 @@ const Cards = (props: any) => {
         ) : (
           <div
             role="status"
-            className="flex items-center justify-center h-[39vh]"
+            className="flex items-center justify-center h-[35vh]"
           >
             <svg
               aria-hidden="true"
@@ -92,7 +92,6 @@ const Cards = (props: any) => {
                 fill="currentFill"
               />
             </svg>
-            <span className="sr-only">Loading...</span>
           </div>
         )}
         <div>

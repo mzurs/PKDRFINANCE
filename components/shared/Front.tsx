@@ -383,12 +383,12 @@ function Front() {
             height={60}
           />
           <Link href={"/"} className="cursor-pointer">
-            <div className="-mt-1 hidden h-8 w-auto text-white lg:flex items-center md:text-md">
+            <div className=" hidden h-8 w-auto text-white lg:flex items-center md:text-md">
               <Image
                 src="/logo1.png"
                 alt="PKDR Finance"
-                width={250}
-                height={225}
+                width={110}
+                height={110}
               />
               {/* <h2 className="text-xl">PKDR Finance</h2> */}
             </div>

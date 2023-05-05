@@ -73,7 +73,7 @@ const AdminSideBar = () => {
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full">
             <div className="flex items-center justify-center pt-6 ">
-              <Image src="/logo1.png" alt="pkdr logo" width="200" height="200" />
+              <Image src="/logo1.png" alt="pkdr logo" width="120" height="120" />
             </div>
             <nav className="mt-6">
               <div>

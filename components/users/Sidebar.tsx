@@ -79,13 +79,13 @@ const Sidebar = () => {
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full">
             <div className="pt-4 pb-2 flex items-center justify-center ">
-              <Image src="/logo1.png" alt="logo2" width="200" height="200" />
+              <Image src="/logo1.png" alt="logo2" width="120" height="120" />
             </div>
             <nav className="mt-0">
               <div>
                 <div
                   id="profile"
-                  className={`flex  font-extrabold bg-transparent border-2 italic text-white items-center justify-center w-full px-4 my-1 py-5 transition-colors duration-200`}
+                  className={`flex  font-extrabold bg-transparent border-t-blue-900 shadow shadow-blue-900 border-transparent italic text-white items-center justify-center w-full px-4 my-1 py-5 transition-colors duration-200`}
                 >
                   <p className="mx-4 text-xl font-normal text-center">
                     {userInfo?.name}

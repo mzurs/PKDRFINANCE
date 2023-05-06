@@ -32,7 +32,7 @@ const RetainUser = () => {
     );
     await fetch("/api/admin/query/retainUser", {
       method: "POST",
-      body: JSON.stringify({ username: username }),
+      body: JSON.stringify({ userName: username }),
       headers: headers,
     })
       .then((response) => response.json())

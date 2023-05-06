@@ -33,7 +33,7 @@ const RevokeUser = () => {
     );
     await fetch("/api/admin/query/revokeUser", {
       method: "POST",
-      body: JSON.stringify({ username: username }),
+      body: JSON.stringify({ userName: username }),
       headers: headers,
     })
       .then((response) => response.json())

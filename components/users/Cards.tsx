@@ -67,7 +67,7 @@ const Cards = (props: any) => {
         {Money ? (
           <div
             className="text-[4rem] font-serif  text-white  
- font-medium flex items-center justify-center h-[28vh]"
+ font-medium flex items-center justify-center h-[35vh]"
           >
             Rs.&nbsp;{Money}
           </div>

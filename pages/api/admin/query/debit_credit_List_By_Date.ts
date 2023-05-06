@@ -124,10 +124,10 @@ export default async function handler(req: any, res: any) {
       result.push(debitList);
     }
     else if(debitList===null){
-      result.push("credit",creditList)
+      result.push(creditList)
     }
     else if(creditList===null){
-      result.push("debit",debitList)
+      result.push(debitList)
     }
 
     res.status(200).json(result);

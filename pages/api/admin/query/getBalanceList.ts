@@ -17,7 +17,7 @@ type BalanceListReturnParams = {
   Amount: number;
 };
 
-const listBalances = async (token:string[]): Promise<BalanceListReturnParams[]> => {
+const listBalances = async (): Promise<BalanceListReturnParams[]> => {
   const input = {
     TableName: PKDR_BALANCES_TABLE,
     // ScanIndexForward: false, // To sort the items in descending order
@@ -58,4 +58,11 @@ const listBalances = async (token:string[]): Promise<BalanceListReturnParams[]> 
 
 
 //handler for chart
-
+export default async function handler(req: any, res: any) {
+  if (req.method === "POST") {
+    const result = await listBalances();
+    res.status(200).json(result);
+  } else {
+    // Handle any other HTTP method
+  }
+}

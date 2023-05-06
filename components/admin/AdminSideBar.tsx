@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
+import { SiOpenaccess } from "react-icons/si";
 
 const AdminSideBar = () => {
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -131,10 +132,23 @@ const AdminSideBar = () => {
                   </span>
                   <span className="mx-4 text-lg font-normal">Test</span>
                 </Link>
-
-                <div className={`${
-                    page === "settings" ? style : "text-white"
+                <Link
+                  id="permission"
+                  onClick={() => setpage("permission")}
+                  className={`${
+                    page === "permission" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#659157]`}
+                  href="/user/admin/permission"
+                >
+                  <span className="text-left">
+                    <div>
+                      <SiOpenaccess className="text-2xl mr-3 ml-5" />
+                    </div>
+                  </span>
+                  <span className="mx-4 text-lg font-normal">Permit User</span>
+                </Link>
+
+                <div className={`flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#659157]`}
                  >
                   <span className="text-left">
                     <div>

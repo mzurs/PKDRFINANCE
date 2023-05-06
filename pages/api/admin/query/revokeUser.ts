@@ -7,14 +7,12 @@ Amplify.configure(awsExports);
 
 const revokeUserAPI = async function (
   authTokens: string[],
-  username:any
+  username:string
 ): Promise<RevokeVerificationResult|any> {
-  const userName:RevokeVerificationMutationVariables = {
-    userName: username
-  };
+
   const authToken = authTokens[1];
   const variables = {
-    userName: userName,
+    userName: username,
   };
   try {
     const res = (await API.graphql({
@@ -34,8 +32,10 @@ const revokeUserAPI = async function (
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
     const authTokens = JSON.parse(req.headers["x-custom-header"]);
+    console.log("🚀 ~ file: revokeUser.ts:37 ~ handler ~ authTokens:", authTokens)
+    
     console.log(req.body);
-    const username:string = req.body.username;
+    const username:string = req.body.userName;
     const  result = await revokeUserAPI(
         authTokens,
         username

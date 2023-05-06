@@ -33,7 +33,9 @@ const loading = atom(false);
 const customAuthentication = atom<boolean>(false);
 
 //Username of User
-const userName = atomWithStorage("username", "");;
+const userName = atomWithStorage("username", "");
+
+const Loader = atom(false);
 
 const isVerified = atomWithStorage("verified", null, storage);
 const userRole = atom<string | null>(null);
@@ -53,5 +55,6 @@ export {
   userRole,
   isVerified,
   userBalance,
-  userName
+  userName,
+  Loader
 };

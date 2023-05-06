@@ -1,28 +1,51 @@
 import React, { useState } from "react";
+import { Loader, userInfoAtom } from "../../state/jotai/index";
 import { notify } from "../users/settingsLayout/ProfileInfo";
+import { ThreeDots } from "react-loader-spinner";
+import { useAtom, useAtomValue } from "jotai";
+import { UserInfo } from "../users/settingsLayout/type/userTypes";
 
 const RevokeUser = () => {
+  let info: UserInfo = {
+    email: "",
+    name: "",
+    profileImage: "",
+    aggregateVerifier: "",
+    verifier: "",
+    verifierId: "",
+    typeOfLogin: "",
+    dappShare: "",
+    idToken: "",
+    oAuthIdToken: "",
+    oAuthAccessToken: "",
+  };
+  info = useAtomValue(userInfoAtom);
   const [username, setUsername] = useState("");
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useAtom(Loader);
 
   const handleSubmit = async () => {
+    setLoader(true);
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([info.idToken, info.oAuthIdToken])
+    );
     await fetch("/api/admin/query/revokeUser", {
       method: "POST",
-      body:JSON.stringify({"username":username})
-    }).then((response) => response.json())
+      body: JSON.stringify({ username: username }),
+      headers: headers,
+    })
+      .then((response) => response.json())
       .then(async (data) => {
-        console.log("🚀 ~ file: RevokeUser.tsx:13 ~ .then ~ data:", data);
-        
-        // if (data) {
-        //   let msg = data.data.setUserName;
-        //   setLoader(false);
-        //   if (msg.toLowerCase().includes("username created")) {
-        //     notify(`Username ${username} revoked successfully`, "success");
-        //   } else {
-        //     notify(msg, "error");
-        //   }
-        // }
+        console.log("🚀 ~ file: RevokeUser.tsx:15 ~ .then ~ data:", data.data);
+        if (data.data.revokeVerification.result) {
+          notify(data.data.revokeVerification.message, "success");
+        } else {
+          notify(data.data.revokeVerification.message, "error");
+        }
       });
+    setLoader(false);
   };
 
   return (
@@ -43,7 +66,10 @@ const RevokeUser = () => {
             onChange={(e: any) => setUsername(e.target.value)}
           />
         </div>
-        <button className="flex justify-center mx-auto mt-12 text-[#61946c] hover:text-gray-200 text-xl border-2 rounded-xl border-[#3c6545] hover:bg-[#45754f] px-3 py-2">
+        <button
+          onClick={handleSubmit}
+          className="flex justify-center mx-auto mt-12 text-[#61946c] hover:text-gray-200 text-xl border-2 rounded-xl border-[#3c6545] hover:bg-[#45754f] px-3 py-2"
+        >
           Revoke Transaction
         </button>
       </div>

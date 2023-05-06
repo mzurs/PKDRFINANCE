@@ -9,7 +9,6 @@ const retainUserAPI = async function (
   authTokens: string[],
   username:string
 ): Promise<RetainVerificationResult|any> {
-  console.log("🚀 ~ file: retainUser.ts:12 ~ username:", username)
 
   const authToken = authTokens[1];
   const variables = {
@@ -22,7 +21,6 @@ const retainUserAPI = async function (
       authToken,
     })) as { data: RetainVerificationResult };
 
-    console.log("🚀 ~ file: retainUser.ts:33 ~ res.data:", res.data);
     return res;
   } catch (error) {
     return error as RetainVerificationResult;
@@ -33,9 +31,7 @@ const retainUserAPI = async function (
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
     const authTokens = JSON.parse(req.headers["x-custom-header"]);
-    // console.log(req.body.username);
     const username :string= req.body.userName;
-    console.log("🚀 ~ file: retainUser.ts:39 ~ handler ~ username:", username)
     const  result = await retainUserAPI(
         authTokens,
         username

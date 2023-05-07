@@ -37,7 +37,13 @@ function Dashboard({ users }: any) {
   const getUsersCount = async (): Promise<number> => {
     const headers = new Headers();
     headers.append("content-type", "application/json");
-    headers.append("x-custom-header", JSON.stringify(["abc"]));
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([
+        "(web3auth as unknown as any).idToken",
+        (userInfo as unknown as any).oAuthIdToken,
+      ])
+    );
     const response = await fetch("/api/admin/query/getUsersCount", {
       method: "GET",
       headers: headers,
@@ -51,7 +57,13 @@ function Dashboard({ users }: any) {
   const getUSDPKRRate = async (): Promise<number> => {
     const headers = new Headers();
     headers.append("content-type", "application/json");
-    headers.append("x-custom-header", JSON.stringify(["abc"]));
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([
+        "(web3auth as unknown as any).idToken",
+        (userInfo as unknown as any).oAuthIdToken,
+      ])
+    );
     const response = await fetch("/api/admin/query/getRateUSDPKR", {
       method: "GET",
       headers: headers,
@@ -65,7 +77,13 @@ function Dashboard({ users }: any) {
   const getPKDRTotalSupply = async () => {
     const headers = new Headers();
     headers.append("content-type", "application/json");
-    headers.append("x-custom-header", JSON.stringify(["abc"]));
+    headers.append(
+      "x-custom-header",
+      JSON.stringify([
+        "(web3auth as unknown as any).idToken",
+        (userInfo as unknown as any).oAuthIdToken,
+      ])
+    );
     const response = await fetch("/api/admin/query/totalSupply", {
       method: "GET",
       headers: headers,
@@ -114,7 +132,7 @@ function Dashboard({ users }: any) {
               <div className="flex flex-col md:w-64">
                 <div className="w-full flex justify-end">
                   <div className="flex items-center">
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
                       height={16}
@@ -139,13 +157,12 @@ function Dashboard({ users }: any) {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                    </svg>
-                    <p className="text-xs leading-none text-green-600">4.3%</p>
+                    </svg> */}
+                    {/* <p className="text-xs leading-none text-green-600">4.3%</p> */}
                   </div>
                 </div>
                 <div className="mt-2.5">
-                  <div className="w-full h-1 bg-gray-200 rounded-full">
-                  </div>
+                  <div className="w-full h-1 bg-gray-200 rounded-full"></div>
                 </div>
               </div>
             </div>
@@ -157,11 +174,40 @@ function Dashboard({ users }: any) {
                 {pkdrCapInUSD?.toFixed(2)} USD
               </p>
 
-              <div className="flex flex-col">
-                <div className="h-4" />
-                <div className="md:w-64 mt-2.5">
-                  <div className="w-full h-1 bg-gray-200 rounded-full">
+              <div className="flex flex-col md:w-64">
+                <div className="w-full flex justify-end">
+                  <div className="flex items-center">
+                    {/* <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={16}
+                      height={16}
+                      viewBox="0 0 16 16"
+                      fill="none"
+                    >
+                      <path
+                        d="M8 3.33334V12.6667"
+                        stroke="#16A34A"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M12 7.33334L8 3.33334"
+                        stroke="#16A34A"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M4 7.33334L8 3.33334"
+                        stroke="#16A34A"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg> */}
+                    {/* <p className="text-xs leading-none text-green-600">9.1%</p> */}
                   </div>
+                </div>
+                <div className="mt-2.5">
+                  <div className="w-full h-1 bg-gray-200 rounded-full"></div>
                 </div>
               </div>
             </div>
@@ -175,7 +221,7 @@ function Dashboard({ users }: any) {
               <div className="flex flex-col md:w-64">
                 <div className="w-full flex justify-end">
                   <div className="flex items-center">
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
                       height={16}
@@ -200,13 +246,12 @@ function Dashboard({ users }: any) {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                    </svg>
-                    <p className="text-xs leading-none text-green-600">9.1%</p>
+                    </svg> */}
+                    {/* <p className="text-xs leading-none text-green-600">9.1%</p> */}
                   </div>
                 </div>
                 <div className="mt-2.5">
-                  <div className="w-full h-1 bg-gray-200 rounded-full">
-                  </div>
+                  <div className="w-full h-1 bg-gray-200 rounded-full"></div>
                 </div>
               </div>
             </div>
@@ -216,10 +261,10 @@ function Dashboard({ users }: any) {
       {/* chart */}
       <div className="flex justify-evenly pt-20">
         <div className="h-[55vh] bg-[#0e0e0e] w-[48.5vw] shadow-md rounded-xl border-2 border-[#171717]">
-          <LineChart/>
+          <LineChart />
         </div>
         <div className="h-[55vh] bg-[#0e0e0e] w-[48.5vw] shadow-md rounded-xl border-2 border-[#171717]">
-          <BarChart/>
+          <BarChart />
         </div>
       </div>
     </div>

@@ -95,10 +95,10 @@ const ProfileInfo = () => {
     <>
       <div className={`${loader?"opacity-40":""} -z-10`}>
         <div className="pl-4">
-          <h1 className="md:text-2xl text-xl font-medium md:pt-10 pt-8">
+          <h1 className="md:text-2xl text-gray-200 text-xl font-medium md:pt-10 pt-8">
             Profile Information
           </h1>
-          <p className="text-gray-500 text-justify text-lg pt-3 pl-3">
+          <p className="text-gray-200 text-justify text-lg pt-3 pl-3">
             This information will be displayed publicly so be carefull about
             what you share.
           </p>
@@ -109,11 +109,11 @@ const ProfileInfo = () => {
               <div className="border-t-2 border-gray-200">
                 <dl>
                   <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt className="text-md font-sm md:text-lg text-gray-500">
+                    <dt className="text-md font-sm md:text-lg text-gray-200">
                      Username
                     </dt>
                     <dd
-                      className={`mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0`}
+                      className={`mt-1 text-md md:text-lg text-gray-200 sm:col-span-2 sm:mt-0`}
                     >
                       <input
                         type="text"
@@ -121,7 +121,7 @@ const ProfileInfo = () => {
                         disabled={dis ? false : true}
                         onChange={handleInputChange}
                         placeholder={name==""?"Set your Username":""}
-                        className={`${
+                        className={`bg-slate-900 ${
                           !dis ? "outline-none" : "border border-[#009ac9]"
                         }`}
                       />
@@ -150,10 +150,10 @@ const ProfileInfo = () => {
                     </dd>
                   </div>
                   <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt className="text-md font-sm md:text-lg text-gray-500">
+                    <dt className="text-md font-sm md:text-lg text-gray-200">
                       Email
                     </dt>
-                    <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
+                    <dd className="mt-1 text-md md:text-lg text-gray-200 sm:col-span-2 sm:mt-0">
                       {info?.email}
                       {/* <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                         Update
@@ -161,10 +161,10 @@ const ProfileInfo = () => {
                     </dd>
                   </div>
                   {/* <div className="border-b-2 border-gray-200 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt className="text-md font-sm md:text-lg text-gray-500">
+                    <dt className="text-md font-sm md:text-lg text-gray-200">
                       Profile Photo
                     </dt>
-                    <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
+                    <dd className="mt-1 text-md md:text-lg text-gray-200 sm:col-span-2 sm:mt-0">
                       Photo
                       <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                         Update
@@ -172,10 +172,10 @@ const ProfileInfo = () => {
                     </dd>
                   </div> */}
                   <div className="py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt className="text-md font-sm md:text-lg text-gray-500">
+                    <dt className="text-md font-sm md:text-lg text-gray-200">
                       Account Number
                     </dt>
-                    <dd className="mt-1 text-md md:text-lg text-gray-900 sm:col-span-2 sm:mt-0">
+                    <dd className="mt-1 text-md md:text-lg text-gray-200 sm:col-span-2 sm:mt-0">
                       {info?.email}
                       {/* <button className="float-right py-0.5 px-2 mr-2 rounded-lg text-[#009ac9] hover:underline">
                         Update

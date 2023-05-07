@@ -24,7 +24,8 @@ const RetainUser = () => {
 
   const handleSubmit = async () => {
     setLoader(true);
-    const headers = new Headers();
+    try {
+      const headers = new Headers();
     headers.append("content-type", "application/json");
     headers.append(
       "x-custom-header",
@@ -44,6 +45,9 @@ const RetainUser = () => {
           notify(data.data.retainVerification.message, "error");
         }
       });
+    } catch (error) {
+      console.error(error);
+    }
     setLoader(false);
   };
 

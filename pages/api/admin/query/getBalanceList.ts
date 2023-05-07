@@ -50,9 +50,7 @@ const listBalances = async (): Promise<BalanceListReturnParams[]> => {
 
   const listOfBalances = item;
 
-  listOfBalances.sort((a, b) => b.id - a.id);
-
-  console.log(listOfBalances);
+  listOfBalances.sort((a, b) => a.id - b.id);
   return listOfBalances;
 };
 

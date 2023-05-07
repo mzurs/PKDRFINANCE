@@ -13,7 +13,6 @@ import {
 import { Line } from "react-chartjs-2";
 import { useAtom, useAtomValue } from "jotai";
 import { userInfoAtom, userName } from "../../state/jotai";
-import { notify } from "./settingsLayout/ProfileInfo";
 
 ChartJS.register(
   CategoryScale,

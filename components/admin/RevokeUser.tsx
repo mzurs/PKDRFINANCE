@@ -25,7 +25,8 @@ const RevokeUser = () => {
 
   const handleSubmit = async () => {
     setLoader(true);
-    const headers = new Headers();
+    try{
+      const headers = new Headers();
     headers.append("content-type", "application/json");
     headers.append(
       "x-custom-header",
@@ -45,6 +46,9 @@ const RevokeUser = () => {
           notify(data.data.revokeVerification.message, "error");
         }
       });
+    }catch(error){
+      console.log(error);
+    }
     setLoader(false);
   };
 

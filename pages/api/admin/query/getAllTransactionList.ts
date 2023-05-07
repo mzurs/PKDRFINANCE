@@ -1,8 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import {
   DynamoDBClient,
-  PutItemCommand,
-  QueryCommand,
   ScanCommand,
 } from "@aws-sdk/client-dynamodb";
 import { Transaction } from "../../user/mutation/transferFrom/types";
@@ -24,10 +22,6 @@ const allTransactionsList = async () :Promise<Transaction[]>=> {
     };
     const command = new ScanCommand(params);
     const { Items }: any = await client.send(command);
-  //   console.log(
-  //     "🚀 ~ file: TransactionTable.ts:87 ~ allTransactionsList ~ Items:",
-  //     Items
-  //   );
   
     let item: Transaction[] = new Array(Items.length);
   
@@ -38,8 +32,7 @@ const allTransactionsList = async () :Promise<Transaction[]>=> {
     const listOfBalances = item;
   
     listOfBalances.sort((a, b) => b.TimeStamp - a.TimeStamp);
-  
-    console.log(listOfBalances);
+
     return listOfBalances;
   };
   

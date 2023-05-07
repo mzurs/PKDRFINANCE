@@ -121,7 +121,6 @@ const transaction = () => {
           <div className="w-full p-4 mb-2 bg-slate-900 sm:px-6 shadow-black border-2 border-transparent">
             <h3
               className="text-3xl pt-5 text-center font-serif font-semibold leading-6 text-white dark:text-white shadow-black"
-              onClick={get_transaction}
             >
               Transaction Records
             </h3>

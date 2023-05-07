@@ -40,14 +40,6 @@ export function LineChart() {
     SetAmountList();
   }, [dateList]);
 
-  useEffect(() => {
-    console.log(
-      "🚀 ~ file: LineChart.tsx:40 ~ LineChart ~ dateList:",
-      dateList
-    );
-    console.log("🚀 ~ file: LineChart.tsx:49 ~ LineChart ~ Amount:", Amount);
-  }, [Amount]);
-
   const SetAmountList = () => {
     try {
       let Amounts: number[] = [];
@@ -92,7 +84,6 @@ export function LineChart() {
       })
         .then((response) => response.json())
         .then(async (data) => {
-          console.log(data);
           setTransactions(data);
         });
     } catch (error) {

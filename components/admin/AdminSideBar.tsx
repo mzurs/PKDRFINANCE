@@ -15,6 +15,7 @@ import { BsFileEarmarkPerson } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { SiOpenaccess } from "react-icons/si";
+import { AiOutlineHistory } from "react-icons/ai";
 
 const AdminSideBar = () => {
   const [auth, setAuth] = useAtom(web3authAtom);
@@ -70,7 +71,7 @@ const AdminSideBar = () => {
 
   return (
     <>
-      <div className=" hidden md:block right-0 top-[4rem] fixed bg-black text-white h-auto border-2 shadow-md border-[#171717]">
+      <div className="z-50 hidden md:block right-0 top-[4rem] fixed bg-black text-white h-auto border-2 shadow-md border-[#171717]">
         <div className="relative hidden h-screen my-4 shadow-lg lg:block w-[20rem]">
           <div className="h-full">
             <div className="flex items-center justify-center pt-6 ">
@@ -123,14 +124,14 @@ const AdminSideBar = () => {
                   className={`${
                     page === "test" ? style : "text-white"
                   } flex items-center justify-start w-full p-4 my-2 font-thin transition-colors duration-200 hover:text-[#659157]`}
-                  href="/user/admin/test"
+                  href="/user/admin/transaction"
                 >
                   <span className="text-left">
                     <div>
-                      <FiSettings className="text-2xl mr-3 ml-5" />
+                      <AiOutlineHistory className="text-2xl mr-3 ml-5" />
                     </div>
                   </span>
-                  <span className="mx-4 text-lg font-normal">Test</span>
+                  <span className="mx-4 text-lg font-normal">User's Transactions</span>
                 </Link>
                 <Link
                   id="permission"

@@ -38,6 +38,7 @@
     "js-cookie": "^3.0.1",
     "js-sha3": "^0.8.0",
     "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
     "next": "latest",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",

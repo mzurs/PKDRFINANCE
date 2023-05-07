@@ -22,14 +22,14 @@ const listBalances = async (): Promise<BalanceListReturnParams[]> => {
     TableName: PKDR_BALANCES_TABLE,
     // ScanIndexForward: false, // To sort the items in descending order
     // ProjectionExpression:"TimeStamp",
-    Limit: 30,
+    // Limit: 30,
     FilterExpression: "id BETWEEN :start AND :end",
     ExpressionAttributeValues: {
       // ":id": {
       //     "S": `${Date.now()}`
       // },
       ":start": {
-        S: `${Date.now() - 7 * 24 * 60 * 60 * 1000}`,
+        S: `${Date.now() - 40 * 24 * 60 * 60 * 1000}`,
       },
       ":end": {
         S: `${Date.now()}`,
@@ -59,6 +59,7 @@ const listBalances = async (): Promise<BalanceListReturnParams[]> => {
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
     const result = await listBalances();
+    console.log("🚀 ~ file: getBalanceList.ts:62 ~ handler ~ result:", result)
     res.status(200).json(result);
   } else {
     // Handle any other HTTP method

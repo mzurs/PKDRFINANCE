@@ -1,27 +1,19 @@
-# Next.js + Tailwind CSS Example
+# PKDR Finance
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+The project mainly concentrates on how conventional finance and financial applications work -by equipping a variety of use cases to the users, including P2P Transfers, On-Time Deposits, Withdrawals, Identity Verification, Data management, Account Activity, and Fraud Alerts. PKDR Finance, on the other hand, knowing all the vulnerabilities of conventional finance, has -come up with a different approach to address all those problems and create a financial application on top of a decentralized ledger. The Pak Digital Ruppee (PKDR) platform is a Web 3.0 application that uses a public ledger to authenticate users. To interact with the application users need to register with the platform, and the system validates all the provided information. PKDR uses a different stack to address this and manages different keys. PKDR Finance enables the users to send and receive digital money, as all users are authenticated with the system -transactions happening on-chain. MultiSig approval to transfer money -this comes in handy when there are malicious transactions. Until and unless users are using PKDR Finance -no such money laundering activities will be done as all users are verified and transactions are recorded and trackable
 
-## Deploy your own
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+### Assumptions & Dependencies
+- Users should have their own Google Account.
+- Users have their Identity card (CNIC).
+- It is assumed that the users are relevant and understand the basic actions of using a website.
+- They must know how to perform login and registration.
+- They must have their Debit/Credit Card.
+- They must be relevant to common navbar operations.
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### Software Interfaces
+- Frontend: Typescript, AWS Amplify, Figma.
+- Backend: Typescript, GraphQL, AWS Serverless Lambda’s, DynamoDB, Cognito, and IAM.
+- Any operating system will work fine.
+- A web browser is a basic requirement for launching a website.
